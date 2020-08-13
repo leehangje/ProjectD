@@ -1,9 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MdDetailActivity">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F3D4D4">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/md_photo1"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="25dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/choonbae2" />
+
+                        <ImageView
+                            android:id="@+id/md_photo2"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="25dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/choonbae2" />
+
+                        <ImageView
+                            android:id="@+id/md_photo3"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="25dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/choonbae2" />
+
+                        <ImageView
+                            android:id="@+id/md_photo4"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="25dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/choonbae2" />
+
+                        <ImageView
+                            android:id="@+id/md_photo5"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="25dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/choonbae2" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="#DCEAF1">
+
+                <TextView
+                    android:id="@+id/md_name"
+                    android:layout_width="72dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="39dp"
+                    android:layout_marginTop="25dp"
+                    android:text="상품 이름"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="52dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="264dp"
+                    android:layout_marginTop="25dp"
+                    android:text="가격"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/dedosit"
+                    android:layout_width="54dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="342dp"
+                    android:layout_marginTop="26dp"
+                    android:text="보증금"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E3F3D0">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mypage_profile_photo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginTop="25dp"
+                    android:text="닉네임"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="170dp"
+                    android:layout_marginTop="28dp"
+                    android:text="(등급표시)"
+                    android:textSize="16sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="328dp"
+                android:background="#E5DBF8">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="0dp"
+                    app:tabBackground="@color/colorAccent"
+                    app:tabIndicatorColor="#FFFFFF">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="상세 정보" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="리뷰 보기" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="닉네임님의 대여상품" />
+
+
+                </com.google.android.material.tabs.TabLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/button9"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="#E1DEDE"
+                    android:text="찜하기"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="#673AB7"
+                    android:text="채팅하기"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
