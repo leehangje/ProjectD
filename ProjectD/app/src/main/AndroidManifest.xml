@@ -5,7 +5,7 @@
 
 
 
-    // 지도 permission → LocationActivity에서 필요(수정)
+    <!--// 지도 permission → LocationActivity에서 필요(수정)-->
 
     <permission android:name="com.example.projectd.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
