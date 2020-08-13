@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context="com.example.projectd.RentListActivity" >
 
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -92,7 +92,7 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -173,7 +173,7 @@
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -198,7 +198,7 @@
             android:layout_marginEnd="36dp"
             android:layout_marginRight="36dp"
             android:layout_marginBottom="25dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@color/colorAccent"
             android:text="작성  완료"
             android:textSize="12sp" />
 
