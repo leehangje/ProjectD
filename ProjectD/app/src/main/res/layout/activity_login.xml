@@ -1,9 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    android:background="#3e4ba9">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/mainLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:src="@drawable/logo1" />
+
+    <EditText
+        android:id="@+id/idValueText"
+        android:layout_width="295dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainLogo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="#DDDDDD"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="ID"
+        android:textColor="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/pwValueText"
+        android:layout_width="295dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/idValueText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="PW"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/id_pw_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pwValueText"
+        android:layout_marginStart="61dp"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="15dp"
+        android:text="아이디/비밀번호 찾기"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pwValueText"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="250dp"
+        android:text="회원가입"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/loginSubmitBtn"
+        android:layout_width="295dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/pwValueText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginRight="58dp"
+        android:text="로그인"
+        android:textSize="18sp" />
+
+
+</RelativeLayout>

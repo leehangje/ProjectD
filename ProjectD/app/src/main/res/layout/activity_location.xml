@@ -1,9 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LocationActivity">
+    android:background="#FFFFFF">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FFFFFF"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="23dp"
+        android:layout_toRightOf="@+id/backBtn"
+        android:text="위치 찾기"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/searchValueText"
+        android:layout_width="284dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="58dp"
+        android:ems="10"
+        android:hint="내 동네이름으로 검색"
+        android:inputType="textPersonName" />
+
+    <ImageButton
+        android:id="@+id/etSearchBtn"
+        android:layout_width="62dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/searchValueText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-60dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginRight="54dp"
+        android:background="#FFFFFF"
+        app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+    <!--
+    <Button
+        android:id="@+id/locSearchBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchValueText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:background="#3E4BA9"
+        android:text="현재 위치 찾기"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+    -->
+
+    <Button
+        android:id="@+id/setupBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchValueText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:background="#3E4BA9"
+        android:text="해당 위치로 설정"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="318dp"
+        android:layout_height="246dp"
+        android:layout_below="@id/setupBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="245dp" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:layout_below="@+id/frameLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:background="#3E4BA9"
+        android:text="완료"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+</RelativeLayout>
