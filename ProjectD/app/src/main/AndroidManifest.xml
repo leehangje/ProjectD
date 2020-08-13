@@ -9,6 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ProfileUpdateActivity"></activity>
+        <activity android:name=".QnAActivity" />
+        <activity android:name=".NoticeActivity" />
+        <activity android:name=".AlramActivity" />
+        <activity android:name=".FavListActivity" />
+        <activity android:name=".ReviewActivity" />
+        <activity android:name=".LendListActivity" />
+        <activity android:name=".RentListActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".ChatListActivity" />
+        <activity android:name=".MdInsertActivity" />
+        <activity android:name=".MypageActivity" />
+        <activity android:name=".MdDetailActivity" />
+        <activity android:name=".CategoryActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchIDActivity" />
+        <activity android:name=".LocationActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
