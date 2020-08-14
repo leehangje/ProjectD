@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projectd">
 
-    <!-- 지도 permission → LocationActivity에서 필요(수정)-->
+
+   <!-- // 지도 permission → LocationActivity에서 필요-->
 
     <permission android:name="com.example.projectd.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
@@ -39,7 +40,7 @@
 
         <activity android:name=".SignUpFormActivity"></activity>
         <activity android:name=".ProfileUpdateActivity" />
-        <activity android:name=".QnAActivity" />
+        <activity android:name=".QnaActivity" />
         <activity android:name=".NoticeActivity" />
         <activity android:name=".AlramActivity" />
         <activity android:name=".FavListActivity" />

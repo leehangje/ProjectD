@@ -6,4 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".AlramActivity">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="66dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:src="@drawable/img" />
+
+
+    <View
+        android:layout_width="317dp"
+        android:layout_height="124dp"
+        android:background="@drawable/upper_show"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="358dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="308dp"
+        android:layout_height="90dp"
+        android:background="#F6F3F3"
+        android:padding="20dp"
+        android:text="알림 내용\n날짜"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="380dp" />
+    <View
+        android:layout_width="317dp"
+        android:layout_height="124dp"
+        android:background="@drawable/upper_show"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="492dp" />
+
+    <View
+        android:layout_width="317dp"
+        android:layout_height="124dp"
+        android:background="@drawable/upper_show"
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="91dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="308dp"
+        android:layout_height="90dp"
+        android:background="#F6F3F3"
+        android:padding="20dp"
+        android:text="알림 내용\n날짜"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="108dp" />
+
+    <View
+        android:layout_width="317dp"
+        android:layout_height="124dp"
+        android:background="@drawable/upper_show"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="222dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="308dp"
+        android:layout_height="90dp"
+        android:background="#F6F3F3"
+        android:padding="20dp"
+        android:text="알림 내용\n날짜"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="232dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="308dp"
+        android:layout_height="90dp"
+        android:background="#F6F3F3"
+        android:padding="20dp"
+        android:text="알림 내용\n날짜"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="500dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
