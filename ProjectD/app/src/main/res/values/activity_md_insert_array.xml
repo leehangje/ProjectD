@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category1">
+        <item>스포츠/레저</item>
+        <item>여행용품</item>
+        <item>육아용품</item>
+        <item>게임/취미</item>
+        <item>자전거/오토바이</item>
+        <item>기타</item>
+    </string-array>
+
+</resources>
