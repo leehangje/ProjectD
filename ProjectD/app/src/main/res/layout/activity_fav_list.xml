@@ -7,7 +7,7 @@
     tools:context=".FavListActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageView1"
         android:layout_width="119dp"
         android:layout_height="86dp"
         android:layout_marginTop="16dp"
@@ -25,7 +25,7 @@
 
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView1"
         android:layout_width="322dp"
         android:layout_height="106dp"
         android:background="#FDFBFB"
@@ -40,7 +40,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView2"
         android:layout_width="97dp"
         android:layout_height="76dp"
         android:background="@drawable/img5"
@@ -56,7 +56,7 @@
         tools:layout_editor_absoluteY="266dp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView2"
         android:layout_width="322dp"
         android:layout_height="106dp"
         android:background="#FDFBFB"
@@ -70,7 +70,7 @@
         tools:layout_editor_absoluteY="251dp" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView3"
         android:layout_width="97dp"
         android:layout_height="76dp"
         android:background="@drawable/img5"
@@ -86,7 +86,7 @@
         tools:layout_editor_absoluteY="390dp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView3"
         android:layout_width="322dp"
         android:layout_height="106dp"
         android:background="#FDFBFB"
@@ -100,7 +100,7 @@
         tools:layout_editor_absoluteY="377dp" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView4"
         android:layout_width="97dp"
         android:layout_height="76dp"
         android:background="@drawable/img5"
@@ -116,7 +116,7 @@
         tools:layout_editor_absoluteY="538dp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView4"
         android:layout_width="322dp"
         android:layout_height="106dp"
         android:background="#FDFBFB"
