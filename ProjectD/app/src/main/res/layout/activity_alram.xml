@@ -83,4 +83,5 @@
         android:text="알림 내용\n날짜"
         tools:layout_editor_absoluteX="58dp"
         tools:layout_editor_absoluteY="500dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projectd">
 
-    // 지도 permission → LocationActivity에서 필요
+   <!-- // 지도 permission → LocationActivity에서 필요-->
     <permission android:name="com.example.projectd.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
 
