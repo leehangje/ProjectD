@@ -17,120 +17,30 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="350dp"
                 android:orientation="vertical">
 
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#F3D4D4">
+                <!--써클 인디케이터 : 슬라이드뷰에서 페이지 표시하는 똥글뱅이-->
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    app:ci_drawable="@drawable/black_radius"
+                    app:ci_height="7dp"
+                    app:ci_margin="4dp"
+                    app:ci_width="7dp" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/md_photo1"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="25dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/choonbae2" />
-
-                        <ImageView
-                            android:id="@+id/md_photo2"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="25dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/choonbae2" />
-
-                        <ImageView
-                            android:id="@+id/md_photo3"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="25dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/choonbae2" />
-
-                        <ImageView
-                            android:id="@+id/md_photo4"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="25dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/choonbae2" />
-
-                        <ImageView
-                            android:id="@+id/md_photo5"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginBottom="25dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/choonbae2" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                <!--viewPager : 슬라이드로 화면 넘기기-->
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vpPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="#DCEAF1">
-
-                <TextView
-                    android:id="@+id/md_name"
-                    android:layout_width="72dp"
-                    android:layout_height="32dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="39dp"
-                    android:layout_marginTop="25dp"
-                    android:text="상품 이름"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="52dp"
-                    android:layout_height="32dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="264dp"
-                    android:layout_marginTop="25dp"
-                    android:text="가격"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/dedosit"
-                    android:layout_width="54dp"
-                    android:layout_height="32dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="342dp"
-                    android:layout_marginTop="26dp"
-                    android:text="보증금"
-                    android:textSize="18sp" />
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -149,15 +59,26 @@
                     android:src="@mipmap/ic_launcher" />
 
                 <TextView
-                    android:id="@+id/nickname"
+                    android:id="@+id/user_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="110dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="106dp"
+                    android:layout_marginTop="12dp"
                     android:text="닉네임"
                     android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/member_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="105dp"
+                    android:layout_marginTop="38dp"
+                    android:text="동네 표시"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/level"
@@ -165,18 +86,137 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="170dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginLeft="324dp"
+                    android:layout_marginTop="20dp"
                     android:text="(등급표시)"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="328dp"
-                android:background="#E5DBF8">
+                android:layout_height="216dp"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:id="@+id/md_name"
+                    android:layout_width="72dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="29dp"
+                    android:layout_marginTop="12dp"
+                    android:text="상품명"
+                    android:textColor="#0E0E0E"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="52dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="29dp"
+                    android:layout_marginTop="53dp"
+                    android:text="가격"
+                    android:textColor="#0E0E0E"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dedosit"
+                    android:layout_width="54dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="88dp"
+                    android:layout_marginTop="54dp"
+                    android:text="보증금"
+                    android:textColor="#0E0E0E"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/md_Registration_date3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginTop="93dp"
+                    android:text="카테고리"
+                    android:textColor="#0E0E0E"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/md_Registration_date4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="106dp"
+                    android:layout_marginLeft="106dp"
+                    android:layout_marginTop="94dp"
+                    android:text="등록일자"
+                    android:textColor="#0E0E0E"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/md_hits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="182dp"
+                    android:layout_marginLeft="182dp"
+                    android:layout_marginTop="93dp"
+                    android:text="조회수"
+                    android:textColor="#0E0E0E"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/md_fave_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="244dp"
+                    android:layout_marginLeft="244dp"
+                    android:layout_marginTop="93dp"
+                    android:text="찜 개수"
+                    android:textColor="#0E0E0E"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/md_detail_content"
+                    android:layout_width="345dp"
+                    android:layout_height="79dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="126dp"
+                    android:text="상세설명"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="231dp"
+                android:background="#FFFFFF">
 
                 <com.google.android.material.tabs.TabLayout
                     android:layout_width="match_parent"
@@ -187,25 +227,30 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="-2dp"
                     app:tabBackground="@color/colorAccent"
-                    app:tabIndicatorColor="#FFFFFF">
+                    app:tabIndicatorColor="#FFFFFF"
+                    app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:tabTextColor="#353333">
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="상세 정보" />
+                        android:text="리뷰 보기">
+
+
+                        <!-- 리뷰목록 들어갈 리싸이클러뷰-->
+                        <!--<androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/reviewRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />-->
+
+                    </com.google.android.material.tabs.TabItem>
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="리뷰 보기" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="닉네임님의 대여상품" />
-
+                        android:text="닉네임님의 판매 상품" />
 
                 </com.google.android.material.tabs.TabLayout>
 
