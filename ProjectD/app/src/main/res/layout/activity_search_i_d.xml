@@ -8,12 +8,28 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="577dp">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="1dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="타이틀"
+                    android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+            </androidx.appcompat.widget.Toolbar>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
@@ -24,19 +40,18 @@
                 app:tabGravity="fill"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/colorPrimary"/>
+                app:tabTextColor="@color/colorPrimary" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="458dp"
+            android:layout_height="475dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         </FrameLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
     <Button
         android:id="@+id/btn_back"
@@ -44,11 +59,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="548dp"
         android:layout_marginBottom="6dp"
         android:text="뒤로가기" />
 

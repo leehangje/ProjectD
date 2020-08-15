@@ -17,6 +17,7 @@ public class SearchIDActivity extends AppCompatActivity {
 
 
 
+
         //뒤로가기
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
