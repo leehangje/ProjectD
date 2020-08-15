@@ -20,14 +20,12 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_toEndOf="@+id/btn_notice"
-        android:layout_toRightOf="@+id/btn_notice"
         android:background="#FFFFFF"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/card_list_fav" />
 
     <ImageButton
-        android:id="@+id/imageButton13"
+        android:id="@+id/btn_gps"
         android:layout_width="24dp"
         android:layout_height="23dp"
         android:layout_alignParentLeft="true"
@@ -51,8 +49,6 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="191dp"
         android:layout_marginRight="191dp"
-        android:layout_toEndOf="@+id/imageButton13"
-        android:layout_toRightOf="@+id/imageButton13"
         android:text="광주광역시 서구 농성2동"
         android:textSize="16sp" />
 
@@ -73,7 +69,7 @@
 
 
     <ImageButton
-        android:id="@+id/btn_notice"
+        android:id="@+id/btn_alram"
         android:layout_width="28dp"
         android:layout_height="27dp"
         android:layout_alignParentTop="true"
