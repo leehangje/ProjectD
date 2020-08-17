@@ -1,18 +1,57 @@
 package com.example.projectd;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    MainMdAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        recyclerView = findViewById(R.id.recyclerView);
+
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new MainMdAdapter();
+
+
+
+        adapter.addItem(new Main("컴퓨터","3500원"));
+        adapter.addItem(new Main("모니터","3000원"));
+
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new OnMainMdItemClickListener() {
+            public static final int main = 1001;
+
+            @Override
+            public void onItemClick(MainMdAdapter.ViewHolder holder, View view, int position) {
+                Main item = adapter.getItem(position);
+
+
+                Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getTitle(),
+                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);
+                startActivityForResult(intent, main);
+
+            }
+
+
+        });
+
 
         //찜목록
         ImageButton btn_like = findViewById(R.id.btn_like);
