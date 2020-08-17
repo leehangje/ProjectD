@@ -35,6 +35,7 @@ public class MdDetailActivity extends AppCompatActivity {
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);
 
+        //채팅하기
         btn_chat = findViewById(R.id.btn_chat);
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +47,7 @@ public class MdDetailActivity extends AppCompatActivity {
 
     }//onCreate
 
+    //상품 상세사진 슬라이드 넘기기
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 3;
 
