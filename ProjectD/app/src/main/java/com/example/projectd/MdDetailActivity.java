@@ -21,13 +21,25 @@ public class MdDetailActivity extends AppCompatActivity {
 
     CircleImageView profile_photo;
     TextView user_nickname, member_addr, user_grade, md_name, md_price, md_deposit, md_category,
-            md_hits, md_fave_count, md_detail_content;
+            md_hits, md_fav_count, md_detail_content;
     Button btn_chat, btn_fav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_md_detail);
+
+        profile_photo = findViewById(R.id.profile_photo);
+        user_nickname = findViewById(R.id.user_nickname);
+        member_addr = findViewById(R.id.member_addr);
+        user_grade = findViewById(R.id.user_grade);
+        md_name = findViewById(R.id.md_name);
+        md_price = findViewById(R.id.md_price);
+        md_deposit = findViewById(R.id.md_dedosit);
+        md_category = findViewById(R.id.md_category);
+        md_hits = findViewById(R.id.md_hits);
+        md_fav_count = findViewById(R.id.md_fav_count);
+        md_detail_content = findViewById(R.id.md_detail_content);
 
         btn_chat = findViewById(R.id.btn_chat);
         btn_fav = findViewById(R.id.btn_fav);
