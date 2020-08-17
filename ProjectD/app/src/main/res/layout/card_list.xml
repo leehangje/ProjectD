@@ -7,87 +7,85 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
-        android:layout_width="152dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_marginStart="18.3dp"
-        android:layout_marginLeft="18.3dp"
-        android:layout_marginTop="11dp"
         android:layout_marginEnd="18.7dp"
-        android:layout_marginRight="18.7dp"
-        card_view:cardCornerRadius="17dp">
+        android:layout_marginTop="11dp"
+        card_view:cardCornerRadius="17dp"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="18.3dp"
+        android:layout_marginRight="18.7dp">
 
         <RelativeLayout
             android:id="@+id/firstLin"
-            android:layout_width="153dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
             android:orientation="vertical"
+            android:background="#ffffff"
             android:padding="10dp">
 
             <RelativeLayout
-                android:layout_width="128dp"
-                android:layout_height="164dp">
+                android:layout_width="375dp"
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/imageIcon"
-                    android:layout_width="match_parent"
-                    android:layout_height="95dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
+                    android:layout_width="54dp"
+                    android:layout_height="68dp"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="14dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/card_list_img" />
 
-                <TextView
-                    android:id="@+id/petName"
+                <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/imageIcon"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:id="@+id/mdName"
+                    android:layout_width="161dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginTop="111dp"
-                    android:text="일 3,500원"
+                    android:layout_marginStart="73dp"
+                    android:layout_marginLeft="73dp"
+                    android:layout_marginTop="12dp"
+                    android:text="자전거대여합니다."
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/petAge"
+                    android:id="@+id/mdprice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/petName"
+                    android:layout_below="@+id/mdName"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="유모차" />
+                    android:layout_marginStart="76dp"
+                    android:layout_marginLeft="76dp"
+                    android:layout_marginTop="6dp"
+                    android:text="일 3,500원" />
 
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="20dp"
-                    android:layout_height="17dp"
-                    android:layout_below="@+id/petName"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="35dp"
-                    android:layout_marginRight="35dp"
-                    android:layout_toEndOf="@+id/petAge"
-                    android:layout_toRightOf="@+id/petAge"
-                    android:background="#FFFFFF"
-                    android:scaleType="fitXY"
-                    card_view:srcCompat="@drawable/card_list_fav" />
+                <ImageView
+                    android:id="@+id/impossible"
+                    android:layout_width="89dp"
+                    android:layout_height="31dp"
+                    android:layout_below="@+id/mdName"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="-1dp"
+                    android:layout_toEndOf="@+id/mdprice"
+                    android:layout_toRightOf="@+id/mdprice"
+                    card_view:srcCompat="@drawable/impossible" />
 
             </RelativeLayout>
 

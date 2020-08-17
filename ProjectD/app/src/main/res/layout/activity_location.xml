@@ -57,20 +57,6 @@
         android:textSize="18sp" />
     -->
 
-    <ImageButton
-        android:id="@+id/etSearchBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_below="@+id/searchValueText"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="-46dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginRight="76dp"
-        android:background="#FFFFFF"
-        android:scaleType="fitXY"
-        android:src="@drawable/main_icon_search" />
-
     <Button
         android:id="@+id/setupBtn"
         android:layout_width="300dp"

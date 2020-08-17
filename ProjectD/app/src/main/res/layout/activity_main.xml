@@ -8,16 +8,49 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+    <ImageButton
+        android:id="@+id/btn_like"
+        android:layout_width="24dp"
+        android:layout_height="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#FFFFFF"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/card_list_fav" />
+
+    <ImageButton
+        android:id="@+id/btn_gps"
+        android:layout_width="24dp"
+        android:layout_height="23dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="29dp"
-        android:text="대여하고 싶은 상품을 검색해주세요!" />
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="23dp"
+        android:background="#FFFFFF"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/main_icon_gps" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="191dp"
+        android:layout_marginRight="191dp"
+        android:text="광주광역시 서구 농성2동"
+        android:textSize="16sp" />
 
     <ImageButton
         android:id="@+id/btn_search"
@@ -26,41 +59,23 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="285dp"
-        android:layout_marginLeft="285dp"
-        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="289dp"
+        android:layout_marginLeft="289dp"
+        android:layout_marginTop="23dp"
         android:background="#FFFFFF"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/main_icon_search" />
 
-    <ImageButton
-        android:id="@+id/btn_like"
-        android:layout_width="24dp"
-        android:layout_height="26dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_toEndOf="@+id/btn_notice"
-        android:layout_toRightOf="@+id/btn_notice"
-        android:background="#FFFFFF"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/card_list_fav" />
 
     <ImageButton
-        android:id="@+id/btn_notice"
-        android:layout_width="31dp"
-        android:layout_height="30dp"
+        android:id="@+id/btn_alram"
+        android:layout_width="28dp"
+        android:layout_height="27dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="22dp"
         android:layout_toEndOf="@+id/btn_search"
         android:layout_toRightOf="@+id/btn_search"
         android:background="#FFFFFF"
@@ -71,52 +86,28 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="74dp"
-        android:background="#606060" />
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:background="#918E8E" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="376dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="87dp"
-        android:layout_marginEnd="201dp"
-        android:layout_marginRight="201dp"
-        android:text="광주광역시 서구 농성2동"
-        android:textSize="16sp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp"
+        android:layout_marginBottom="51dp">
 
-    <ImageButton
-        android:id="@+id/imageButton13"
-        android:layout_width="24dp"
-        android:layout_height="23dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="88dp"
-        android:background="#FFFFFF"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/main_icon_gps" />
-
-        <FrameLayout
-            android:layout_width="355dp"
-            android:layout_height="536dp"
-            android:layout_marginTop="115dp">
-
-            <include
-                android:id="@+id/card1"
-                layout="@layout/card_list"
-                android:layout_width="158dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="0dp" />
-        </FrameLayout>
-
+        <include
+            android:id="@+id/card1"
+            layout="@layout/card_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp" />
+    </FrameLayout>
 
 
 </RelativeLayout>

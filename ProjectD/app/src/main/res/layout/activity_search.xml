@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
 
     <RelativeLayout
@@ -13,7 +14,7 @@
 
         <EditText
             android:id="@+id/searchText"
-            android:layout_width="334dp"
+            android:layout_width="372dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -28,19 +29,6 @@
             android:inputType="textMultiLine"
             android:windowSoftInputMode="stateAlwaysVisible" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="93dp"
-            android:text="검색결과"
-            android:textSize="18sp" />
-
         <SearchView
             android:id="@+id/icon_search"
             android:layout_width="wrap_content"
@@ -48,32 +36,34 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="-44dp"
-            android:layout_marginLeft="-44dp"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="65dp"
-            android:layout_marginRight="65dp"
+            android:layout_marginStart="-42dp"
+            android:layout_marginLeft="-42dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginRight="11dp"
             android:layout_toEndOf="@+id/searchText"
             android:layout_toRightOf="@+id/searchText" />
 
-
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="389dp"
-        android:layout_height="571dp"
+    <fragment
+        android:id="@+id/SearchFragement"
+        android:name="com.example.projectd.SearchFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp">
-
-        <include
-            android:id="@+id/card1"
-            layout="@layout/card_list"
-            android:layout_width="158dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="0dp" />
-    </FrameLayout>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="95dp"
+        android:layout_weight="1" />
 
 </RelativeLayout>
