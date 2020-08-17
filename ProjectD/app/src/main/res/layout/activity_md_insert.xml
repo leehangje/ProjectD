@@ -114,15 +114,15 @@
                 />
 
             <Spinner
-                android:id="@+id/catecory"
+                android:id="@+id/spinner"
                 android:layout_width="303dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="225dp"
-                android:layout_toEndOf="@+id/catecory1"
-                android:layout_toRightOf="@+id/catecory1"
-                android:paddingLeft="10dp" />
+                android:layout_toEndOf="@+id/textView8"
+                android:layout_toRightOf="@+id/textView8"
+                android:entries="@array/카테고리" />
 
             <TextView
                 android:id="@+id/textView8"
