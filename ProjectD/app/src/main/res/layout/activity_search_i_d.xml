@@ -23,11 +23,11 @@
                 android:elevation="1dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-                <TextView
+               <!-- <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="타이틀"
-                    android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title" />
+                    android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title" />-->
 
             </androidx.appcompat.widget.Toolbar>
 

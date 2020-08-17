@@ -27,7 +27,7 @@ public class SearchIDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search_i_d);
 
         //뒤로가기
         Button btn_back = findViewById(R.id.btn_back);
@@ -39,13 +39,13 @@ public class SearchIDActivity extends AppCompatActivity {
         });
 
 
-        toolbar = findViewById(R.id.toolbar);
+       /* toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("아이디/비밀번호 찾기");
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+*/
         fragment1 = new IdFragment();
         fragment2 = new PwFragment();
 
