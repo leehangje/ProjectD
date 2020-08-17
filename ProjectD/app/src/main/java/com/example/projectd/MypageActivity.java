@@ -27,6 +27,7 @@ public class MypageActivity extends AppCompatActivity {
         mypage_qna = findViewById(R.id.mypage_qna);
         mypage_logout = findViewById(R.id.mypage_logout);
 
+        //프로필 수정
         btn_profile_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,6 +37,7 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        //내 상품목록
         my_goods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +46,7 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        //빌린내역목록
         my_rentlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +55,7 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        //찜목록
         my_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +64,7 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        //공지사항
         mypage_notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +73,7 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        //자주묻는질문
         mypage_qna.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +82,14 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        //로그아웃
+        mypage_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MypageActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }//onCreate()
