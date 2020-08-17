@@ -20,8 +20,8 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class MdInsertActivity extends AppCompatActivity {
+
     ImageView imgVwSelected;
     Button btnImageSend, btnImageSelection;
     File tempSelectFile;
@@ -29,12 +29,20 @@ public class MdInsertActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_md_insert);
+        setContentView(R.layout.activity_main);
+
+
+        btnImageSend = findViewById(R.id.btnImageSend);
+        btnImageSend.setEnabled(false);
+        btnImageSend.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View view){
+                FileUploadUtils.send2Server(tempSelectFile);
+            }
+        });
 
         btnImageSelection = findViewById(R.id.btnImageSelection);
-        btnImageSelection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnImageSelection.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View view){
                 // Intent를 통해 이미지를 선택
                 Intent intent = new Intent();
                 //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -48,8 +56,7 @@ public class MdInsertActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode != 1 || resultCode != RESULT_OK) {
             return;
@@ -71,6 +78,10 @@ public class MdInsertActivity extends AppCompatActivity {
             ioe.printStackTrace();
         }
         btnImageSend.setEnabled(true);
-
     }
+
+
+
+
+
 }
