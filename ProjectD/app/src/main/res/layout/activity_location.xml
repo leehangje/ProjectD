@@ -5,44 +5,6 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <ImageButton
-        android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#FFFFFF"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="23dp"
-        android:layout_toRightOf="@+id/backBtn"
-        android:text="위치 찾기"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/searchValueText"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginLeft="62dp"
-        android:layout_marginTop="58dp"
-        android:ems="10"
-        android:hint="내 동네이름으로 검색"
-        android:inputType="textPersonName" />
-
     <!--
     <Button
         android:id="@+id/locSearchBtn"
@@ -56,6 +18,21 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
     -->
+
+    <EditText
+        android:id="@+id/searchValueText"
+        android:layout_width="284dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:hint="내 위치"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/setupBtn"
