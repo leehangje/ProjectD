@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         btn_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,FavListActivity.class);
+                Intent intent = new Intent(MainActivity.this,SearchIDActivity.class);
                 startActivity(intent);
             }
         });
