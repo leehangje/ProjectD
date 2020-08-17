@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
@@ -21,12 +22,15 @@ public class MdDetailActivity extends AppCompatActivity {
     CircleImageView profile_photo;
     TextView user_nickname, member_addr, user_grade, md_name, md_price, md_deposit, md_category,
             md_hits, md_fave_count, md_detail_content;
-    Button btn_chat;
+    Button btn_chat, btn_fav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_md_detail);
+
+        btn_chat = findViewById(R.id.btn_chat);
+        btn_fav = findViewById(R.id.btn_fav);
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
@@ -36,14 +40,22 @@ public class MdDetailActivity extends AppCompatActivity {
         indicator.setViewPager(vpPager);
 
         //채팅하기
-        btn_chat = findViewById(R.id.btn_chat);
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MdDetailActivity.this, ChatActivity.class);
                 startActivity(intent);
             }
-        });//btn_chat.setOnClickListener()
+        });
+
+        //찜하기
+        btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MdDetailActivity.this, "해당 상품을 찜 목록에 넣었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }//onCreate
 
