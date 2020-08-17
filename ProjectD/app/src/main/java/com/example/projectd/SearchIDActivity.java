@@ -1,6 +1,6 @@
 package com.example.projectd;
 
-import androidx.appcompat.app.ActionBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -34,9 +33,11 @@ public class SearchIDActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchIDActivity.this,LoginActivity.class);
+                Intent intent = new Intent(SearchIDActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
-        });
+        }); //btn_back.setOnClickListener()
+
 
 
        /* toolbar = findViewById(R.id.toolbar);
