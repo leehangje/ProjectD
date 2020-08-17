@@ -23,9 +23,10 @@
         android:layout_marginTop="48dp"
         android:backgroundTint="#DDDDDD"
         android:ems="10"
+        android:hint="ID"
         android:inputType="textPersonName"
-        android:text="ID"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"/>
 
     <EditText
         android:id="@+id/pwValueText"
