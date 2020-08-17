@@ -38,16 +38,6 @@ public class CategoryActivity extends AppCompatActivity {
         });//setOnClickListener()
 
         //유,아동 카테고리
-        category_icon1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CategoryActivity.this, CategoryViewActivity.class);
-                startActivity(intent);
-
-            }//onClick()
-        });//setOnClickListener()
-
-        //생활용품 카테고리
         category_icon2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +47,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
-        //스포츠,레져 카테고리
+        //생활용품 카테고리
         category_icon3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +57,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
-        //의류,잡화 카테고리
+        //스포츠,레져 카테고리
         category_icon4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +67,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
-        //게임,취미 카테고리
+        //의류,잡화 카테고리
         category_icon5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +77,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
-        //뷰티,미용 카테고리
+        //게임,취미 카테고리
         category_icon6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +87,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
-        //반려동물용품 카테고리
+        //뷰티,미용 카테고리
         category_icon7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +97,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
-        //기타 물품 카테고리
+        //반려동물용품 카테고리
         category_icon8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +107,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
-        //무료나눔 카테고리
+        //기타 물품 카테고리
         category_icon9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +117,7 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
+        //무료나눔 카테고리
         category_icon10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
