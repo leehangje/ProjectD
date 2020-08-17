@@ -22,7 +22,8 @@ public class LoginActivity extends AppCompatActivity {
         id_pw_search = findViewById(R.id.id_pw_search);
         signUp = findViewById(R.id.signUp);
         loginSubmitBtn = findViewById(R.id.loginSubmitBtn);
-        
+
+
 
     } //onCreate()
 } //class
