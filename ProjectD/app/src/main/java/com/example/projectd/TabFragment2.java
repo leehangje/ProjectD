@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TabFragment2 extends Fragment {
 
     RecyclerView recyclerView;
-    ReviewAdapter adapter;
+    MainMdAdapter adapter;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -53,7 +53,7 @@ public class TabFragment2 extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false));
-        adapter = new ReviewAdapter();
+        adapter = new MainMdAdapter();
 
         recyclerView.setAdapter(adapter);
 
