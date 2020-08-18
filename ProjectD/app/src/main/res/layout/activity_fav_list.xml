@@ -14,7 +14,7 @@
         app:cardUseCompatPadding="true"> <!--  app:cardBackgroundColor="#FFFFFFFF" -->
 
         <LinearLayout
-            android:id="@+id/parentLayout"
+            android:id="@+id/parentLayout01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -32,7 +32,7 @@
                     android:layout_margin="3dp">
 
                     <ImageView
-                        android:id="@+id/iv_img"
+                        android:id="@+id/iimg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"/>
@@ -40,7 +40,7 @@
                     <ProgressBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBar1"
                         android:layout_gravity="center"
                         android:visibility="gone"/>
 
@@ -82,7 +82,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/img_possible"
+                    android:id="@+id/iipossible"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
