@@ -51,7 +51,7 @@ public class TabFragment1 extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_tab1,container,false);
 
-        MainActivity activity = (MainActivity) getActivity();
+        MdDetailActivity activity = (MdDetailActivity) getActivity();
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
 
