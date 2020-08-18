@@ -8,10 +8,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
@@ -23,6 +26,9 @@ public class MdDetailActivity extends AppCompatActivity {
     TextView user_nickname, member_addr, user_grade, md_name, md_price, md_deposit, md_category,
             md_hits, md_fav_count, md_detail_content;
     Button btn_chat, btn_fav;
+
+    TabFragment1 fragment1;
+    TabFragment2 fragment2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,40 @@ public class MdDetailActivity extends AppCompatActivity {
 
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);
+
+        // 탭 - 리뷰&판매자의 다른상품
+        fragment1 = new TabFragment1();
+        fragment2 = new TabFragment2();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment1).commit();
+
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("리뷰"));
+        tabs.addTab(tabs.newTab().setText("닉네임님의 다른 상품"));
+
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                Log.d("MainActivity", "선택된 탭: " + position);
+
+                Fragment selected = null;
+                if (position == 0){
+                    selected = fragment1;
+                }else if (position == 1){
+                    selected = fragment2;
+                }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
+
 
         //채팅하기
         btn_chat.setOnClickListener(new View.OnClickListener() {
