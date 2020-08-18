@@ -16,7 +16,7 @@
         android:src="@drawable/logo2" />
 
     <Button
-        android:id="@+id/joinBtn"
+        android:id="@+id/signUpBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainLogo"
@@ -32,7 +32,7 @@
         android:id="@+id/snsImgView"
         android:layout_width="match_parent"
         android:layout_height="162dp"
-        android:layout_below="@+id/joinBtn"
+        android:layout_below="@+id/signUpBtn"
         android:layout_marginTop="0dp"
         app:srcCompat="@drawable/sns" />
 

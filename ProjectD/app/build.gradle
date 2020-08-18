@@ -42,6 +42,7 @@ dependencies {
     // Dex error → LocationActivity에서 필요
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -57,5 +58,7 @@ dependencies {
     //화면넘기기 ViewPager(재은)
     implementation 'me.relex:circleindicator:1.2.2'
 
+    //리사이클 뷰
+    implementation 'com.android.support:recyclerview-v7:30.1.0'
 
 }

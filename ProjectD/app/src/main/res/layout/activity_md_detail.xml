@@ -48,7 +48,7 @@
                 android:background="#E3F3D0">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/mypage_profile_photo"
+                    android:id="@+id/profile_photo"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentLeft="true"
@@ -80,16 +80,29 @@
                     android:text="동네 표시"
                     android:textSize="16sp" />
 
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="276dp"
+                    android:layout_marginLeft="276dp"
+                    android:layout_marginTop="14dp" />
+
                 <TextView
-                    android:id="@+id/level"
+                    android:id="@+id/user_grade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="324dp"
-                    android:layout_marginTop="20dp"
-                    android:text="(등급표시)"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="358dp"
+                    android:layout_marginTop="14dp"
+                    android:text="(평균)"
+                    android:textSize="12sp" />
 
 
             </RelativeLayout>
@@ -113,7 +126,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/price"
+                    android:id="@+id/md_price"
                     android:layout_width="52dp"
                     android:layout_height="32dp"
                     android:layout_alignParentLeft="true"
@@ -126,20 +139,20 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/dedosit"
+                    android:id="@+id/md_dedosit"
                     android:layout_width="54dp"
                     android:layout_height="32dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="88dp"
-                    android:layout_marginTop="54dp"
+                    android:layout_marginLeft="89dp"
+                    android:layout_marginTop="52dp"
                     android:text="보증금"
                     android:textColor="#0E0E0E"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/md_Registration_date3"
+                    android:id="@+id/md_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -154,7 +167,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/md_Registration_date4"
+                    android:id="@+id/md_Registration_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -184,7 +197,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/md_fave_count"
+                    android:id="@+id/md_fav_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -225,9 +238,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginTop="-2dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="-1dp"
                     app:tabBackground="@color/colorAccent"
                     app:tabIndicatorColor="#FFFFFF"
                     app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -261,7 +274,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/btn_fav"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -276,7 +289,7 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/btn_chat"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

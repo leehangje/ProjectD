@@ -1,6 +1,6 @@
 package com.example.projectd;
 
-import androidx.appcompat.app.ActionBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,24 +26,27 @@ public class SearchIDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search_i_d);
 
+        //뒤로가기
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchIDActivity.this,LoginActivity.class);
+                Intent intent = new Intent(SearchIDActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
-        });
+        }); //btn_back.setOnClickListener()
 
 
-        toolbar = findViewById(R.id.toolbar);
+
+       /* toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("아이디/비밀번호 찾기");
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+*/
         fragment1 = new IdFragment();
         fragment2 = new PwFragment();
 
