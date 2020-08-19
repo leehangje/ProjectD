@@ -78,6 +78,7 @@
 
         <activity android:name=".MypageActivity" android:parentActivityName=".MainActivity"></activity>
 
+        <activity android:name=".NoticeFindActivity" android:parentActivityName=".NoticeActivity"></activity>
 
     </application>
 
