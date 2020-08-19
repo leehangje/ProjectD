@@ -44,8 +44,6 @@
 
         <activity android:name=".SignUpFormActivity"></activity>
         <activity android:name=".ProfileUpdateActivity" />
-        <activity android:name=".QnaActivity" />
-        <activity android:name=".NoticeActivity" />
         <activity android:name=".AlramActivity" />
         <activity android:name=".FavListActivity" />
         <activity android:name=".ReviewActivity" />
@@ -69,6 +67,14 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".ProfilActivity" android:parentActivityName=".MypageActivity"></activity>
+
+        <activity android:name=".NoticeActivity" android:parentActivityName=".MypageActivity"></activity>
+
+        <activity android:name=".QnAListActivity" android:parentActivityName=".MypageActivity"></activity>
+
+        <activity android:name=".MypageActivity" android:parentActivityName=".MainActivity"></activity>
 
 
     </application>
