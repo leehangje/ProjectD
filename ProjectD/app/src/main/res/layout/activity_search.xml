@@ -55,15 +55,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="463dp"
         android:orientation="vertical"
         android:visibility="visible">
 
         <fragment
             android:id="@+id/SearchFragement"
             android:name="com.example.projectd.SearchFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="370dp"
+            android:layout_height="452dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
@@ -74,5 +74,16 @@
             android:layout_marginBottom="30dp"
             android:layout_weight="1" />
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#3F51B5"
+        app:itemBackground="#3F51B5"
+        app:itemIconTint="#FFFFFF"
+        app:itemTextColor="@color/wallet_bright_foreground_disabled_holo_light"
+        app:menu="@menu/menu_bottom" />
 
 </LinearLayout>
