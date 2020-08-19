@@ -74,7 +74,7 @@
 
         <activity android:name=".QnAListActivity" android:parentActivityName=".MypageActivity"></activity>
 
-        <activity android:name=".MypageActivity" android:parentActivityName=".MainActivity"></activity>
+        <!--<activity android:name=".MypageActivity" android:parentActivityName=".MainActivity"></activity>-->
 
 
     </application>
