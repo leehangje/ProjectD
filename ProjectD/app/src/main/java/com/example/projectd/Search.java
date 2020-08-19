@@ -1,6 +1,8 @@
 package com.example.projectd;
 
-public class Search {
+import java.io.Serializable;
+
+public class Search implements Serializable {
     String title;
     String price;
 

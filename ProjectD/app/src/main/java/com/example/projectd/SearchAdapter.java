@@ -1,27 +1,39 @@
 package com.example.projectd;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>
         implements OnSearchItemClickListener {
-    ArrayList<Search> items = new ArrayList<Search>();
+
+    Context context;
+    ArrayList<Search> items;
     OnSearchItemClickListener listener;
 
+    public SearchAdapter(Context context, ArrayList<Search> items) {
+        this.context = context;
+        this.items = items;
+    }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.fragment_search, parent, false);
+        View itemView = inflater.inflate(R.layout.card_list, parent, false);
 
         return new ViewHolder(itemView, this);
     }
@@ -30,6 +42,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Search item = items.get(position);
         holder.setItem(item);
+
     }
 
     @Override
@@ -40,8 +53,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public void setOnItemClickListener(OnSearchItemClickListener listener){
         this.listener = listener;
     }
-
-
 
     @Override
     public void onItemClick(ViewHolder holder, View view, int position) {
@@ -77,8 +88,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             textView.setText(item.getTitle());
             textView2.setText(item.getPrice());
         }
-
-
 
     }
 

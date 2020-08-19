@@ -15,74 +15,46 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
+    SearchActivity activity;
 
     RecyclerView recyclerView;
     SearchAdapter adapter;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
-
-    }
+    ArrayList<Search> items;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_search,container,false);
 
-        SearchActivity activity = (SearchActivity) getActivity();
+        activity = (SearchActivity) getActivity();
+        items = new ArrayList<>();
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.VERTICAL , false);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false));
-        adapter = new SearchAdapter();
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new SearchAdapter(activity.getApplicationContext(), items);
 
-       // adapter.addItem(new Search("컴퓨터","3500원"));
-
+        adapter.addItem(new Search("컴퓨터","3500원"));
+        adapter.addItem(new Search("자건거", "5000원"));
 
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(new OnSearchItemClickListener() {
+            public static final int main = 1001;
+            @Override
+            public void onItemClick(SearchAdapter.ViewHolder holder, View view, int position) {
+                Search item = adapter.getItem(position);
+
+                Toast.makeText(activity.getApplicationContext(), "선택됨" + item.getTitle(),
+                        Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(activity.getApplicationContext(), MdDetailActivity.class);
+                startActivityForResult(intent, main);
+            }
+        });
+
         return  rootView;
-
-
     }
-
-
 }
