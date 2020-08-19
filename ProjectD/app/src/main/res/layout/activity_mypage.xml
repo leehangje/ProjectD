@@ -91,13 +91,14 @@
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="5dp" />
 
                 <TextView
                     android:layout_width="62dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="7dp"
                     android:text="(평균)"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -167,7 +168,7 @@
                 android:layout_width="310dp"
                 android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="30dp"
                 android:background="#FFFFFF"
                 android:text="공지사항"
                 android:textColor="#434242"
@@ -190,7 +191,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="32dp"
                 android:background="#FFFFFF"
                 android:text="로그아웃"
                 android:textColor="#434242"
