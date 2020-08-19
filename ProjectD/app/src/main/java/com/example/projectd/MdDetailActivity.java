@@ -57,10 +57,11 @@ public class MdDetailActivity extends AppCompatActivity {
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);
 
-        // 탭 - 리뷰&판매자의 다른상품
+        // 탭 프래그먼트
         fragment1 = new TabFragment1();
         fragment2 = new TabFragment2();
 
+        //기본으로 표시될 프래그먼트
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment1).commit();
 
         TabLayout tabs = findViewById(R.id.tabs);
