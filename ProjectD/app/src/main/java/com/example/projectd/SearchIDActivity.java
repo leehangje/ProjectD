@@ -29,7 +29,7 @@ public class SearchIDActivity extends AppCompatActivity {
         // 액션 바 설정
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.drawable.actionbar_back);
-        actionBar.setTitle("검색");
+        actionBar.setTitle("아이디/비밀번호 찾기");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
