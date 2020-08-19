@@ -52,7 +52,9 @@
         <activity android:name=".ChatActivity" />
         <activity android:name=".ChatListActivity" />
         <activity android:name=".MdInsertActivity" />
+<!--
         <activity android:name=".MypageActivity" />
+-->
         <activity android:name=".MdDetailActivity" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".SearchActivity" />
