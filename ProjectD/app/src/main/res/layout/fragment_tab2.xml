@@ -17,12 +17,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <include
-            android:id="@+id/darungoods"
-            layout="@layout/card_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </FrameLayout>
 
 </LinearLayout>
