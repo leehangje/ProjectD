@@ -136,7 +136,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#3F51B5"
-        app:itemBackground="#3F51B5"
         app:itemIconTint="#FFFFFF"
         app:itemTextColor="@color/wallet_bright_foreground_disabled_holo_light"
         app:menu="@menu/menu_bottom" />
