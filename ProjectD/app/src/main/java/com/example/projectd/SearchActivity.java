@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.view.MenuItem;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -24,7 +25,19 @@ public class SearchActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
+    }//onCreate
 
+    // 액션 바 뒤로가기 기능을 추가한 메소드
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int curId = item.getItemId();
 
-    }
+        switch (curId) {
+            case android.R.id.home :
+                // → android.R.id.home : 메뉴바 상단의 아이콘(뒤로가기) 아이디
+                this.finish();      // 앱 종료
+                break;
+        }
+        return true;
+    } //onOptionsItemSelected()
 }
