@@ -38,7 +38,7 @@ public class MypageActivity extends AppCompatActivity {
         btn_profile_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, ProfileUpdateActivity.class);
+                Intent intent = new Intent(MypageActivity.this, ProfilActivity.class);
                 startActivity(intent);
 
             }
@@ -84,7 +84,7 @@ public class MypageActivity extends AppCompatActivity {
         mypage_qna.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, QnaActivity.class);
+                Intent intent = new Intent(MypageActivity.this, QnAListActivity.class);
                 startActivity(intent);
             }
         });
