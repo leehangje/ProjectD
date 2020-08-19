@@ -150,6 +150,8 @@
         android:textColor="#434242"
         android:textStyle="bold" />
 
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_bottom"
         android:layout_width="match_parent"

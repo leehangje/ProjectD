@@ -6,232 +6,239 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
-    <!-- category_icon1을 기준으로 다른 아이콘 따라 움직임 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/category_icon1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/camera" />
+        <!-- category_icon1을 기준으로 다른 아이콘 따라 움직임 -->
 
-    <ImageView
-        android:id="@+id/category_icon2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="125dp"
-        android:src="@drawable/baby" />
+            <ImageView
+                android:id="@+id/category_icon1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/camera" />
 
-    <ImageView
-        android:id="@+id/category_icon3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="-40dp"
-        android:layout_marginTop="85dp"
-        android:src="@drawable/cup" />
+            <ImageView
+                android:id="@+id/category_icon2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="125dp"
+                android:src="@drawable/baby" />
 
-    <ImageView
-        android:id="@+id/category_icon4"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="85dp"
-        android:src="@drawable/cycle" />
+            <ImageView
+                android:id="@+id/category_icon3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="-40dp"
+                android:layout_marginTop="85dp"
+                android:src="@drawable/cup" />
 
-    <ImageView
-        android:id="@+id/category_icon5"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="-40dp"
-        android:layout_marginTop="170dp"
-        android:src="@drawable/closet" />
+            <ImageView
+                android:id="@+id/category_icon4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="85dp"
+                android:src="@drawable/cycle" />
 
-    <ImageView
-        android:id="@+id/category_icon6"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="170dp"
-        android:src="@drawable/game" />
+            <ImageView
+                android:id="@+id/category_icon5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="-40dp"
+                android:layout_marginTop="170dp"
+                android:src="@drawable/closet" />
 
-    <ImageView
-        android:id="@+id/category_icon7"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="-40dp"
-        android:layout_marginTop="255dp"
-        android:src="@drawable/beauty" />
+            <ImageView
+                android:id="@+id/category_icon6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="170dp"
+                android:src="@drawable/game" />
 
-    <ImageView
-        android:id="@+id/category_icon8"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="255dp"
-        android:src="@drawable/pet" />
+            <ImageView
+                android:id="@+id/category_icon7"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="-40dp"
+                android:layout_marginTop="255dp"
+                android:src="@drawable/beauty" />
 
-    <ImageView
-        android:id="@+id/category_icon9"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="-40dp"
-        android:layout_marginTop="340dp"
-        android:src="@drawable/etc" />
+            <ImageView
+                android:id="@+id/category_icon8"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="255dp"
+                android:src="@drawable/pet" />
 
-    <ImageView
-        android:id="@+id/category_icon10"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="340dp"
-        android:src="@drawable/free" />
+            <ImageView
+                android:id="@+id/category_icon9"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="-40dp"
+                android:layout_marginTop="340dp"
+                android:src="@drawable/etc" />
+
+            <ImageView
+                android:id="@+id/category_icon10"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="340dp"
+                android:src="@drawable/free" />
 
 
-    <Button
-        android:id="@+id/categoryBtn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:background="#FFFFFF"
-        android:text="디지털/가전"
-        android:textSize="18dp"
-        android:layout_marginLeft="5dp"/>
+            <Button
+                android:id="@+id/categoryBtn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:background="#FFFFFF"
+                android:text="디지털/가전"
+                android:textSize="18dp"
+                android:layout_marginLeft="5dp"/>
 
-    <Button
-        android:id="@+id/categoryBtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="170dp"
-        android:textSize="18dp"
-        android:background="#FFFFFF"
-        android:text="유 / 아동" />
+            <Button
+                android:id="@+id/categoryBtn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="170dp"
+                android:textSize="18dp"
+                android:background="#FFFFFF"
+                android:text="유 / 아동" />
 
-    <Button
-        android:id="@+id/categoryBtn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginTop="85dp"
-        android:background="#FFFFFF"
-        android:text="생활 용품"
-        android:textSize="18dp"
-        android:layout_marginLeft="5dp"/>
+            <Button
+                android:id="@+id/categoryBtn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginTop="85dp"
+                android:background="#FFFFFF"
+                android:text="생활 용품"
+                android:textSize="18dp"
+                android:layout_marginLeft="5dp"/>
 
-    <Button
-        android:id="@+id/categoryBtn4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="170dp"
-        android:textSize="18dp"
-        android:layout_marginTop="85dp"
-        android:background="#FFFFFF"
-        android:text="스포츠/레져" />
+            <Button
+                android:id="@+id/categoryBtn4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="170dp"
+                android:textSize="18dp"
+                android:layout_marginTop="85dp"
+                android:background="#FFFFFF"
+                android:text="스포츠/레져" />
 
-    <Button
-        android:id="@+id/categoryBtn5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginTop="170dp"
-        android:background="#FFFFFF"
-        android:text="의류/잡화"
-        android:textSize="18dp"
-        android:layout_marginLeft="5dp"/>
+            <Button
+                android:id="@+id/categoryBtn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginTop="170dp"
+                android:background="#FFFFFF"
+                android:text="의류/잡화"
+                android:textSize="18dp"
+                android:layout_marginLeft="5dp"/>
 
-    <Button
-        android:id="@+id/categoryBtn6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="170dp"
-        android:textSize="18dp"
-        android:layout_marginTop="170dp"
-        android:background="#FFFFFF"
-        android:text="게임 / 취미" />
+            <Button
+                android:id="@+id/categoryBtn6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="170dp"
+                android:textSize="18dp"
+                android:layout_marginTop="170dp"
+                android:background="#FFFFFF"
+                android:text="게임 / 취미" />
 
-    <Button
-        android:id="@+id/categoryBtn7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginTop="255dp"
-        android:background="#FFFFFF"
-        android:text="뷰티 / 미용"
-        android:textSize="18dp"
-        android:layout_marginLeft="5dp"/>
+            <Button
+                android:id="@+id/categoryBtn7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginTop="255dp"
+                android:background="#FFFFFF"
+                android:text="뷰티 / 미용"
+                android:textSize="18dp"
+                android:layout_marginLeft="5dp"/>
 
-    <Button
-        android:id="@+id/categoryBtn8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="170dp"
-        android:textSize="18dp"
-        android:layout_marginTop="255dp"
-        android:background="#FFFFFF"
-        android:text="반려동물용품" />
+            <Button
+                android:id="@+id/categoryBtn8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="170dp"
+                android:textSize="18dp"
+                android:layout_marginTop="255dp"
+                android:background="#FFFFFF"
+                android:text="반려동물용품" />
 
-    <Button
-        android:id="@+id/categoryBtn9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginTop="340dp"
-        android:background="#FFFFFF"
-        android:text="기타 물품"
-        android:textSize="18dp"
-        android:layout_marginLeft="5dp"/>
+            <Button
+                android:id="@+id/categoryBtn9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginTop="340dp"
+                android:background="#FFFFFF"
+                android:text="기타 물품"
+                android:textSize="18dp"
+                android:layout_marginLeft="5dp"/>
 
-    <Button
-        android:id="@+id/categoryBtn10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/category_icon1"
-        android:layout_toRightOf="@id/category_icon1"
-        android:layout_marginLeft="170dp"
-        android:textSize="18dp"
-        android:layout_marginTop="340dp"
-        android:background="#FFFFFF"
-        android:text="무료 나눔" />
+            <Button
+                android:id="@+id/categoryBtn10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/category_icon1"
+                android:layout_toRightOf="@id/category_icon1"
+                android:layout_marginLeft="170dp"
+                android:textSize="18dp"
+                android:layout_marginTop="340dp"
+                android:background="#FFFFFF"
+                android:text="무료 나눔" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_bottom"
