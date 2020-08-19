@@ -53,32 +53,36 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="463dp"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:layout_height="468dp">
 
-        <fragment
-            android:id="@+id/SearchFragement"
-            android:name="com.example.projectd.SearchFragment"
-            android:layout_width="370dp"
-            android:layout_height="452dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="463dp"
+            android:orientation="vertical"
+            android:visibility="visible">
 
+            <fragment
+                android:id="@+id/SearchFragement"
+                android:name="com.example.projectd.SearchFragment"
+                android:layout_width="370dp"
+                android:layout_height="452dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_alignParentBottom="true"
         android:background="#3F51B5"
         app:itemIconTint="#FFFFFF"

@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -28,14 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 상단 바 없애기
+        if (Build.VERSION.SDK_INT >= 21) {
+            getSupportActionBar().hide();
+        } else if (Build.VERSION.SDK_INT < 21) {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+
         recyclerView = findViewById(R.id.recyclerView);
 
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new MainMdAdapter();
-
-
 
         adapter.addItem(new Main("컴퓨터","3500원"));
         adapter.addItem(new Main("모니터","3000원"));

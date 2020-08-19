@@ -101,39 +101,43 @@
             android:background="#918E8E" />
     </LinearLayout>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="451dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="0dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_height="513dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="422dp"
+            android:layout_height="454dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="0dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
-        <include
-            android:id="@+id/card1"
-            layout="@layout/card_list"
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="0dp" />
-    </FrameLayout>
-
+            <include
+                android:id="@+id/card1"
+                layout="@layout/card_list"
+                android:layout_width="390dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="0dp" />
+        </FrameLayout>
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:background="#3F51B5"
         app:itemIconTint="#FFFFFF"

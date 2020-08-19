@@ -1,6 +1,7 @@
 package com.example.projectd;
 
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,13 @@ public class SearchIDActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 액션 바 설정
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setIcon(R.drawable.actionbar_back);
+        actionBar.setTitle("검색");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
 
         setContentView(R.layout.activity_search_i_d);
