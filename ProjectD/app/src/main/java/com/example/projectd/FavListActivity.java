@@ -2,6 +2,7 @@ package com.example.projectd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class FavListActivity extends AppCompatActivity {
                 Toast.makeText(FavListActivity.this, "선택"+position+"\n물품명"+dto.getMd_name()+"\n닉네임"+dto.getMember_nickname()
                         , Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(FavListActivity.this , MdDetailActivity.class);
+                startActivity(intent);
 
             }
         });
