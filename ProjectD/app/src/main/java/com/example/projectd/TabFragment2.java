@@ -2,31 +2,31 @@ package com.example.projectd;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment {
-    SearchActivity activity;
+public class TabFragment2 extends Fragment {
+    MdDetailActivity activity;
 
     RecyclerView recyclerView;
-    SearchAdapter adapter;
-    ArrayList<Search> items;
+    DarunMdAdapter adapter;
+    ArrayList<Darun> items;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_search,container,false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_tab2,container,false);
 
-        activity = (SearchActivity) getActivity();
+        activity = (MdDetailActivity) getActivity();
         items = new ArrayList<>();
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
@@ -34,18 +34,19 @@ public class SearchFragment extends Fragment {
                 new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.VERTICAL , false);
 
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new SearchAdapter(activity.getApplicationContext(), items);
+        adapter = new DarunMdAdapter(activity.getApplicationContext(), items);
 
-        adapter.addItem(new Search("컴퓨터","3500원"));
-        adapter.addItem(new Search("자건거", "5000원"));
+        adapter.addItem(new Darun("킥보드", "2000원"));
+        adapter.addItem(new Darun("자건거", "5000원"));
 
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new OnSearchItemClickListener() {
+        adapter.setOnItemClickListener(new OnDarunMdItemClickListener() {
             public static final int main = 1001;
+
             @Override
-            public void onItemClick(SearchAdapter.ViewHolder holder, View view, int position) {
-                Search item = adapter.getItem(position);
+            public void onItemClick(DarunMdAdapter.ViewHolder holder, View view, int position) {
+                Darun item = adapter.getItem(position);
 
                 Toast.makeText(activity.getApplicationContext(), "선택됨" + item.getTitle(),
                         Toast.LENGTH_LONG).show();
@@ -56,5 +57,7 @@ public class SearchFragment extends Fragment {
         });
 
         return  rootView;
+
+
     }
 }

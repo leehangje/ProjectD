@@ -1,12 +1,10 @@
 package com.example.projectd;
 
-import java.io.Serializable;
-
-public class Search implements Serializable {
+public class Darun {
     String title;
     String price;
 
-    public Search(String title, String price) {
+    public Darun(String title, String price) {
         this.title = title;
         this.price = price;
     }

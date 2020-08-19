@@ -7,8 +7,10 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +28,13 @@ public class LoginActivity extends AppCompatActivity {
 
         checkDangerousPermissions();    //위험 권한 주기
 
+        // 상단 바 없애기
+        if (Build.VERSION.SDK_INT >= 21) {
+            getSupportActionBar().hide();
+        } else if (Build.VERSION.SDK_INT < 21) {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+
         id_pw_search = findViewById(R.id.id_pw_search);
         signUp = findViewById(R.id.signUp);
         loginSubmitBtn = findViewById(R.id.loginSubmitBtn);
@@ -41,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpFormActivity.class);
                 startActivity(intent);
             }
         }); //signUp.setOnClickListener()
