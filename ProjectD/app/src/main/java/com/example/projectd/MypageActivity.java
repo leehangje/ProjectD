@@ -2,17 +2,24 @@ package com.example.projectd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MypageActivity extends AppCompatActivity {
 
     Button btn_profile_update, mypage_notice, mypage_qna, mypage_logout;
     ImageButton my_goods, my_rentlist, my_fav;
 
+    private Context mContext = MypageActivity.this;
+    private static final int ACTIVITY_NUM = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +98,17 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        setupBottomNavigationView();
 
     }//onCreate()
 
+    // 하단 바 메소드
+    private void setupBottomNavigationView() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.menu_bottom);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
+    } //setupBottomNavigationView()
 
 }//class

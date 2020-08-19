@@ -2,14 +2,22 @@ package com.example.projectd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CategoryActivity extends AppCompatActivity {
     ImageView category_icon1, category_icon2, category_icon3, category_icon4, category_icon5,
             category_icon6, category_icon7, category_icon8, category_icon9, category_icon10;
+
+    private Context mContext = CategoryActivity.this;
+    private static final int ACTIVITY_NUM = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +135,17 @@ public class CategoryActivity extends AppCompatActivity {
             }//onClick()
         });//setOnClickListener()
 
+        setupBottomNavigationView();
+
     }//onCreate()
+
+    // 하단 바 메소드
+    private void setupBottomNavigationView() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.menu_bottom);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
+    } //setupBottomNavigationView()
 
 }//class
