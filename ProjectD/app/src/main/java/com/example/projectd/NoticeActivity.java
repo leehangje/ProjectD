@@ -30,14 +30,8 @@ public class NoticeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new NoticeAdapter();
 
-        adapter.addItem(new Notice("박준근", "광주시 길구"));
-        adapter.addItem(new Notice("안중근", "광주시 봉구"));
-        adapter.addItem(new Notice("안중근", "광주시 봉구"));
-        adapter.addItem(new Notice("안중근", "광주시 봉구"));
-        adapter.addItem(new Notice("안중근", "광주시 봉구"));
-        adapter.addItem(new Notice("안중근", "광주시 봉구"));
-        adapter.addItem(new Notice("안중근", "광주시 봉구"));
-
+        adapter.addItem(new Notice("8월 19일", "최고기온 34도"));
+        adapter.addItem(new Notice("8월 20일", "쉬고싶다"));
 
 
         recyclerView.setAdapter(adapter);
@@ -51,7 +45,7 @@ public class NoticeActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getSub(),
                         Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                Intent intent = new Intent(getApplicationContext(), NoticeFindActivity.class);
                 startActivityForResult(intent, Notice);
 
             }

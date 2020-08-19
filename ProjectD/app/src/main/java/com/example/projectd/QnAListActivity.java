@@ -34,22 +34,14 @@ public class QnAListActivity extends AppCompatActivity {
             recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             List<QnAListAdapter.Item> data = new ArrayList<>();
 
-        data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "Fruits"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Apple"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Orange"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Banana"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "Cars"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Audi"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Aston Martin"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "BMW"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Cadillac"));
+        data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "궁금한게 있나요?"));
+        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "저도 몰라요"));
+        data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "이 앱을 만든 동기가 궁금하신가요?"));
+        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "안알려줌 ㅎ"));
 
-        QnAListAdapter.Item places = new QnAListAdapter.Item(QnAListAdapter.HEADER, "Places");
+        QnAListAdapter.Item places = new QnAListAdapter.Item(QnAListAdapter.HEADER, "대여하는 방법이 궁금하신가요?");
         places.invisibleChildren = new ArrayList<>();
-        places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Kerala"));
-        places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Tamil Nadu"));
-        places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Karnataka"));
-        places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "Maharashtra"));
+        places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "안대여"));
 
         data.add(places);
 
