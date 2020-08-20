@@ -42,17 +42,19 @@ public class RealMainActivity extends AppCompatActivity {
                         .replace(R.id.main_layout,mainActivity).commitAllowingStateLoss();
                     return true;
                 }
-                /*case R.id.tab2:{ getSupportFragmentManager().beginTransaction()
+                case R.id.tab2:{ getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_layout,categoryActivity).commitAllowingStateLoss();
                     return true;
                 }
+                /*
                 case R.id.tab4:{ getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_layout,chatListActivity).commitAllowingStateLoss();
                     return true;
-                }case R.id.tab5:{ getSupportFragmentManager().beginTransaction()
+                }*/
+                case R.id.tab5:{ getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_layout,mypageActivity).commitAllowingStateLoss();
                     return true;
-                }*/ default: return false;
+                } default: return false;
             }
             }
         });
