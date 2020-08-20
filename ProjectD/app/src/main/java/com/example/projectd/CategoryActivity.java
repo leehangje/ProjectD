@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CategoryActivity extends Fragment {
-    //CategoryViewActivity
 
     ImageView category_icon1, category_icon2, category_icon3, category_icon4, category_icon5,
             category_icon6, category_icon7, category_icon8, category_icon9, category_icon10;
@@ -33,6 +32,7 @@ public class CategoryActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable
             ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_category, container, false);
+
 
         category_icon1 = viewGroup.findViewById(R.id.category_icon1);
         category_icon2 = viewGroup.findViewById(R.id.category_icon2);
