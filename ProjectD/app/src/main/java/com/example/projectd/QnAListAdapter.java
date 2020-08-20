@@ -32,7 +32,7 @@ public class QnAListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         switch (type) {
             case HEADER:
                 LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.activity_qna, parent, false);
+                view = inflater.inflate(R.layout.activity_qna_sub, parent, false);
                 ListHeaderViewHolder header = new ListHeaderViewHolder(view);
                 return header;
             case CHILD:
