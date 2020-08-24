@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -22,6 +23,9 @@ public class CategoryActivity extends Fragment {
 
    LinearLayout category1, category2, category3, category4, category5,
             category6, category7, category8, category9, category10;
+
+   Button categoryBtn1, categoryBtn2, categoryBtn3, categoryBtn4, categoryBtn5, categoryBtn6,
+           categoryBtn7, categoryBtn8, categoryBtn9, categoryBtn10;
 
     ViewGroup viewGroup;
 
@@ -51,8 +55,28 @@ public class CategoryActivity extends Fragment {
         toolbar_context = viewGroup.findViewById(R.id.toolbar_context);
         mainActivity = new MainActivity();
 
+        categoryBtn1 = viewGroup.findViewById(R.id.categoryBtn1);
+        categoryBtn2 = viewGroup.findViewById(R.id.categoryBtn2);
+        categoryBtn3 = viewGroup.findViewById(R.id.categoryBtn3);
+        categoryBtn4 = viewGroup.findViewById(R.id.categoryBtn4);
+        categoryBtn5 = viewGroup.findViewById(R.id.categoryBtn5);
+        categoryBtn6 = viewGroup.findViewById(R.id.categoryBtn6);
+        categoryBtn7 = viewGroup.findViewById(R.id.categoryBtn7);
+        categoryBtn8 = viewGroup.findViewById(R.id.categoryBtn8);
+        categoryBtn9 = viewGroup.findViewById(R.id.categoryBtn9);
+        categoryBtn10 = viewGroup.findViewById(R.id.categoryBtn10);
+
+
         //디지털,가전 카테고리
         category1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        categoryBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
@@ -69,8 +93,24 @@ public class CategoryActivity extends Fragment {
             }//onClick()
         });
 
+        categoryBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
         //생활용품 카테고리
         category3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
+        categoryBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
@@ -87,8 +127,24 @@ public class CategoryActivity extends Fragment {
             }//onClick()
         });
 
+        categoryBtn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
         //의류,잡화 카테고리
         category5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
+        categoryBtn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
@@ -105,8 +161,24 @@ public class CategoryActivity extends Fragment {
             }//onClick()
         });
 
+        categoryBtn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
         //뷰티,미용 카테고리
         category7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
+        categoryBtn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
@@ -123,6 +195,14 @@ public class CategoryActivity extends Fragment {
             }//onClick()
         });
 
+        categoryBtn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
         //기타 물품 카테고리
         category9.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,8 +212,24 @@ public class CategoryActivity extends Fragment {
             }//onClick()
         });
 
+        categoryBtn9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
         //무료나눔 카테고리
         category10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                startActivity(intent);
+            }//onClick()
+        });
+
+        categoryBtn10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
