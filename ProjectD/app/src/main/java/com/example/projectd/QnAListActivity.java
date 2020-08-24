@@ -1,7 +1,9 @@
 package com.example.projectd;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
@@ -17,11 +19,17 @@ public class QnAListActivity extends AppCompatActivity {
     private RecyclerView recyclerview;
 
     Button button;
+    ImageButton back_btn;
+
+    LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_qna_list);
+
+            toolbar_context = findViewById(R.id.toolbar_context);
+            back_btn = findViewById(R.id.btn_back);
 
             button = findViewById(R.id.button);
             LinearLayout layout01 = (LinearLayout) findViewById(R.id.layout01);
@@ -42,5 +50,20 @@ public class QnAListActivity extends AppCompatActivity {
             data.add(places);
 
         recyclerview.setAdapter(new QnAListAdapter(data));
+
+        // 툴바 안의 뒤로가기 버튼 클릭할 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

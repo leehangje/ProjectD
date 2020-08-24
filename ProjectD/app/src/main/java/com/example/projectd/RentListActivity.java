@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class RentListActivity extends AppCompatActivity {
@@ -14,12 +15,15 @@ public class RentListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RentAdapter adapter;
 
+    LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent_list);
 
         recyclerView = findViewById(R.id.recyclerView);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -43,6 +47,14 @@ public class RentListActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);
                 startActivityForResult(intent, chat);
 
+            }
+        });
+
+        // 툴바 안의 뒤로가기 버튼 클릭할 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
