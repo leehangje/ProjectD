@@ -65,7 +65,7 @@
 
                     <ImageView
                         android:id="@+id/category_icon1"
-                        android:layout_width="45dp"
+                        android:layout_width="40dp"
                         android:layout_height="45dp"
                         android:src="@drawable/camera" />
 
@@ -76,20 +76,20 @@
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
                         android:text="디지털/가전"
-                        android:textSize="20dp"  />
+                        android:textSize="19dp"  />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/category6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="42dp"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon6"
-                        android:layout_width="45dp"
+                        android:layout_width="43dp"
                         android:layout_height="45dp"
                         android:src="@drawable/game" />
 
@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:textSize="20dp"
+                        android:textSize="19dp"
                         android:background="#FFFFFF"
                         android:text="게임 / 취미" />
                 </LinearLayout>
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:textSize="20dp"
+                        android:textSize="19dp"
                         android:background="#FFFFFF"
                         android:text="유 / 아동" />
                 </LinearLayout>
@@ -139,13 +139,13 @@
                     android:id="@+id/category7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="47dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon7"
-                        android:layout_width="45dp"
+                        android:layout_width="44dp"
                         android:layout_height="45dp"
                         android:src="@drawable/beauty" />
 
@@ -156,7 +156,7 @@
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
                         android:text="뷰티 / 미용"
-                        android:textSize="20dp"  />
+                        android:textSize="19dp"  />
                 </LinearLayout>
 
             </LinearLayout>
@@ -172,12 +172,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon3"
-                        android:layout_width="45dp"
+                        android:layout_width="43dp"
                         android:layout_height="45dp"
                         android:src="@drawable/cup" />
 
@@ -188,7 +188,7 @@
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
                         android:text="생활 용품"
-                        android:textSize="20dp"  />
+                        android:textSize="19dp"  />
                 </LinearLayout>
 
                 <LinearLayout
@@ -196,12 +196,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="42dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon8"
-                        android:layout_width="45dp"
+                        android:layout_width="44dp"
                         android:layout_height="45dp"
                         android:src="@drawable/pet" />
 
@@ -210,7 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:textSize="20dp"
+                        android:textSize="19dp"
                         android:background="#FFFFFF"
                         android:text="반려동물용품" />
                 </LinearLayout>
@@ -228,12 +228,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon4"
-                        android:layout_width="45dp"
+                        android:layout_width="43dp"
                         android:layout_height="45dp"
                         android:src="@drawable/cycle" />
 
@@ -244,20 +244,20 @@
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
                         android:text="스포츠/레져"
-                        android:textSize="20dp" />
+                        android:textSize="19dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/category9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="29dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon9"
-                        android:layout_width="45dp"
+                        android:layout_width="43dp"
                         android:layout_height="45dp"
                         android:src="@drawable/etc" />
 
@@ -284,12 +284,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon5"
-                        android:layout_width="45dp"
+                        android:layout_width="43dp"
                         android:layout_height="45dp"
                         android:src="@drawable/closet" />
 
@@ -300,20 +300,20 @@
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
                         android:text="의류/잡화"
-                        android:textSize="20dp" />
+                        android:textSize="19dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/category10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="45dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="42dp"
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/category_icon10"
-                        android:layout_width="45dp"
+                        android:layout_width="43dp"
                         android:layout_height="45dp"
                         android:src="@drawable/free" />
 
