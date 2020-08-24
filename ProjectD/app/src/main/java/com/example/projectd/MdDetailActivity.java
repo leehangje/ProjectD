@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ public class MdDetailActivity extends AppCompatActivity {
 
     TabFragment1 fragment1;
     TabFragment2 fragment2;
+
+    LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class MdDetailActivity extends AppCompatActivity {
 
         btn_chat = findViewById(R.id.btn_chat);
         btn_fav = findViewById(R.id.btn_fav);
+
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
@@ -106,6 +111,14 @@ public class MdDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MdDetailActivity.this, "해당 상품을 찜 목록에 넣었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 툴바 안의 뒤로가기 버튼 클릭할 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

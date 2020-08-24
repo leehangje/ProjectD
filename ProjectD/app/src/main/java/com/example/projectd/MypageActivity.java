@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,6 +25,9 @@ public class MypageActivity extends Fragment {
     ImageButton my_goods, my_rentlist, my_fav;
 
     ViewGroup viewGroup;
+
+    MainActivity mainActivity;
+    LinearLayout toolbar_context;
 
     /*private Context mContext = MypageActivity.this;*/
     private static final int ACTIVITY_NUM = 3;
@@ -41,6 +45,10 @@ public class MypageActivity extends Fragment {
         mypage_notice = viewGroup.findViewById(R.id.mypage_notice);
         mypage_qna = viewGroup.findViewById(R.id.mypage_qna);
         mypage_logout = viewGroup.findViewById(R.id.mypage_logout);
+        toolbar_context = viewGroup.findViewById(R.id.toolbar_context);
+
+        mainActivity = new MainActivity();
+
 
         //프로필 수정
         btn_profile_update.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +111,15 @@ public class MypageActivity extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // 툴바 안의 뒤로가기 버튼을 클릭했을 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.main_layout, mainActivity).commitAllowingStateLoss();
             }
         });
 

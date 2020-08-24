@@ -11,6 +11,7 @@ import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ public class AlramActivity extends AppCompatActivity {
     AlramSubActivity adapter;
     ArrayList<AlramSubDTO> dtos;
 
+    LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
+
     protected  void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class AlramActivity extends AppCompatActivity {
         dtos = new ArrayList<>();
 
         listView = findViewById(R.id.listView);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         adapter = new AlramSubActivity(AlramActivity.this,dtos , size);
         adapter.addDto(new AlramSubDTO("내용","2020-8-18"));
@@ -47,6 +51,14 @@ public class AlramActivity extends AppCompatActivity {
                         , Toast.LENGTH_SHORT).show();
 
 
+            }
+        });
+
+        // 툴바 안의 뒤로가기 버튼 클릭할 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

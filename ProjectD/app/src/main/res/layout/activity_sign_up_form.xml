@@ -1,132 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/emailValueText"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginLeft="34dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="아이디(이메일)"
-        android:inputType="textEmailAddress" />
-
-    <Button
-        android:id="@+id/redCheckBtn"
-        android:layout_width="100dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emailValueText"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="-59dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginRight="37dp"
-        android:background="#3e4ba9"
-        android:text="중복확인"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+        android:background="#3e4ba9">
+        <LinearLayout
+            android:id="@+id/toolbar_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/namedValueText"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/emailValueText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="이름"
-        android:inputType="textPassword" />
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="#3e4ba9"
+                app:srcCompat="@drawable/back_white" />
 
-    <EditText
-        android:id="@+id/pwdValueText"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/namedValueText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPassword" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:text="회원가입"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/pwdValueCheck"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/pwdValueText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="비밀번호 확인"
-        android:inputType="textPassword" />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/nickNameValueText"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/pwdValueCheck"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="닉네임"
-        android:inputType="textPersonName" />
+    </androidx.appcompat.widget.Toolbar>
 
-    <EditText
-        android:id="@+id/phoneNumValueText"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/nickNameValueText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="휴대전화번호"
-        android:inputType="phone" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/locationValueText"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/phoneNumValueText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="내 위치 찾기"
-        android:inputType="textPostalAddress" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/emailValueText"
+                android:layout_width="253dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="34dp"
+                android:layout_marginLeft="34dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="아이디(이메일)"
+                android:inputType="textEmailAddress" />
 
-    <Button
-        android:id="@+id/locationSearchBtn"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/locationValueText"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="-59dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginRight="39dp"
-        android:background="#3e4ba9"
-        android:text="위치 찾기"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+            <Button
+                android:id="@+id/redCheckBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="#3e4ba9"
+                android:text="중복확인"
+                android:layout_marginBottom="5dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/joinSubmitBtn"
-        android:layout_width="393dp"
-        android:layout_height="68dp"
-        android:layout_below="@+id/locationValueText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:background="#3e4ba9"
-        android:text="회원가입"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/namedValueText"
+            android:layout_width="345dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="이름"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/pwdValueText"
+            android:layout_width="345dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="비밀번호"
+            android:inputType="textEmailAddress" />
+
+
+        <EditText
+            android:id="@+id/pwdValueCheck"
+            android:layout_width="345dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="비밀번호 확인"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/nickNameValueText"
+            android:layout_width="345dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="닉네임"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/phoneNumValueText"
+            android:layout_width="345dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="휴대전화번호"
+            android:inputType="phone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/locationValueText"
+                android:layout_width="253dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="34dp"
+                android:layout_marginLeft="34dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="내 위치 찾기"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/locationSearchBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="#3e4ba9"
+                android:text="위치 찾기"
+                android:layout_marginBottom="5dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/joinSubmitBtn"
+            android:layout_width="345dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"
+            android:background="#3e4ba9"
+            android:text="회원가입"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.projectd.R;
@@ -17,22 +18,18 @@ import com.example.projectd.R;
 public class SignUpFormActivity extends AppCompatActivity {
     Button redCheckBtn, locationSearchBtn, joinSubmitBtn;
     EditText locationValueText;
+    LinearLayout toolbar_context;   // 툴바를 감싸는 레이아웃
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_form);
 
-        // 액션 바 설정
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setIcon(R.drawable.actionbar_back);
-        actionBar.setTitle("회원가입");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         redCheckBtn = findViewById(R.id.redCheckBtn);
         locationSearchBtn = findViewById(R.id.locationSearchBtn);
         joinSubmitBtn = findViewById(R.id.joinSubmitBtn);
         locationValueText = findViewById(R.id.locationValueText);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         // 주소 가져오기
         Intent intent = getIntent();
@@ -62,6 +59,14 @@ public class SignUpFormActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SignUpFormActivity.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // 툴바 안에 뒤로가기 버튼 눌렀을 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

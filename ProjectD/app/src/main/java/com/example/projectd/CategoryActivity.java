@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,6 +25,10 @@ public class CategoryActivity extends Fragment {
 
     ViewGroup viewGroup;
 
+    MainActivity mainActivity;
+
+    LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
+
     /*private Context mContext = CategoryActivity.this;*/
     private static final int ACTIVITY_NUM = 3;
 
@@ -32,7 +37,6 @@ public class CategoryActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable
             ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_category, container, false);
-
 
         category_icon1 = viewGroup.findViewById(R.id.category_icon1);
         category_icon2 = viewGroup.findViewById(R.id.category_icon2);
@@ -44,6 +48,8 @@ public class CategoryActivity extends Fragment {
         category_icon8 = viewGroup.findViewById(R.id.category_icon8);
         category_icon9 = viewGroup.findViewById(R.id.category_icon9);
         category_icon10 = viewGroup.findViewById(R.id.category_icon10);
+        toolbar_context = viewGroup.findViewById(R.id.toolbar_context);
+        mainActivity = new MainActivity();
 
         //디지털,가전 카테고리
         category_icon1.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +139,15 @@ public class CategoryActivity extends Fragment {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
                 startActivity(intent);
             }//onClick()
+        });
+
+        // 툴바안의 뒤로가기 버튼을 클릭했을 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.main_layout, mainActivity).commitAllowingStateLoss();
+            }
         });
 
         return viewGroup;

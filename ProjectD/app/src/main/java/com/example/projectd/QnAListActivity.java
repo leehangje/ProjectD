@@ -23,10 +23,6 @@ public class QnAListActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_qna_list);
 
-            ActionBar actionBar = getSupportActionBar();  //제목줄 객 제목체 얻어오기
-            actionBar.setTitle("QnA");  //액션바 설정
-            actionBar.setDisplayHomeAsUpEnabled(true);   //업버튼 <- 만들기
-
             button = findViewById(R.id.button);
             LinearLayout layout01 = (LinearLayout) findViewById(R.id.layout01);
 
@@ -34,16 +30,16 @@ public class QnAListActivity extends AppCompatActivity {
             recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             List<QnAListAdapter.Item> data = new ArrayList<>();
 
-        data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "궁금한게 있나요?"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "저도 몰라요"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "이 앱을 만든 동기가 궁금하신가요?"));
-        data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "안알려줌 ㅎ"));
+            data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "궁금한게 있나요?"));
+            data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "저도 몰라요"));
+            data.add(new QnAListAdapter.Item(QnAListAdapter.HEADER, "이 앱을 만든 동기가 궁금하신가요?"));
+            data.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "안알려줌 ㅎ"));
 
-        QnAListAdapter.Item places = new QnAListAdapter.Item(QnAListAdapter.HEADER, "대여하는 방법이 궁금하신가요?");
-        places.invisibleChildren = new ArrayList<>();
-        places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "안대여"));
+            QnAListAdapter.Item places = new QnAListAdapter.Item(QnAListAdapter.HEADER, "대여하는 방법이 궁금하신가요?");
+            places.invisibleChildren = new ArrayList<>();
+            places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "안대여"));
 
-        data.add(places);
+            data.add(places);
 
         recyclerview.setAdapter(new QnAListAdapter(data));
     }

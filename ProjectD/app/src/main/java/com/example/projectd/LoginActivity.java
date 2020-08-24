@@ -28,13 +28,6 @@ public class LoginActivity extends AppCompatActivity {
 
         checkDangerousPermissions();    //위험 권한 주기
 
-        // 상단 바 없애기
-        if (Build.VERSION.SDK_INT >= 21) {
-            getSupportActionBar().hide();
-        } else if (Build.VERSION.SDK_INT < 21) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
-
         id_pw_search = findViewById(R.id.id_pw_search);
         signUp = findViewById(R.id.signUp);
         loginSubmitBtn = findViewById(R.id.loginSubmitBtn);

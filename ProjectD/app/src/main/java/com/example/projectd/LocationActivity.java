@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.projectd.R;
@@ -51,6 +52,8 @@ public class LocationActivity extends AppCompatActivity {
 
     String myAddress;
 
+    LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,16 +61,11 @@ public class LocationActivity extends AppCompatActivity {
 
         checkDangerousPermissions();    //위험 권한 주기
 
-        // 액션 바 설정
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setIcon(R.drawable.actionbar_back);
-        actionBar.setTitle("위치 찾기");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         searchValueText = findViewById(R.id.searchValueText);
         setupBtn = findViewById(R.id.setupBtn);
         //locSearchBtn = findViewById(R.id.locSearchBtn);
         submitBtn = findViewById(R.id.submitBtn);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -127,6 +125,13 @@ public class LocationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }); //submitBtn.setOnClickListener()
+
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     } //onCreate()
 

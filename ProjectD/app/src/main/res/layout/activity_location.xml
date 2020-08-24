@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
-    <!--
-    <Button
-        android:id="@+id/locSearchBtn"
-        android:layout_width="300dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchValueText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:background="#3E4BA9"
-        android:text="현재 위치 찾기"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-    -->
+        android:background="#3e4ba9">
+        <LinearLayout
+            android:id="@+id/toolbar_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="#3e4ba9"
+                app:srcCompat="@drawable/back_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:text="위치 찾기"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <EditText
         android:id="@+id/searchValueText"
@@ -36,11 +57,16 @@
 
     <Button
         android:id="@+id/setupBtn"
-        android:layout_width="300dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchValueText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="27dp"
         android:background="#3E4BA9"
         android:text="해당 위치로 설정"
         android:textColor="#FFFFFF"
@@ -50,9 +76,14 @@
         android:id="@+id/frameLayout"
         android:layout_width="318dp"
         android:layout_height="246dp"
-        android:layout_below="@id/setupBtn"
+        android:layout_below="@+id/searchValueText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp">
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="27dp">
 
         <fragment
             android:id="@+id/map"
@@ -66,11 +97,16 @@
         android:id="@+id/submitBtn"
         android:layout_width="350dp"
         android:layout_height="58dp"
-        android:layout_below="@+id/frameLayout"
+        android:layout_below="@+id/searchValueText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="27dp"
         android:background="#3E4BA9"
         android:text="완료"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
-</RelativeLayout>
+</LinearLayout>

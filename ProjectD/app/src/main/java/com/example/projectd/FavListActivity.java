@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ public class FavListActivity extends AppCompatActivity {
     FavListSubActivity adapter;
     ArrayList<FavListDTO> dtos;
 
+    LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,7 @@ public class FavListActivity extends AppCompatActivity {
         dtos = new ArrayList<>();
 
         listView = findViewById(R.id.listView);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         adapter = new FavListSubActivity(FavListActivity.this,dtos,size);
         adapter.addDto(new FavListDTO("물품명","닉네임"));
@@ -47,6 +51,14 @@ public class FavListActivity extends AppCompatActivity {
                 Intent intent = new Intent(FavListActivity.this , MdDetailActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        // 툴바 안의 뒤로가기 버튼 클릭할 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

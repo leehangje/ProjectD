@@ -28,13 +28,6 @@ public class SearchIDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_i_d);
 
-        // 액션 바 설정
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setIcon(R.drawable.actionbar_back);
-        actionBar.setTitle("아이디/비밀번호 찾기");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-
 
         //로그인가기
         Button btn_back = findViewById(R.id.btn_back);

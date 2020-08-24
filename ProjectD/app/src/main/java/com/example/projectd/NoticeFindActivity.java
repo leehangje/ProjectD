@@ -12,9 +12,6 @@ public class NoticeFindActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_find);
 
-        ActionBar actionBar = getSupportActionBar();  //제목줄 객체 얻어오기
-        actionBar.setTitle("공지사항");  //액션바 제목설정
-        actionBar.setDisplayHomeAsUpEnabled(true);   //업버튼 <- 만들기
 
     }
 }
