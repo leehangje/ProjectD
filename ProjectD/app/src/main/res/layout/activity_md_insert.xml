@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -89,7 +89,7 @@
                 android:text="제목" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName6"
+                android:id="@+id/edit_title"
                 android:layout_width="303dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
@@ -136,7 +136,7 @@
                 android:text="가격" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/edit_price"
                 android:layout_width="165dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
@@ -151,14 +151,14 @@
 
             <CheckBox
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginStart="175dp"
                 android:layout_marginLeft="175dp"
                 android:layout_marginTop="285dp"
                 android:layout_toEndOf="@+id/textView8"
                 android:layout_toRightOf="@+id/textView8"
+                android:gravity="center_vertical"
                 android:text="협상가능" />
-            />
 
             <TextView
                 android:id="@+id/textView9"
@@ -172,7 +172,7 @@
                 android:text="대여기간" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/edit_date"
                 android:layout_width="165dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
@@ -180,19 +180,26 @@
                 android:layout_marginTop="345dp"
                 android:layout_toEndOf="@+id/textView8"
                 android:layout_toRightOf="@+id/textView8"
+                android:clickable="true"
+                android:editable="false"
                 android:ems="10"
-                android:hint="원하는 대여기간을 설정하세요"
-                android:inputType="textPersonName"
-                android:textSize="12sp" />
+                android:focusable="false"
+                android:hint="대여기간을 설정하세요"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <CheckBox
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginStart="175dp"
                 android:layout_marginLeft="175dp"
                 android:layout_marginTop="345dp"
                 android:layout_toEndOf="@+id/textView8"
                 android:layout_toRightOf="@+id/textView8"
+                android:gravity="center_vertical"
                 android:text="협상가능" />
 
             <TextView
@@ -206,9 +213,23 @@
                 android:paddingLeft="10dp"
                 android:text="보증금" />
 
+            <Spinner
+                android:id="@+id/rent_spinner"
+                android:layout_width="164dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="405dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_toEndOf="@+id/textView10"
+                android:layout_toRightOf="@+id/textView10"
+                android:entries="@array/카테고리2"
+                android:gravity="center|left" />
+
             <CheckBox
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginStart="175dp"
                 android:layout_marginLeft="175dp"
                 android:layout_marginTop="405dp"
@@ -216,19 +237,6 @@
                 android:layout_toRightOf="@+id/textView10"
                 android:text="협상가능" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName4"
-                android:layout_width="165dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="405dp"
-                android:layout_toEndOf="@+id/textView8"
-                android:layout_toRightOf="@+id/textView8"
-                android:ems="10"
-                android:hint="보증금 설정"
-                android:inputType="textPersonName"
-                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -241,7 +249,7 @@
                 android:text="상세 설명" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName5"
+                android:id="@+id/edit_detail"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginStart="12dp"
@@ -255,7 +263,7 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnsubmit"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -263,14 +271,30 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="false"
-                android:layout_marginStart="139dp"
-                android:layout_marginLeft="139dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="615dp"
-                android:layout_marginEnd="122dp"
-                android:layout_marginRight="122dp"
+                android:layout_marginEnd="211dp"
+                android:layout_marginRight="211dp"
                 android:layout_marginBottom="1dp"
                 android:text="입력하기" />
 
+            <Button
+                android:id="@+id/btncancel"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="210dp"
+                android:layout_marginLeft="210dp"
+                android:layout_marginTop="615dp"
+                android:layout_marginEnd="51dp"
+                android:layout_marginRight="51dp"
+                android:layout_marginBottom="1dp"
+                android:text="취소" />
         </RelativeLayout>
 
 
