@@ -80,13 +80,13 @@
                     android:textSize="14sp"
                     android:textStyle="normal|bold" />
 
-                <Button
-                    android:id="@+id/tv_date"
+                <TextView
+                    android:id="@+id/btn_review"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="리뷰쓰기"
+                    android:text="대여날짜"
                     android:textAlignment="center"
                     android:textSize="14sp"
                     android:textStyle="normal|bold" />

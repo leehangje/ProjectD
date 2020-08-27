@@ -1,9 +1,12 @@
 package com.example.projectd;
 
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,9 +16,15 @@ import java.util.ArrayList;
 
 public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
         implements OnRentItemCLickListener {
+    private static final String TAG = "RentAdapter";
+
     ArrayList<Rent> items = new ArrayList<Rent>();
     OnRentItemCLickListener listener;
+    Context mContext;
 
+    public void setmContext(Context mContext) {
+        this.mContext = mContext;
+    }
 
     @NonNull
     @Override
@@ -49,16 +58,17 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
     }
 
 
-
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         TextView textView2;
-
-        public ViewHolder(View itemView, final OnRentItemCLickListener listener){
+        Button button;
+        public ViewHolder(final View itemView,
+                          final OnRentItemCLickListener listener){
             super(itemView);
 
             textView = itemView.findViewById(R.id.tv_name);
             textView2 = itemView.findViewById(R.id.tv_addr);
+            button = itemView.findViewById(R.id.btn_review);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,7 +79,33 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
                         listener.onItemClick(ViewHolder.this, view, position);
                     }
                 }
+                
             });
+            
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    //int i = 0;
+                    /**
+                     * 버튼 클릭 이벤트
+                     */
+
+                    if (position == 0) {
+                        Log.e(TAG, "onClick: button " + position);
+                        RentListActivity activity = (RentListActivity) mContext;
+                        activity.runReviewActivity();
+                    }
+
+                    if (position == 1) {
+                        Log.e(TAG, "onClick: button " + position);
+                        RentListActivity activity = (RentListActivity) mContext;
+                        activity.runReviewActivity();
+                    }
+
+                }
+            });
+            
         }
 
         public void setItem(Rent item){
