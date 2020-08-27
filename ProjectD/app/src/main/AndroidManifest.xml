@@ -3,7 +3,7 @@
     package="com.example.projectd">
 
 
-   <!-- // 지도 permission → LocationActivity에서 필요-->
+    <!-- // 지도 permission → LocationActivity에서 필요-->
 
     <permission android:name="com.example.projectd.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
@@ -21,6 +21,10 @@
     <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
     <!--0x00020000 : 안드로이드 2.0 버전-->
 
+    <!-- 네트워크 연결 : DB, spring 연동 시 필요 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,11 +33,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 
-        android:name="androidx.multidex.MultiDexApplication">
+        android:name="androidx.multidex.MultiDexApplication"
+
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true">
 
         <uses-library android:name="com.google.android.maps"/>
         <uses-library android:name="org.apache.http.legacy"
             android:required="false"/>
+
+        <!-- DB, spring 연동 시 필요 -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyD7wAJVRHAe2jMHZSouoMxf-8-sjJPZUn0"/>
@@ -53,9 +66,9 @@
         <activity android:name=".ChatListActivity" />
         <activity android:name=".MdInsertActivity" />
         <activity android:name=".CategoryViewActivity"/>
-<!--
-        <activity android:name=".MypageActivity" />
--->
+        <!--
+                <activity android:name=".MypageActivity" />
+        -->
         <activity android:name=".MdDetailActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".SearchIDActivity" />
