@@ -76,8 +76,8 @@ public class SignUpFormActivity extends AppCompatActivity {
                 String member_nickname = nicknameValueText.getText().toString();
                 String member_tel = telValueText.getText().toString();
                 String member_addr = locationValueText.getText().toString();
-                String member_latitude = null;
-                String member_longitude = null;
+                String member_latitude = locationValueText.getText().toString();
+                String member_longitude = locationValueText.getText().toString();
 
                 SignUpInsert signUpInsert = new SignUpInsert(member_id, member_pw, member_nickname,
                                                              member_tel, member_addr, member_latitude, member_longitude,  member_name);
