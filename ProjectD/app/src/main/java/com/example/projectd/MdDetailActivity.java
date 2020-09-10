@@ -1,12 +1,16 @@
 package com.example.projectd;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,12 +19,34 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectd.Dto.MdDTO;
 import com.google.android.material.tabs.TabLayout;
+
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class MdDetailActivity extends AppCompatActivity {
+    public static MdDTO detailDTO = null;
+
+    /*연결할 주소*/
+    String str = "[{\"md_name\":\"미란이\",\"md_category\":\"생활용품\",\"md_price\":10000,\"md_rental_term\":\"1일\",\"md_deposit\":100000,\"md_detail_content\":\"요리를 참 잘해요\",\"md_photo_url\":\"https://ifh.cc/g/TqfuhP.jpg\",\"member_id\":\"conan\",\"member_addr\":\"광주 서구 경열로\",\"md_fav_count\":2,\"md_registration_date\":\"2020.08.27\",\"md_serial_number\":\"1\",\"md_rent_status\":1,\"md_hits\":99999}]";
+    //실패//private String str = "http://localhost:80/app/anDetail?md_serial_number=1";
+    //실패//private String str = "http://localhost:80/app/anDetail?md_serial_number=" + detailDTO.getMd_serial_number();
+    //실패//private String str = "['http://localhost:80/app/anDetail?md_serial_number=1']";
+    //실패//private String str = "[" + "http://localhost:80/app/anDetail?md_serial_number=1" + "]";
+    //private String str = ipConfig + "/app/anDetail?md_serial_number=1";
+
+    private ArrayList<String> md_nameList;
+    private ArrayList<String>md_categoryList;
+    private JSONArray jsonArray;
+
     FragmentPagerAdapter adapterViewPager;
 
     CircleImageView profile_photo;
@@ -37,6 +63,8 @@ public class MdDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_md_detail);
+
+        checkDangerousPermissions();    //위험 권한 주기
 
         profile_photo = findViewById(R.id.profile_photo);
         user_nickname = findViewById(R.id.user_nickname);
@@ -123,7 +151,34 @@ public class MdDetailActivity extends AppCompatActivity {
         });
 
 
+        //db에서 데이터 가져오기(json)
+        md_nameList = new ArrayList<>();
+        md_categoryList = new ArrayList<>();
+
+        jsonRead();
+
     }//onCreate
+
+    //db에서 데이터 가져오기(json)
+    private void jsonRead() {
+        try {
+            jsonArray = new JSONArray(str);
+            for(int i = 0 ; i<jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String md_name = jsonObject.getString("md_name");
+                String md_category = jsonObject.getString("md_category");
+
+                md_nameList.add(md_name);
+                md_categoryList.add(md_category);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        md_name.setText(md_nameList.toString());
+        md_category.setText(md_categoryList.toString());
+
+
+    }
 
     //상품 상세사진 슬라이드 넘기기
     public static class MyPagerAdapter extends FragmentPagerAdapter {
@@ -161,4 +216,49 @@ public class MdDetailActivity extends AppCompatActivity {
         }//getPageTitle()
 
     }//MyPagerAdapter()
+
+    //----------------------------------------------------------------
+    // 위험 권한
+    private void checkDangerousPermissions () {
+        String[] permissions = {
+                android.Manifest.permission.INTERNET,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        };
+
+        int permissionCheck = PackageManager.PERMISSION_GRANTED;
+        for (int i = 0; i < permissions.length; i++) {
+            permissionCheck = ContextCompat.checkSelfPermission(this, permissions[i]);
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+                break;
+            }
+        }
+
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "권한 있음", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "권한 없음", Toast.LENGTH_LONG).show();
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
+                Toast.makeText(this, "권한 설명 필요함.", Toast.LENGTH_LONG).show();
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, 1);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult ( int requestCode, String[] permissions,
+                                             int[] grantResults){
+        if (requestCode == 1) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
 }
