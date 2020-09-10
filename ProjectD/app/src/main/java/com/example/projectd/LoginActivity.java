@@ -16,12 +16,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.projectd.ATask.LoginSelect;
-import com.example.projectd.Dto.MemberDTO;
+import com.example.projectd.Dto.MemberDto;
 
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
-    public static MemberDTO loginDTO = null;
+    public static MemberDto loginDTO = null;
 
     EditText etId, etPw;
     TextView id_pw_search, signUp;

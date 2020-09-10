@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.example.projectd.Dto.MemberDTO;
+import com.example.projectd.Dto.MemberDto;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -89,7 +89,7 @@ public class SignUpCheckNickName extends AsyncTask<Void, Void, Void> {
 
     }
 
-    public MemberDTO readMessage(InputStream inputStream) throws IOException {
+    public MemberDto readMessage(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         reader.setLenient(true);
 
@@ -107,6 +107,6 @@ public class SignUpCheckNickName extends AsyncTask<Void, Void, Void> {
         reader.endObject();
         reader.close();
         Log.d("main:joinchknickname : ", member_nickname );
-        return new MemberDTO(member_nickname);
+        return new MemberDto(member_nickname);
     }
 }

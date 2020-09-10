@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.example.projectd.Dto.MemberDTO;
+import com.example.projectd.Dto.MemberDto;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -82,7 +82,7 @@ public class SignUpCheckId extends AsyncTask<Void, Void, Void> {
         return null;
     } //doInBackground()
 
-    private MemberDTO readMessage(InputStream inputStream) throws IOException {
+    private MemberDto readMessage(InputStream inputStream) throws IOException {
 
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         reader.setLenient(true);
@@ -122,7 +122,7 @@ public class SignUpCheckId extends AsyncTask<Void, Void, Void> {
         reader.endObject();
         reader.close();
         Log.d("main:loginselect : ", member_id + "," + member_name);
-        return new MemberDTO(member_id, member_nickname,
+        return new MemberDto(member_id, member_nickname,
                 member_tel, member_addr, member_latitude,
                 member_longitude, member_grade, member_name);
     } //readMessage()

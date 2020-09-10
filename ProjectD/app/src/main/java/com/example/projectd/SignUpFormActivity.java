@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.example.projectd.ATask.SignUpCheckId;
 import com.example.projectd.ATask.SignUpCheckNickName;
 import com.example.projectd.ATask.SignUpInsert;
-import com.example.projectd.Dto.MemberDTO;
+import com.example.projectd.Dto.MemberDto;
 
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
@@ -35,8 +35,8 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
     GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
 
-    public static MemberDTO idCheckDTO = null;
-    public static MemberDTO nicknamecheckDTO = null;
+    public static MemberDto idCheckDTO = null;
+    public static MemberDto nicknamecheckDTO = null;
 
     Button btnEmailAuth, btnLocSearch, btnSubmit;
     EditText etId, etName, etPw, etNickName,
@@ -386,6 +386,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                     return;
                 }
 
+                member_addr += " " + detailAddress;   // 상세주소 정보를 member_addr 변수에 추가
 
                 SignUpInsert signUpInsert = new SignUpInsert(member_id, member_pw, member_nickname,
                                                              member_tel, member_addr, member_latitude, member_longitude,  member_name);

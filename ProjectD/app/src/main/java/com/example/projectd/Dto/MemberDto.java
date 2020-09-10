@@ -1,6 +1,6 @@
 package com.example.projectd.Dto;
 
-public class MemberDTO {
+public class MemberDto {
     String member_id;
     String member_pw;
     String member_nickname;
@@ -12,7 +12,7 @@ public class MemberDTO {
     String member_name;
 
     // 회원가입 시 데이터베이스에 멤버 정보를 추가할 때
-    public MemberDTO(String member_id, String member_pw, String member_nickname,
+    public MemberDto(String member_id, String member_pw, String member_nickname,
                      String member_tel, String member_addr, String member_latitude,
                      String member_longitude, int member_grade, String member_name) {
         this.member_id = member_id;
@@ -28,7 +28,7 @@ public class MemberDTO {
 
     // 암호 없이 멤버 정보를 가져올 때
     // 이메일 중복체크할 때
-    public MemberDTO(String member_id, String member_nickname,
+    public MemberDto(String member_id, String member_nickname,
                      String member_tel, String member_addr, String member_latitude,
                      String member_longitude, int memmber_grade, String member_name) {
         this.member_id = member_id;
@@ -42,7 +42,7 @@ public class MemberDTO {
     }
 
     // 닉네임 중복체크할 때
-    public MemberDTO(String member_nickname) {
+    public MemberDto(String member_nickname) {
         this.member_nickname = member_nickname;
     }
 
