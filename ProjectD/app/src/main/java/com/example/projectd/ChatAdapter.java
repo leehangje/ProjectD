@@ -1,106 +1,122 @@
 package com.example.projectd;
 
+
+import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.projectd.Dto.ChatDto;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>
-        implements OnChatItemClickListener {
-    ArrayList<Chat> items = new ArrayList<Chat>();
-    OnChatItemClickListener listener;
+import java.util.List;
+
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
+    private List<ChatDto> mDataset;
+    private String myNickName;
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView TextView_nickname;
+        public TextView TextView_msg;
+        public ImageView ImageView_profile;
+        public LinearLayout linearlayout_destination;
+        public LinearLayout linearlayout_main;
+
+        public View rootView;
+        public MyViewHolder(View v) {
+            super(v);
+            TextView_nickname = v.findViewById(R.id.TextView_nickname);
+            TextView_msg = v.findViewById(R.id.TextView_msg);
+            ImageView_profile = v.findViewById(R.id.ImageView_profile);
+            linearlayout_destination = v.findViewById(R.id.messageItem_linearlayout_destination);
+            linearlayout_main = v.findViewById(R.id.messageItem_linearlayout_main);
+            rootView = v;
+
+        }
 
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.activity_chat_list_sub, parent, false);
-
-        return new ViewHolder(itemView, this);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Chat item = items.get(position);
-        holder.setItem(item);
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public ChatAdapter(List<ChatDto> myDataset, Context context, String myNickName) {
+        //{"1","2"}
+        mDataset = myDataset;
+        this.myNickName = myNickName;
     }
 
+    // Create new views (invoked by the layout manager)
+    @Override
+    public ChatAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                       int viewType) {
+        // create a new view
+        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.activity_chat_item, parent, false);
+
+        MyViewHolder vh = new MyViewHolder(v);
+        return vh;
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        ChatDto chat = mDataset.get(position);
+
+        //holder.TextView_nickname.setText(chat.getNickname());
+        holder.TextView_msg.setText(chat.getMsg());
+
+        if(chat.getName().equals(this.myNickName)) {
+            /*holder.TextView_msg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+            holder.TextView_nickname.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);*/
+
+            holder.TextView_msg.setBackgroundResource(R.drawable.rightbubble);
+            holder.TextView_msg.setText(mDataset.get(position).getMsg());
+            holder.linearlayout_destination.setVisibility(View.VISIBLE);
+            holder.linearlayout_main.setGravity(Gravity.RIGHT);
+
+        }
+        else {
+            /*holder.TextView_msg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+            holder.TextView_nickname.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);*/
+            holder.linearlayout_destination.setVisibility(View.VISIBLE);
+            holder.linearlayout_main.setGravity(Gravity.LEFT);
+            holder.TextView_msg.setBackgroundResource(R.drawable.leftbubble);
+            holder.TextView_msg.setText(mDataset.get(position).getMsg());
+            holder.TextView_nickname.setText(chat.getName());
+
+
+            //이미지 넣기
+            /*Glide.with(holder.itemView.getContext()).load(userModel.profileImageUrl)
+                    .apply(new RequestOptions().circleCrop())
+                    .into(messageViewHolder.imageView_profile);*/
+        }
+
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return items.size();
+
+        //삼항 연산자
+        return mDataset == null ? 0 :  mDataset.size();
     }
 
-    public void setOnItemClickListener(OnChatItemClickListener listener){
-        this.listener = listener;
+    public ChatDto getChat(int position) {
+        return mDataset != null ? mDataset.get(position) : null;
     }
 
-    @Override
-    public void onItemClick(ViewHolder holder, View view, int position) {
-        if(listener != null){
-            listener.onItemClick(holder, view, position);
-        }
+    public void addChat(ChatDto chat) {
+        mDataset.add(chat);
+        notifyItemInserted(mDataset.size()-1); //갱신
     }
-
-
-
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
-        TextView textView2;
-
-        public ViewHolder(View itemView, final OnChatItemClickListener listener){
-            super(itemView);
-
-            textView = itemView.findViewById(R.id.tv_name);
-            textView2 = itemView.findViewById(R.id.tv_addr);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-
-                    if(listener != null){
-                        listener.onItemClick(ViewHolder.this, view, position);
-                    }
-                }
-            });
-        }
-
-        public void setItem(Chat item){
-            textView.setText(item.getName());
-            textView2.setText(item.getAddr());
-        }
-
-
-    }
-
-
-    public void addItem(Chat item){
-        items.add(item);
-    }
-
-    public void setItems(ArrayList<Chat> items){
-        this.items = items;
-    }
-
-    public Chat getItem(int position){
-        return items.get(position);
-    }
-
-    public void setItem(int position, Chat item){
-        items.set(position, item);
-    }
-
-
-
-
-
-
-
 
 }

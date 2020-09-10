@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.projectd.Dto.ChatDto;
+
 public class ChatListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ChatAdapter adapter;
+    ChatListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +26,10 @@ public class ChatListActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ChatAdapter();
+        adapter = new ChatListAdapter();
 
-        adapter.addItem(new Chat("박준근", "광주시 서구"));
-        adapter.addItem(new Chat("안중근", "광주시 서구"));
+        adapter.addItem(new ChatDto());
+        adapter.addItem(new ChatDto());
 
         recyclerView.setAdapter(adapter);
 
@@ -35,8 +37,8 @@ public class ChatListActivity extends AppCompatActivity {
             public static final int chat = 1001;
 
             @Override
-            public void onItemClick(ChatAdapter.ViewHolder holder, View view, int position) {
-                Chat item = adapter.getItem(position);
+            public void onItemClick(ChatListAdapter.ViewHolder holder, View view, int position) {
+                ChatDto item = adapter.getItem(position);
 
                 Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getName(),
                         Toast.LENGTH_LONG).show();
