@@ -3,25 +3,47 @@ package com.example.projectd.Dto;
 public class MemberDTO {
     String member_id;
     String member_pw;
-    String nickname;
-    String tel;
-    String addr;
-    String latitude;
-    String longitude;
-    int grade;
+    String member_nickname;
+    String member_tel;
+    String member_addr;
+    String member_latitude;
+    String member_longitude;
+    int member_grade;
     String member_name;
 
-    public MemberDTO(String member_id, String member_pw, String nickname, String tel, String addr,
-                     String latitude, String longitude, int grade, String member_name) {
+    // 회원가입 시 데이터베이스에 멤버 정보를 추가할 때
+    public MemberDTO(String member_id, String member_pw, String member_nickname,
+                     String member_tel, String member_addr, String member_latitude,
+                     String member_longitude, int member_grade, String member_name) {
         this.member_id = member_id;
         this.member_pw = member_pw;
-        this.nickname = nickname;
-        this.tel = tel;
-        this.addr = addr;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.grade = grade;
+        this.member_nickname = member_nickname;
+        this.member_tel = member_tel;
+        this.member_addr = member_addr;
+        this.member_latitude = member_latitude;
+        this.member_longitude = member_longitude;
+        this.member_grade = member_grade;
         this.member_name = member_name;
+    }
+
+    // 암호 없이 멤버 정보를 가져올 때
+    // 이메일 중복체크할 때
+    public MemberDTO(String member_id, String member_nickname,
+                     String member_tel, String member_addr, String member_latitude,
+                     String member_longitude, int memmber_grade, String member_name) {
+        this.member_id = member_id;
+        this.member_nickname = member_nickname;
+        this.member_tel = member_tel;
+        this.member_addr = member_addr;
+        this.member_latitude = member_latitude;
+        this.member_longitude = member_longitude;
+        this.member_grade = member_grade;
+        this.member_name = member_name;
+    }
+
+    // 닉네임 중복체크할 때
+    public MemberDTO(String member_nickname) {
+        this.member_nickname = member_nickname;
     }
 
     public String getMember_id() {
@@ -32,6 +54,14 @@ public class MemberDTO {
         this.member_id = member_id;
     }
 
+    public String getMember_name() {
+        return member_name;
+    }
+
+    public void setMember_name(String member_name) {
+        this.member_name = member_name;
+    }
+
     public String getMember_pw() {
         return member_pw;
     }
@@ -40,59 +70,51 @@ public class MemberDTO {
         this.member_pw = member_pw;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getMember_nickname() {
+        return member_nickname;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setMember_nickname(String member_nickname) {
+        this.member_nickname = member_nickname;
     }
 
-    public String getTel() {
-        return tel;
+    public String getMember_tel() {
+        return member_tel;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setMember_tel(String member_tel) {
+        this.member_tel = member_tel;
     }
 
-    public String getAddr() {
-        return addr;
+    public String getMember_addr() {
+        return member_addr;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
+    public void setMember_addr(String member_addr) {
+        this.member_addr = member_addr;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public String getMember_latitude() {
+        return member_latitude;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setMember_latitude(String member_latitude) {
+        this.member_latitude = member_latitude;
     }
 
-    public String getLongitude() {
-        return longitude;
+    public String getMember_longitude() {
+        return member_longitude;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setMember_longitude(String member_longitude) {
+        this.member_longitude = member_longitude;
     }
 
-    public int getGrade() {
-        return grade;
+    public int getMember_grade() {
+        return member_grade;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
-    public String getMember_name() {
-        return member_name;
-    }
-
-    public void setMember_name(String member_name) {
-        this.member_name = member_name;
+    public void setMember_grade(int member_grade) {
+        this.member_grade = member_grade;
     }
 }

@@ -1,31 +1,29 @@
 package com.example.projectd;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.projectd.ATask.LoginSelect;
-import com.example.projectd.Dto.MemberDto;
+import com.example.projectd.Dto.MemberDTO;
 
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
-    public static MemberDto loginDTO = null;
+    public static MemberDTO loginDTO = null;
 
-    EditText idValueText, pwValueText;
+    EditText etId, etPw;
     TextView id_pw_search, signUp;
     Button loginSubmitBtn;
 
@@ -39,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         id_pw_search = findViewById(R.id.id_pw_search);
         signUp = findViewById(R.id.signUp);
         loginSubmitBtn = findViewById(R.id.loginSubmitBtn);
-        idValueText = findViewById(R.id.idValueText);
-        pwValueText = findViewById(R.id.pwValueText);
+        etId = findViewById(R.id.etId);
+        etPw = findViewById(R.id.etPw);
 
 
         // 아이디/비밀번호 찾기 화면 띄우기
@@ -67,9 +65,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 loginDTO = null;
 
-                if(idValueText.getText().toString().length() != 0 && pwValueText.getText().toString().length() != 0) {
-                    String member_id = idValueText.getText().toString();
-                    String member_pw = pwValueText.getText().toString();
+                if(etId.getText().toString().length() != 0 && etPw.getText().toString().length() != 0) {
+                    String member_id = etId.getText().toString();
+                    String member_pw = etPw.getText().toString();
 
                     LoginSelect loginSelect = new LoginSelect(member_id, member_pw);
                     try {
@@ -97,9 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "아이디나 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     Log.d("main:login", "아이디나 비밀번호가 일치하지 않습니다.");
-                    idValueText.setText("");
-                    pwValueText.setText("");
-                    idValueText.requestFocus();
+                    etId.setText("");
+                    etPw.setText("");
+                    etId.requestFocus();
                 }
 
             }
@@ -150,4 +148,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
 } //class

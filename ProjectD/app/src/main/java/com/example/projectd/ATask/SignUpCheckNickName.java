@@ -20,14 +20,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static com.example.projectd.Common.CommonMethod.ipConfig;
-import static com.example.projectd.LoginActivity.loginDTO;
+import static com.example.projectd.SignUpFormActivity.nicknamecheckDTO;
 
-public class LoginSelect extends AsyncTask<Void, Void, Void> {
-    String member_id, member_pw;
+public class SignUpCheckNickName extends AsyncTask<Void, Void, Void> {
+    private static final String TAG = "main:SignUpCheckNickName";
+    String member_nickname;
 
-    public LoginSelect(String member_id, String member_pw) {
-        this.member_id = member_id;
-        this.member_pw = member_pw;
+    //생성자 만들기
+    public SignUpCheckNickName(String member_nickname) {
+        this.member_nickname = member_nickname;
+        //Log.d(TAG, "SignUpCheckNickName: "+ this.member_nickname);
     }
 
     HttpClient httpClient;
@@ -37,17 +39,16 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
+
         try {
-            // MultipartEntityBuilder 생성
+            // MultipartEntityBuild 생성
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
             // 문자열 및 데이터 추가
-            builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("member_pw", member_pw, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_nickname", member_nickname, ContentType.create("Multipart/related", "UTF-8"));
 
-            String postURL = ipConfig + "/app/anLogin";
-
+            String postURL = ipConfig + "/app/anNickNameCheck";
             // 전송
             InputStream inputStream = null;
             httpClient = AndroidHttpClient.newInstance("Android");
@@ -57,14 +58,14 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
 
-            loginDTO = readMessage(inputStream);
+            nicknamecheckDTO = readMessage(inputStream);
 
             inputStream.close();
 
         } catch (Exception e) {
-            Log.d("main:loginselect", e.getMessage());
+            Log.d("main:joincheknickname", e.getMessage());
             e.printStackTrace();
-        } finally {
+        }finally {
             if(httpEntity != null){
                 httpEntity = null;
             }
@@ -77,51 +78,35 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
             if(httpClient != null){
                 httpClient = null;
             }
+
         }
 
         return null;
-    } //doInBackground()
+    }
 
-    private MemberDTO readMessage(InputStream inputStream) throws IOException {
+    @Override
+    protected void onPostExecute(Void aVoid) {
+
+    }
+
+    public MemberDTO readMessage(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
+        reader.setLenient(true);
 
-        String member_id = "";
-        String member_name = "";
         String member_nickname = "";
-        String member_tel = "";
-        String member_addr = "";
-        String member_latitude = "";
-        String member_longitude = "";
-        int member_grade = 0;
 
         reader.beginObject();
         while (reader.hasNext()) {
             String readStr = reader.nextName();
-            if (readStr.equals("member_id")) {
-                member_id = reader.nextString();
-            } else if (readStr.equals("member_nickname")) {
+            if (readStr.equals("member_nickname")) {
                 member_nickname = reader.nextString();
-            } else if (readStr.equals("member_name")) {
-                member_name = reader.nextString();
-            } else if (readStr.equals("member_tel")) {
-                member_tel = reader.nextString();
-            } else if(readStr.equals("member_addr")) {
-                member_addr = reader.nextString();
-            } else if(readStr.equals("member_latitude")) {
-                member_latitude = reader.nextString();
-            }  else if(readStr.equals("member_longitude")) {
-                member_longitude = reader.nextString();
-            }  else if(readStr.equals("memmber_grade")) {
-                member_grade = reader.nextInt();
             } else {
                 reader.skipValue();
             }
         }
         reader.endObject();
         reader.close();
-        Log.d("main:loginselect : ", member_id + "," + member_name);
-        return new MemberDTO(member_id, member_nickname,
-                             member_tel, member_addr, member_latitude,
-                             member_longitude, member_grade, member_name);
-    }//readMessage()
-} //class
+        Log.d("main:joinchknickname : ", member_nickname );
+        return new MemberDTO(member_nickname);
+    }
+}
