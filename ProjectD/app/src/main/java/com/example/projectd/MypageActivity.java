@@ -2,11 +2,16 @@ package com.example.projectd;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,28 +20,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MypageActivity extends Fragment {
 
-    Button btn_profile_update, mypage_notice, mypage_qna, mypage_logout;
-    ImageButton my_goods, my_rentlist, my_fav;
-
+    TextView btn_profile_update, mypage_notice, mypage_qna, mypage_logout;
+    ImageView my_goods, my_rentlist, my_fav;
     ViewGroup viewGroup;
-
-    MainActivity mainActivity;
-    LinearLayout toolbar_context;
-
-    /*private Context mContext = MypageActivity.this;*/
-    private static final int ACTIVITY_NUM = 3;
+    ActionBar abar;
+    LinearLayout Lin1, Lin2, Lin3;
+    TextView user_nickname, member_addr;
+    RatingBar ratingBar2;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable
             ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_mypage, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_mypage, null);
+
+        setHasOptionsMenu(true);
 
         btn_profile_update = viewGroup.findViewById(R.id.btn_profile_update);
         my_goods = viewGroup.findViewById(R.id.my_goods);
@@ -45,9 +53,60 @@ public class MypageActivity extends Fragment {
         mypage_notice = viewGroup.findViewById(R.id.mypage_notice);
         mypage_qna = viewGroup.findViewById(R.id.mypage_qna);
         mypage_logout = viewGroup.findViewById(R.id.mypage_logout);
-        toolbar_context = viewGroup.findViewById(R.id.toolbar_context);
+        Lin1 = viewGroup.findViewById(R.id.Lin1);
+        Lin2 = viewGroup.findViewById(R.id.Lin2);
+        Lin3 = viewGroup.findViewById(R.id.Lin3);
+        user_nickname = viewGroup.findViewById(R.id.user_nickname);
+        member_addr = viewGroup.findViewById(R.id.member_addr);
+        ratingBar2 = viewGroup.findViewById(R.id.ratingBar2);
+        checkDangerousPermissions();
 
-        mainActivity = new MainActivity();
+        Intent intent = getActivity().getIntent();
+
+        String user = intent.getExtras().getString("member_nickname");
+        user_nickname.setText(user);
+        String addr = intent.getExtras().getString("member_addr");
+        member_addr.setText(addr);
+
+        ratingBar2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                // 저는 0개를 주기싫어서, 만약 1개미만이면 강제로 1개를 넣었습니다.
+                if (ratingBar2.getRating()<1.0f){
+                    ratingBar2.setRating(2);
+                }
+            }
+        });
+
+
+
+        //빌린 목록
+        Lin1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LendListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //빌려준 목록
+        Lin2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), RentListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //찜목록
+        Lin3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FavListActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         //프로필 수정
@@ -57,33 +116,6 @@ public class MypageActivity extends Fragment {
                 Intent intent = new Intent(getActivity(), ProfilActivity.class);
                 startActivity(intent);
 
-            }
-        });
-
-        //내 상품목록
-        my_goods.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LendListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //빌린내역목록
-        my_rentlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RentListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //찜목록
-        my_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), FavListActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -114,108 +146,51 @@ public class MypageActivity extends Fragment {
             }
         });
 
-        // 툴바 안의 뒤로가기 버튼을 클릭했을 때
-        toolbar_context.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.main_layout, mainActivity).commitAllowingStateLoss();
-            }
-        });
-
         return viewGroup;
 
     }//onCreateView()
 
+    // 위험 권한
+    private void checkDangerousPermissions () {
+        String[] permissions = {
+                android.Manifest.permission.INTERNET,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        };
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mypage);
-
-        btn_profile_update = findViewById(R.id.btn_profile_update);
-        my_goods = findViewById(R.id.my_goods);
-        my_rentlist = findViewById(R.id.my_rentlist);
-        my_fav = findViewById(R.id.my_fav);
-        mypage_notice = findViewById(R.id.mypage_notice);
-        mypage_qna = findViewById(R.id.mypage_qna);
-        mypage_logout = findViewById(R.id.mypage_logout);
-
-        //프로필 수정
-        btn_profile_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, ProfilActivity.class);
-                startActivity(intent);
-
+        int permissionCheck = PackageManager.PERMISSION_GRANTED;
+        for (int i = 0; i < permissions.length; i++) {
+            permissionCheck = ContextCompat.checkSelfPermission(getActivity(), permissions[i]);
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+                break;
             }
-        });
+        }
 
-        //내 상품목록
-        my_goods.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, LendListActivity.class);
-                startActivity(intent);
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getActivity(), "권한 있음", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "권한 없음", Toast.LENGTH_LONG).show();
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permissions[0])) {
+                Toast.makeText(getActivity(), "권한 설명 필요함.", Toast.LENGTH_LONG).show();
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), permissions, 1);
             }
-        });
+        }
+    }
 
-        //빌린내역목록
-        my_rentlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, RentListActivity.class);
-                startActivity(intent);
+    @Override
+    public void onRequestPermissionsResult ( int requestCode, String[] permissions,
+                                             int[] grantResults){
+        if (requestCode == 1) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
+                }
             }
-        });
+        }
+    }
 
-        //찜목록
-        my_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            *//*Intent intent = new Intent(MainActivity.this, FavListActivity.class);
-            startActivity(intent);*//*
-            }
-        });
-
-        //공지사항
-        mypage_notice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, NoticeActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //자주묻는질문
-        mypage_qna.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, QnAListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //로그아웃
-        mypage_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MypageActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        setupBottomNavigationView();
-
-    }//onCreate()
-
-    // 하단 바 메소드
-    private void setupBottomNavigationView() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.menu_bottom);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
-    } //setupBottomNavigationView()*/
-
-}//class
+} //class

@@ -85,11 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if(loginDTO != null){
+                    String member_nickname = loginDTO.getMember_nickname();
+                    String member_addr = loginDTO.getMember_addr();
                     Toast.makeText(LoginActivity.this, loginDTO.getMember_id() + "님 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                     Log.d("main:login", loginDTO.getMember_id() + "님 로그인 되었습니다.");
 
                     // 로그인 정보에 값이 있으면 로그인이 되었으므로 메인화면으로 이동
                     Intent intent = new Intent(LoginActivity.this, RealMainActivity.class);
+                    intent.putExtra("member_nickname", member_nickname);
+                    intent.putExtra("member_addr", member_addr);
                     startActivity(intent);
 
                 } else {
