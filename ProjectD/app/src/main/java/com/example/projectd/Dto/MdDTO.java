@@ -1,6 +1,8 @@
 package com.example.projectd.Dto;
 
-public class MdDTO {
+import java.io.Serializable;
+
+public class MdDTO implements Serializable {
     String md_name;
     String md_category;
     int md_price;
