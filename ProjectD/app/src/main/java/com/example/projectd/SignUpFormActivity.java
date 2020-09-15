@@ -204,7 +204,8 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                         return false;
 
                     } else {
-                        //아이디 중복 체크
+                        //닉네임 중복 체크
+                        Log.d(TAG, "onKey: " + nickname);
                         SignUpCheckNickName signUpCheckNickName = new SignUpCheckNickName(nickname);
 
                         try {
@@ -296,13 +297,26 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                     return;
                 } else if(!checkEmail(member_id)) {
                     Toast.makeText(SignUpFormActivity.this, "아이디는 이메일 형식으로 입력해주세요!", Toast.LENGTH_SHORT).show();
-                } else if (!idCheck) {      // 아이디 중복확인이 안되어 있을 경우
-                    Toast.makeText(SignUpFormActivity.this, "사용 불가능한 아이디입니다!", Toast.LENGTH_SHORT).show();
-                    etId.requestFocus();
-                    return;
-                } else if (!checkIdStr.equals(member_id)) {
-                    Toast.makeText(SignUpFormActivity.this, "이메일 인증을 진행하여 주세요", Toast.LENGTH_SHORT).show();
-                    return;
+                } else {
+                    //아이디 중복 체크
+                    SignUpCheckId signUpCheckId = new SignUpCheckId(member_id);
+
+                    try {
+                        signUpCheckId.execute().get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (idCheckDTO != null) {
+                        Toast.makeText(SignUpFormActivity.this, "사용 불가능한 아이디입니다!", Toast.LENGTH_SHORT).show();
+                        idCheckDTO = null;
+                        return;
+                    } else if (!checkIdStr.equals(member_id)) {
+                        Toast.makeText(SignUpFormActivity.this, "이메일 인증을 진행하여 주세요", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
 
                 /*
@@ -378,7 +392,8 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                 // 위치 & 상세정보 체크
                 String detailAddress = etDetailAdd.getText().toString().trim();
 
-                if (member_addr.length() == 0 || member_latitude.length() == 0 || member_longitude.length() == 0 ) {
+                if (member_addr.length() == 0 || member_latitude.length() == 0 || member_longitude.length() == 0
+                        || member_latitude == null || member_longitude == null) {
                     Toast.makeText(SignUpFormActivity.this, "위치 찾기 버튼으로 위치를 지정해주세요!", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (detailAddress.length() == 0) {
@@ -434,6 +449,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
             etLocation.setFocusable(true);
         } else {
             etLocation.setText("No Data");
+            Toast.makeText(this, member_latitude + ", " + member_longitude, Toast.LENGTH_SHORT).show();
         }
     }//onActivityResult()
 

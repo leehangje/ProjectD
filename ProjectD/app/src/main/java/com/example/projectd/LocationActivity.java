@@ -120,6 +120,7 @@ public class LocationActivity extends AppCompatActivity {
                         "latitude" + latitude + "\nlongitude" + longitude,
                         Toast.LENGTH_SHORT).show();
                 String address = getCurrentAddress(latitude, longitude);
+                address = address.substring(5);
                 searchValueText.setText(address);
             }
         }); //locSearchBtn.setOnClickListener()
@@ -278,7 +279,7 @@ public class LocationActivity extends AppCompatActivity {
         String msg = "Latitude : " + curPoint.latitude
                 + "\nLongitude : " + curPoint.longitude;
 
-        Log.d(TAG, "showCurrentLocation: " + msg);
+        //Log.d(TAG, "showCurrentLocation: " + msg);
         //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 18));
