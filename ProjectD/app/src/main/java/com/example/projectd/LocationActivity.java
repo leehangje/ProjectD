@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -33,8 +35,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -54,6 +58,7 @@ public class LocationActivity extends AppCompatActivity {
 
     LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
 
+    Double latitude, longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,19 +88,26 @@ public class LocationActivity extends AppCompatActivity {
                 }
                 map = googleMap;
                 map.setMyLocationEnabled(true);
+
+                // 현재 위치에 마커를 추가
+                GpsTracker gpsTracker = new GpsTracker(LocationActivity.this);
+                latitude = gpsTracker.getLatitude();
+                longitude = gpsTracker.getLongitude();
+                addMarker(new LatLng(latitude, longitude));
+
+                // 지도를 클릭했을 때 실행되는 메소드
+                map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        addMarker(latLng);      // 마커를 추가
+                        latitude = latLng.latitude;
+                        longitude = latLng.longitude;
+                    } //onMapClick()
+                }); //map.setOnMapClickListener()
             }
         }); //mapFragment.getMapAsync()
 
         MapsInitializer.initialize(this);
-
-        /*
-        locSearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requestMyLocation();
-            }
-        });//locSearchBtn.setOnClickListener()
-        */
 
         setupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,14 +116,11 @@ public class LocationActivity extends AppCompatActivity {
                 //Double latitude = currentLocation.getLatitude();
                 //Double longitude = currentLocation.getLongitude();
 
-                GpsTracker gpsTracker = new GpsTracker(LocationActivity.this);
-                Double latitude = gpsTracker.latitude;
-                Double longitude = gpsTracker.latitude;
-
                 Toast.makeText(LocationActivity.this,
                         "latitude" + latitude + "\nlongitude" + longitude,
                         Toast.LENGTH_SHORT).show();
                 String address = getCurrentAddress(latitude, longitude);
+                address = address.substring(5);
                 searchValueText.setText(address);
             }
         }); //locSearchBtn.setOnClickListener()
@@ -122,7 +131,11 @@ public class LocationActivity extends AppCompatActivity {
                 myAddress = searchValueText.getText().toString();
                 Intent intent = new Intent(LocationActivity.this, SignUpFormActivity.class);
                 intent.putExtra("myAddress", myAddress);
-                startActivity(intent);
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
+                //startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }); //submitBtn.setOnClickListener()
 
@@ -266,7 +279,7 @@ public class LocationActivity extends AppCompatActivity {
         String msg = "Latitude : " + curPoint.latitude
                 + "\nLongitude : " + curPoint.longitude;
 
-        Log.d(TAG, "showCurrentLocation: " + msg);
+        //Log.d(TAG, "showCurrentLocation: " + msg);
         //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 18));
@@ -302,6 +315,24 @@ public class LocationActivity extends AppCompatActivity {
         return lastLocation;
     } //currentLocation()
 
+    // 마커를 추가하는 메소드
+    public void addMarker(LatLng latLng) {
+        // 마커 크기 설정
+        int height = 100;
+        int width = 100;
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.map_marker_icon);
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
+
+        map.clear();    // 이전에 찍은 마커를 사라지게끔 하기위해 맵 초기화
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.icon(smallMarkerIcon);
+        markerOptions.position(latLng); //마커위치설정
+        map.animateCamera(CameraUpdateFactory.newLatLng(latLng));   // 마커생성위치로 이동
+        Marker marker = map.addMarker(markerOptions);
+    }
+/*
     // 액션 바 아이콘 클릭했을 때
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -316,7 +347,7 @@ public class LocationActivity extends AppCompatActivity {
         }
         return true;
     } //onOptionsItemSelected()
-
+*/
     //----------------------------------------------------------------
     // 위험 권한
     private void checkDangerousPermissions () {

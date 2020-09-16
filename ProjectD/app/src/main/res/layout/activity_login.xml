@@ -15,7 +15,7 @@
         android:src="@drawable/logo1" />
 
     <EditText
-        android:id="@+id/idValueText"
+        android:id="@+id/etId"
         android:layout_width="295dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainLogo"
@@ -29,10 +29,10 @@
         android:textColorHint="#FFFFFF"/>
 
     <EditText
-        android:id="@+id/pwValueText"
+        android:id="@+id/etPw"
         android:layout_width="295dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/idValueText"
+        android:layout_below="@+id/etId"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:backgroundTint="#FFFFFF"
@@ -46,7 +46,7 @@
         android:id="@+id/id_pw_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pwValueText"
+        android:layout_below="@+id/etPw"
         android:layout_marginStart="61dp"
         android:layout_marginLeft="61dp"
         android:layout_marginTop="15dp"
@@ -58,10 +58,9 @@
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pwValueText"
+        android:layout_below="@id/etPw"
         android:layout_marginLeft="280dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="250dp"
         android:text="회원가입"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />
@@ -70,7 +69,7 @@
         android:id="@+id/loginSubmitBtn"
         android:layout_width="295dp"
         android:layout_height="60dp"
-        android:layout_below="@id/pwValueText"
+        android:layout_below="@id/etPw"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"

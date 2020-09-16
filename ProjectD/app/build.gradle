@@ -45,6 +45,7 @@ dependencies {
 
     // 지도 라이브러리 → LocationActivity에서 필요
     implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 
     // Dex error → LocationActivity에서 필요
     implementation 'com.android.support:multidex:1.0.3'

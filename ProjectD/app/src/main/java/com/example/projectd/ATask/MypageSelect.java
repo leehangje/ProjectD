@@ -1,5 +1,6 @@
 package com.example.projectd.ATask;
 
+
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.JsonReader;
@@ -22,18 +23,18 @@ import java.io.InputStreamReader;
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 import static com.example.projectd.LoginActivity.loginDTO;
 
-public class LoginSelect extends AsyncTask<Void, Void, Void> {
-    String member_id, member_pw;
-
-    public LoginSelect(String member_id, String member_pw) {
-        this.member_id = member_id;
-        this.member_pw = member_pw;
-    }
+public class MypageSelect extends AsyncTask<Void, Void, Void> {
+    String member_nickname, member_addr;
 
     HttpClient httpClient;
     HttpPost httpPost;
     HttpResponse httpResponse;
     HttpEntity httpEntity;
+
+    public MypageSelect(String member_nickname, String member_addr) {
+        this.member_nickname = member_nickname;
+        this.member_addr = member_addr;
+    }
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -43,8 +44,8 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
             // 문자열 및 데이터 추가
-            builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("member_pw", member_pw, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_nickname", member_nickname, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_addr", member_addr, ContentType.create("Multipart/related", "UTF-8"));
 
             String postURL = ipConfig + "/app/anLogin";
 
@@ -58,8 +59,6 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
             inputStream = httpEntity.getContent();
 
             loginDTO = readMessage(inputStream);
-
-            inputStream.close();
 
         } catch (Exception e) {
             Log.d("main:loginselect", e.getMessage());
@@ -118,7 +117,6 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
             }
         }
         reader.endObject();
-        reader.close();
         Log.d("main:loginselect : ", member_id + "," + member_name);
         return new MemberDto(member_id, member_nickname,
                              member_tel, member_addr, member_latitude,

@@ -20,14 +20,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static com.example.projectd.Common.CommonMethod.ipConfig;
-import static com.example.projectd.LoginActivity.loginDTO;
+import static com.example.projectd.SignUpFormActivity.idCheckDTO;
 
-public class LoginSelect extends AsyncTask<Void, Void, Void> {
-    String member_id, member_pw;
+public class SignUpCheckId extends AsyncTask<Void, Void, Void> {
+    private static final String TAG = "main:SignUpIdCheck";
 
-    public LoginSelect(String member_id, String member_pw) {
+    String member_id;
+
+    public SignUpCheckId(String member_id) {
         this.member_id = member_id;
-        this.member_pw = member_pw;
     }
 
     HttpClient httpClient;
@@ -44,9 +45,8 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
 
             // 문자열 및 데이터 추가
             builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("member_pw", member_pw, ContentType.create("Multipart/related", "UTF-8"));
 
-            String postURL = ipConfig + "/app/anLogin";
+            String postURL = ipConfig + "/app/anIdCheck";
 
             // 전송
             InputStream inputStream = null;
@@ -57,10 +57,10 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
 
-            loginDTO = readMessage(inputStream);
+            idCheckDTO = readMessage(inputStream);
+            Log.d(TAG, "SignUpIdCheck:doInBackground: " + idCheckDTO.getMember_id());
 
             inputStream.close();
-
         } catch (Exception e) {
             Log.d("main:loginselect", e.getMessage());
             e.printStackTrace();
@@ -83,7 +83,9 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
     } //doInBackground()
 
     private MemberDto readMessage(InputStream inputStream) throws IOException {
+
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
+        reader.setLenient(true);
 
         String member_id = "";
         String member_name = "";
@@ -111,7 +113,7 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
                 member_latitude = reader.nextString();
             }  else if(readStr.equals("member_longitude")) {
                 member_longitude = reader.nextString();
-            }  else if(readStr.equals("memmber_grade")) {
+            }  else if(readStr.equals("member_grade")) {
                 member_grade = reader.nextInt();
             } else {
                 reader.skipValue();
@@ -121,7 +123,9 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
         reader.close();
         Log.d("main:loginselect : ", member_id + "," + member_name);
         return new MemberDto(member_id, member_nickname,
-                             member_tel, member_addr, member_latitude,
-                             member_longitude, member_grade, member_name);
-    }//readMessage()
+                member_tel, member_addr, member_latitude,
+                member_longitude, member_grade, member_name);
+    } //readMessage()
+
 } //class
+

@@ -1,5 +1,6 @@
 package com.example.projectd;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectd.Dto.MdDTO;
+
 import java.util.ArrayList;
 
 public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder>
         implements OnMainMdItemClickListener {
-    ArrayList<Main> items = new ArrayList<Main>();
+    Context context;
+    ArrayList<MdDTO> items;
     OnMainMdItemClickListener listener;
+
+    public MainMdAdapter(Context context, ArrayList<MdDTO> items) {
+        this.context = context;
+        this.items = items;
+    }
+
 
 
     @NonNull
@@ -27,7 +37,7 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Main item = items.get(position);
+        MdDTO item = items.get(position);
         holder.setItem(item);
     }
 
@@ -39,8 +49,6 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
     public void setOnItemClickListener(OnMainMdItemClickListener listener){
         this.listener = listener;
     }
-
-
 
     @Override
     public void onItemClick(ViewHolder holder, View view, int position) {
@@ -70,29 +78,29 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
                 }
             });
         }
-        public void setItem(Main item){
-            textView.setText(item.getTitle());
-            textView2.setText(item.getPrice());
+        public void setItem(MdDTO item){
+            textView.setText("" + item.getMd_name());
+            textView2.setText("" + item.getMd_price());
         }
-
-
-
     }
 
+    public void removeAll(){
+        items.clear();
+    }
 
-    public void addItem(Main item){
+    public void addItem(MdDTO item){
         items.add(item);
     }
 
-    public void setItems(ArrayList<Main> items){
+    public void setItems(ArrayList<MdDTO> items){
         this.items = items;
     }
 
-    public Main getItem(int position){
+    public MdDTO getItem(int position){
         return items.get(position);
     }
 
-    public void setItem(int position, Main item){
+    public void setItem(int position, MdDTO item){
         items.set(position, item);
     }
 

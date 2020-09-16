@@ -122,16 +122,6 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-
-            <include
-                android:id="@+id/card1"
-                layout="@layout/card_list"
-                android:layout_width="390dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="0dp" />
         </FrameLayout>
     </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -141,7 +131,7 @@
         android:layout_alignParentBottom="true"
         android:background="#3F51B5"
         app:itemIconTint="#FFFFFF"
-        app:itemTextColor="@color/wallet_bright_foreground_disabled_holo_light"
         app:menu="@menu/menu_bottom" />
+    <!--app:itemTextColor="@color/wallet_bright_foreground_disabled_holo_light"-->
 
 </LinearLayout>

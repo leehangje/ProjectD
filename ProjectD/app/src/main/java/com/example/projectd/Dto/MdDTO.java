@@ -1,6 +1,8 @@
 package com.example.projectd.Dto;
 
-public class MdDTO {
+import java.io.Serializable;
+
+public class MdDTO implements Serializable {
     String md_name;
     String md_category;
     int md_price;
@@ -12,14 +14,14 @@ public class MdDTO {
     String member_addr;
     int md_fav_count;
     String md_registration_date;
-    int md_serial_number;
+    String md_serial_number;
     int md_rent_status;
     int md_hits;
 
     public MdDTO(String md_name, String md_category, int md_price, String md_rental_term,
                  int md_deposit, String md_detail_content, String md_photo_url, String member_id,
                  String member_addr, int md_fav_count, String md_registration_date,
-                 int md_serial_number, int md_rent_status, int md_hits) {
+                 String md_serial_number, int md_rent_status, int md_hits) {
         this.md_name = md_name;
         this.md_category = md_category;
         this.md_price = md_price;
@@ -124,11 +126,11 @@ public class MdDTO {
         this.md_registration_date = md_registration_date;
     }
 
-    public int getMd_serial_number() {
+    public String getMd_serial_number() {
         return md_serial_number;
     }
 
-    public void setMd_serial_number(int md_serial_number) {
+    public void setMd_serial_number(String md_serial_number) {
         this.md_serial_number = md_serial_number;
     }
 
