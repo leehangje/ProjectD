@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#E6E6E6"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -13,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#3e4ba9">
+
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
@@ -41,6 +41,15 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="27dp"
+        android:text="지도 우상단의 gps를 클릭하여 위치를 지정하고 해당 위치로 설정 버튼을 클릭한 후, 완료 버튼을 반드시 클릭해주세요!"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/searchValueText"
         android:layout_width="284dp"
@@ -51,10 +60,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="65dp"
         android:layout_marginLeft="65dp"
-        android:layout_marginTop="27dp"
-        android:ems="10"
+        android:layout_marginTop="15dp"
+        android:background="#FFFFFF"
         android:hint="내 위치"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp" />
 
     <Button
         android:id="@+id/setupBtn"
@@ -111,3 +121,12 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 </LinearLayout>
+
+<!--
+
+1. 그냥 뒤로 가기 버튼만 클릭했을 때, 해당 위치로 설정 버튼만 클릭 후 뒤로 가기 버튼만 클릭했을 때 : 현재 위치는 No Data, 위도와 경도 둘다 null
+    즉 뒤로가기 버튼을 클릭하면 아무런 값이 들어오지 않는다.
+2. gps 버튼 안누르고 그냥 해당 위치로 설정 버튼만 클릭한 후, 완료 버튼을 클릭했을 때 : 현재 위치는 ok, 하지만 위도와 경도 둘다 null
+3. gps 버튼 클릭 > 해당 위치로 설정 버튼 클릭 > 완료 버튼을 클릭해야 세 값이 다 들어온다.
+
+-->
