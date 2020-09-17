@@ -2,6 +2,7 @@ package com.example.projectd;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -109,6 +110,7 @@ public class LocationActivity extends AppCompatActivity {
 
         MapsInitializer.initialize(this);
 
+        // 해당 위치 설정 버튼 클릭 시
         setupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,18 +126,27 @@ public class LocationActivity extends AppCompatActivity {
                 searchValueText.setText(address);
             }
         }); //locSearchBtn.setOnClickListener()
-
+        
+        // 완료 버튼 클릭시
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myAddress = searchValueText.getText().toString();
                 Intent intent = new Intent(LocationActivity.this, SignUpFormActivity.class);
-                intent.putExtra("myAddress", myAddress);
-                intent.putExtra("latitude", latitude);
-                intent.putExtra("longitude", longitude);
-                //startActivity(intent);
-                setResult(RESULT_OK, intent);
-                finish();
+                
+                if(myAddress.equals("") || latitude.equals("") || longitude.equals("") ) {
+                    // 알림 대화 상자를 보여주면서 경고문 보여주기
+                    showMessage();
+                    Log.d(TAG, "if:onClick: " + myAddress + ", " + latitude + ", " + longitude);
+                } else {
+                    intent.putExtra("myAddress", myAddress);
+                    intent.putExtra("latitude", latitude);
+                    intent.putExtra("longitude", longitude);
+                    //startActivity(intent);
+                    setResult(RESULT_OK, intent);
+                    Log.d(TAG, "else:onClick: " + myAddress + ", " + latitude + ", " + longitude);
+                    finish();
+                }
             }
         }); //submitBtn.setOnClickListener()
 
@@ -332,22 +343,23 @@ public class LocationActivity extends AppCompatActivity {
         map.animateCamera(CameraUpdateFactory.newLatLng(latLng));   // 마커생성위치로 이동
         Marker marker = map.addMarker(markerOptions);
     }
-/*
-    // 액션 바 아이콘 클릭했을 때
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int curId = item.getItemId();
 
-        switch (curId) {
-            case android.R.id.home :
-                // → android.R.id.home : 메뉴바 상단의 홈 아이디
-                Toast.makeText(this, "뒤로 가기!", Toast.LENGTH_SHORT).show();
-                this.finish();      // 앱 종료
-                break;
-        }
-        return true;
-    } //onOptionsItemSelected()
-*/
+    // 알림 대화상자를 보여주는 메소드
+    public void showMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // → 대화상자를 만들기 위한 빌더 객체 생성
+        builder.setTitle("알림");
+        builder.setMessage("지도 우상단의 gps 버튼으로 위치 지정한 다음 해당 위치로 설정 버튼 클릭한 후 완료 버튼을 클릭해주세요!");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    } //showMessage()
+
     //----------------------------------------------------------------
     // 위험 권한
     private void checkDangerousPermissions () {
