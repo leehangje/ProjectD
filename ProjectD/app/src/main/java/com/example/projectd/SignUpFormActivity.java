@@ -33,7 +33,8 @@ import java.util.regex.Pattern;
 public class SignUpFormActivity extends AppCompatActivity implements View.OnClickListener, Dialog.OnCancelListener{
     private static final String TAG = "main:SignUpFormActivity";
 
-    GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
+
+     GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
 
     public static MemberDto idCheckDTO = null;
     public static MemberDto nicknamecheckDTO = null;
