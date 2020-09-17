@@ -1,25 +1,22 @@
 package com.example.projectd;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.projectd.ATask.AnMainSelect;
+import com.example.projectd.Dto.MdDTO;
+
+import java.util.ArrayList;
 
 public class MainActivity extends Fragment {
 
@@ -27,6 +24,8 @@ public class MainActivity extends Fragment {
     MainMdAdapter adapter;
     ViewGroup viewGroup;
     ImageButton btn_like;
+
+    ArrayList<MdDTO> items;
 
     /*private Context mContext = MainActivity.this;*/
     private static final int ACTIVITY_NUM = 3;
@@ -43,7 +42,20 @@ public class MainActivity extends Fragment {
         } else if (Build.VERSION.SDK_INT < 21) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }*/
+
+        items = new ArrayList<>();
         recyclerView = viewGroup.findViewById(R.id.recyclerView);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new MainMdAdapter(getContext(), items);
+
+        //adapter.addItem(new Main("컴퓨터", "3500원"));
+        //adapter.addItem(new Main("모니터", "3000원"));
+
+        recyclerView.setAdapter(adapter);
+
+
 
         //찜목록
         btn_like = viewGroup.findViewById(R.id.btn_like);
@@ -87,27 +99,17 @@ public class MainActivity extends Fragment {
 
 
 
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new MainMdAdapter();
-
-        adapter.addItem(new Main("컴퓨터", "3500원"));
-        adapter.addItem(new Main("모니터", "3000원"));
-
-        recyclerView.setAdapter(adapter);
-
         adapter.setOnItemClickListener(new OnMainMdItemClickListener() {
             public static final int main = 1001;
 
             @Override
             public void onItemClick(MainMdAdapter.ViewHolder holder, View view, int position) {
-                Main item = adapter.getItem(position);
+                MdDTO item = adapter.getItem(position);
 
-
-                Toast.makeText(getActivity(), "아이템 선택됨" + item.getTitle(),
+                Toast.makeText(getActivity(), "아이템 선택됨" + item.getMd_name(),
                         Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity(), MdDetailActivity.class);
+                intent.putExtra("item", item);
                 startActivityForResult(intent, main);
 
             }
@@ -115,6 +117,8 @@ public class MainActivity extends Fragment {
 
         });
 
+        AnMainSelect  anMainSelect = new AnMainSelect(items, adapter);
+        anMainSelect.execute();
 
 
         /*setupBottomNavigationView();*/    //하단 바 메소드 호출

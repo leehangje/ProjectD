@@ -1,3 +1,4 @@
+/*
 package com.example.projectd.ATask;
 
 import android.net.http.AndroidHttpClient;
@@ -143,3 +144,4 @@ public class DetailSelect extends AsyncTask<Void, Void, Void> {
     }//readMessage()
 
 }
+*/

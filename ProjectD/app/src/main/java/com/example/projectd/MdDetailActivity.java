@@ -33,10 +33,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class MdDetailActivity extends AppCompatActivity {
-    public static MdDTO detailDTO = null;
+    public MdDTO item = null;
 
     /*연결할 주소*/
-    String str = "[{\"md_name\":\"미란이\",\"md_category\":\"생활용품\",\"md_price\":10000,\"md_rental_term\":\"1일\",\"md_deposit\":100000,\"md_detail_content\":\"요리를 참 잘해요\",\"md_photo_url\":\"https://ifh.cc/g/TqfuhP.jpg\",\"member_id\":\"conan\",\"member_addr\":\"광주 서구 경열로\",\"md_fav_count\":2,\"md_registration_date\":\"2020.08.27\",\"md_serial_number\":\"1\",\"md_rent_status\":1,\"md_hits\":99999}]";
+    //String str = "[{\"md_name\":\"미란이\",\"md_category\":\"생활용품\",\"md_price\":10000,\"md_rental_term\":\"1일\",\"md_deposit\":100000,\"md_detail_content\":\"요리를 참 잘해요\",\"md_photo_url\":\"https://ifh.cc/g/TqfuhP.jpg\",\"member_id\":\"conan\",\"member_addr\":\"광주 서구 경열로\",\"md_fav_count\":2,\"md_registration_date\":\"2020.08.27\",\"md_serial_number\":\"1\",\"md_rent_status\":1,\"md_hits\":99999}]";
     //실패//private String str = "http://localhost:80/app/anDetail?md_serial_number=1";
     //실패//private String str = "http://localhost:80/app/anDetail?md_serial_number=" + detailDTO.getMd_serial_number();
     //실패//private String str = "['http://localhost:80/app/anDetail?md_serial_number=1']";
@@ -51,7 +51,7 @@ public class MdDetailActivity extends AppCompatActivity {
 
     CircleImageView profile_photo;
     TextView user_nickname, member_addr, user_grade, md_name, md_price, md_deposit, md_category,
-            md_hits, md_fav_count, md_detail_content;
+            md_Registration_date, md_hits, md_fav_count, md_detail_content;
     Button btn_chat, btn_fav;
 
     TabFragment1 fragment1;
@@ -64,7 +64,11 @@ public class MdDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_md_detail);
 
-        checkDangerousPermissions();    //위험 권한 주기
+        Intent intent = getIntent();
+
+        if (intent != null){
+            item = (MdDTO) intent.getSerializableExtra("item");
+        }
 
         profile_photo = findViewById(R.id.profile_photo);
         user_nickname = findViewById(R.id.user_nickname);
@@ -74,12 +78,15 @@ public class MdDetailActivity extends AppCompatActivity {
         md_price = findViewById(R.id.md_price);
         md_deposit = findViewById(R.id.md_dedosit);
         md_category = findViewById(R.id.md_category);
+        md_Registration_date = findViewById(R.id.md_Registration_date);
         md_hits = findViewById(R.id.md_hits);
         md_fav_count = findViewById(R.id.md_fav_count);
         md_detail_content = findViewById(R.id.md_detail_content);
 
         btn_chat = findViewById(R.id.btn_chat);
         btn_fav = findViewById(R.id.btn_fav);
+
+        setItem(item);
 
         toolbar_context = findViewById(R.id.toolbar_context);
 
@@ -155,12 +162,23 @@ public class MdDetailActivity extends AppCompatActivity {
         md_nameList = new ArrayList<>();
         md_categoryList = new ArrayList<>();
 
-        jsonRead();
+        //jsonRead();
 
     }//onCreate
 
+    public void setItem(MdDTO item){
+        md_name.setText(item.getMd_name());
+        md_price.setText("대여료: " + item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
+        md_deposit.setText("보증금: " + item.getMd_deposit() + "원");
+        md_category.setText(item.getMd_category());
+        md_Registration_date.setText(item.getMd_registration_date());
+        md_hits.setText("조회수:" + item.getMd_hits());
+        md_fav_count.setText("찜:" + item.getMd_fav_count());
+        md_detail_content.setText("<상세정보>\n" + item.getMd_detail_content());
+    }
+
     //db에서 데이터 가져오기(json)
-    private void jsonRead() {
+    /*private void jsonRead() {
         try {
             jsonArray = new JSONArray(str);
             for(int i = 0 ; i<jsonArray.length(); i++){
@@ -176,10 +194,8 @@ public class MdDetailActivity extends AppCompatActivity {
         }
         md_name.setText(md_nameList.toString());
         md_category.setText(md_categoryList.toString());
-
-
     }
-
+*/
     //상품 상세사진 슬라이드 넘기기
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 3;
@@ -216,49 +232,5 @@ public class MdDetailActivity extends AppCompatActivity {
         }//getPageTitle()
 
     }//MyPagerAdapter()
-
-    //----------------------------------------------------------------
-    // 위험 권한
-    private void checkDangerousPermissions () {
-        String[] permissions = {
-                android.Manifest.permission.INTERNET,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-        };
-
-        int permissionCheck = PackageManager.PERMISSION_GRANTED;
-        for (int i = 0; i < permissions.length; i++) {
-            permissionCheck = ContextCompat.checkSelfPermission(this, permissions[i]);
-            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
-                break;
-            }
-        }
-
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "권한 있음", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "권한 없음", Toast.LENGTH_LONG).show();
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
-                Toast.makeText(this, "권한 설명 필요함.", Toast.LENGTH_LONG).show();
-            } else {
-                ActivityCompat.requestPermissions(this, permissions, 1);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult ( int requestCode, String[] permissions,
-                                             int[] grantResults){
-        if (requestCode == 1) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(this, permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-    }
 
 }
