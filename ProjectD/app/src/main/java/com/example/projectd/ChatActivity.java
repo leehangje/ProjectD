@@ -68,7 +68,10 @@ public class ChatActivity extends AppCompatActivity {
         chatList = new ArrayList<>();
         mAdapter = new ChatAdapter(chatList, ChatActivity.this, name  );
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.scrollToPosition(chatList.size() - 1);
+        /*  mAdapter.notifyDataSetChanged();
 
+        mRecyclerView.scrollToPosition(chatList.size() - 1);*/
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
