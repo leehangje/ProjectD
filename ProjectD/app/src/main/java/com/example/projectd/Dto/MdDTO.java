@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class MdDTO implements Serializable {
     String md_name;
+    //String md_title;
     String md_category;
     int md_price;
     String md_rental_term;
@@ -18,11 +19,14 @@ public class MdDTO implements Serializable {
     int md_rent_status;
     int md_hits;
 
-    public MdDTO(String md_name, String md_category, int md_price, String md_rental_term,
+
+
+    public MdDTO(String md_name, /*String md_title*/  String md_category, int md_price, String md_rental_term,
                  int md_deposit, String md_detail_content, String md_photo_url, String member_id,
                  String member_addr, int md_fav_count, String md_registration_date,
                  String md_serial_number, int md_rent_status, int md_hits) {
         this.md_name = md_name;
+        //this.md_title = md_title;
         this.md_category = md_category;
         this.md_price = md_price;
         this.md_rental_term = md_rental_term;
@@ -38,9 +42,11 @@ public class MdDTO implements Serializable {
         this.md_hits = md_hits;
     }
 
-    public String getMd_name() {
-        return md_name;
-    }
+    /*public String getMd_title() { return md_title; }
+
+    public void setMd_title(String md_title) { this.md_title = md_title; }*/
+
+    public String getMd_name() { return md_name; }
 
     public void setMd_name(String md_name) {
         this.md_name = md_name;

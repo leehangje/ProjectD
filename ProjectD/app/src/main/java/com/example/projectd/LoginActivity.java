@@ -115,7 +115,10 @@ public class LoginActivity extends AppCompatActivity {
         String[] permissions = {
                 android.Manifest.permission.INTERNET,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
         };
 
         int permissionCheck = PackageManager.PERMISSION_GRANTED;

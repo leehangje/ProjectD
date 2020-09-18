@@ -11,10 +11,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.projectd.Dto.MdDTO;
+
 public class LendListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     LendAdapter adapter;
+
+    MdDTO dto;
 
     LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
 
@@ -30,6 +34,7 @@ public class LendListActivity extends AppCompatActivity {
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new LendAdapter();
+
 
         adapter.addItem(new Lend("", ""));
         adapter.addItem(new Lend("", ""));

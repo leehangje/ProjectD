@@ -80,7 +80,7 @@
         </LinearLayout>
 
         <TextView
-            android:itd="@+id/tvIdCheck"
+            android:id="@+id/tvIdCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"

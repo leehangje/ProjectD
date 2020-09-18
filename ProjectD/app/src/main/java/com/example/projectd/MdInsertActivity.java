@@ -40,6 +40,7 @@ import static com.example.projectd.Common.CommonMethod.isNetworkConnected;
 public class MdInsertActivity extends AppCompatActivity {
 
     EditText et_md_name, et_md_title, et_md_price, et_md_rental_term , et_md_deposit, et_md_detail_content;
+    Spinner sp_md_category;
 
     ImageView imgVwSelected;
     Button btnImageCreate, btnImageSelection, btn_submit, btn_cancel;
@@ -85,6 +86,7 @@ public class MdInsertActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_md_insert);
 
+        tmpDateFormat = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss");
 
         //edit text
         et_md_name = findViewById(R.id.et_md_name);
@@ -110,7 +112,7 @@ public class MdInsertActivity extends AppCompatActivity {
         });
 
         //카테고리 스피너
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        Spinner spinner = (Spinner)findViewById(R.id.sp_md_category);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -127,6 +129,7 @@ public class MdInsertActivity extends AppCompatActivity {
         btnImageCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 try{
                     file = createFile();
                     Log.d("FilePath ", file.getAbsolutePath());
@@ -280,12 +283,14 @@ public class MdInsertActivity extends AppCompatActivity {
             if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
                 md_name = et_md_name.getText().toString();
                 md_title = et_md_title.getText().toString();
-                md_rental_term = et_md_rental_term.getText().toString();
-                md_detail_content = et_md_detail_content.getText().toString();
+                /*md_category = sp_md_category.getSelectedItem().toString();
                 md_price = et_md_price.getText().toString();
+                md_rental_term = et_md_rental_term.getText().toString();
                 md_deposit = et_md_deposit.getText().toString();
+                md_detail_content = et_md_detail_content.getText().toString();*/
 
-                MdInsert mdInsert = new MdInsert(md_name, md_photo_url, md_photo_real_url, md_title, md_category
+
+                MdInsert mdInsert = new MdInsert(md_name, md_title, md_photo_url, md_photo_real_url,  md_category
                         , md_rental_term, md_detail_content, md_price, md_deposit);
                 mdInsert.execute();
 
@@ -294,6 +299,8 @@ public class MdInsertActivity extends AppCompatActivity {
                         Intent.FLAG_ACTIVITY_SINGLE_TOP | // 엑티비티를 호출할 경우 호출된 엑티비티가 현재 태스크의 최상단에 존재하고 있었다면 새로운 인스턴스를 생성하지 않습니다. 예를 들어 ABC가 엑티비티 스택에 존재하는 상태에서 C를 호출하였다면 여전히 ABC가 존재하게 됩니다.
                         Intent.FLAG_ACTIVITY_CLEAR_TOP); // 만약에 엑티비티스택에 호출하려는 엑티비티의 인스턴스가 이미 존재하고 있을 경우에 새로운 인스턴스를 생성하는 것 대신에 존재하고 있는 엑티비티를 포그라운드로 가져옵니다. 그리고 엑티비티스택의 최상단 엑티비티부터 포그라운드로 가져올 엑티비티까지의 모든 엑티비티를 삭제합니다.
                 startActivity(showIntent);
+
+                Toast.makeText(this, "업로드 성공" , Toast.LENGTH_SHORT).show();
 
                 finish();
             }else{

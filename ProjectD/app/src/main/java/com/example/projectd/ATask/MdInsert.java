@@ -28,10 +28,10 @@ public class MdInsert extends AsyncTask<Void, Void, Void> {
         this.md_photo_real_url = md_photo_real_url;
         this.md_title = md_title;
         this.md_category = md_category;
-        this.md_rental_term = md_rental_term;
-        this.md_detail_content = md_detail_content;
         this.md_price = md_price;
+        this.md_rental_term = md_rental_term;
         this.md_deposit = md_deposit;
+        this.md_detail_content = md_detail_content;
     }
 
     @Override
