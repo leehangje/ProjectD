@@ -17,19 +17,13 @@ public class CommonMethod {
     /*public static String  ipConfig = "http://192.168.200.151:8989";*/
     /*public static String ipConfig = "http://192.168.0.178:8080";*/
     //public static String ipConfig = "http://121.148.239.200:80";
-<<<<<<< HEAD
     /*public static String ipConfig = "http://192.168.1.8:8989";*/
-<<<<<<< HEAD
     public static String ipConfig = "http://192.168.0.74:8080";
-=======
     /*public static String ipConfig = "http://172.30.1.28:80";*/
-    public static String ipConfig = "http://192.168.0.71:8080";
->>>>>>> d6236520be0c42dc28fd24e58b5a09dbc6ea572b
-=======
-    public static String ipConfig = "http://192.168.1.8:8989";
+    //public static String ipConfig = "http://192.168.0.71:8080";
+    //public static String ipConfig = "http://192.168.1.8:8989";
     /*public static String ipConfig = "http://172.30.1.28:80";*/
    /* public static String ipConfig = "http://192.168.0.71:8080";*/
->>>>>>> 5af04bb5deef9a67b5534772d8dbc4fa44c8a0ec
 
     // 네트워크에 연결되어 있는 지 확인해주는 메소드
     public static boolean isNetworkConnected(Context context) {
