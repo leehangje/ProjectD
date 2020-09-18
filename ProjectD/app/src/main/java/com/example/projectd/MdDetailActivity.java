@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectd.ATask.DetailSelect;
 import com.example.projectd.Dto.MdDTO;
+import com.example.projectd.Dto.MemberDto;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -28,12 +30,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class MdDetailActivity extends AppCompatActivity {
     public MdDTO item = null;
+    public MemberDto memberDto = null;
 
     /*연결할 주소*/
     //String str = "[{\"md_name\":\"미란이\",\"md_category\":\"생활용품\",\"md_price\":10000,\"md_rental_term\":\"1일\",\"md_deposit\":100000,\"md_detail_content\":\"요리를 참 잘해요\",\"md_photo_url\":\"https://ifh.cc/g/TqfuhP.jpg\",\"member_id\":\"conan\",\"member_addr\":\"광주 서구 경열로\",\"md_fav_count\":2,\"md_registration_date\":\"2020.08.27\",\"md_serial_number\":\"1\",\"md_rent_status\":1,\"md_hits\":99999}]";
@@ -68,6 +72,16 @@ public class MdDetailActivity extends AppCompatActivity {
 
         if (intent != null){
             item = (MdDTO) intent.getSerializableExtra("item");
+
+            DetailSelect detailSelect = new DetailSelect(item.getMember_id());
+            try {
+                memberDto = detailSelect.execute().get();
+                Log.d("main:Detail", "onCreate: " + memberDto.getMember_nickname());
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         profile_photo = findViewById(R.id.profile_photo);
@@ -86,7 +100,7 @@ public class MdDetailActivity extends AppCompatActivity {
         btn_chat = findViewById(R.id.btn_chat);
         btn_fav = findViewById(R.id.btn_fav);
 
-        setItem(item);
+        setItem(item, memberDto);
 
         toolbar_context = findViewById(R.id.toolbar_context);
 
@@ -166,7 +180,10 @@ public class MdDetailActivity extends AppCompatActivity {
 
     }//onCreate
 
-    public void setItem(MdDTO item){
+    public void setItem(MdDTO item, MemberDto memberDto){
+        user_nickname.setText(memberDto.getMember_nickname());
+        member_addr.setText(memberDto.getMember_addr());
+
         md_name.setText(item.getMd_name());
         md_price.setText("대여료: " + item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
         md_deposit.setText("보증금: " + item.getMd_deposit() + "원");
