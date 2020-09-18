@@ -31,8 +31,8 @@ public class LendListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new LendAdapter();
 
-        adapter.addItem(new Lend("컴퓨터", "박준근"));
-        adapter.addItem(new Lend("모니터", "안중근"));
+        adapter.addItem(new Lend("", ""));
+        adapter.addItem(new Lend("", ""));
 
         recyclerView.setAdapter(adapter);
 

@@ -33,7 +33,8 @@ import java.util.regex.Pattern;
 public class SignUpFormActivity extends AppCompatActivity implements View.OnClickListener, Dialog.OnCancelListener{
     private static final String TAG = "main:SignUpFormActivity";
 
-    GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
+
+     GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
 
     public static MemberDto idCheckDTO = null;
     public static MemberDto nicknamecheckDTO = null;
@@ -41,7 +42,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
     Button btnEmailAuth, btnLocSearch, btnSubmit;
     EditText etId, etName, etPw, etNickName,
             etTel, etLocation, etPwCheck, etDetailAdd;
-    TextView tvIdCheck, tvPwCheck, tvNickNameCheck, tvTelCheck;
+    TextView tvIdCheck, tvPwCheck1, tvPwCheck2, tvNickNameCheck, tvTelCheck;
     String state;
     String member_id, member_pw, member_name,
             member_nickname, member_tel, member_addr,
@@ -74,7 +75,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_form);
 
-        btnEmailAuth = findViewById(R.id.btnEmailAuth);
+        btnEmailAuth = findViewById(R.id.btnTelAuth);
         btnLocSearch = findViewById(R.id.btnLocSearch);
         btnSubmit = findViewById(R.id.btnSubmit);
 
@@ -88,7 +89,8 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
         etDetailAdd = findViewById(R.id.etDetailAdd);
 
         tvIdCheck = findViewById(R.id.tvIdCheck);
-        tvPwCheck = findViewById(R.id.tvPwCheck);
+        tvPwCheck1 = findViewById(R.id.tvPwCheck1);
+        tvPwCheck2 = findViewById(R.id.tvPwCheck2);
         tvNickNameCheck = findViewById(R.id.tvNickNameCheck);
         tvTelCheck = findViewById(R.id.tvTelCheck);
 
@@ -105,7 +107,6 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                     if(id.length() == 0 ){  //아이디를 입력하지 않은 경우
                         tvIdCheck.setText("아이디를 입력하세요!");
                         tvIdCheck.setVisibility(View.VISIBLE);
-                        etId.setText("");
                         etId.requestFocus();
                         return false;
                     } else if (!checkEmail(id)) { //이메일 형식에 맞지 않는 경우
@@ -167,10 +168,10 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                 String pwCheckText = etPwCheck.getText().toString();
 
                 if (!pwText.equals(pwCheckText)) {
-                    tvPwCheck.setVisibility(View.VISIBLE);
+                    tvPwCheck2.setVisibility(View.VISIBLE);
                     Log.d(TAG, "onTextChanged: " + pwText + ", " + pwCheckText);
                 } else {
-                    tvPwCheck.setVisibility(View.GONE);
+                    tvPwCheck2.setVisibility(View.GONE);
                     Log.d(TAG, "onTextChanged: " + pwText + ", " + pwCheckText);
                 }
             }
@@ -180,6 +181,33 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
             }
         }); //pwValueCheck.addTextChangedListener()
+
+        // 비밀번호 입력 칸에 값을 입력한 후 발생하는 key 리스너
+        etPw.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                String pw = etPw.getText().toString().trim();
+
+                if(event.getAction() == KeyEvent.ACTION_DOWN
+                        && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    if(pw.length() == 0 ){  //아이디를 입력하지 않은 경우
+                        tvPwCheck1.setText("비밀번호를 입력하세요!");
+                        tvPwCheck1.setVisibility(View.VISIBLE);
+                        etPw.requestFocus();
+                        return false;
+                    } else if (!isValidPassword(pw)) { //비밀번호 형식에 맞지 않는 경우
+                        tvPwCheck1.setText("비밀번호는 최소 8자 이상, 알파벳 소문자, 숫자 및 특수 문자를 사용하십시오!");
+                        tvPwCheck1.setVisibility(View.VISIBLE);
+                        etPw.setText("");
+                        etPw.requestFocus();
+                        return false;
+                    } else {
+                        tvPwCheck1.setVisibility(View.GONE);
+                    }
+                }
+                return false;
+            } //onKey()
+        }); //etPw.setOnKeyListener()
 
         // 닉네임 입력 칸에 값을 입력한 후 발생하는 key 리스너
         etNickName.setOnKeyListener(new View.OnKeyListener() {
@@ -233,6 +261,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
             } //onKey()
         }); //etId.setOnKeyListener()
 
+        // 휴대폰 번호 입력 칸에 값을 입력한 후 발생하는 key 리스너
         etTel.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -392,8 +421,8 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                 // 위치 & 상세정보 체크
                 String detailAddress = etDetailAdd.getText().toString().trim();
 
-                if (member_addr.length() == 0 || member_latitude.length() == 0 || member_longitude.length() == 0
-                        || member_latitude == null || member_longitude == null) {
+                if (member_addr.length() == 0 || member_addr.equals("주소 미입력")
+                        || member_latitude == null || member_longitude == null ) {
                     Toast.makeText(SignUpFormActivity.this, "위치 찾기 버튼으로 위치를 지정해주세요!", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (detailAddress.length() == 0) {
@@ -414,11 +443,11 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 if (state.equals("1")) {
-                    Toast.makeText(SignUpFormActivity.this, "삽입성공 !!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this, "회원가입되셨습니다.", Toast.LENGTH_SHORT).show();
                     Log.d("main:joinact", "삽입성공 !!!");
                     finish();
                 } else {
-                    Toast.makeText(SignUpFormActivity.this, "삽입실패 !!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this, "회원가입에 실패하셨습니다. 관리자에게 문의하세요", Toast.LENGTH_LONG).show();
                     Log.d("main:joinact", "삽입실패 !!!");
                 }
             } //btnSubmit.onClick()
@@ -434,7 +463,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
     } //onCreate()
 
-    // LoginActivity에서 전달한 위치 정보를 받는 메소드
+    // LocationActivity에서 전달한 위치 정보를 받는 메소드
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     @Nullable Intent data) {
@@ -443,13 +472,14 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
         if (requestCode == LOCATION_ACTIVITY_REQUEST_CODE
                 && resultCode == RESULT_OK) {
             String myAddress = data.getStringExtra("myAddress");
+            //etLocation.setText(myAddress);
             etLocation.setText(myAddress);
             member_latitude = String.valueOf(data.getDoubleExtra("latitude", 0));
             member_longitude = String.valueOf(data.getDoubleExtra("longitude", 0));
             etLocation.setFocusable(true);
         } else {
-            etLocation.setText("No Data");
-            Toast.makeText(this, member_latitude + ", " + member_longitude, Toast.LENGTH_SHORT).show();
+            etLocation.setText("주소 미입력");
+
         }
     }//onActivityResult()
 
@@ -473,7 +503,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
 

@@ -17,6 +17,8 @@
     <!-- 사진등록 권한 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
     <!--0x00020000 : 안드로이드 2.0 버전-->
@@ -92,6 +94,17 @@
         <activity android:name=".MypageActivity" android:parentActivityName=".MainActivity"></activity>
 
         <activity android:name=".NoticeFindActivity" android:parentActivityName=".NoticeActivity"></activity>
+
+        <!-- API24 이상부터 Url 이 file:// 로 시작되면 안되서 content:// 으로 변환시키는 부분 -->
+        <provider
+            android:authorities="${applicationId}.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths"/>
+        </provider>
 
     </application>
 
