@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 import static com.example.projectd.LoginActivity.loginDTO;
 
-public class LoginSelect extends AsyncTask<Void, Void, Void> {
+public  class LoginSelect extends AsyncTask<Void, Void, Void> {
     String member_id, member_pw;
 
     public LoginSelect(String member_id, String member_pw) {
