@@ -1,9 +1,15 @@
 package com.example.projectd;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,8 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectd.ATask.SearchId;
+
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 /**
@@ -20,9 +31,12 @@ import java.util.regex.Pattern;
  * Use the {@link IdFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IdFragment extends Fragment {
+public class IdFragment extends DialogFragment {
     EditText etTel, etAuthNum;
     Button btnTelAuth, btnSearchId;
+    String authNum, phoneNum;
+    String message, title;  // 알림 정보를 담는 변수
+    String state;           // 아이디 찾기 결과
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,6 +102,12 @@ public class IdFragment extends Fragment {
                 } else if (!Pattern.matches("^01(?:0|1|[6-9])(\\d{3}|\\d{4})(\\d{4})$", tel)){
                     Toast.makeText(getContext(), "핸드폰 번호는 10 ~ 11자의 숫자만 사용가능합니다!", Toast.LENGTH_SHORT).show();
                     return;
+                } else {
+                    phoneNum = etTel.getText().toString();
+                    authNum = numberGen(4,2);
+                    message = "인증번호는 " + authNum + " 입니다.\n" + "인증번호 입력칸에 입력해주세요!";
+                    // 알림 상자로 인증번호 보여주기
+                    showMessage("인증 번호", message);
                 }
 
             } //onClick()
@@ -107,25 +127,50 @@ public class IdFragment extends Fragment {
                     Toast.makeText(getContext(), "핸드폰 번호는 10 ~ 11자의 숫자만 사용가능합니다!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    // 알림 상자로 인증번호 보여주기
-                    showMessage();
-                }
+                    if (authNum.equals(etAuthNum.getText().toString())
+                        && phoneNum.equals(etTel.getText().toString())) {
+                        // 전송한 인증 번호 = 입력한 인증번호
+                        // 인증번호를 보낸 휴대폰 번호 = 실제 입력한 휴대폰 번호(인증 번호를 보낸 번호를 나중에 바꿨을 경우)
+                        SearchId searchId = new SearchId(tel);
 
-                Toast.makeText(getContext(),  etAuthNum.getText().toString() + ", " + etTel.getText().toString(), Toast.LENGTH_LONG).show();
-            }
+                        try {
+                            state = searchId.execute().get().trim();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (state.equals("")) {    //회원이 아닌 경우(아이디 x)
+                            showMessage("알림", "가입된 아이디가 존재하지 않습니다");
+                        } else {
+                            String[] split = state.split("@");
+                            String email = split[0].replace(split[0].substring(split[0].length() - 3, split[0].length()), "***");
+                               email += "@" + split[1];
+                            message = "고객님의 정보와 일치하는 아이디입니다.\n" + "\n"
+                                    + email;
+                            showMessage("아이디 찾기", message);
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "인증번호가 맞지 않습니다.\n" + "다시 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                //Toast.makeText(getContext(),  etAuthNum.getText().toString() + ", " + authNum + ", " + etTel.getText().toString(), Toast.LENGTH_LONG).show();
+            } //onClick()
         }); //btnSearchId.setOnClickListener()
 
         return rootView;
     } //onCreateView()
 
     // 알림 대화상자를 보여주는 메소드
-    public void showMessage() {
+    public void showMessage(String title, String message) {
+
         // getContext 안됨 / getActivity() 안됨 / getActivity().getApplicationContext() 안됨
         //getActivity(), R.style.Theme_AppCompat_Dialog_Alert 안됨
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Dialog_Alert);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // → 대화상자를 만들기 위한 빌더 객체 생성
-        builder.setTitle("인증번호");
-        builder.setMessage("인증번호는" + " 입니다");
+        builder.setTitle(title);
+        builder.setMessage(message);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -134,5 +179,35 @@ public class IdFragment extends Fragment {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+
+
     } //showMessage()
+
+    // 인증번호 (4자리 난수) 생성 메소드
+    public static String numberGen(int len, int dupCd) {
+        Random rand = new Random();
+        String numStr = ""; //난수가 저장될 변수
+
+        for(int i=0;i<len;i++) {
+
+            //0~9 까지 난수 생성
+            String ran = Integer.toString(rand.nextInt(10));
+
+            if(dupCd==1) {
+                //중복 허용시 numStr에 append
+                numStr += ran;
+            }else if(dupCd==2) {
+                //중복을 허용하지 않을시 중복된 값이 있는지 검사한다
+                if(!numStr.contains(ran)) {
+                    //중복된 값이 없으면 numStr에 append
+                    numStr += ran;
+                }else {
+                    //생성된 난수가 중복되면 루틴을 다시 실행한다
+                    i-=1;
+                }
+            }
+        }
+        return numStr;
+    }
+
 }

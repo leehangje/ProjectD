@@ -85,7 +85,7 @@ public class SignUpCheckId extends AsyncTask<Void, Void, Void> {
     private MemberDto readMessage(InputStream inputStream) throws IOException {
 
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
-        reader.setLenient(true);
+        //reader.setLenient(true);
 
         String member_id = "";
         String member_name = "";

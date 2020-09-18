@@ -560,7 +560,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                     Log.d(TAG, "onClick: " + sender.getEmailCode());
                     //인증 다이얼로그 생성
                     dialog = LayoutInflater.from(this);
-                    dialogLayout = dialog.inflate(R.layout.auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
+                    dialogLayout = dialog.inflate(R.layout.layout_auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
                     authDialog = new Dialog(this); //Dialog 객체 생성
                     authDialog.setContentView(dialogLayout); //Dialog에 inflate한 View를 탑재 하여줌
                     authDialog.setCanceledOnTouchOutside(false); //Dialog 바깥 부분을 선택해도 닫히지 않게 설정함.
