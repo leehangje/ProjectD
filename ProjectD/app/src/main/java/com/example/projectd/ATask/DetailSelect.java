@@ -95,12 +95,12 @@ public class DetailSelect extends AsyncTask<Void, Void, MemberDto> {
 
         String member_id = "";
         String member_nickname = "";
-        String member_tel = "";;
-        String member_addr = "";;
-        String member_latitude = "";;
-        String member_longitude = "";;
-        int member_grade = 0;;
-        String member_name = "";;
+        String member_tel = "";
+        String member_addr = "";
+        String member_latitude = "";
+        String member_longitude = "";
+        String member_grade = "";
+        String member_name = "";
 
         reader.beginObject();
         while (reader.hasNext()) {
@@ -118,7 +118,7 @@ public class DetailSelect extends AsyncTask<Void, Void, MemberDto> {
             } else if (readStr.equals("member_longitude")){
                 member_longitude = reader.nextString();
             } else if (readStr.equals("member_grade")){
-                member_grade = reader.nextInt();
+                member_grade = reader.nextString();
             } else if (readStr.equals("member_name")){
                 member_name = reader.nextString();
             } else {
