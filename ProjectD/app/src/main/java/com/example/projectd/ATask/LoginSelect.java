@@ -86,19 +86,23 @@ public  class LoginSelect extends AsyncTask<Void, Void, Void> {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
 
         String member_id = "";
+        String member_pw = "";
         String member_name = "";
         String member_nickname = "";
         String member_tel = "";
         String member_addr = "";
         String member_latitude = "";
         String member_longitude = "";
-        int member_grade = 0;
+        String member_grade = "";
+        String member_profile = "";
 
         reader.beginObject();
         while (reader.hasNext()) {
             String readStr = reader.nextName();
             if (readStr.equals("member_id")) {
                 member_id = reader.nextString();
+            } else if (readStr.equals("member_pw")) {
+                member_pw = reader.nextString();
             } else if (readStr.equals("member_nickname")) {
                 member_nickname = reader.nextString();
             } else if (readStr.equals("member_name")) {
@@ -112,7 +116,9 @@ public  class LoginSelect extends AsyncTask<Void, Void, Void> {
             }  else if(readStr.equals("member_longitude")) {
                 member_longitude = reader.nextString();
             }  else if(readStr.equals("memmber_grade")) {
-                member_grade = reader.nextInt();
+                member_grade = reader.nextString();
+            } else if(readStr.equals("memmber_profile")) {
+                member_profile = reader.nextString();
             } else {
                 reader.skipValue();
             }
@@ -120,8 +126,8 @@ public  class LoginSelect extends AsyncTask<Void, Void, Void> {
         reader.endObject();
         reader.close();
         Log.d("main:loginselect : ", member_id + "," + member_name);
-        return new MemberDto(member_id, member_nickname,
-                             member_tel, member_addr, member_latitude,
-                             member_longitude, member_grade, member_name);
+        return new MemberDto(member_id, member_pw, member_nickname, member_tel,
+                            member_addr, member_latitude, member_longitude,
+                            member_grade, member_name, member_profile);
     }//readMessage()
 } //class

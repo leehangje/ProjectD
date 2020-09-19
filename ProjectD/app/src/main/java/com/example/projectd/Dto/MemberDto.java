@@ -8,13 +8,14 @@ public class MemberDto {
     String member_addr;
     String member_latitude;
     String member_longitude;
-    int member_grade;
+    String member_grade;
     String member_name;
+    String member_profile;
 
-    // 회원가입 시 데이터베이스에 멤버 정보를 추가할 때
+    // 일반 회원가입 시 데이터베이스에 멤버 정보를 추가할 때
     public MemberDto(String member_id, String member_pw, String member_nickname,
                      String member_tel, String member_addr, String member_latitude,
-                     String member_longitude, int member_grade, String member_name) {
+                     String member_longitude, String member_grade, String member_name, String member_profile) {
         this.member_id = member_id;
         this.member_pw = member_pw;
         this.member_nickname = member_nickname;
@@ -24,13 +25,14 @@ public class MemberDto {
         this.member_longitude = member_longitude;
         this.member_grade = member_grade;
         this.member_name = member_name;
+        this.member_profile = member_profile;
     }
 
     // 암호 없이 멤버 정보를 가져올 때
     // 이메일 중복체크할 때
     public MemberDto(String member_id, String member_nickname,
                      String member_tel, String member_addr, String member_latitude,
-                     String member_longitude, int memmber_grade, String member_name) {
+                     String member_longitude, String member_grade, String member_name) {
         this.member_id = member_id;
         this.member_nickname = member_nickname;
         this.member_tel = member_tel;
@@ -110,11 +112,19 @@ public class MemberDto {
         this.member_longitude = member_longitude;
     }
 
-    public int getMember_grade() {
+    public String getMember_grade() {
         return member_grade;
     }
 
-    public void setMember_grade(int member_grade) {
+    public void setMember_grade(String member_grade) {
         this.member_grade = member_grade;
+    }
+
+    public String getMember_profile() {
+        return member_profile;
+    }
+
+    public void setMember_profile(String member_profile) {
+        this.member_profile = member_profile;
     }
 }

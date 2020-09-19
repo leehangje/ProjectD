@@ -94,7 +94,7 @@ public class SignUpCheckId extends AsyncTask<Void, Void, Void> {
         String member_addr = "";
         String member_latitude = "";
         String member_longitude = "";
-        int member_grade = 0;
+        String member_grade = "";
 
         reader.beginObject();
         while (reader.hasNext()) {
@@ -114,7 +114,7 @@ public class SignUpCheckId extends AsyncTask<Void, Void, Void> {
             }  else if(readStr.equals("member_longitude")) {
                 member_longitude = reader.nextString();
             }  else if(readStr.equals("member_grade")) {
-                member_grade = reader.nextInt();
+                member_grade = reader.nextString();
             } else {
                 reader.skipValue();
             }
