@@ -79,8 +79,8 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
             });
         }
         public void setItem(MdDTO item){
-            textView.setText("" + item.getMd_name());
-            textView2.setText("" + item.getMd_price());
+            textView.setText(item.getMd_name());
+            textView2.setText(item.getMd_price());
         }
     }
 

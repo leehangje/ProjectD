@@ -4,29 +4,26 @@ import java.io.Serializable;
 
 public class MdDTO implements Serializable {
     String md_name;
-    //String md_title;
     String md_category;
-    int md_price;
+    String md_price;
     String md_rental_term;
-    int md_deposit;
+    String md_deposit;
     String md_detail_content;
     String md_photo_url;
     String member_id;
-    String member_addr;
-    int md_fav_count;
+    String md_fav_count;
     String md_registration_date;
     String md_serial_number;
-    int md_rent_status;
-    int md_hits;
+    String md_rent_status;
+    String md_hits;
 
 
 
-    public MdDTO(String md_name, /*String md_title*/  String md_category, int md_price, String md_rental_term,
-                 int md_deposit, String md_detail_content, String md_photo_url, String member_id,
-                 String member_addr, int md_fav_count, String md_registration_date,
-                 String md_serial_number, int md_rent_status, int md_hits) {
+    public MdDTO(String md_name, String md_category, String md_price, String md_rental_term,
+                 String md_deposit, String md_detail_content, String md_photo_url, String member_id,
+                 String md_fav_count, String md_registration_date,
+                 String md_serial_number, String md_rent_status, String md_hits) {
         this.md_name = md_name;
-        //this.md_title = md_title;
         this.md_category = md_category;
         this.md_price = md_price;
         this.md_rental_term = md_rental_term;
@@ -34,7 +31,6 @@ public class MdDTO implements Serializable {
         this.md_detail_content = md_detail_content;
         this.md_photo_url = md_photo_url;
         this.member_id = member_id;
-        this.member_addr = member_addr;
         this.md_fav_count = md_fav_count;
         this.md_registration_date = md_registration_date;
         this.md_serial_number = md_serial_number;
@@ -42,9 +38,6 @@ public class MdDTO implements Serializable {
         this.md_hits = md_hits;
     }
 
-    /*public String getMd_title() { return md_title; }
-
-    public void setMd_title(String md_title) { this.md_title = md_title; }*/
 
     public String getMd_name() { return md_name; }
 
@@ -60,11 +53,11 @@ public class MdDTO implements Serializable {
         this.md_category = md_category;
     }
 
-    public int getMd_price() {
+    public String getMd_price() {
         return md_price;
     }
 
-    public void setMd_price(int md_price) {
+    public void setMd_price(String md_price) {
         this.md_price = md_price;
     }
 
@@ -76,11 +69,11 @@ public class MdDTO implements Serializable {
         this.md_rental_term = md_rental_term;
     }
 
-    public int getMd_deposit() {
+    public String getMd_deposit() {
         return md_deposit;
     }
 
-    public void setMd_deposit(int md_deposit) {
+    public void setMd_deposit(String md_deposit) {
         this.md_deposit = md_deposit;
     }
 
@@ -108,19 +101,11 @@ public class MdDTO implements Serializable {
         this.member_id = member_id;
     }
 
-    public String getMember_addr() {
-        return member_addr;
-    }
-
-    public void setMember_addr(String member_addr) {
-        this.member_addr = member_addr;
-    }
-
-    public int getMd_fav_count() {
+    public String getMd_fav_count() {
         return md_fav_count;
     }
 
-    public void setMd_fav_count(int md_fav_count) {
+    public void setMd_fav_count(String md_fav_count) {
         this.md_fav_count = md_fav_count;
     }
 
@@ -140,19 +125,19 @@ public class MdDTO implements Serializable {
         this.md_serial_number = md_serial_number;
     }
 
-    public int getMd_rent_status() {
+    public String getMd_rent_status() {
         return md_rent_status;
     }
 
-    public void setMd_rent_status(int md_rent_status) {
+    public void setMd_rent_status(String md_rent_status) {
         this.md_rent_status = md_rent_status;
     }
 
-    public int getMd_hits() {
+    public String getMd_hits() {
         return md_hits;
     }
 
-    public void setMd_hits(int md_hits) {
+    public void setMd_hits(String md_hits) {
         this.md_hits = md_hits;
     }
 }

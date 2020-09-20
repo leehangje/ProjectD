@@ -1,6 +1,8 @@
 package com.example.projectd.Dto;
 
-public class MemberDto {
+import java.io.Serializable;
+
+public class MemberDto implements Serializable {
     String member_id;
     String member_pw;
     String member_nickname;

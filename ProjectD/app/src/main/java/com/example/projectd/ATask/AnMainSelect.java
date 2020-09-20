@@ -122,7 +122,7 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
 
     public MdDTO readMessage(JsonReader reader) throws IOException {
         String md_name = "", md_category = "", md_rental_term = "", md_detail_content = "",
-                md_photo_url = "", member_id = "", member_addr = "", md_registration_date = "",
+                md_photo_url = "", member_id = "", md_registration_date = "",
                 md_serial_number = "";
         String md_price = "", md_deposit = "", md_fav_count = "", md_rent_status = "", md_hits = "";
 
@@ -142,8 +142,6 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
                 md_photo_url = reader.nextString();
             } else if (readStr.equals("member_id")) {
                 member_id = reader.nextString();
-            } else if (readStr.equals("member_addr")) {
-                member_addr = reader.nextString();
             } else if (readStr.equals("md_registration_date")) {
                 md_registration_date = reader.nextString();
             } else if (readStr.equals("md_serial_number")) {
@@ -165,10 +163,10 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
         reader.endObject();
         //Log.d("listselect:myitem", id + "," + name + "," + hire_date + "," + image_path);
 
-        return new MdDTO(md_name, md_category, Integer.parseInt(md_price), md_rental_term,
-                Integer.parseInt(md_deposit), md_detail_content, md_photo_url, member_id,
-                member_addr, Integer.parseInt(md_fav_count), md_registration_date,
-                md_serial_number, Integer.parseInt(md_rent_status), Integer.parseInt(md_hits));
+        return new MdDTO(md_name, md_category, md_price, md_rental_term,
+                md_deposit, md_detail_content, md_photo_url, member_id,
+                md_fav_count, md_registration_date,
+                md_serial_number, md_rent_status, md_hits);
 
     }
 

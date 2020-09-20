@@ -39,14 +39,6 @@ public class MdDetailActivity extends AppCompatActivity {
     public MdDTO item = null;
     public MemberDto memberDto = null;
 
-    /*연결할 주소*/
-    //String str = "[{\"md_name\":\"미란이\",\"md_category\":\"생활용품\",\"md_price\":10000,\"md_rental_term\":\"1일\",\"md_deposit\":100000,\"md_detail_content\":\"요리를 참 잘해요\",\"md_photo_url\":\"https://ifh.cc/g/TqfuhP.jpg\",\"member_id\":\"conan\",\"member_addr\":\"광주 서구 경열로\",\"md_fav_count\":2,\"md_registration_date\":\"2020.08.27\",\"md_serial_number\":\"1\",\"md_rent_status\":1,\"md_hits\":99999}]";
-    //실패//private String str = "http://localhost:80/app/anDetail?md_serial_number=1";
-    //실패//private String str = "http://localhost:80/app/anDetail?md_serial_number=" + detailDTO.getMd_serial_number();
-    //실패//private String str = "['http://localhost:80/app/anDetail?md_serial_number=1']";
-    //실패//private String str = "[" + "http://localhost:80/app/anDetail?md_serial_number=1" + "]";
-    //private String str = ipConfig + "/app/anDetail?md_serial_number=1";
-
     private ArrayList<String> md_nameList;
     private ArrayList<String>md_categoryList;
     private JSONArray jsonArray;
