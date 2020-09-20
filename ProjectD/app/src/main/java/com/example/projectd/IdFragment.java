@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  * create an instance of this fragment.
  */
 public class IdFragment extends DialogFragment {
-    EditText etTel, etAuthNum;
+    EditText etTel, etTelAuthNum;
     Button btnTelAuth, btnSearchId;
     String authNum, phoneNum;
     String message, title;  // 알림 정보를 담는 변수
@@ -87,7 +87,7 @@ public class IdFragment extends DialogFragment {
         btnSearchId = rootView.findViewById(R.id.btnSearchId);
         btnTelAuth = rootView.findViewById(R.id.btnTelAuth);
         etTel = rootView.findViewById(R.id.etTel);
-        etAuthNum = rootView.findViewById(R.id.etAuthNum);
+        etTelAuthNum = rootView.findViewById(R.id.etTelAuthNum);
 
         // 인증 번호 받기 버튼 클릭 시
         btnTelAuth.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +127,7 @@ public class IdFragment extends DialogFragment {
                     Toast.makeText(getContext(), "핸드폰 번호는 10 ~ 11자의 숫자만 사용가능합니다!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    if (authNum.equals(etAuthNum.getText().toString())
+                    if (authNum.equals(etTelAuthNum.getText().toString())
                         && phoneNum.equals(etTel.getText().toString())) {
                         // 전송한 인증 번호 = 입력한 인증번호
                         // 인증번호를 보낸 휴대폰 번호 = 실제 입력한 휴대폰 번호(인증 번호를 보낸 번호를 나중에 바꿨을 경우)
@@ -144,9 +144,13 @@ public class IdFragment extends DialogFragment {
                         if (state.equals("")) {    //회원이 아닌 경우(아이디 x)
                             showMessage("알림", "가입된 아이디가 존재하지 않습니다");
                         } else {
+                            // split : 문자열을 잘라 배열로 담음
+                            // replace : 해당 문자열(매개변수 1)을 다른 문자열(매개변수 2)로 대체
+                            // substring: 몇번째(매개변수 1)부터 몇번째(매개변수 2)까지의 문자열을 반환
                             String[] split = state.split("@");
-                            String email = split[0].replace(split[0].substring(split[0].length() - 3, split[0].length()), "***");
-                               email += "@" + split[1];
+                            int split0length = split[0].length();
+                            String email = split[0].replace(split[0].substring(split0length - 3, split0length), "***");
+                            email += "@" + split[1];
                             message = "고객님의 정보와 일치하는 아이디입니다.\n" + "\n"
                                     + email;
                             showMessage("아이디 찾기", message);
@@ -180,7 +184,6 @@ public class IdFragment extends DialogFragment {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-
     } //showMessage()
 
     // 인증번호 (4자리 난수) 생성 메소드
@@ -188,15 +191,14 @@ public class IdFragment extends DialogFragment {
         Random rand = new Random();
         String numStr = ""; //난수가 저장될 변수
 
-        for(int i=0;i<len;i++) {
-
+        for (int i = 0; i < len; i++) {
             //0~9 까지 난수 생성
             String ran = Integer.toString(rand.nextInt(10));
 
-            if(dupCd==1) {
+            if (dupCd == 1) {
                 //중복 허용시 numStr에 append
                 numStr += ran;
-            }else if(dupCd==2) {
+            } else if (dupCd == 2) {
                 //중복을 허용하지 않을시 중복된 값이 있는지 검사한다
                 if(!numStr.contains(ran)) {
                     //중복된 값이 없으면 numStr에 append
@@ -208,6 +210,5 @@ public class IdFragment extends DialogFragment {
             }
         }
         return numStr;
-    }
-
+    } //numberGen()
 }
