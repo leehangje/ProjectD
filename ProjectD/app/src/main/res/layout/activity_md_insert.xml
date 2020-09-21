@@ -20,13 +20,15 @@
 
             <ImageView
                 android:id="@+id/imgVwSelected"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="163dp"
+                android:layout_height="140dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="false"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginBottom="16dp" />
 
             <EditText
@@ -38,9 +40,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginStart="188dp"
-                android:layout_marginLeft="188dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginStart="187dp"
+                android:layout_marginLeft="187dp"
+                android:layout_marginTop="39dp"
                 android:layout_marginEnd="29dp"
                 android:layout_marginRight="29dp"
                 android:ems="10"
@@ -56,8 +58,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="false"
                 android:layout_alignParentBottom="false"
-                android:layout_marginTop="29dp"
-                android:layout_marginEnd="153dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="145dp"
                 android:layout_marginRight="151dp"
                 android:layout_marginBottom="574dp"
                 android:text="이미지선택"
@@ -71,35 +73,47 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="false"
-                android:layout_marginTop="29dp"
-                android:layout_marginEnd="56dp"
-                android:layout_marginRight="56dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="37dp"
+                android:layout_marginRight="37dp"
                 android:layout_marginBottom="0dp"
                 android:text="사진촬영"
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/tv_md_title"
+                android:id="@+id/tv_member_id"
                 android:layout_width="90dp"
                 android:layout_height="60dp"
+                android:gravity="center|left"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="165dp"
                 android:paddingLeft="10dp"
-                android:text="제목" />
+                android:text="작성자"
+                />
+
+            <TextView
+                android:id="@+id/tv_md_serial"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="110dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="165dp"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                android:text="제품번호" />
 
             <EditText
-                android:id="@+id/et_md_title"
-                android:layout_width="303dp"
+                android:id="@+id/et_md_serial"
+                android:layout_width="90dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginLeft="12dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="165dp"
-                android:layout_toEndOf="@+id/tv_md_title"
-                android:layout_toRightOf="@+id/tv_md_title"
-                android:ems="10"
-                android:hint="제목을 입력하세요"
-                android:inputType="textPersonName" />
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                android:hint="제품번호 입력" />
+
 
             <TextView
                 android:id="@+id/tv_md_category"
@@ -137,7 +151,7 @@
 
             <EditText
                 android:id="@+id/et_md_price"
-                android:layout_width="165dp"
+                android:layout_width="289dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
@@ -148,17 +162,6 @@
                 android:hint="가격을 입력하세요"
                 android:inputType="textPersonName"
                 android:textSize="12sp"/>
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="175dp"
-                android:layout_marginLeft="175dp"
-                android:layout_marginTop="285dp"
-                android:layout_toEndOf="@+id/tv_md_price"
-                android:layout_toRightOf="@+id/tv_md_price"
-                android:gravity="center_vertical"
-                android:text="협상가능" />
 
             <TextView
                 android:id="@+id/tv_md_rental_term"
@@ -173,7 +176,7 @@
 
             <EditText
                 android:id="@+id/et_md_rental_term"
-                android:layout_width="165dp"
+                android:layout_width="289dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
@@ -191,17 +194,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="175dp"
-                android:layout_marginLeft="175dp"
-                android:layout_marginTop="345dp"
-                android:layout_toEndOf="@+id/tv_md_rental_term"
-                android:layout_toRightOf="@+id/tv_md_rental_term"
-                android:gravity="center_vertical"
-                android:text="협상가능" />
-
             <TextView
                 android:id="@+id/tv_md_deposit"
                 android:layout_width="90dp"
@@ -215,7 +207,7 @@
 
             <EditText
                 android:id="@+id/et_md_deposit"
-                android:layout_width="164dp"
+                android:layout_width="289dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="13dp"
@@ -228,16 +220,6 @@
                 android:textSize="12sp"
                 android:gravity="center|left" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="175dp"
-                android:layout_marginLeft="175dp"
-                android:layout_marginTop="405dp"
-                android:layout_toEndOf="@+id/tv_md_deposit"
-                android:layout_toRightOf="@+id/tv_md_deposit"
-                android:text="협상가능" />
-
 
             <TextView
                 android:id="@+id/tv_md_detail_content"
@@ -247,11 +229,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="465dp"
+                android:paddingLeft="10dp"
                 android:text="상세 설명" />
 
             <EditText
                 android:id="@+id/et_md_detail_content"
-                android:layout_width="match_parent"
+                android:layout_width="289dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
@@ -278,7 +261,6 @@
                 android:layout_marginEnd="211dp"
                 android:layout_marginRight="211dp"
                 android:layout_marginBottom="1dp"
-                android:onClick="btnSubmitClicked"
                 android:text="입력하기"
                 />
 

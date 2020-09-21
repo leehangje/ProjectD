@@ -2,6 +2,7 @@ package com.example.projectd.ATask;
 
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,25 +19,29 @@ import java.nio.charset.Charset;
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 public class MdInsert extends AsyncTask<Void, Void, Void> {
-    String md_name, md_photo_url, md_photo_real_url, md_title, md_category, md_rental_term, md_detail_content, md_price, md_deposit;
+    String md_name, md_photo_url, md_photo_real_url, md_category, md_rental_term, md_detail_content, md_price, md_deposit
+            , member_id, md_serial_number;
 
 
-    public MdInsert ( String md_name, String md_photo_url, String md_photo_real_url,String md_title, String md_category
-            ,String md_rental_term,String md_detail_content, String md_price, String md_deposit){
+    public MdInsert ( String md_name, String md_photo_url, String md_photo_real_url, String md_category
+            ,String md_rental_term,String md_detail_content, String md_price, String md_deposit
+            ,String member_id, String md_serial_number ){
         this.md_name = md_name;
         this.md_photo_url = md_photo_url;
         this.md_photo_real_url = md_photo_real_url;
-        this.md_title = md_title;
         this.md_category = md_category;
         this.md_price = md_price;
         this.md_rental_term = md_rental_term;
         this.md_deposit = md_deposit;
         this.md_detail_content = md_detail_content;
+        this.member_id = member_id;
+        this.md_serial_number = md_serial_number;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        Log.d("main:mdinsert", "onPreExecute: " + md_photo_real_url);
     }
 
     @Override
@@ -50,12 +55,12 @@ public class MdInsert extends AsyncTask<Void, Void, Void> {
             // 문자열 및 데이터 추가
             builder.addTextBody("md_name", md_name, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_photo_url", md_photo_url, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("md_title", md_title, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_category", md_category, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_rental_term", md_rental_term, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_detail_content", md_detail_content, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_price", md_price, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_deposit", md_deposit, ContentType.create("Multipart/related", "UTF-8"));
+
 
             builder.addPart("image", new FileBody(new File(md_photo_real_url)));
 
@@ -91,7 +96,7 @@ public class MdInsert extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        //Log.d("Sub1Add:imageFilePath1", "추가성공");
+        Log.d("Sub1Add:imageFilePath1", "추가성공");
 
     }
 

@@ -18,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -38,16 +39,18 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 import static com.example.projectd.Common.CommonMethod.isNetworkConnected;
 
 public class MdInsertActivity extends AppCompatActivity {
+    private static final String TAG = "MdInsertActivity";
 
-    EditText et_md_name, et_md_title, et_md_price, et_md_rental_term , et_md_deposit, et_md_detail_content;
+    EditText et_md_name, et_md_price, et_md_rental_term , et_md_deposit, et_md_detail_content , et_md_serial;
     Spinner sp_md_category;
+    TextView tv_member_id;
 
     ImageView imgVwSelected;
     Button btnImageCreate, btnImageSelection, btn_submit, btn_cancel;
     //File tempSelectFile;
 
-    String md_name = "", md_title = "", md_category = ""
-            , md_rental_term = "", md_detail_content = "", md_price = "", md_deposit = "";
+    String md_name = "", md_category = "", md_rental_term = "", md_detail_content = ""
+            , md_price = "", md_deposit = "", member_id = "", md_serial_number = "";
 
     public String md_photo_url, md_photo_real_url;
 
@@ -90,7 +93,6 @@ public class MdInsertActivity extends AppCompatActivity {
 
         //edit text
         et_md_name = findViewById(R.id.et_md_name);
-        et_md_title = findViewById(R.id.et_md_title);
         et_md_price = findViewById(R.id.et_md_price);
         et_md_rental_term = findViewById(R.id.et_md_rental_term);
         et_md_deposit = findViewById(R.id.et_md_deposit);
@@ -117,7 +119,7 @@ public class MdInsertActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Object item = adapterView.getItemAtPosition(i);
             }
 
             @Override
@@ -168,24 +170,13 @@ public class MdInsertActivity extends AppCompatActivity {
             }
         });
 
-
-        //btnImageSend.setEnabled(false);
-      /*  btnImageSend.setOnClickListener(new View.OnClickListener(){
-            @Override public void onClick(View view){
-                FileUploadUtils.send2Server(tempSelectFile);
+        // 전송버튼 클릭
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnSubmit();
             }
         });
-        btnImageSelection.setOnClickListener(new View.OnClickListener(){
-            @Override public void onClick(View view){
-                // Intent를 통해 이미지를 선택
-                Intent intent = new Intent();
-                //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, 1);
-            }
-        });*/
-
 
     }
 
@@ -243,27 +234,6 @@ public class MdInsertActivity extends AppCompatActivity {
             }
         }
 
-
-        /*if (requestCode != 1 || resultCode != RESULT_OK) {
-            return;
-        }
-        Uri dataUri = data.getData();
-        imgVwSelected.setImageURI(dataUri);
-        try {
-            // ImageView 에 이미지 출력
-            InputStream in = getContentResolver().openInputStream(dataUri);
-            Bitmap image = BitmapFactory.decodeStream(in);
-            imgVwSelected.setImageBitmap(image);
-            in.close();
-            // 선택한 이미지 임시 저장
-            String date = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(new Date());
-            tempSelectFile = new File(Environment.getExternalStorageDirectory() + "/Pictures/Test/", "temp_" + date + ".jpeg");
-            OutputStream out = new FileOutputStream(tempSelectFile);
-            image.compress(Bitmap.CompressFormat.JPEG, 100, out);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        btnImageCreate.setEnabled(true);*/
     }
 
     private String getPathFromURI(Uri contentUri) {
@@ -278,20 +248,34 @@ public class MdInsertActivity extends AppCompatActivity {
         return res;
     }
 
-    public void btnSubmitClicked(View view){
+    public void btnSubmit(){
         if(isNetworkConnected(this) == true){
+
+            Log.d("main:mdinsertActivity", "btnSubmit: " + fileSize);
+
             if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
                 md_name = et_md_name.getText().toString();
-                md_title = et_md_title.getText().toString();
-                /*md_category = sp_md_category.getSelectedItem().toString();
+                md_category = sp_md_category.getSelectedItem().toString();
                 md_price = et_md_price.getText().toString();
                 md_rental_term = et_md_rental_term.getText().toString();
                 md_deposit = et_md_deposit.getText().toString();
-                md_detail_content = et_md_detail_content.getText().toString();*/
+                md_detail_content = et_md_detail_content.getText().toString();
+                member_id = LoginActivity.loginDTO.getMember_id();
+                md_serial_number = et_md_serial.getText().toString();
+
+                Log.d(TAG, "\nvv: " + md_name);
+                Log.d(TAG, "\nvv: " + md_category);
+                Log.d(TAG, "\nvv: " + md_price);
+                Log.d(TAG, "\nvv: " + md_rental_term);
+                Log.d(TAG, "\nvv: " + md_deposit);
+                Log.d(TAG, "\nvv: " + md_detail_content);
+                Log.d(TAG, "\nvv: " + member_id);
+                Log.d(TAG, "\nvv: " + md_serial_number);
 
 
-                MdInsert mdInsert = new MdInsert(md_name, md_title, md_photo_url, md_photo_real_url,  md_category
-                        , md_rental_term, md_detail_content, md_price, md_deposit);
+
+                MdInsert mdInsert = new MdInsert(md_name, md_photo_url, md_photo_real_url,  md_category
+                        , md_rental_term, md_detail_content, md_price, md_deposit, member_id, md_serial_number);
                 mdInsert.execute();
 
                 Intent showIntent = new Intent(getApplicationContext(), LendListActivity.class);
