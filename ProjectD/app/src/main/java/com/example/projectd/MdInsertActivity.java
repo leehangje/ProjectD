@@ -61,7 +61,6 @@ public class MdInsertActivity extends AppCompatActivity {
 
     java.text.SimpleDateFormat tmpDateFormat;
 
-
     Calendar myCalendar = Calendar.getInstance();
 
     //DATEPICKER
@@ -115,11 +114,12 @@ public class MdInsertActivity extends AppCompatActivity {
 
         //카테고리 스피너
         Spinner spinner = (Spinner)findViewById(R.id.sp_md_category);
+        md_category = (String) spinner.getSelectedItem();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Object item = adapterView.getItemAtPosition(i);
+                md_category = (String) adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -128,6 +128,8 @@ public class MdInsertActivity extends AppCompatActivity {
             }
         });
 
+
+        //사진촬영버튼 클릭
         btnImageCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +160,7 @@ public class MdInsertActivity extends AppCompatActivity {
             }
         });
 
+        //이미지로드 버튼 클릭
         btnImageSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -236,6 +239,7 @@ public class MdInsertActivity extends AppCompatActivity {
 
     }
 
+
     private String getPathFromURI(Uri contentUri) {
         String res = null;
         String[] proj = {MediaStore.Images.Media.DATA};
@@ -248,6 +252,8 @@ public class MdInsertActivity extends AppCompatActivity {
         return res;
     }
 
+
+    //전송버튼 클릭 시
     public void btnSubmit(){
         if(isNetworkConnected(this) == true){
 
@@ -255,24 +261,14 @@ public class MdInsertActivity extends AppCompatActivity {
 
             if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
                 md_name = et_md_name.getText().toString();
-                md_category = sp_md_category.getSelectedItem().toString();
+                md_category = "";
                 md_price = et_md_price.getText().toString();
                 md_rental_term = et_md_rental_term.getText().toString();
                 md_deposit = et_md_deposit.getText().toString();
                 md_detail_content = et_md_detail_content.getText().toString();
                 member_id = LoginActivity.loginDTO.getMember_id();
                 md_serial_number = et_md_serial.getText().toString();
-
-                Log.d(TAG, "\nvv: " + md_name);
-                Log.d(TAG, "\nvv: " + md_category);
-                Log.d(TAG, "\nvv: " + md_price);
-                Log.d(TAG, "\nvv: " + md_rental_term);
-                Log.d(TAG, "\nvv: " + md_deposit);
-                Log.d(TAG, "\nvv: " + md_detail_content);
-                Log.d(TAG, "\nvv: " + member_id);
-                Log.d(TAG, "\nvv: " + md_serial_number);
-
-
+                
 
                 MdInsert mdInsert = new MdInsert(md_name, md_photo_url, md_photo_real_url,  md_category
                         , md_rental_term, md_detail_content, md_price, md_deposit, member_id, md_serial_number);
