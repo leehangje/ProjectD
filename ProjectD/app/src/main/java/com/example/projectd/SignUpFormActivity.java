@@ -33,8 +33,7 @@ import java.util.regex.Pattern;
 public class SignUpFormActivity extends AppCompatActivity implements View.OnClickListener, Dialog.OnCancelListener{
     private static final String TAG = "main:SignUpFormActivity";
 
-
-     GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
+    GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
 
     public static MemberDto idCheckDTO = null;
     public static MemberDto nicknamecheckDTO = null;
@@ -52,9 +51,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
     //중복 확인 & 이메일 인증 여부를 확인하는 변수
     boolean idCheck = false;
-    boolean nicknameCheck = false;
     String checkIdStr = "";
-    String checkNicknameStr = "";
 
     //Dialog에 관련된 변수
     LayoutInflater dialog;      //LayoutInflater

@@ -34,8 +34,7 @@ public class SearchIDActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchIDActivity.this, LoginActivity.class);
-                startActivity(intent);
+                finish();
             }
         }); //btn_back.setOnClickListener()
 
