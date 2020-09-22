@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.projectd.Dto.MdDTO;
+
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
@@ -19,7 +21,7 @@ public class SearchFragment extends Fragment {
 
     RecyclerView recyclerView;
     SearchAdapter adapter;
-    ArrayList<Search> items;
+    ArrayList<MdDTO> items;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,8 +38,8 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SearchAdapter(activity.getApplicationContext(), items);
 
-        adapter.addItem(new Search("컴퓨터","3500원"));
-        adapter.addItem(new Search("자건거", "5000원"));
+        //adapter.addItem(new Search("컴퓨터","3500원"));
+        //adapter.addItem(new Search("자건거", "5000원"));
 
         recyclerView.setAdapter(adapter);
 
@@ -45,9 +47,9 @@ public class SearchFragment extends Fragment {
             public static final int main = 1001;
             @Override
             public void onItemClick(SearchAdapter.ViewHolder holder, View view, int position) {
-                Search item = adapter.getItem(position);
+                MdDTO item = adapter.getItem(position);
 
-                Toast.makeText(activity.getApplicationContext(), "선택됨" + item.getTitle(),
+                Toast.makeText(getActivity(), "아이템 선택됨" + item.getMd_name(),
                         Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(activity.getApplicationContext(), MdDetailActivity.class);

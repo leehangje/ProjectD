@@ -55,30 +55,26 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="468dp">
+        android:layout_height="513dp">
 
-        <LinearLayout
-            android:id="@+id/linearlayout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="463dp"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="454dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
-            <fragment
-                android:id="@+id/SearchFragement"
-                android:name="com.example.projectd.SearchFragment"
-                android:layout_width="370dp"
-                android:layout_height="452dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </FrameLayout>
     </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_bottom"

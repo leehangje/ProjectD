@@ -1,16 +1,18 @@
 package com.example.projectd;
 
-import java.io.Serializable;
+import com.example.projectd.Dto.MdDTO;
 
-public class Search implements Serializable {
+
+
+public class Search  {
     String title;
     String price;
 
-    public Search(String title, String price) {
+    public Search(String title, String price){
         this.title = title;
         this.price = price;
-    }
 
+    }
     public String getTitle() {
         return title;
     }
@@ -26,4 +28,6 @@ public class Search implements Serializable {
     public void setPrice(String price) {
         this.price = price;
     }
+
+
 }
