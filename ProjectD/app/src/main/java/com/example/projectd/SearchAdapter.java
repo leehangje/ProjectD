@@ -1,18 +1,15 @@
 package com.example.projectd;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
 
@@ -20,10 +17,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         implements OnSearchItemClickListener {
 
     Context context;
-    ArrayList<Search> items;
+    ArrayList<MdDTO>  items;
     OnSearchItemClickListener listener;
 
-    public SearchAdapter(Context context, ArrayList<Search> items) {
+    public SearchAdapter(Context context, ArrayList<MdDTO> items) {
         this.context = context;
         this.items = items;
     }
@@ -38,9 +35,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return new ViewHolder(itemView, this);
     }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Search item = items.get(position);
+    public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
+        MdDTO item = items.get(position);
         holder.setItem(item);
 
     }
@@ -84,28 +83,33 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             });
         }
 
-        public void setItem(Search item){
-            textView.setText(item.getTitle());
-            textView2.setText(item.getPrice());
+        public void setItem(MdDTO item){
+            textView.setText("" + item.getMd_name());
+            textView2.setText("" + item.getMd_price());
         }
 
     }
 
 
-    public void addItem(Search item){
+    public void removeAll(){
+        items.clear();
+    }
+
+    public void addItem(MdDTO item){
         items.add(item);
     }
 
-    public void setItems(ArrayList<Search> items){
+    public void setItems(ArrayList<MdDTO> items){
         this.items = items;
     }
 
-    public Search getItem(int position){
+    public MdDTO getItem(int position){
         return items.get(position);
     }
 
-    public void setItem(int position, Search item){
+    public void setItem(int position, MdDTO item){
         items.set(position, item);
     }
+
 
 }

@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 public class SignUpFormActivity extends AppCompatActivity implements View.OnClickListener, Dialog.OnCancelListener{
     private static final String TAG = "main:SignUpFormActivity";
 
-    GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
+    static GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
 
     public static MemberDto idCheckDTO = null;
     public static MemberDto nicknamecheckDTO = null;
@@ -549,12 +549,16 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
                 //G메일 전송
                 try {
+
                     Log.d(TAG, "onClick: " + id);
                     sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
                             "이메일 인증번호는 "+ sender.getEmailCode()+ "입니다. \n인증번호를 입력해주세요!",
                             "dteam0420@gmail.com",
                             id);
                     Log.d(TAG, "onClick: " + sender.getEmailCode());
+
+
+                    //mailSender(id);
                     //인증 다이얼로그 생성
                     dialog = LayoutInflater.from(this);
                     dialogLayout = dialog.inflate(R.layout.layout_auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
@@ -587,11 +591,24 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                 } catch (Exception e) {
                     Log.e("SendMail", e.getMessage(), e);
                 }
+
             }
         }
 
     } //onClick()
 
+    /*
+    public static void mailSender(String email) {
+        try {
+            sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
+                    "이메일 인증번호는 "+ sender.getEmailCode()+ "입니다. \n인증번호를 입력해주세요!",
+                    "dteam0420@gmail.com",
+                    email);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    */
     public void countDownTimer() { //카운트 다운 메소드
 
         time_counter = (TextView) dialogLayout.findViewById(R.id.emailAuth_time_counter);

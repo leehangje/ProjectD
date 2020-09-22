@@ -23,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.example.projectd.SignUpFormActivity.checkEmail;
 import static com.example.projectd.SignUpFormActivity.idCheckDTO;
+import static com.example.projectd.SignUpFormActivity.sender;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,12 +33,25 @@ import static com.example.projectd.SignUpFormActivity.idCheckDTO;
 public class PwFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "PwFragment";
-    GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
+    //GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
 
     EditText etEmail, etEmailAuthNum;
     Button btnEmailAuth, btnResetPw;
 
     ViewGroup rootView;
+
+    //Dialog에 관련된 변수
+    LayoutInflater dialog;      //LayoutInflater
+    View dialogLayout;          //layout을 담을 View
+    Dialog authDialog;          //dialog 객체
+
+    //카운트 다운 타이머에 관련된 변수
+    TextView time_counter;      //시간을 보여주는 TextView
+    EditText emailAuth_number;  //인증 번호를 입력 하는 칸
+    Button emailAuth_btn;       // 인증버튼
+    CountDownTimer countDownTimer;
+    final int MILLISINFUTURE = 300 * 1000; //총 시간 (300초 = 5분)
+    final int COUNT_DOWN_INTERVAL = 1000; //onTick 메소드를 호출할 간격 (1초)
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -153,11 +167,16 @@ public class PwFragment extends Fragment implements View.OnClickListener{
             }
 
             if (idCheckDTO == null) {
+                Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
                 showMessage("알림", "가입하신 이메일이 존재하지 않습니다.\n다시 입력해주세요.");
                 return;
             } else {
                 showMessage("알림", "인증번호 이메일을 발송했습니다.\n이메일을 통해 인증번호를 입력해주세요");
                 idCheckDTO = null;
+                Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+                //((SignUpFormActivity) getActivity()).mailSender(id);
+                ((SearchIDActivity) getActivity()).changeText(id);
+                /*
                 //G메일 전송
                 try {
                     Toast.makeText(getContext(), "try 구문 안1, " + id, Toast.LENGTH_SHORT).show();
@@ -166,12 +185,95 @@ public class PwFragment extends Fragment implements View.OnClickListener{
                             "dteam0420@gmail.com",
                             id);
                     Toast.makeText(getContext(), "try 구문 안2", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onClick: " + sender.getEmailCode());
+                    //Log.d(TAG, "onClick: " + sender.getEmailCode());
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "catch 구문 안1", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onClick: 이메일 보내기 오류");
                 } //try-catch
+                */
+
+                //G메일 전송
+                try {
+
+                    Log.d(TAG, "onClick: " + id);
+                    sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
+                            "이메일 인증번호는 "+ sender.getEmailCode()+ "입니다. \n인증번호를 입력해주세요!",
+                            "dteam0420@gmail.com",
+                            id);
+                    Log.d(TAG, "onClick: " + sender.getEmailCode());
+
+
+                    //mailSender(id);
+                    /*
+                    //인증 다이얼로그 생성
+                    dialog = LayoutInflater.from(getContext());
+                    dialogLayout = dialog.inflate(R.layout.layout_auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
+                    authDialog = new Dialog(getContext()); //Dialog 객체 생성
+                    authDialog.setContentView(dialogLayout); //Dialog에 inflate한 View를 탑재 하여줌
+                    authDialog.setCanceledOnTouchOutside(false); //Dialog 바깥 부분을 선택해도 닫히지 않게 설정함.
+                    authDialog.show();
+                    countDownTimer();
+
+                    //다이얼로그 내 인증번호 입력 확인버튼 클릭시
+                    emailAuth_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String user_answer = emailAuth_number.getText().toString().trim();
+
+                            if (user_answer.equals(sender.getEmailCode())){
+                                Toast.makeText(getContext(), "이메일 인증 성공", Toast.LENGTH_SHORT).show();
+                                authDialog.cancel();
+                            } else{
+                                Toast.makeText(getContext(), "인증 번호를 다시 입력해주세요!", Toast.LENGTH_SHORT).show();
+                                emailAuth_number.setText("");
+                                emailAuth_number.requestFocus();
+                                return;
+                            }
+                        }
+                    });*/
+                } catch (Exception e) {
+                    Log.e("SendMail", e.getMessage(), e);
+                }
             }
         }
     } //onClick()
+
+    public void countDownTimer() { //카운트 다운 메소드
+
+        time_counter = (TextView) dialogLayout.findViewById(R.id.emailAuth_time_counter);
+        //줄어드는 시간을 나타내는 TextView
+        emailAuth_number = (EditText) dialogLayout.findViewById(R.id.emailAuth_number);
+        //사용자 인증 번호 입력창
+        emailAuth_btn = (Button) dialogLayout.findViewById(R.id.emailAuth_btn);
+        //인증하기 버튼
+
+        countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
+            @Override
+            public void onTick(long millisUntilFinished) { //(300초에서 1초 마다 계속 줄어듬)
+
+                long emailAuthCount = millisUntilFinished / 1000;
+                Log.d("Alex", emailAuthCount + "");
+
+                if ((emailAuthCount - ((emailAuthCount / 60) * 60)) >= 10) { //초가 10보다 크면 그냥 출력
+                    time_counter.setText((emailAuthCount / 60) + " : " + (emailAuthCount - ((emailAuthCount / 60) * 60)));
+                } else { //초가 10보다 작으면 앞에 '0' 붙여서 같이 출력. ex) 02,03,04...
+                    time_counter.setText((emailAuthCount / 60) + " : 0" + (emailAuthCount - ((emailAuthCount / 60) * 60)));
+                }
+
+                //emailAuthCount은 종료까지 남은 시간임. 1분 = 60초 되므로,
+                // 분을 나타내기 위해서는 종료까지 남은 총 시간에 60을 나눠주면 그 몫이 분이 된다.
+                // 분을 제외하고 남은 초를 나타내기 위해서는, (총 남은 시간 - (분*60) = 남은 초) 로 하면 된다.
+
+            } //onTick()
+            @Override
+            public void onFinish() { //시간이 다 되면 다이얼로그 종료
+
+                authDialog.cancel();
+
+            }
+        }.start();
+
+        emailAuth_btn.setOnClickListener(this);
+    }
+
 }
