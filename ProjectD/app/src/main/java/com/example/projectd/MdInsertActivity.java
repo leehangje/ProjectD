@@ -96,6 +96,9 @@ public class MdInsertActivity extends AppCompatActivity {
         et_md_rental_term = findViewById(R.id.et_md_rental_term);
         et_md_deposit = findViewById(R.id.et_md_deposit);
         et_md_detail_content = findViewById(R.id.et_md_detail_content);
+        et_md_serial = findViewById(R.id.et_md_serial);
+
+        sp_md_category = findViewById(R.id.sp_md_category);
 
         btnImageCreate = findViewById(R.id.btnImageCreate);
         btnImageSelection = findViewById(R.id.btnImageSelection);
@@ -259,16 +262,18 @@ public class MdInsertActivity extends AppCompatActivity {
 
             Log.d("main:mdinsertActivity", "btnSubmit: " + fileSize);
 
+
             if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
                 md_name = et_md_name.getText().toString();
-                md_category = "";
                 md_price = et_md_price.getText().toString();
                 md_rental_term = et_md_rental_term.getText().toString();
                 md_deposit = et_md_deposit.getText().toString();
                 md_detail_content = et_md_detail_content.getText().toString();
                 member_id = LoginActivity.loginDTO.getMember_id();
+/*
                 md_serial_number = et_md_serial.getText().toString();
-                
+*/
+
 
                 MdInsert mdInsert = new MdInsert(md_name, md_photo_url, md_photo_real_url,  md_category
                         , md_rental_term, md_detail_content, md_price, md_deposit, member_id, md_serial_number);

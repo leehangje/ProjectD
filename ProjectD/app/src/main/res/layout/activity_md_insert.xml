@@ -103,17 +103,18 @@
                 android:paddingLeft="10dp"
                 android:text="제품번호*" />
 
+
             <EditText
                 android:id="@+id/et_md_serial"
                 android:layout_width="196dp"
                 android:layout_height="60dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="200dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="165dp"
+                android:layout_marginTop="166dp"
                 android:gravity="center|left"
-                android:paddingLeft="10dp"
-                android:hint="생년월일" />
-
+                android:hint="생년월일"
+                android:paddingLeft="10dp" />
 
             <TextView
                 android:id="@+id/tv_md_category"

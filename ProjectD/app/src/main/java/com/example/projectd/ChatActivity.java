@@ -77,6 +77,7 @@ public class ChatActivity extends AppCompatActivity {
         myRef = database.getReference();
 
 
+
         //주의사항!!
 
         myRef.addChildEventListener(new ChildEventListener() {

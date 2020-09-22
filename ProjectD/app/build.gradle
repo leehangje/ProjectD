@@ -76,6 +76,9 @@ dependencies {
     //탭레이아웃 사용
     implementation 'com.android.support:design:30.0.0'
 
+    // json 데이터를 객체로 만듬
+    implementation 'com.google.code.gson:gson:2.8.5'
+
     // 안드로이드와 통신할수 있는 버전 가져오기
     implementation group: 'org.apache.httpcomponents', name: 'httpclient-android', version: '4.3.5.1'
     implementation('org.apache.httpcomponents:httpmime:4.3') {

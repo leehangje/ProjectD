@@ -60,7 +60,8 @@ public class MdInsert extends AsyncTask<Void, Void, Void> {
             builder.addTextBody("md_detail_content", md_detail_content, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_price", md_price, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_deposit", md_deposit, ContentType.create("Multipart/related", "UTF-8"));
-
+            builder.addTextBody("md_serial_number", md_serial_number, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
 
             builder.addPart("image", new FileBody(new File(md_photo_real_url)));
 

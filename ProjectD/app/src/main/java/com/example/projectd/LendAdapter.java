@@ -1,6 +1,7 @@
 package com.example.projectd;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectd.Dto.MdDTO;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder>
         implements OnLendItemCLickListener {
-    ArrayList<Lend> items = new ArrayList<Lend>();
+
+    Context context;
+    List<MdDTO> items;
     OnLendItemCLickListener listener;
 
+    public LendAdapter(Context context, List<MdDTO> items){
+        this.context = context;
+        this.items = items;
+    }
 
     @NonNull
     @Override
@@ -28,7 +38,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Lend item = items.get(position);
+        MdDTO item = items.get(position);
         holder.setItem(item);
     }
 
@@ -51,49 +61,54 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder>
 
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
-        TextView textView2;
+        TextView tv_md_lend_name;
+        TextView tv_md_lender;
+        TextView tv_md_category;
+        TextView tv_md_serial_num;
+
 
         public ViewHolder(View itemView, final OnLendItemCLickListener listener){
             super(itemView);
 
-            textView = itemView.findViewById(R.id.tv_name);
-            textView2 = itemView.findViewById(R.id.tv_addr);
+            tv_md_lend_name = itemView.findViewById(R.id.tv_md_lend_name);
+            tv_md_lender = itemView.findViewById(R.id.tv_md_lender);
+            tv_md_category = itemView.findViewById(R.id.tv_md_category);
+            tv_md_serial_num = itemView.findViewById(R.id.tv_md_serial_num);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
 
-                    if(listener != null){
-                        listener.onItemClick(ViewHolder.this, view, position);
+
                     }
                 }
             });
         }
 
-        public void setItem(Lend item){
-            textView.setText(item.getName());
-            textView2.setText(item.getLender());
+        public void setItem(MdDTO item){
+            tv_md_lend_name.setText(item.getMd_name());
+            tv_md_lender.setText(item.getMember_id());
+            tv_md_category.setText(item.getMd_category());
+            tv_md_serial_num.setText(item.getMd_serial_number());
         }
-
-
     }
 
 
-    public void addItem(Lend item){
+    public void addItem(MdDTO item){
         items.add(item);
     }
 
-    public void setItems(ArrayList<Lend> items){
+    public void setItems(List<MdDTO> items){
         this.items = items;
     }
 
-    public Lend getItem(int position){
+    public MdDTO getItem(int position){
         return items.get(position);
     }
 
-    public void setItem(int position, Lend item){
+    public void setItem(int position, MdDTO item){
         items.set(position, item);
     }
 
