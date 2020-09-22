@@ -1,11 +1,15 @@
 package com.example.projectd;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.ByteArrayInputStream;
@@ -16,6 +20,8 @@ import java.security.Security;
 import java.util.Properties;
 
 public class GMailSender extends javax.mail.Authenticator {
+    private static final String LOG = "GMailSender";
+
     private String mailhost = "smtp.gmail.com";
     private String user;
     private String password;
@@ -46,6 +52,7 @@ public class GMailSender extends javax.mail.Authenticator {
         session = Session.getDefaultInstance(props, this);
     }
 
+
     public String getEmailCode() {
         return emailCode;
     } //생성된 이메일 인증코드 반환
@@ -69,7 +76,7 @@ public class GMailSender extends javax.mail.Authenticator {
     }
 
     public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
-        try{
+        try {
             MimeMessage message = new MimeMessage(session);
             DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
             message.setSender(new InternetAddress(sender)); //본인 이메일 설정
@@ -80,7 +87,7 @@ public class GMailSender extends javax.mail.Authenticator {
             else
                 message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
             Transport.send(message);    //메시지 전달
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -123,6 +130,70 @@ public class GMailSender extends javax.mail.Authenticator {
             throw new IOException("Not Supported");
         }
     }
+
+
+    private class EmailSenderTask extends AsyncTask<Void, Void, Void> {
+        public final int REPLY_TO_ADDRESSES_AMOUNT = 1;
+
+        private String subject;
+        private String recipients;
+        private InternetAddress from;
+        private InternetAddress[] replyToAddresses;
+        private MimeMessage message;
+        private DataHandler handler;
+
+        public EmailSenderTask(final String from, String subject, String body, String sender,
+                               String recipients) {
+            this.subject = subject;
+            this.recipients = recipients;
+
+            try {
+                this.from = new InternetAddress(from.contains("@") ? from : sender);
+            } catch (AddressException e) {
+                Log.e(LOG, e.getMessage(), e);
+            }
+
+            this.replyToAddresses = new InternetAddress[REPLY_TO_ADDRESSES_AMOUNT];
+            this.replyToAddresses[0] = this.from;
+
+            this.message = new MimeMessage(session);
+            this.handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
+        }
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                // TODO: gmail seems to override this... need to find out how to set the sender
+                // COMMENT: Added reply to address so that the user would be able to reply directly to the sender.
+                this.message.setSender(this.from);
+                this.message.setFrom(this.from);
+                this.message.setReplyTo(this.replyToAddresses);
+                this.message.setSubject(this.subject);
+                this.message.setDataHandler(this.handler);
+
+                if (this.recipients.indexOf(',') > 0) {
+                    this.message.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(this.recipients));
+                } else {
+                    this.message.setRecipient(Message.RecipientType.TO, new InternetAddress(
+                            this.recipients));
+                }
+            } catch (Exception e) {
+                Log.e(LOG, e.getMessage(), e);
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Transport.send(this.message);
+            } catch (Exception e) {
+                Log.e(LOG, e.getMessage(), e);
+            }
+
+            return null;
+        }
+    } //EmailSenderTask()
 }
 
 /*
