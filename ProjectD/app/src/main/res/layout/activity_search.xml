@@ -27,7 +27,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="13dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:ems="10"
@@ -35,19 +35,13 @@
                 android:inputType="textMultiLine"
                 android:windowSoftInputMode="stateAlwaysVisible" />
 
-            <SearchView
+            <Button
                 android:id="@+id/icon_search"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginRight="100dp"
-                android:layout_toEndOf="@+id/searchText"
-                android:layout_toRightOf="@+id/searchText" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="검색" />
+
 
         </LinearLayout>
 

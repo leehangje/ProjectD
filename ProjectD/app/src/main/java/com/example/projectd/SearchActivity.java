@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -19,15 +22,17 @@ import com.example.projectd.ATask.SearchSelect;
 import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
-    EditText editText;
-    SearchView searchView;
+    EditText searchText;
+    Button searchBtn;
     LinearLayout linearLayout;
     SearchAdapter adapter;
     RecyclerView recyclerView;
     ViewGroup viewGroup;
-
+    Map<String,Object> params;
     ArrayList<MdDTO> items;
 
     private static final int ACTIVITY_NUM = 3;
@@ -37,19 +42,30 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        editText = findViewById(R.id.searchText);
-        searchView = findViewById(R.id.icon_search);
+        searchText = findViewById(R.id.searchText);
+        searchBtn = findViewById(R.id.icon_search);
         items = new ArrayList<>();
+
+
         recyclerView = findViewById(R.id.recyclerView);
         //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         adapter = new SearchAdapter(getApplicationContext(), items);
 
-        searchView.setOnClickListener(new View.OnClickListener() {
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linearLayout.setVisibility(View.VISIBLE);
+//                linearLayout.setVisibility(View.VISIBLE);
+
+                String test = searchText.getText().toString();
+                Log.d("===> searchText : ", test);
+
+                params = new HashMap<>();
+                params.put("searchKeyword", test);
+
+                SearchSelect searchSelect = new SearchSelect(items, adapter, params);
+                searchSelect.execute();
             }
         });
 
@@ -75,7 +91,7 @@ public class SearchActivity extends AppCompatActivity {
 
         });
 
-        SearchSelect searchSelect = new SearchSelect(items, adapter);
+        SearchSelect searchSelect = new SearchSelect(items, adapter, null);
         searchSelect.execute();
 
 

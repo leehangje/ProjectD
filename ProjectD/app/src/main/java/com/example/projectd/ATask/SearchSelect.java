@@ -10,15 +10,21 @@ import com.example.projectd.SearchAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 
@@ -28,10 +34,12 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
     // 생성자
     ArrayList<MdDTO> items;
     SearchAdapter adapter;
+    Map<String,Object> params;
 
-    public SearchSelect(ArrayList<MdDTO> items, SearchAdapter adapter) {
+    public SearchSelect(ArrayList<MdDTO> items, SearchAdapter adapter,Map<String,Object> params) {
         this.items = items;
         this.adapter = adapter;
+        this.params = params;
     }
 
     HttpClient httpClient;
@@ -52,14 +60,23 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
 
         try {
             // MultipartEntityBuild 생성
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+//            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+//            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE).;
+
 
             // 전송
             InputStream inputStream = null;
             httpClient = AndroidHttpClient.newInstance("Android");
             httpPost = new HttpPost(postURL);
-            httpPost.setEntity(builder.build());
+            List<NameValuePair> nameValuePairs;
+            if(params != null) {
+                Log.d("===> ","notNull");
+                Log.d("===> ",params.get("searchKeyword").toString());
+                nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("searchKeyword", params.get("searchKeyword").toString()));
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            }
+//            httpPost.setEntity(builder.build());
             httpResponse = httpClient.execute(httpPost);
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
