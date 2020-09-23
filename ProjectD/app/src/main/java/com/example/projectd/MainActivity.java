@@ -56,7 +56,6 @@ public class MainActivity extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-
         //찜목록
         btn_like = viewGroup.findViewById(R.id.btn_like);
         btn_like.setOnClickListener(new View.OnClickListener() {
@@ -111,13 +110,11 @@ public class MainActivity extends Fragment {
                 Intent intent = new Intent(getActivity(), MdDetailActivity.class);
                 intent.putExtra("item", item);
                 startActivityForResult(intent, main);
-
             }
-
 
         });
 
-        AnMainSelect  anMainSelect = new AnMainSelect(items, adapter);
+        AnMainSelect anMainSelect = new AnMainSelect(items, adapter);
         anMainSelect.execute();
 
 

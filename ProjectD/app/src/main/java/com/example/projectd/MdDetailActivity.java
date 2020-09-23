@@ -39,8 +39,6 @@ public class MdDetailActivity extends AppCompatActivity {
     public MdDTO item = null;
     public MemberDto memberDto = null;
 
-    private ArrayList<String> md_nameList;
-    private ArrayList<String>md_categoryList;
     private JSONArray jsonArray;
 
     FragmentPagerAdapter adapterViewPager;
@@ -68,13 +66,18 @@ public class MdDetailActivity extends AppCompatActivity {
             DetailSelect detailSelect = new DetailSelect(item.getMember_id());
             try {
                 memberDto = detailSelect.execute().get();
-                Log.d("main:Detail", "onCreate: " + memberDto.getMember_nickname());
+                //Log.d("main:Detail", "onCreate: " + memberDto.getMember_nickname());
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+        // 전달할 데이터 Bundle
+
+        final Bundle args = new Bundle();
+        args.putString("member_id", item.getMember_id());  // 키값, 데이터
 
         profile_photo = findViewById(R.id.profile_photo);
         user_nickname = findViewById(R.id.user_nickname);
@@ -127,6 +130,8 @@ public class MdDetailActivity extends AppCompatActivity {
                     selected = fragment2;
                 }
 
+                fragment2.setArguments(args);
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 
@@ -163,11 +168,6 @@ public class MdDetailActivity extends AppCompatActivity {
             }
         });
 
-
-        //db에서 데이터 가져오기(json)
-        md_nameList = new ArrayList<>();
-        md_categoryList = new ArrayList<>();
-
         //jsonRead();
 
     }//onCreate
@@ -186,25 +186,7 @@ public class MdDetailActivity extends AppCompatActivity {
         md_detail_content.setText("<상세정보>\n" + item.getMd_detail_content());
     }
 
-    //db에서 데이터 가져오기(json)
-    /*private void jsonRead() {
-        try {
-            jsonArray = new JSONArray(str);
-            for(int i = 0 ; i<jsonArray.length(); i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String md_name = jsonObject.getString("md_name");
-                String md_category = jsonObject.getString("md_category");
 
-                md_nameList.add(md_name);
-                md_categoryList.add(md_category);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        md_name.setText(md_nameList.toString());
-        md_category.setText(md_categoryList.toString());
-    }
-*/
     //상품 상세사진 슬라이드 넘기기
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 3;

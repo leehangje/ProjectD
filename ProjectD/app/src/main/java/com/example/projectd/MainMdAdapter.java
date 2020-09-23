@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder>
         implements OnMainMdItemClickListener {
+
     Context context;
     ArrayList<MdDTO> items;
     OnMainMdItemClickListener listener;
@@ -23,7 +24,6 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
         this.context = context;
         this.items = items;
     }
-
 
 
     @NonNull
@@ -38,6 +38,7 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MdDTO item = items.get(position);
+
         holder.setItem(item);
     }
 

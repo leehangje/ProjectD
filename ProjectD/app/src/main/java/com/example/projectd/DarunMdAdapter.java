@@ -9,20 +9,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectd.Dto.MdDTO;
+
 import java.util.ArrayList;
 
 public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHolder>
         implements OnDarunMdItemClickListener {
 
     Context context;
-    ArrayList<Darun> items;
+    String member_id;
+    ArrayList<MdDTO> items;
     OnDarunMdItemClickListener listener;
 
-    public DarunMdAdapter(Context context, ArrayList<Darun> items) {
+    public DarunMdAdapter(Context context, ArrayList<MdDTO> items, String member_id) {
+        this.context = context;
+        this.items = items;
+        this.member_id = member_id;
+    }
+
+    public DarunMdAdapter(Context context, ArrayList<MdDTO> items) {
         this.context = context;
         this.items = items;
     }
-
+    
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,10 +43,9 @@ public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Darun item = items.get(position);
+        MdDTO item = items.get(position);
         holder.setItem(item);
     }
-
 
     @Override
     public int getItemCount() {
@@ -49,7 +57,7 @@ public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHold
     }
 
     @Override
-    public void onItemClick(DarunMdAdapter.ViewHolder holder, View view, int position) {
+    public void onItemClick(ViewHolder holder, View view, int position) {
         if(listener != null){
             listener.onItemClick(holder, view, position);
         }
@@ -75,30 +83,31 @@ public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHold
                     }
                 }
             });
-
-
         }
-        public void setItem(Darun item){
-            textView.setText(item.getTitle());
-            textView2.setText(item.getPrice());
+        public void setItem(MdDTO item){
+            textView.setText(item.getMd_name());
+            textView2.setText(item.getMd_price());
         }
 
     }
 
+    public void removeAll(){
+        items.clear();
+    }
 
-    public void addItem(Darun item){
+    public void addItem(MdDTO item){
         items.add(item);
     }
 
-    public void setItems(ArrayList<Darun> items){
+    public void setItems(ArrayList<MdDTO> items){
         this.items = items;
     }
 
-    public Darun getItem(int position){
+    public MdDTO getItem(int position){
         return items.get(position);
     }
 
-    public void setItem(int position, Darun item){
+    public void setItem(int position, MdDTO item){
         items.set(position, item);
     }
 

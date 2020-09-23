@@ -7,57 +7,81 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectd.ATask.AnDarunSelect;
+import com.example.projectd.Dto.MdDTO;
+
 import java.util.ArrayList;
 
 public class TabFragment2 extends Fragment {
-    MdDetailActivity activity;
 
     RecyclerView recyclerView;
     DarunMdAdapter adapter;
-    ArrayList<Darun> items;
+    MdDetailActivity activity;
 
+    ArrayList<MdDTO> items;
+    String member_id;
 
+    /*private Context mContext = MainActivity.this;*/
+    private static final int ACTIVITY_NUM = 3;
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@Nullable LayoutInflater inflater, @Nullable
+            ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_tab2,container,false);
 
         activity = (MdDetailActivity) getActivity();
+
+
+        Bundle args = getArguments(); // 데이터 받기
+        if(args != null)
+        {
+            member_id = args.getString("member_id");
+        }
+
         items = new ArrayList<>();
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.VERTICAL , false);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.VERTICAL , false);
 
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new DarunMdAdapter(activity.getApplicationContext(), items);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter.addItem(new Darun("킥보드", "2000원"));
-        adapter.addItem(new Darun("자건거", "5000원"));
+        adapter = new DarunMdAdapter(getContext(), items);
+
+        //adapter.addItem(new Darun("킥보드", "2000원"));
+        //adapter.addItem(new Darun("자건거", "5000원"));
 
         recyclerView.setAdapter(adapter);
+
 
         adapter.setOnItemClickListener(new OnDarunMdItemClickListener() {
             public static final int main = 1001;
 
             @Override
             public void onItemClick(DarunMdAdapter.ViewHolder holder, View view, int position) {
-                Darun item = adapter.getItem(position);
+                MdDTO item = adapter.getItem(position);
 
-                Toast.makeText(activity.getApplicationContext(), "선택됨" + item.getTitle(),
+                Toast.makeText(getActivity(), "아이템 선택됨" + item.getMd_name(),
                         Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(activity.getApplicationContext(), MdDetailActivity.class);
+                Intent intent = new Intent(getActivity(), MdDetailActivity.class);
+                intent.putExtra("item", item);
                 startActivityForResult(intent, main);
             }
         });
 
-        return  rootView;
 
+
+        AnDarunSelect anDarunSelect = new AnDarunSelect(items, adapter, member_id);
+        anDarunSelect.execute();
+
+
+        return  rootView;
 
     }
 }

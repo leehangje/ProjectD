@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.example.projectd.DarunMdAdapter;
 import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.MainMdAdapter;
 
@@ -25,16 +26,17 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 // doInBackground 파라미터 타입, onProgressUpdate파라미터 타입, onPostExecute 파라미터 타입 순서
 // AsyncTask <Params, Progress, Result> 순서임
-public class AnMainSelect extends AsyncTask<Void, Void, Void> {
-    // 생성자
-    ArrayList<MdDTO> items;
-    MainMdAdapter adapter;
+public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
 
-    public AnMainSelect(ArrayList<MdDTO> items, MainMdAdapter adapter) {
+    String member_id;
+    ArrayList<MdDTO> items;
+    DarunMdAdapter adapter;
+
+    public AnDarunSelect(ArrayList<MdDTO> items, DarunMdAdapter adapter, String member_id){
         this.items = items;
         this.adapter = adapter;
+        this.member_id = member_id;
     }
-
 
     HttpClient httpClient;
     HttpPost httpPost;
@@ -50,12 +52,15 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         items.clear();
         String result = "";
-        String postURL = ipConfig + "/app/anMainSelect";
+        String postURL = ipConfig + "/app/anDarunSelect";
 
         try {
             // MultipartEntityBuild 생성
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+            // 문자열 및 데이터 추가
+            builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
 
             // 전송
             InputStream inputStream = null;
@@ -68,18 +73,9 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
 
             readJsonStream(inputStream);
 
-            /*BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null){
-                stringBuilder.append(line + "\n");
-            }
-            String jsonStr = stringBuilder.toString();
-
-            inputStream.close();*/
 
         } catch (Exception e) {
-            Log.d("AnMainSelect", e.getMessage());
+            Log.d("AnDarunSelect", e.getMessage());
             e.printStackTrace();
         }finally {
             if(httpEntity != null){
@@ -102,7 +98,7 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        Log.d("AnMainSelect", "AnMainSelect Complete!!!");
+        Log.d("AnDarunSelect", "AnDarunSelect Complete!!!");
 
         adapter.notifyDataSetChanged();
     }
@@ -119,6 +115,7 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
             reader.close();
         }
     }
+
 
     public MdDTO readMessage(JsonReader reader) throws IOException {
         String md_name = "", md_category = "", md_rental_term = "", md_detail_content = "",
@@ -161,13 +158,11 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
             }
         }
         reader.endObject();
-        //Log.d("listselect:myitem", id + "," + name + "," + hire_date + "," + image_path);
 
         return new MdDTO(md_name, md_category, md_price, md_rental_term,
                 md_deposit, md_detail_content, md_photo_url, member_id,
                 md_fav_count, md_registration_date,
                 md_serial_number, md_rent_status, md_hits);
-
     }
 
-}
+}//class

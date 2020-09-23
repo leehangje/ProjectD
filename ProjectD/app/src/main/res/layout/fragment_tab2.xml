@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TabFragment1">
+    tools:context=".TabFragment2">
 
     <FrameLayout
         android:layout_width="match_parent"
