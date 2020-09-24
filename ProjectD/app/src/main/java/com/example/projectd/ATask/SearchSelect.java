@@ -58,6 +58,7 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
         String result = "";
         String postURL = ipConfig + "/app/SearchSelect";
 
+
         try {
             // MultipartEntityBuild 생성
 //            MultipartEntityBuilder builder = MultipartEntityBuilder.create();

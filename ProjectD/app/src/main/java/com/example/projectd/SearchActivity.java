@@ -34,6 +34,9 @@ public class SearchActivity extends AppCompatActivity {
     ViewGroup viewGroup;
     Map<String,Object> params;
     ArrayList<MdDTO> items;
+    LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
+
+
 
     private static final int ACTIVITY_NUM = 3;
 
@@ -47,6 +50,7 @@ public class SearchActivity extends AppCompatActivity {
         items = new ArrayList<>();
 
 
+        toolbar_context = findViewById(R.id.toolbar_context);
         recyclerView = findViewById(R.id.recyclerView);
         //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -88,35 +92,22 @@ public class SearchActivity extends AppCompatActivity {
 
             }
 
-
         });
+
+
 
         SearchSelect searchSelect = new SearchSelect(items, adapter, null);
         searchSelect.execute();
 
-
-
+        // 툴바 안의 뒤로가기 버튼 클릭할 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
 
     }//onCreate
-
-    // 액션 바 뒤로가기 기능을 추가한 메소드
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int curId = item.getItemId();
-
-        switch (curId) {
-            case android.R.id.home :
-                // → android.R.id.home : 메뉴바 상단의 아이콘(뒤로가기) 아이디
-                this.finish();      // 앱 종료
-                break;
-        }
-        return true;
-    } //onOptionsItemSelected()
-
-
-
-
-
 }
