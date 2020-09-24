@@ -96,7 +96,7 @@ public class MdInsertActivity extends AppCompatActivity {
         et_md_rental_term = findViewById(R.id.et_md_rental_term);
         et_md_deposit = findViewById(R.id.et_md_deposit);
         et_md_detail_content = findViewById(R.id.et_md_detail_content);
-        et_md_serial = findViewById(R.id.et_md_serial);
+        //et_md_serial = findViewById(R.id.et_md_serial);
 
         sp_md_category = findViewById(R.id.sp_md_category);
 
@@ -124,10 +124,8 @@ public class MdInsertActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 md_category = (String) adapterView.getItemAtPosition(i).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
@@ -270,10 +268,6 @@ public class MdInsertActivity extends AppCompatActivity {
                 md_deposit = et_md_deposit.getText().toString();
                 md_detail_content = et_md_detail_content.getText().toString();
                 member_id = LoginActivity.loginDTO.getMember_id();
-/*
-                md_serial_number = et_md_serial.getText().toString();
-*/
-
 
                 MdInsert mdInsert = new MdInsert(md_name, md_photo_url, md_photo_real_url,  md_category
                         , md_rental_term, md_detail_content, md_price, md_deposit, member_id, md_serial_number);

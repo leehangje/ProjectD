@@ -28,8 +28,9 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private List<MemberDto> memberDtoList;
     private List<ChatDto> chatList;
-    private String name = "name2";
+    private String nickname = LoginActivity.loginDTO.getMember_nickname();
 
     private EditText EditText_Chat;
     private Button Button_send;
@@ -51,9 +52,12 @@ public class ChatActivity extends AppCompatActivity {
                 String msg = EditText_Chat.getText().toString(); //msg
 
                 if(msg != null) {
+                    //MemberDto dto = new MemberDto();
+                    //dto.setMember_nickname(nickname);
+
                     ChatDto chat = new ChatDto();
 
-                    chat.setName(name);
+                    chat.setName(nickname);
                     chat.setMsg(msg);
                     myRef.push().setValue(chat);
                 }
@@ -66,7 +70,7 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         chatList = new ArrayList<>();
-        mAdapter = new ChatAdapter(chatList, ChatActivity.this, name  );
+        mAdapter = new ChatAdapter(chatList, ChatActivity.this, nickname  );
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.scrollToPosition(chatList.size() - 1);
         /*  mAdapter.notifyDataSetChanged();

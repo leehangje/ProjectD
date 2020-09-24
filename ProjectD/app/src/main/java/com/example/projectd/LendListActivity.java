@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.projectd.ATask.MdInsert;
 import com.example.projectd.Common.CommonMethod;
 import com.example.projectd.Dto.MdDTO;
 import com.google.gson.Gson;
@@ -34,11 +37,10 @@ public class LendListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     LendAdapter adapter;
-    ViewGroup viewGroup;
-    MdDTO dto;
 
+    //List<MdDTO> mdDTOS;
     LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
-
+    String category = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,30 +49,24 @@ public class LendListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         toolbar_context = findViewById(R.id.toolbar_context);
 
+        //spinner선택 아이템 값을 가져오기
+        final Spinner spinner = findViewById(R.id.sp_md_category2);
+        category = spinner.getSelectedItem().toString();
 
-        String category; // TODO 여기서 카테고리를 받는다
-        //category = dto.getMd_category();
-
-        category = "육아용품";  // 임의 카테고리 TODO 바꾸세요
-
-        MdPullRequest request = new MdPullRequest(category);
-        request.execute();
-/*
-        adapter.setOnItemClickListener(new OnLendItemCLickListener() {
-            public static final int lend = 1001;
-
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(LendAdapter.ViewHolder holder, View view, int position) {
-                MdDTO item = adapter.getItem(position);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                category = spinner.getSelectedItem().toString();
 
-                Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getMd_name(),
-                        Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);
-                startActivity(intent);
-
+                MdPullRequest request = new MdPullRequest(category, LoginActivity.loginDTO.getMember_id());
+                request.execute();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-*/
+
+
 
         // 툴바 안의 뒤로가기 버튼 클릭할 때
         toolbar_context.setOnClickListener(new View.OnClickListener() {
@@ -84,15 +80,17 @@ public class LendListActivity extends AppCompatActivity {
     private class MdPullRequest extends AsyncTask<Void, Void, List<MdDTO>> {
 
         String category;
+        String member_id;
 
-        public MdPullRequest(String category) {
+        public MdPullRequest(String category, String member_id) {
             this.category = category;
+            this.member_id = member_id;
         }
 
         @Override
         protected List<MdDTO> doInBackground(Void... voids) {
             Log.e(TAG, "doInBackground: 호출됨");
-            String param = "category=" + category;
+            String param = "category=" + category + "&member_id=" + member_id;
             List<MdDTO> list = null;
             try {
                 // 연결단계
@@ -140,14 +138,32 @@ public class LendListActivity extends AppCompatActivity {
             return list;
         }
 
+        //선택된 아이템 MD디테일화면으로 보내기
         @Override
-        protected void onPostExecute(List<MdDTO> mdDTOS) {
+        protected void onPostExecute(final List<MdDTO> mdDTOS) {
+            final int Lend = 1001;
+
             LinearLayoutManager layoutManager =
                     new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);
             adapter = new LendAdapter(getApplicationContext(), mdDTOS);
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener(new OnLendItemCLickListener() {
+                @Override
+                public void onItemClick(LendAdapter.ViewHolder holder, View view, int position) {
+                    MdDTO item = adapter.getItem(position);
+                    Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getMd_name(),
+                            Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);
+                    intent.putExtra("item", item );
+                    startActivityForResult(intent, Lend );
+
+                }
+            });
+
             super.onPostExecute(mdDTOS);
+
         }
     }
+
 }

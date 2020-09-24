@@ -12,7 +12,7 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="@color/colorAccent"> <!--  app:cardBackgroundColor="#FFFFFFFF" -->
+        app:cardBackgroundColor="#ffffff"> <!--  app:cardBackgroundColor="#FFFFFFFF" -->
 
         <LinearLayout
             android:id="@+id/parentLayout"
@@ -33,7 +33,7 @@
                     android:layout_margin="3dp">
 
                     <ImageView
-                        android:id="@+id/iv_img"
+                        android:id="@+id/iv_md_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"/>
@@ -52,54 +52,157 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:weightSum="4">
+                android:weightSum="5">
 
-                <TextView
-                    android:id="@+id/tv_md_serial_num"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="번호"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textStyle="normal|bold" />
-                <TextView
-                    android:id="@+id/tv_md_lend_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="대여품"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textStyle="normal|bold" />
+                    android:layout_height="30dp"
+                    android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/tv_md_lender"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="대여자"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textStyle="normal|bold" />
+                    <TextView
+                        android:id="@+id/tv_md_serial_num2"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="고유번호"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#cccac6"/>
+                    <TextView
+                        android:id="@+id/tv_md_serial_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="번호"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#ffffff"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_md_category"
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/tv_md_lend_name2"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="상품명"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#cccac6"/>
+                    <TextView
+                        android:id="@+id/tv_md_lend_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="대여품"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#ffffff"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/tv_md_lender2"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="ID"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#cccac6"/>
+                    <TextView
+                        android:id="@+id/tv_md_lender"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="대여자"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#ffffff"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/tv_md_category2"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="카테고리"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#cccac6"/>
+
+                    <TextView
+                        android:id="@+id/tv_md_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="카테고리"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#ffffff"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/tv_md_nego"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="대여여부"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
+                        android:background="#cccac6"/>
+                <Spinner
+                    android:id="@+id/sp_md_nego_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="카테고리"
                     android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textStyle="normal|bold" />
+                    android:background="#ffffff"
+                    android:entries="@array/협상카테고리" />
+                </LinearLayout>
 
             </LinearLayout>
 

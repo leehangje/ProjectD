@@ -14,6 +14,7 @@ public class MemberDto implements Serializable {
     String member_name;
     String member_profile;
 
+    public MemberDto () {}
     // 일반 회원가입 시 데이터베이스에 멤버 정보를 추가할 때
     public MemberDto(String member_id, String member_pw, String member_nickname,
                      String member_tel, String member_addr, String member_latitude,
