@@ -1,16 +1,12 @@
 package com.example.projectd;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,17 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectd.ATask.DetailPhotoSelect;
 import com.example.projectd.ATask.DetailSelect;
 import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.Dto.MemberDto;
 import com.google.android.material.tabs.TabLayout;
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,8 +30,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class MdDetailActivity extends AppCompatActivity {
     public MdDTO item = null;
     public MemberDto memberDto = null;
-
-    private JSONArray jsonArray;
+    Bundle mBundle = null;
 
     FragmentPagerAdapter adapterViewPager;
 
@@ -50,6 +41,8 @@ public class MdDetailActivity extends AppCompatActivity {
 
     TabFragment1 fragment1;
     TabFragment2 fragment2;
+
+    DetailPhotoFragment1 detailPhotoFragment1;
 
     LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
 
@@ -64,8 +57,11 @@ public class MdDetailActivity extends AppCompatActivity {
             item = (MdDTO) intent.getSerializableExtra("item");
 
             DetailSelect detailSelect = new DetailSelect(item.getMember_id());
+            //DetailPhotoSelect detailPhotoSelect = new DetailPhotoSelect(item.getMd_serial_number());
+
             try {
                 memberDto = detailSelect.execute().get();
+                //item = detailPhotoSelect.execute().get();
                 //Log.d("main:Detail", "onCreate: " + memberDto.getMember_nickname());
             } catch (ExecutionException e) {
                 e.printStackTrace();
@@ -74,10 +70,7 @@ public class MdDetailActivity extends AppCompatActivity {
             }
         }
 
-        // 전달할 데이터 Bundle
-
-        final Bundle args = new Bundle();
-        args.putString("member_id", item.getMember_id());  // 키값, 데이터
+        //detailPhotoFragment1.setArguments(args);    // detailPhotoFragment1에 시리얼넘버 넘겨줌
 
         profile_photo = findViewById(R.id.profile_photo);
         user_nickname = findViewById(R.id.user_nickname);
@@ -95,14 +88,18 @@ public class MdDetailActivity extends AppCompatActivity {
         btn_chat = findViewById(R.id.btn_chat);
         btn_fav = findViewById(R.id.btn_fav);
 
-        setItem(item, memberDto);
-
         toolbar_context = findViewById(R.id.toolbar_context);
+
+        setItem(item, memberDto);
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+
+
+
         vpPager.setAdapter(adapterViewPager);
 
+        //프로필사진 동글이
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);
 
@@ -110,7 +107,7 @@ public class MdDetailActivity extends AppCompatActivity {
         fragment1 = new TabFragment1();
         fragment2 = new TabFragment2();
 
-        //기본으로 표시될 프래그먼트
+        //탭 프래그먼트중 기본으로 표시될 프래그먼트
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment1).commit();
 
         TabLayout tabs = findViewById(R.id.tabs);
@@ -127,10 +124,14 @@ public class MdDetailActivity extends AppCompatActivity {
                 if (position == 0){
                     selected = fragment1;
                 }else if (position == 1){
+                    // 전달할 데이터 Bundle
+                    mBundle = new Bundle();
+                    mBundle.putString("member_id", item.getMember_id());  // 키값, 데이터
+                    mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
                     selected = fragment2;
                 }
 
-                fragment2.setArguments(args);
+                //fragment2.setArguments(args);
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
@@ -140,7 +141,7 @@ public class MdDetailActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
-        });
+        }); //tabs.addOnTabSelectedListener()
 
 
         //채팅하기
@@ -168,9 +169,8 @@ public class MdDetailActivity extends AppCompatActivity {
             }
         });
 
-        //jsonRead();
+    }//onCreate()
 
-    }//onCreate
 
     public void setItem(MdDTO item, MemberDto memberDto){
         user_nickname.setText(memberDto.getMember_nickname());
@@ -188,8 +188,8 @@ public class MdDetailActivity extends AppCompatActivity {
 
 
     //상품 상세사진 슬라이드 넘기기
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 3;
+    public class MyPagerAdapter extends FragmentPagerAdapter {
+        private int NUM_ITEMS = 3;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -204,24 +204,32 @@ public class MdDetailActivity extends AppCompatActivity {
         // Returns the fragment to display for that page
         @Override
         public Fragment getItem(int position) {
+
             switch (position) {
                 case 0:
-                    return DetailPhotoFragment1.newInstance(0, "Page # 1");
+                    // 전달할 데이터 Bundle
+                    Bundle bundle = new Bundle();
+                    bundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
+                    return new DetailPhotoFragment1(0, bundle);
                 case 1:
-                    return DetailPhotoFragment2.newInstance(1, "Page # 2");
+                    return DetailPhotoFragment2.newInstance(1);
                 case 2:
-                    return DetailPhotoFragment3.newInstance(2, "Page # 3");
+                    return DetailPhotoFragment3.newInstance(2);
                 default:
                     return null;
             }
         }//getItem()
 
-        // Returns the page title for the top indicator
+
         @Override
         public CharSequence getPageTitle(int position) {
             return "Page " + position;
         }//getPageTitle()
 
     }//MyPagerAdapter()
+
+    public void fragChanged(Bundle bundle){
+
+    }
 
 }

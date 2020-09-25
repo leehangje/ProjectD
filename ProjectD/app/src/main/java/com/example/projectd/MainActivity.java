@@ -117,18 +117,8 @@ public class MainActivity extends Fragment {
         AnMainSelect anMainSelect = new AnMainSelect(items, adapter);
         anMainSelect.execute();
 
-
-        /*setupBottomNavigationView();*/    //하단 바 메소드 호출
-        //onCreate()
-
-        // 하단 바 메소드
-    /*private void setupBottomNavigationView() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.menu_bottom);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);*/
-        //setupBottomNavigationView()
         return viewGroup;
-    }
-}
+
+    }//oncreateView()
+
+}//class

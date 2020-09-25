@@ -37,12 +37,17 @@ public class TabFragment2 extends Fragment {
 
         activity = (MdDetailActivity) getActivity();
 
+        if(activity.mBundle != null){
+            Bundle bundle = activity.mBundle;
+            member_id = bundle.getString("member_id");
+            activity.mBundle = null;
+        }
 
-        Bundle args = getArguments(); // 데이터 받기
+        /*Bundle args = getArguments(); // 데이터 받기
         if(args != null)
         {
             member_id = args.getString("member_id");
-        }
+        }*/
 
         items = new ArrayList<>();
 

@@ -9,22 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DetailPhotoFragment2#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class DetailPhotoFragment2 extends Fragment {
     // Store instance variables
-    private String title;
+    //private String title;
     private int page;
 
     // newInstance constructor for creating fragment with arguments
-    public static DetailPhotoFragment2 newInstance(int page, String title) {
+    public static DetailPhotoFragment2 newInstance(int page /*, String title*/) {
         DetailPhotoFragment2 fragment = new DetailPhotoFragment2();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
-        args.putString("someTitle", title);
+        //args.putString("someTitle", title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,7 +30,7 @@ public class DetailPhotoFragment2 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
+        //title = getArguments().getString("someTitle");
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -42,8 +38,7 @@ public class DetailPhotoFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_photo2, container, false);
-        EditText tvLabel = (EditText) view.findViewById(R.id.editText);
-        tvLabel.setText(page + "번째 사진");
+
         return view;
     }
 }

@@ -18,7 +18,9 @@ public class MdDTO implements Serializable {
     String md_rent_status;
     String md_hits;
 
+    public MdDTO() {
 
+    }
 
     public MdDTO(String md_name, String md_category, String md_price, String md_rental_term,
                  String md_deposit, String md_detail_content, String md_photo_url, String member_id,
