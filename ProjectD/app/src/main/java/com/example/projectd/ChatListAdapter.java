@@ -1,5 +1,6 @@
 package com.example.projectd;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.projectd.Dto.ChatDto;
+import com.example.projectd.Dto.MdDTO;
+import com.example.projectd.Dto.MemberDto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>
         implements OnChatItemClickListener {
-    ArrayList<ChatDto> items = new ArrayList<ChatDto>();
+    //ArrayList<ChatDto> items = new ArrayList<ChatDto>();
+    List<MemberDto> items;
     OnChatItemClickListener listener;
+    Context context;
 
+    public ChatListAdapter(Context context, List<MemberDto> items){
+        this.context = context;
+        this.items = items;
+
+    }
 
     @NonNull
     @Override
@@ -30,7 +42,8 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ChatDto item = items.get(position);
+        MemberDto item = items.get(position);
+        //holder.setItem(item);
         holder.setItem(item);
     }
 
@@ -53,17 +66,17 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
-        TextView textView2;
-        TextView textView3;
-        ImageView imageView;
+        TextView tv_chat_nickname;
+        TextView tv_chat_addr;
+        //TextView tv_last_msg;
+        ImageView iv_chatlist_img;
         public ViewHolder(View itemView, final OnChatItemClickListener listener){
             super(itemView);
 
-            textView = itemView.findViewById(R.id.tv_name);
-            textView2 = itemView.findViewById(R.id.tv_addr);
-            textView3 = itemView.findViewById(R.id.tv_msg);
-            imageView = itemView.findViewById(R.id.iv_img);
+            tv_chat_nickname = itemView.findViewById(R.id.tv_chat_nickname);
+            tv_chat_addr = itemView.findViewById(R.id.tv_chat_addr);
+            //tv_last_msg = itemView.findViewById(R.id.tv_last_msg);
+            iv_chatlist_img = itemView.findViewById(R.id.iv_chatlist_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,29 +90,38 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             });
         }
 
-        public void setItem(ChatDto item){
-            textView.setText(item.getName());
-            textView2.setText(item.getAddr());
-            textView3.setText(item.getMsg());
-        }
+//        public void setItem(ChatDto item){
+//            tv_chat_nickname.setText(item.getName());
+//            tv_chat_addr.setText(item.getAddr());
+//            tv_last_msg.setText(item.getMsg());
+//
+//        }
+          public void setItem(MemberDto item){
+              tv_chat_nickname.setText(item.getMember_nickname());
+              tv_chat_addr.setText(item.getMember_addr());
+              Glide.with(itemView).load(item.getMember_profile()).into(iv_chatlist_img);
 
+
+              //tv_last_msg.setText(item.getMsg());
+
+          }
 
     }
 
 
-    public void addItem(ChatDto item){
+    public void addItem(MemberDto item){
         items.add(item);
     }
 
-    public void setItems(ArrayList<ChatDto> items){
+    public void setItems(ArrayList<MemberDto> items){
         this.items = items;
     }
 
-    public ChatDto getItem(int position){
+    public MemberDto getItem(int position){
         return items.get(position);
     }
 
-    public void setItem(int position, ChatDto item){
+    public void setItem(int position, MemberDto item){
         items.set(position, item);
     }
 

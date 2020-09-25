@@ -1,17 +1,18 @@
 package com.example.projectd.Dto;
 
+import org.w3c.dom.Comment;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChatDto {
+
     private String name;
     private String addr;
     private String msg;
     private String photoUrl;
 
-   /*public ChatDto(String name, String addr, String msg){
-        this.name = name;
-        this.addr = addr;
-        this.msg = msg;
-    }
-*/
+
     public String getName(){
         return name;
     }

@@ -30,7 +30,9 @@ public class ChatActivity extends AppCompatActivity {
 
     private List<MemberDto> memberDtoList;
     private List<ChatDto> chatList;
+
     private String nickname = LoginActivity.loginDTO.getMember_nickname();
+    private String photo_url = LoginActivity.loginDTO.getMember_profile();
 
     private EditText EditText_Chat;
     private Button Button_send;
@@ -57,6 +59,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     ChatDto chat = new ChatDto();
 
+                    chat.setPhotoUrl(photo_url);
                     chat.setName(nickname);
                     chat.setMsg(msg);
                     myRef.push().setValue(chat);
@@ -72,10 +75,9 @@ public class ChatActivity extends AppCompatActivity {
         chatList = new ArrayList<>();
         mAdapter = new ChatAdapter(chatList, ChatActivity.this, nickname  );
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(chatList.size() - 1);
-        /*  mAdapter.notifyDataSetChanged();
 
-        mRecyclerView.scrollToPosition(chatList.size() - 1);*/
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();

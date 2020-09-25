@@ -10,11 +10,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.projectd.Dto.ChatDto;
+import com.example.projectd.Dto.MemberDto;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
     private List<ChatDto> mDataset;
@@ -93,12 +101,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             holder.TextView_msg.setText(mDataset.get(position).getMsg());
             holder.TextView_nickname.setText(chat.getName());
 
-
             //이미지 넣기
-            /*Glide.with(holder.itemView.getContext()).load(userModel.profileImageUrl)
+            Glide.with(holder.itemView.getContext()).load(LoginActivity.loginDTO.getMember_profile())
                     .apply(new RequestOptions().circleCrop())
-                    .into(messageViewHolder.imageView_profile);*/
+                    .into(holder.ImageView_profile);
         }
+
+
 
     }
 

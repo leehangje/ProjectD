@@ -32,7 +32,7 @@
                     android:layout_margin="3dp">
 
                     <ImageView
-                        android:id="@+id/iv_img"
+                        android:id="@+id/iv_chatlist_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"/>
@@ -58,18 +58,18 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_chat_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="이름"
+                    android:text="닉네임"
                     android:textAlignment="center"
                     android:textSize="14sp"
                     android:textStyle="normal|bold" />
 
                 <TextView
-                    android:id="@+id/tv_addr"
+                    android:id="@+id/tv_chat_addr"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -80,7 +80,7 @@
                     android:textStyle="normal|bold" />
 
                 <TextView
-                    android:id="@+id/tv_msg"
+                    android:id="@+id/tv_last_msg"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"

@@ -64,9 +64,9 @@ public class LendListActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
+
+
         });
-
-
 
         // 툴바 안의 뒤로가기 버튼 클릭할 때
         toolbar_context.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +75,7 @@ public class LendListActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
+    }//oncreate
 
     private class MdPullRequest extends AsyncTask<Void, Void, List<MdDTO>> {
 
