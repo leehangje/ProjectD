@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHolder>
         implements OnDarunMdItemClickListener {
 
-    Context context;
+    static Context context;
     String member_id;
     ArrayList<MdDTO> items;
     OnDarunMdItemClickListener listener;
@@ -66,12 +68,14 @@ public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHold
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         TextView textView2;
+        ImageView iv_img;
 
         public ViewHolder(View itemView, final OnDarunMdItemClickListener listener){
             super(itemView);
 
             textView = itemView.findViewById(R.id.tv_title);
             textView2 = itemView.findViewById(R.id.tv_price);
+            iv_img = itemView.findViewById(R.id.iv_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,6 +91,7 @@ public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHold
         public void setItem(MdDTO item){
             textView.setText(item.getMd_name());
             textView2.setText(item.getMd_price());
+            Glide.with(context).load(item.getMd_photo_url()).into(iv_img);
         }
 
     }

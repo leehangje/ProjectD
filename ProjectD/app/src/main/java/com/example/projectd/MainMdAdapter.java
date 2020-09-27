@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder>
         implements OnMainMdItemClickListener {
 
-    Context context;
+    static Context context;
     ArrayList<MdDTO> items;
     OnMainMdItemClickListener listener;
 
@@ -61,12 +63,14 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         TextView textView2;
+        ImageView iv_img;
 
         public ViewHolder(View itemView, final OnMainMdItemClickListener listener){
             super(itemView);
 
             textView = itemView.findViewById(R.id.tv_title);
             textView2 = itemView.findViewById(R.id.tv_price);
+            iv_img = itemView.findViewById(R.id.iv_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,6 +86,7 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
         public void setItem(MdDTO item){
             textView.setText(item.getMd_name());
             textView2.setText(item.getMd_price());
+            Glide.with(context).load(item.getMd_photo_url()).into(iv_img);
         }
     }
 

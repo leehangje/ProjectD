@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.projectd.ATask.DetailPhotoSelect;
 import com.example.projectd.ATask.DetailSelect;
 import com.example.projectd.Dto.MdDTO;
@@ -173,6 +174,15 @@ public class MdDetailActivity extends AppCompatActivity {
     public void setItem(MdDTO item, MemberDto memberDto){
         user_nickname.setText(memberDto.getMember_nickname());
         member_addr.setText(memberDto.getMember_addr());
+        user_grade.setText(memberDto.getMember_grade());
+        Glide.with(this).load(memberDto.getMember_profile()).into(profile_photo);
+
+        // 사진url 가져오는 대표적인 방법: 글라이드 (쓰려면 그래들 추가해야됨)
+       /* String imageUrl = mdDTO.getMd_photo_url();
+        Glide.with(this).load(imageUrl)
+                .placeholder(R.drawable.choonbae1)
+                .error(R.drawable.heart)
+                .into(detail_photo1);*/
 
         md_name.setText(item.getMd_name());
         md_price.setText("대여료: " + item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
