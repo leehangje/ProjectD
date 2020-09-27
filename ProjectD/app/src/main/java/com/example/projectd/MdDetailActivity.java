@@ -70,7 +70,6 @@ public class MdDetailActivity extends AppCompatActivity {
             }
         }
 
-        //detailPhotoFragment1.setArguments(args);    // detailPhotoFragment1에 시리얼넘버 넘겨줌
 
         profile_photo = findViewById(R.id.profile_photo);
         user_nickname = findViewById(R.id.user_nickname);
@@ -96,12 +95,11 @@ public class MdDetailActivity extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
 
 
-
         vpPager.setAdapter(adapterViewPager);
 
         //프로필사진 동글이
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(vpPager);
+        /*CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(vpPager);*/
 
         // 탭 프래그먼트
         fragment1 = new TabFragment1();
@@ -112,7 +110,7 @@ public class MdDetailActivity extends AppCompatActivity {
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("리뷰"));
-        tabs.addTab(tabs.newTab().setText("닉네임님의 다른 상품"));
+        tabs.addTab(tabs.newTab().setText( memberDto.getMember_nickname() + "님의 다른 상품"));
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -189,23 +187,30 @@ public class MdDetailActivity extends AppCompatActivity {
 
     //상품 상세사진 슬라이드 넘기기
     public class MyPagerAdapter extends FragmentPagerAdapter {
-        private int NUM_ITEMS = 3;
+        //private int NUM_ITEMS = 3;
+        private int NUM_ITEMS = 1;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
-        // Returns total number of pages
+
         @Override
         public int getCount() {
             return NUM_ITEMS;
         }
 
-        // Returns the fragment to display for that page
+
         @Override
         public Fragment getItem(int position) {
 
-            switch (position) {
+            // 전달할 데이터 Bundle
+            Bundle bundle = new Bundle();
+            bundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
+            return new DetailPhotoFragment1(0, bundle);
+
+
+            /*switch (position) {
                 case 0:
                     // 전달할 데이터 Bundle
                     Bundle bundle = new Bundle();
@@ -217,14 +222,8 @@ public class MdDetailActivity extends AppCompatActivity {
                     return DetailPhotoFragment3.newInstance(2);
                 default:
                     return null;
-            }
+            }*/
         }//getItem()
-
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return "Page " + position;
-        }//getPageTitle()
 
     }//MyPagerAdapter()
 

@@ -56,15 +56,17 @@
                 android:layout_height="350dp"
                 android:orientation="vertical">
 
+
                 <!--써클 인디케이터 : 슬라이드뷰에서 페이지 표시하는 똥글뱅이-->
-                <me.relex.circleindicator.CircleIndicator
+                <!--<me.relex.circleindicator.CircleIndicator
                     android:id="@+id/indicator"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     app:ci_drawable="@drawable/black_radius"
                     app:ci_height="7dp"
                     app:ci_margin="4dp"
-                    app:ci_width="7dp" />
+                    app:ci_width="7dp" />-->
+
 
                 <!--viewPager : 슬라이드로 화면 넘기기-->
                 <androidx.viewpager.widget.ViewPager

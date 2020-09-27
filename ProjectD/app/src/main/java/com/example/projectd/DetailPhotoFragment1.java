@@ -137,8 +137,6 @@ public class DetailPhotoFragment1 extends Fragment {
 //        }catch (InterruptedException e){
 //            e.printStackTrace();
 //        }
-
-
         return view;
     }
 }

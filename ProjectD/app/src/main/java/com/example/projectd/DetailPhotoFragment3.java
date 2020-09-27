@@ -1,3 +1,4 @@
+/*
 package com.example.projectd;
 
 import android.os.Bundle;
@@ -41,4 +42,4 @@ public class DetailPhotoFragment3 extends Fragment {
 
         return view;
     }
-}
+}*/

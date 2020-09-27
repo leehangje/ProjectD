@@ -1,3 +1,4 @@
+/*
 package com.example.projectd;
 
 import android.os.Bundle;
@@ -16,7 +17,9 @@ public class DetailPhotoFragment2 extends Fragment {
     private int page;
 
     // newInstance constructor for creating fragment with arguments
-    public static DetailPhotoFragment2 newInstance(int page /*, String title*/) {
+    public static DetailPhotoFragment2 newInstance(int page */
+/*, String title*//*
+) {
         DetailPhotoFragment2 fragment = new DetailPhotoFragment2();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
@@ -41,4 +44,4 @@ public class DetailPhotoFragment2 extends Fragment {
 
         return view;
     }
-}
+}*/
