@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.example.projectd.ATask.AnMainSelect;
 import com.example.projectd.Dto.MdDTO;
+import com.example.projectd.Dto.MemberDto;
 
 import java.util.ArrayList;
+import static com.example.projectd.LoginActivity.loginDTO;
 
 public class MainActivity extends Fragment {
 
@@ -24,7 +26,6 @@ public class MainActivity extends Fragment {
     MainMdAdapter adapter;
     ViewGroup viewGroup;
     ImageButton btn_like;
-
     ArrayList<MdDTO> items;
 
     /*private Context mContext = MainActivity.this;*/
@@ -114,7 +115,7 @@ public class MainActivity extends Fragment {
 
         });
 
-        AnMainSelect anMainSelect = new AnMainSelect(items, adapter);
+        AnMainSelect anMainSelect = new AnMainSelect(items, adapter, loginDTO.getMember_addr());
         anMainSelect.execute();
 
         return viewGroup;
