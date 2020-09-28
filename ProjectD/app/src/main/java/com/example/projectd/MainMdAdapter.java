@@ -88,14 +88,16 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
         }
         public void setItem(MdDTO item){
             textView.setText(item.getMd_name());
-            textView2.setText(item.getMd_price());
-            Glide.with(context).load(item.getMd_photo_url()).into(iv_img);
+            textView2.setText(item.getMd_price() + "원");
+            Glide.with(context).load(item.getMd_photo_url()).placeholder(R.drawable.spinner_icon).into(iv_img);
 
-            if (item.getMd_rent_status().equals('0')){
-                img_possible.setImageResource(R.drawable.possible);
-            }else {
+            //getMd_rent_status(대여상태)가 1이면 대여중, 0이면 대여가능 표시
+            if (item.getMd_rent_status().equals("1")){
                 img_possible.setImageResource(R.drawable.impossible);
+            }else {
+                img_possible.setImageResource(R.drawable.possible);
             }
+
 
         }
     }

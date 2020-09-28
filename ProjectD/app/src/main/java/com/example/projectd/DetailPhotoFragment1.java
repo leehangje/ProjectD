@@ -85,9 +85,13 @@ public class DetailPhotoFragment1 extends Fragment {
         // 사진url
         String imageUrl = mdDTO.getMd_photo_url();
         Glide.with(this).load(imageUrl)
-                    .placeholder(R.drawable.choonbae1)
-                    .error(R.drawable.heart)
-                    .into(detail_photo1);
+                                .placeholder(R.drawable.spinner_icon)
+                                .into(detail_photo1);
+
+       /* Glide.with(this).load(imageUrl)
+                    .placeholder(R.drawable.choonbae1)      //대신해서 들어갈 이미지
+                    .error(R.drawable.heart)                //에러가 났을경우 들어갈 이미지
+                    .into(detail_photo1);*/
 
 
         //사진url 띄워주기
