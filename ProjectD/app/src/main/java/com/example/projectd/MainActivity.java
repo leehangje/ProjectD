@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectd.ATask.AnMainSelect;
@@ -27,6 +28,7 @@ public class MainActivity extends Fragment {
     ViewGroup viewGroup;
     ImageButton btn_like;
     ArrayList<MdDTO> items;
+    TextView tv_addr;
 
     /*private Context mContext = MainActivity.this;*/
     private static final int ACTIVITY_NUM = 3;
@@ -56,6 +58,8 @@ public class MainActivity extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
+        tv_addr = viewGroup.findViewById(R.id.tv_addr);
+        tv_addr.setText(loginDTO.getMember_addr());     //메인 상단에 회원 동네 뜨도록 함
 
         //찜목록
         btn_like = viewGroup.findViewById(R.id.btn_like);

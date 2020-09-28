@@ -23,24 +23,23 @@
                 android:id="@+id/btn_gps"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="17dp"
+                android:layout_marginStart="7dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="22dp"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/main_icon_gps" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="175dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="14dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="30dp"
+                android:id="@+id/tv_addr"
+                android:layout_width="179dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="27dp"
                 android:layout_marginEnd="191dp"
                 android:layout_marginRight="0dp"
-                android:text="광주광역시 서구 농성2동"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,9 +51,9 @@
                 android:id="@+id/btn_search"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="17dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="20dp"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/main_icon_search" />
@@ -63,9 +62,9 @@
                 android:id="@+id/btn_alram"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="17dp"
+                android:layout_marginStart="13dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="20dp"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/main_icon_alram" />
@@ -76,7 +75,7 @@
                 android:layout_height="34dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="0dp"
                 android:background="#FFFFFF"
