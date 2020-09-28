@@ -115,9 +115,9 @@ public  class LoginSelect extends AsyncTask<Void, Void, Void> {
                 member_latitude = reader.nextString();
             }  else if(readStr.equals("member_longitude")) {
                 member_longitude = reader.nextString();
-            }  else if(readStr.equals("memmber_grade")) {
+            }  else if(readStr.equals("member_grade")) {
                 member_grade = reader.nextString();
-            } else if(readStr.equals("memmber_profile")) {
+            } else if(readStr.equals("member_profile")) {
                 member_profile = reader.nextString();
             } else {
                 reader.skipValue();
