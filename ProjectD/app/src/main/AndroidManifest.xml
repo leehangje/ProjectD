@@ -58,13 +58,13 @@
             android:value="@integer/google_play_services_version"/>
 
         <activity android:name=".SignUpFormActivity"></activity>
-        <activity android:name=".ProfileUpdateActivity" />
         <activity android:name=".AlramActivity" />
         <activity android:name=".FavListActivity" />
         <activity android:name=".ReviewActivity" />
         <activity android:name=".LendListActivity" />
         <activity android:name=".RentListActivity" />
         <activity android:name=".ChatActivity" />
+        <activity android:name=".ProfilSubActivity" />
         <activity android:name=".ChatListActivity" />
         <activity android:name=".MdInsertActivity" />
         <activity android:name=".CategoryViewActivity"/>

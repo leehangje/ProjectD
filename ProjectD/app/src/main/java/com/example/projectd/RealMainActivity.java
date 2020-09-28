@@ -1,13 +1,21 @@
 package com.example.projectd;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.projectd.ATask.LoginSelect;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.concurrent.ExecutionException;
+
+import static com.example.projectd.LoginActivity.loginDTO;
 
 public class RealMainActivity extends AppCompatActivity {
 
@@ -80,4 +88,46 @@ public class RealMainActivity extends AppCompatActivity {
             } //onNavigationItemSelected()
         }); //setOnNavigationItemSelectedListener()
     } //onCreate()
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        String imageDbPathU = intent.getExtras().getString("imageDbPathU");
+        String pImgDbPathU = intent.getExtras().getString("pImgDbPathU");
+        Log.d("main", "RealMainImage: " + imageDbPathU);
+        Log.d("main", "RealMainPImage: " + pImgDbPathU);
+
+        if (imageDbPathU != pImgDbPathU) {
+
+            String member_id = loginDTO.getMember_id();
+            String member_pw = loginDTO.getMember_pw();
+            LoginSelect select = new LoginSelect(member_id, member_pw);
+            loginDTO = null;
+            try {
+                select.execute().get();
+            } catch (ExecutionException e) {
+                e.getMessage();
+            } catch (InterruptedException e) {
+                e.getMessage();
+            }
+        }
+        Log.d("main", "onNewIntent: " + loginDTO.getMember_id());
+        Log.d("main", "onNewIntent: " + loginDTO.getMember_pw());
+        Log.d("main", "onNewIntent: " + loginDTO.getMember_profile());
+
+//        Fragment frg = null;
+//        frg = getSupportFragmentManager().findFragmentBy(mypageActivity);
+//        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.detach(frg);
+//        ft.attach(frg);
+//        ft.commit();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction(); //getFragmentManager().beginTransaction();
+        if (Build.VERSION.SDK_INT >= 26) {
+            ft.setReorderingAllowed(false);
+        }
+        ft.detach(mypageActivity).attach(mypageActivity).commit();
+
+    }
 } //class

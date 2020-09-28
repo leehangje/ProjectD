@@ -4,93 +4,295 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".ProfilActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#3e4ba9">
+        android:layout_height="?attr/actionBarSize">
+
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="ModifieClicked"
             android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="#3e4ba9"
-                app:srcCompat="@drawable/back_white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="프로필 수정"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                android:layout_marginLeft="10dp"
+                android:text="프로필 상세"
+                android:textSize="20dp"
+                android:textColor="#101010"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Modified"
+            android:layout_width="73dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="230dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#101010"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:text="수정"/>
 
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgView"
-        android:layout_width="144dp"
-        android:layout_height="136dp"
-        android:layout_marginTop="50dp"
-        android:src="@mipmap/ic_launcher_round" />
-
-    <TextView
-        android:id="@+id/Tv2"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textSize="20dp"
-        android:textColor="#101010"
-        android:text="닉네임" />
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/Tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:textColor="#101010"
-        android:text="핸드폰 번호" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@color/cardview_dark_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:layout_marginLeft="10dp"
+                        android:text="별명" />
+
+                    <TextView
+                        android:id="@+id/profile_nickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="없음"
+                        android:textColor="#101010"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:layout_marginLeft="10dp"
+                        android:text="이름" />
+
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:text="없음" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:layout_marginLeft="10dp"
+                        android:text="생년월일" />
+
+                    <TextView
+                        android:id="@+id/profile_birth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:text="없음" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:layout_marginLeft="10dp"
+                        android:text="핸드폰 번호" />
+
+                    <TextView
+                        android:id="@+id/profile_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:text="없음" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:layout_marginLeft="10dp"
+                        android:text="이메일 주소" />
+
+                    <TextView
+                        android:id="@+id/profile_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:text="없음" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:layout_marginLeft="10dp"
+                        android:text="집 주소" />
+
+                    <TextView
+                        android:id="@+id/profile_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:text="없음" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:layout_marginLeft="10dp"
+                        android:text="집 전화번호" />
+
+                    <TextView
+                        android:id="@+id/profile_home_tel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16dp"
+                        android:textColor="#101010"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:text="없음" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <Button
-        android:id="@+id/Btn1"
-        android:layout_width="250dp"
+        android:id="@+id/profile_set"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:background="#00BCD4"
-        android:text="위치 다시 지정하기"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"/>
-
-    <EditText
-        android:id="@+id/Et1"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textColor="#00BCD4"
-        android:text="찾은 위치" />
-
-    <Button
-        android:id="@+id/Btn2"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="#00BCD4"
-        android:text="수정 완료"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"/>
-
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@drawable/radius"
+        android:textSize="22dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="btnUpdateClicked"
+        android:text="확인"/>
 
 </LinearLayout>
