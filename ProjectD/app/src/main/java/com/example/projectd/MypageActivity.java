@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,7 +27,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
+import com.example.projectd.ATask.ProfileUpdate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MypageActivity extends Fragment {
 
@@ -37,6 +43,10 @@ public class MypageActivity extends Fragment {
     LinearLayout Lin1, Lin2, Lin3;
     TextView user_nickname, member_addr;
     RatingBar ratingBar2;
+    CircleImageView profile_photo;
+
+    ProgressDialog progressDialog;
+    ProfileUpdate profilUpdate;
 
     @Nullable
     @Override
@@ -59,14 +69,17 @@ public class MypageActivity extends Fragment {
         user_nickname = viewGroup.findViewById(R.id.user_nickname);
         member_addr = viewGroup.findViewById(R.id.member_addr);
         ratingBar2 = viewGroup.findViewById(R.id.ratingBar2);
-        checkDangerousPermissions();
+        profile_photo = viewGroup.findViewById(R.id.profile_photo);
 
-        Intent intent = getActivity().getIntent();
-
-        String user = intent.getExtras().getString("member_nickname");
+        String user = LoginActivity.loginDTO.getMember_name();
         user_nickname.setText(user);
-        String addr = intent.getExtras().getString("member_addr");
+        String addr = LoginActivity.loginDTO.getMember_addr();
         member_addr.setText(addr);
+
+        Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
+                .signature(new ObjectKey(System.currentTimeMillis()))
+                .placeholder(R.drawable.cast_mini_controller_progress_drawable)
+                .into(profile_photo);
 
         ratingBar2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -77,8 +90,6 @@ public class MypageActivity extends Fragment {
                 }
             }
         });
-
-
 
         //빌린 목록
         Lin1.setOnClickListener(new View.OnClickListener() {
@@ -108,14 +119,12 @@ public class MypageActivity extends Fragment {
         });
 
 
-
         //프로필 수정
         btn_profile_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProfilActivity.class);
                 startActivity(intent);
-
             }
         });
 
@@ -150,47 +159,6 @@ public class MypageActivity extends Fragment {
 
     }//onCreateView()
 
-    // 위험 권한
-    private void checkDangerousPermissions () {
-        String[] permissions = {
-                android.Manifest.permission.INTERNET,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-        };
 
-        int permissionCheck = PackageManager.PERMISSION_GRANTED;
-        for (int i = 0; i < permissions.length; i++) {
-            permissionCheck = ContextCompat.checkSelfPermission(getActivity(), permissions[i]);
-            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
-                break;
-            }
-        }
-
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getActivity(), "권한 있음", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "권한 없음", Toast.LENGTH_LONG).show();
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permissions[0])) {
-                Toast.makeText(getActivity(), "권한 설명 필요함.", Toast.LENGTH_LONG).show();
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), permissions, 1);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult ( int requestCode, String[] permissions,
-                                             int[] grantResults){
-        if (requestCode == 1) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getActivity(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-    }
 
 } //class

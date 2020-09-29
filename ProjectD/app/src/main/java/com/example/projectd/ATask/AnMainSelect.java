@@ -29,12 +29,19 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
     // 생성자
     ArrayList<MdDTO> items;
     MainMdAdapter adapter;
+    String member_addr;
 
     public AnMainSelect(ArrayList<MdDTO> items, MainMdAdapter adapter) {
         this.items = items;
         this.adapter = adapter;
     }
 
+    //메인페이지에서 회원과 같은동네의 상품만 보여주기위해
+    public AnMainSelect(ArrayList<MdDTO> items, MainMdAdapter adapter, String member_addr) {
+        this.items = items;
+        this.adapter = adapter;
+        this.member_addr = member_addr;
+    }
 
     HttpClient httpClient;
     HttpPost httpPost;
@@ -56,6 +63,9 @@ public class AnMainSelect extends AsyncTask<Void, Void, Void> {
             // MultipartEntityBuild 생성
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+            // 문자열 및 데이터 추가
+            builder.addTextBody("member_addr", member_addr, ContentType.create("Multipart/related", "UTF-8"));
 
             // 전송
             InputStream inputStream = null;

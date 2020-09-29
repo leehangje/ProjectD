@@ -91,7 +91,7 @@ public class DarunMdAdapter extends RecyclerView.Adapter<DarunMdAdapter.ViewHold
         public void setItem(MdDTO item){
             textView.setText(item.getMd_name());
             textView2.setText(item.getMd_price());
-            Glide.with(context).load(item.getMd_photo_url()).into(iv_img);
+            Glide.with(context).load(item.getMd_photo_url()).placeholder(R.drawable.spinner_icon).into(iv_img);
         }
 
     }
