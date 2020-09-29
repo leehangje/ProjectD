@@ -22,7 +22,6 @@ import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.Dto.MemberDto;
 import com.google.android.material.tabs.TabLayout;
 
-
 import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,8 +42,6 @@ public class MdDetailActivity extends AppCompatActivity {
     TabFragment1 fragment1;
     TabFragment2 fragment2;
 
-    DetailPhotoFragment1 detailPhotoFragment1;
-
     LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
 
     @Override
@@ -58,7 +55,7 @@ public class MdDetailActivity extends AppCompatActivity {
             item = (MdDTO) intent.getSerializableExtra("item");
 
             DetailSelect detailSelect = new DetailSelect(item.getMember_id());
-            //DetailPhotoSelect detailPhotoSelect = new DetailPhotoSelect(item.getMd_serial_number());
+
 
             try {
                 memberDto = detailSelect.execute().get();
@@ -187,7 +184,7 @@ public class MdDetailActivity extends AppCompatActivity {
         md_name.setText(item.getMd_name());
         md_price.setText("대여료: " + item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
         md_deposit.setText("보증금: " + item.getMd_deposit() + "원");
-        md_category.setText(item.getMd_category());
+        md_category.setText("카테고리 - " + item.getMd_category());
         md_Registration_date.setText(item.getMd_registration_date());
         md_hits.setText("조회수:" + item.getMd_hits());
         md_fav_count.setText("찜:" + item.getMd_fav_count());

@@ -3,6 +3,7 @@ package com.example.projectd.ATask;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.JsonReader;
+import android.util.JsonWriter;
 import android.util.Log;
 
 import com.example.projectd.Dto.MdDTO;
@@ -14,15 +15,15 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,12 +76,14 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
                 Log.d("===> ",params.get("searchKeyword").toString());
                 nameValuePairs = new ArrayList<NameValuePair>(1);
                 nameValuePairs.add(new BasicNameValuePair("searchKeyword", params.get("searchKeyword").toString()));
-                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
             }
 //            httpPost.setEntity(builder.build());
             httpResponse = httpClient.execute(httpPost);
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
+
+
 
             readJsonStream(inputStream);
 
@@ -124,6 +127,7 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
         adapter.notifyDataSetChanged();
     }
 
+
     public void readJsonStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         try {
@@ -136,6 +140,7 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
             reader.close();
         }
     }
+
 
     public MdDTO readMessage(JsonReader reader) throws IOException {
         String md_name = "", md_category = "", md_rental_term = "", md_detail_content = "",

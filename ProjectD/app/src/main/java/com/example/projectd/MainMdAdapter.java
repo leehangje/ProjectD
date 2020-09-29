@@ -22,6 +22,7 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
     ArrayList<MdDTO> items;
     OnMainMdItemClickListener listener;
 
+
     public MainMdAdapter(Context context, ArrayList<MdDTO> items) {
         this.context = context;
         this.items = items;
@@ -64,6 +65,7 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
         TextView textView;
         TextView textView2;
         ImageView iv_img;
+        ImageView img_possible;
 
         public ViewHolder(View itemView, final OnMainMdItemClickListener listener){
             super(itemView);
@@ -71,6 +73,7 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
             textView = itemView.findViewById(R.id.tv_title);
             textView2 = itemView.findViewById(R.id.tv_price);
             iv_img = itemView.findViewById(R.id.iv_img);
+            img_possible = itemView.findViewById(R.id.img_possible);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,8 +88,17 @@ public class MainMdAdapter extends RecyclerView.Adapter<MainMdAdapter.ViewHolder
         }
         public void setItem(MdDTO item){
             textView.setText(item.getMd_name());
-            textView2.setText(item.getMd_price());
-            Glide.with(context).load(item.getMd_photo_url()).into(iv_img);
+            textView2.setText(item.getMd_price() + "원");
+            Glide.with(context).load(item.getMd_photo_url()).placeholder(R.drawable.spinner_icon).into(iv_img);
+
+            //getMd_rent_status(대여상태)가 1이면 대여중, 0이면 대여가능 표시
+            if (item.getMd_rent_status().equals("1")){
+                img_possible.setImageResource(R.drawable.impossible);
+            }else {
+                img_possible.setImageResource(R.drawable.possible);
+            }
+
+
         }
     }
 

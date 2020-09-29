@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>
         implements OnSearchItemClickListener {
 
-    Context context;
+    static Context context;
     ArrayList<MdDTO>  items;
     OnSearchItemClickListener listener;
 
@@ -64,12 +66,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         TextView textView2;
+        ImageView iv_img;
+        ImageView img_possible;
+
 
         public ViewHolder(View itemView, final OnSearchItemClickListener listener){
             super(itemView);
 
             textView = itemView.findViewById(R.id.tv_title);
             textView2 = itemView.findViewById(R.id.tv_price);
+            iv_img = itemView.findViewById(R.id.iv_img);
+            img_possible = itemView.findViewById(R.id.img_possible);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,7 +92,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         public void setItem(MdDTO item){
             textView.setText("" + item.getMd_name());
-            textView2.setText("" + item.getMd_price());
+            textView2.setText("" + item.getMd_price() + "원");
+            Glide.with(context).load(item.getMd_photo_url()).placeholder(R.drawable.spinner_icon).into(iv_img);
+
+            //getMd_rent_status(대여상태)가 1이면 대여중, 0이면 대여가능 표시
+            if (item.getMd_rent_status().equals("1")){
+                img_possible.setImageResource(R.drawable.impossible);
+            }else {
+                img_possible.setImageResource(R.drawable.possible);
+            }
         }
 
     }
