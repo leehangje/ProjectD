@@ -29,14 +29,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
-import com.example.projectd.ATask.ProfileUpdate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MypageActivity extends Fragment {
 
-    TextView btn_profile_update, mypage_notice, mypage_qna, mypage_logout;
+    TextView btn_profile_update, mypage_notice, mypage_qna, mypage_logout, ratingSum;
     ImageView my_goods, my_rentlist, my_fav;
     ViewGroup viewGroup;
     ActionBar abar;
@@ -45,8 +44,6 @@ public class MypageActivity extends Fragment {
     RatingBar ratingBar2;
     CircleImageView profile_photo;
 
-    ProgressDialog progressDialog;
-    ProfileUpdate profilUpdate;
 
     @Nullable
     @Override
@@ -70,24 +67,24 @@ public class MypageActivity extends Fragment {
         member_addr = viewGroup.findViewById(R.id.member_addr);
         ratingBar2 = viewGroup.findViewById(R.id.ratingBar2);
         profile_photo = viewGroup.findViewById(R.id.profile_photo);
+        ratingSum = viewGroup.findViewById(R.id.ratingSum);
 
+        final String grade = LoginActivity.loginDTO.getMember_grade();
         String user = LoginActivity.loginDTO.getMember_name();
         user_nickname.setText(user);
-        String addr = LoginActivity.loginDTO.getMember_addr();
+         String addr = LoginActivity.loginDTO.getMember_addr();
         member_addr.setText(addr);
+        ratingBar2.setRating(Float.parseFloat(grade));
+        ratingSum.setText(grade);
 
         Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
-                .signature(new ObjectKey(System.currentTimeMillis()))
                 .placeholder(R.drawable.cast_mini_controller_progress_drawable)
                 .into(profile_photo);
 
         ratingBar2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                // 저는 0개를 주기싫어서, 만약 1개미만이면 강제로 1개를 넣었습니다.
-                if (ratingBar2.getRating()<1.0f){
-                    ratingBar2.setRating(2);
-                }
+
             }
         });
 

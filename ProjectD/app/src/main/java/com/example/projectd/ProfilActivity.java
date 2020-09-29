@@ -96,6 +96,7 @@ public class ProfilActivity extends AppCompatActivity {
         profile_nickname.setText(member_nickname);
         profile_phone.setText(member_tel);
         profile_location.setText(member_addr);
+        profile_email.setText(member_id);
 
         imagePath = LoginActivity.loginDTO.getMember_profile();
         pImgDbPathU = imagePath;
