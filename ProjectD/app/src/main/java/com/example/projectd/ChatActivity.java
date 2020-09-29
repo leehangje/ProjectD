@@ -54,11 +54,7 @@ public class ChatActivity extends AppCompatActivity {
                 String msg = EditText_Chat.getText().toString(); //msg
 
                 if(msg != null) {
-                    //MemberDto dto = new MemberDto();
-                    //dto.setMember_nickname(nickname);
-
                     ChatDto chat = new ChatDto();
-
                     chat.setPhotoUrl(photo_url);
                     chat.setName(nickname);
                     chat.setMsg(msg);
@@ -75,6 +71,7 @@ public class ChatActivity extends AppCompatActivity {
         chatList = new ArrayList<>();
         mAdapter = new ChatAdapter(chatList, ChatActivity.this, nickname  );
         mRecyclerView.setAdapter(mAdapter);
+
         mAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(chatList.size() - 1);
 

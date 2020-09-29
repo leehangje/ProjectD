@@ -1,7 +1,6 @@
 package com.example.projectd;
-
-
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +10,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.projectd.Dto.ChatDto;
-import com.example.projectd.Dto.MemberDto;
-
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import static com.example.projectd.LoginActivity.loginDTO;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
     private List<ChatDto> mDataset;
     private String myNickName;
+    private Context context;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -49,15 +46,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             rootView = v;
 
         }
-
-
     }
+
+    private Bitmap bitmap;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ChatAdapter(List<ChatDto> myDataset, Context context, String myNickName) {
         //{"1","2"}
         mDataset = myDataset;
         this.myNickName = myNickName;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -79,36 +77,35 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         // - replace the contents of the view with that element
         ChatDto chat = mDataset.get(position);
 
-        //holder.TextView_nickname.setText(chat.getNickname());
         holder.TextView_msg.setText(chat.getMsg());
 
         if(chat.getName().equals(this.myNickName)) {
-            /*holder.TextView_msg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-            holder.TextView_nickname.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);*/
-
             holder.TextView_msg.setBackgroundResource(R.drawable.rightbubble);
             holder.TextView_msg.setText(mDataset.get(position).getMsg());
             holder.linearlayout_destination.setVisibility(View.VISIBLE);
             holder.linearlayout_main.setGravity(Gravity.RIGHT);
-
         }
         else {
-            /*holder.TextView_msg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-            holder.TextView_nickname.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);*/
+
+           /* Glide.with(context).asBitmap().load(loginDTO.getMember_profile())
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            bitmap = resource;
+                        }
+                    });
+            holder.ImageView_profile.setImageBitmap(bitmap);*/
+            //이미지 넣기
+            Glide.with(context).load(loginDTO.getMember_profile())
+                    .apply(new RequestOptions().circleCrop())
+                    .into(holder.ImageView_profile);
+
             holder.linearlayout_destination.setVisibility(View.VISIBLE);
             holder.linearlayout_main.setGravity(Gravity.LEFT);
             holder.TextView_msg.setBackgroundResource(R.drawable.leftbubble);
             holder.TextView_msg.setText(mDataset.get(position).getMsg());
             holder.TextView_nickname.setText(chat.getName());
-
-            //이미지 넣기
-            Glide.with(holder.itemView.getContext()).load(LoginActivity.loginDTO.getMember_profile())
-                    .apply(new RequestOptions().circleCrop())
-                    .into(holder.ImageView_profile);
         }
-
-
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -125,7 +122,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     public void addChat(ChatDto chat) {
         mDataset.add(chat);
-        notifyItemInserted(mDataset.size()-1); //갱신
+        notifyItemInserted(mDataset.size() -1); //갱신e
+
     }
+
+
+
+
+
 
 }

@@ -1,5 +1,7 @@
 package com.example.projectd.Dto;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class MemberDto implements Serializable {

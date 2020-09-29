@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.projectd.Dto.ChatDto;
-import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.Dto.MemberDto;
 
 import java.util.ArrayList;
@@ -68,7 +66,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tv_chat_nickname;
         TextView tv_chat_addr;
-        //TextView tv_last_msg;
         ImageView iv_chatlist_img;
         public ViewHolder(View itemView, final OnChatItemClickListener listener){
             super(itemView);
@@ -90,20 +87,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             });
         }
 
-//        public void setItem(ChatDto item){
-//            tv_chat_nickname.setText(item.getName());
-//            tv_chat_addr.setText(item.getAddr());
-//            tv_last_msg.setText(item.getMsg());
-//
-//        }
+
           public void setItem(MemberDto item){
               tv_chat_nickname.setText(item.getMember_nickname());
               tv_chat_addr.setText(item.getMember_addr());
               Glide.with(itemView).load(item.getMember_profile()).into(iv_chatlist_img);
-
-
-              //tv_last_msg.setText(item.getMsg());
-
           }
 
     }
