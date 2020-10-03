@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.projectd.ATask.DetailPhotoSelect;
 import com.example.projectd.ATask.DetailSelect;
+import com.example.projectd.ATask.FavUpdate;
+import com.example.projectd.ATask.FavUpdateMinus;
 import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.Dto.MemberDto;
 import com.google.android.material.tabs.TabLayout;
@@ -56,18 +59,14 @@ public class MdDetailActivity extends AppCompatActivity {
 
             DetailSelect detailSelect = new DetailSelect(item.getMember_id());
 
-
             try {
                 memberDto = detailSelect.execute().get();
-                //item = detailPhotoSelect.execute().get();
-                //Log.d("main:Detail", "onCreate: " + memberDto.getMember_nickname());
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
 
         profile_photo = findViewById(R.id.profile_photo);
         user_nickname = findViewById(R.id.user_nickname);
@@ -84,6 +83,8 @@ public class MdDetailActivity extends AppCompatActivity {
 
         btn_chat = findViewById(R.id.btn_chat);
         btn_fav = findViewById(R.id.btn_fav);
+        // 데이터베이스에 찜이 안 되어 있는 경우 setTag를 0 ,되어 있는경우 1로 셋팅
+        btn_fav.setTag("0");
 
         toolbar_context = findViewById(R.id.toolbar_context);
 
@@ -91,7 +92,6 @@ public class MdDetailActivity extends AppCompatActivity {
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-
 
         vpPager.setAdapter(adapterViewPager);
 
@@ -126,7 +126,6 @@ public class MdDetailActivity extends AppCompatActivity {
                     mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
                     selected = fragment2;
                 }
-
                 //fragment2.setArguments(args);
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
@@ -153,9 +152,49 @@ public class MdDetailActivity extends AppCompatActivity {
         btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MdDetailActivity.this, "해당 상품을 찜 목록에 넣었습니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                // 전달할 데이터 Bundle
+                //mBundle = new Bundle();
+                //mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
+
+                // 찜일때
+                if (btn_fav.getTag().toString().equals("1")){
+                    Toast.makeText(MdDetailActivity.this, "찜 취소했습니다.", Toast.LENGTH_SHORT).show();
+                    FavUpdateMinus favUpdateMinus = new FavUpdateMinus(item.getMd_serial_number());
+
+                    try {
+                        favUpdateMinus.execute().get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    btn_fav.setText("찜하기");
+                    btn_fav.setBackgroundColor(Color.parseColor("#f5f51f"));
+                    btn_fav.setTag("0");
+                // 찜이 아닐때
+                }else if(btn_fav.getTag().toString().equals("0")){
+                    Toast.makeText(MdDetailActivity.this, "찜 목록에 넣었습니다.", Toast.LENGTH_SHORT).show();
+                    FavUpdate favUpdate = new FavUpdate(item.getMd_serial_number());
+
+                    try {
+                        favUpdate.execute().get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    btn_fav.setText("찜 취소");
+                    btn_fav.setBackgroundColor(Color.RED);
+                    btn_fav.setTag("1");
+                }else{
+                    Log.d("main:mdDetail", "onClick: 아무것도 안탐 ");
+                }
+
+            }//onclick()
+        });//btn_fav.setOnClickListener()
+
 
         // 툴바 안의 뒤로가기 버튼 클릭할 때
         toolbar_context.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +224,7 @@ public class MdDetailActivity extends AppCompatActivity {
         md_price.setText("대여료: " + item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
         md_deposit.setText("보증금: " + item.getMd_deposit() + "원");
         md_category.setText("카테고리 - " + item.getMd_category());
-        md_Registration_date.setText(item.getMd_registration_date());
+        md_Registration_date.setText(item.getMd_registration_date());   //등록일자
         md_hits.setText("조회수:" + item.getMd_hits());
         md_fav_count.setText("찜:" + item.getMd_fav_count());
         md_detail_content.setText("<상세정보>\n" + item.getMd_detail_content());
@@ -238,4 +277,4 @@ public class MdDetailActivity extends AppCompatActivity {
 
     }
 
-}
+}//class

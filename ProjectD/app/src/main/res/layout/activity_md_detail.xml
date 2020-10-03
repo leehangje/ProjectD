@@ -307,7 +307,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#E1DEDE"
+            android:background="#f5f51f"
             android:text="찜하기"
             android:textSize="18sp"
             android:textStyle="bold" />
