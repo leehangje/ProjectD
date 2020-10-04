@@ -41,7 +41,6 @@ public class DetailSelect extends AsyncTask<Void, Void, MemberDto> {
 
     @Override
     protected MemberDto doInBackground(Void... voids) {
-
           try {
             // MultipartEntityBuilder 생성
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
@@ -121,9 +120,9 @@ public class DetailSelect extends AsyncTask<Void, Void, MemberDto> {
                 member_addr = reader.nextString();
             } else if(readStr.equals("member_latitude")) {
                 member_latitude = reader.nextString();
-            }  else if(readStr.equals("member_longitude")) {
+            } else if(readStr.equals("member_longitude")) {
                 member_longitude = reader.nextString();
-            }  else if(readStr.equals("member_grade")) {
+            } else if(readStr.equals("member_grade")) {
                 member_grade = reader.nextString();
             } else if(readStr.equals("member_profile")) {
                 member_profile = reader.nextString();
