@@ -35,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MypageActivity extends Fragment {
 
-    TextView btn_profile_update, mypage_notice, mypage_qna, mypage_logout, ratingSum;
+    TextView btn_profile_update, mypage_notice, mypage_qna, mypage_logout, ratingSum, btn1;
     ImageView my_goods, my_rentlist, my_fav;
     ViewGroup viewGroup;
     ActionBar abar;
@@ -68,9 +68,10 @@ public class MypageActivity extends Fragment {
         ratingBar2 = viewGroup.findViewById(R.id.ratingBar2);
         profile_photo = viewGroup.findViewById(R.id.profile_photo);
         ratingSum = viewGroup.findViewById(R.id.ratingSum);
+        btn1 = viewGroup.findViewById(R.id.btn1);
 
         final String grade = LoginActivity.loginDTO.getMember_grade();
-        String user = LoginActivity.loginDTO.getMember_name();
+        String user = LoginActivity.loginDTO.getMember_nickname();
         user_nickname.setText(user);
          String addr = LoginActivity.loginDTO.getMember_addr();
         member_addr.setText(addr);
@@ -78,8 +79,11 @@ public class MypageActivity extends Fragment {
         ratingSum.setText(grade);
 
         Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
-                .placeholder(R.drawable.cast_mini_controller_progress_drawable)
+                .placeholder(R.color.cardview_dark_background)
                 .into(profile_photo);
+
+
+        btn1.setText(LoginActivity.loginDTO.getMember_profile());
 
         ratingBar2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override

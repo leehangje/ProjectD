@@ -62,14 +62,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_photo"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@color/cardview_dark_background" />
+            <RelativeLayout
+                android:id="@+id/a_bus_info_lay"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_photo"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="10dp"
+
+                    android:paddingBottom="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@color/cardview_dark_background" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignLeft="@id/profile_photo"
+                    android:layout_alignTop="@id/profile_photo"
+                    android:layout_alignRight="@id/profile_photo"
+                    android:layout_alignBottom="@id/profile_photo"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="103dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/white"
+                    android:src="@drawable/ic_baseline_add_circle_outline_24" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

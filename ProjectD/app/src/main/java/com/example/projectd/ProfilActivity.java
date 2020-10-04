@@ -104,7 +104,9 @@ public class ProfilActivity extends AppCompatActivity {
 
         profile_photo.setVisibility(View.VISIBLE);
         // 선택된 이미지 보여주기
-        Glide.with(this).load(LoginActivity.loginDTO.getMember_profile()).into(profile_photo);
+        Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
+                .placeholder(R.color.cardview_dark_background)
+                .into(profile_photo);
 
         Modified.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +119,8 @@ public class ProfilActivity extends AppCompatActivity {
         profile_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                show();
+                    show();
+
             }
         });
 
@@ -166,6 +169,7 @@ public class ProfilActivity extends AppCompatActivity {
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_PICK);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), LOAD_IMAGE);
+                    re
                 }
             }
         });
@@ -203,7 +207,6 @@ public class ProfilActivity extends AppCompatActivity {
                 String uploadFileName = imageRealPathU.split("/")[imageRealPathU.split("/").length - 1];
                 imageDbPathU = ipConfig + "/app/resources/" + uploadFileName;
                 imageDbPathA = ipConfig + "/app/resources/" + uploadFileName;
-                pImgDbPathU = ipConfig + "/app/resources/" + uploadFileName;
 
                 ImageView profile_photo = (ImageView) findViewById(R.id.profile_photo);
                 profile_photo.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
@@ -237,7 +240,6 @@ public class ProfilActivity extends AppCompatActivity {
                 String uploadFileName = imageRealPathU.split("/")[imageRealPathU.split("/").length - 1];
                 imageDbPathU = ipConfig + "/app/resources/" + uploadFileName;
                 imageDbPathA = ipConfig + "/app/resources/" + uploadFileName;
-                pImgDbPathU = ipConfig + "/app/resources/" + uploadFileName;
 
             } catch (Exception e) {
                 e.printStackTrace();
