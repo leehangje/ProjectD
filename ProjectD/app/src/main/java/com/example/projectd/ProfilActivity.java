@@ -45,7 +45,7 @@ public class ProfilActivity extends AppCompatActivity {
     CircleImageView profile_photo;
     Button profile_set;
 
-    String id = LoginActivity.loginDTO.getMember_id();
+    //String id = LoginActivity.loginDTO.getMember_id();
 
     public String imagePath;
     public String pImgDbPathU;
@@ -311,7 +311,7 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
-
+                    String id = LoginActivity.loginDTO.getMember_id();
                     ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
                     profilUpdate.execute();
 
@@ -348,7 +348,7 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
-
+                    String id = LoginActivity.naverLoginDTO.getMember_id();
                     ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
                     profilUpdate.execute();
 
@@ -384,7 +384,7 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
-
+                    String id = SessionCallback.kakaoLoginDTO.getMember_id();
                     ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
                     profilUpdate.execute();
 
@@ -421,8 +421,8 @@ public class ProfilActivity extends AppCompatActivity {
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000){  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
 
-                    ProfilIensert profilInsert = new ProfilIensert(id, imageDbPathA, imageRealPathA);
-                    profilInsert.execute();
+                    //ProfilIensert profilInsert = new ProfilIensert(id, imageDbPathA, imageRealPathA);
+                    //profilInsert.execute();
 
                     Intent showIntent = new Intent(getApplicationContext(), RealMainActivity.class);
                     showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |   // 이 엑티비티 플래그를 사용하여 엑티비티를 호출하게 되면 새로운 태스크를 생성하여 그 태스크안에 엑티비티를 추가하게 됩니다. 단, 기존에 존재하는 태스크들중에 생성하려는 엑티비티와 동일한 affinity(관계, 유사)를 가지고 있는 태스크가 있다면 그곳으로 새 엑티비티가 들어가게됩니다.
