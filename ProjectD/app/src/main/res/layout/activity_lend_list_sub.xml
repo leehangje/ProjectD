@@ -193,15 +193,16 @@
                         android:textSize="14sp"
                         android:textStyle="normal|bold"
                         android:background="#cccac6"/>
-                <Spinner
-                    android:id="@+id/sp_md_nego_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:textAlignment="center"
-                    android:background="#ffffff"
-                    android:entries="@array/협상카테고리" />
+
+                        <Spinner
+                        android:id="@+id/sp_md_nego_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:background="#ffffff"
+                        android:entries="@array/협상카테고리" />
                 </LinearLayout>
 
             </LinearLayout>
