@@ -98,9 +98,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:textSize="19dp"
                         android:background="#FFFFFF"
-                        android:text="게임 / 취미" />
+                        android:text="게임/취미"
+                        android:textSize="19dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -130,9 +130,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:textSize="19dp"
                         android:background="#FFFFFF"
-                        android:text="유 / 아동" />
+                        android:text="유/아동"
+                        android:textSize="19dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -155,8 +155,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
-                        android:text="뷰티 / 미용"
-                        android:textSize="19dp"  />
+                        android:text="뷰티/미용"
+                        android:textSize="19dp" />
                 </LinearLayout>
 
             </LinearLayout>

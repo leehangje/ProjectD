@@ -1,8 +1,12 @@
 package com.example.projectd;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -10,45 +14,59 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectd.ATask.CategorySelect;
+import com.example.projectd.Dto.MdDTO;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class CategoryViewActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    CategoryAdapter adapter;
+    public static MdDTO selItem = null;
+
+    private RecyclerView recyclerView;
+    private CategoryAdapter adapter;
+    ArrayList<MdDTO> items ;
+
+    CategorySelect categorySelect;
+    ProgressDialog progressDialog;
+
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_view);
 
+        items = new ArrayList<>();
+        adapter = new CategoryAdapter(this, items);
         recyclerView = findViewById(R.id.recyclerView);
 
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CategoryAdapter();
-
-        adapter.addItem(new Category("모니터", "1000원"));
-        adapter.addItem(new Category("자전거", "1000원"));
-
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new OnCategoryItemClickListener() {
-            public static final int category1 = 1001;
+        Intent intent = getIntent();
+        if (intent != null) {
+            category = intent.getStringExtra("category");
+        }
 
-            @Override
-            public void onItemClick(CategoryAdapter.ViewHolder holder, View view, int position) {
-                Category item = adapter.getItem(position);
 
-                Toast.makeText(getApplicationContext(), "선택됨" + item.getTitle(),
-                        Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);
-                startActivityForResult(intent, category1);
-
-            }
-        });
+        categorySelect = new CategorySelect(items, adapter, progressDialog, category);
+        try {
+            categorySelect.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
+
 }
+

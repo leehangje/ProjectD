@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,15 +19,28 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.projectd.ATask.CategorySelect;
+import com.example.projectd.Dto.MdDTO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CategoryActivity extends Fragment {
+import java.util.ArrayList;
 
-   LinearLayout category1, category2, category3, category4, category5,
+public class CategoryActivity extends Fragment {
+    public  static MdDTO mdDTO = null;
+
+    CategorySelect categorySelect;
+
+    ArrayList<MdDTO> myItemArrayList;
+    RecyclerView recyclerView;
+
+    CategoryAdapter adapter;
+    StringBuffer stringBuffer;
+    ProgressDialog progressDialog;
+    LinearLayout category1, category2, category3, category4, category5,
             category6, category7, category8, category9, category10;
 
-   Button categoryBtn1, categoryBtn2, categoryBtn3, categoryBtn4, categoryBtn5, categoryBtn6,
-           categoryBtn7, categoryBtn8, categoryBtn9, categoryBtn10;
+    Button categoryBtn1, categoryBtn2, categoryBtn3, categoryBtn4, categoryBtn5, categoryBtn6,
+            categoryBtn7, categoryBtn8, categoryBtn9, categoryBtn10;
 
     ViewGroup viewGroup;
 
@@ -72,6 +87,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn1.getText().toString());
                 startActivity(intent);
             }
         });
@@ -80,6 +96,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn1.getText().toString());
                 startActivity(intent);
             }
         });
@@ -89,6 +106,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn2.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -97,6 +115,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn2.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -106,6 +125,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn3.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -114,6 +134,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn3.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -123,6 +144,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn4.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -131,6 +153,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn4.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -140,6 +163,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn5.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -148,6 +172,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn5.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -157,6 +182,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn6.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -165,6 +191,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn6.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -174,6 +201,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn7.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -182,6 +210,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn7.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -191,6 +220,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn8.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -199,6 +229,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn8.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -208,6 +239,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn9.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -216,6 +248,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn9.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -225,6 +258,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn10.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
@@ -233,6 +267,7 @@ public class CategoryActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryViewActivity.class);
+                intent.putExtra("category",categoryBtn10.getText().toString());
                 startActivity(intent);
             }//onClick()
         });
