@@ -1,36 +1,74 @@
 package com.example.projectd;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.projectd.ATask.LoginSelect;
+import com.example.projectd.ATask.NaverJoin;
+import com.example.projectd.ATask.NaverLogin;
 import com.example.projectd.Dto.MemberDto;
+import com.kakao.auth.AuthType;
+import com.kakao.auth.Session;
+import com.nhn.android.naverlogin.OAuthLogin;
+import com.nhn.android.naverlogin.OAuthLoginHandler;
+import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "main:LoginActivity";
+
     public static MemberDto loginDTO = null;
+    public static MemberDto naverLoginDTO = null;
 
     EditText etId, etPw;
     TextView id_pw_search, signUp;
     Button loginSubmitBtn;
+    String state = "";
+    ImageView naverLoginBtn, kakaoLoginBtn;
+
+    //네이버 로그인 관련
+    // https://developers.naver.com/apps/#/myapps/4HyB0M2cnGc8fif15HRb/overview
+    private static String OAUTH_CLIENT_ID = "cEfqX1rKoH7meFdpxDrl"; //클라이언트 아이디
+    private static String OAUTH_CLIENT_SECRET = "ulRbzFfLxf";       //Client Secret Key
+    private static String OAUTH_CLIENT_NAME = "대여안대여";         //애플리케이션 이름
+    public static OAuthLogin mOAuthLoginInstance;
+    public static OAuthLoginButton mOAuthLoginButton;
+    public static Context mContext;
+    public static Map<String, String> mUserInfoMap;
+
+    //카카오 로그인 관련
+    SessionCallback sessionCallback;
+    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +77,30 @@ public class LoginActivity extends AppCompatActivity {
 
         checkDangerousPermissions();    //위험 권한 주기
 
+        sessionCallback = new SessionCallback(getApplicationContext());
+
         id_pw_search = findViewById(R.id.id_pw_search);
         signUp = findViewById(R.id.signUp);
         loginSubmitBtn = findViewById(R.id.loginSubmitBtn);
         etId = findViewById(R.id.etId);
         etPw = findViewById(R.id.etPw);
+        naverLoginBtn = findViewById(R.id.naverLoginBtn);
+        kakaoLoginBtn = findViewById(R.id.kakaoLoginBtn);
 
+        mContext = LoginActivity.this;
+
+        //네이버 로그인 초기화
+        initData();
+
+        //키 값 발급
+        getHashKey();
+
+        naverLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOAuthLoginInstance.startOauthLoginActivity(LoginActivity.this, mOAuthLoginHandler);
+            }
+        });
 
         // 아이디/비밀번호 찾기 화면 띄우기
         id_pw_search.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +168,279 @@ public class LoginActivity extends AppCompatActivity {
             }
         }); //loginSubmitBtn.setOnClickListener()
 
+        // 카카오세션 콜백 등록
+        session = Session.getCurrentSession();
+        session.addCallback(sessionCallback);
+
+        // 카카오 로그인 버튼 클릭 시
+        kakaoLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
+                Log.d(TAG, "onClick: 카카오로그인완료");
+            }
+        });
+
     } //onCreate()
+
+    /****************************************************************************************************************
+     * Kakao
+     ****************************************************************************************************************/
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 카카오세션 콜백 삭제
+        Session.getCurrentSession().removeCallback(sessionCallback);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // 카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /****************************************************************************************************************
+     * Naver
+     ****************************************************************************************************************/
+
+    private void initData() {
+        //초기화
+        mOAuthLoginInstance = OAuthLogin.getInstance();
+        mOAuthLoginInstance.init(mContext, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_CLIENT_NAME);
+
+        mOAuthLoginButton = findViewById(R.id.naverLoginBtn);
+        mOAuthLoginButton.setOAuthLoginHandler(mOAuthLoginHandler);
+        mOAuthLoginButton.setBgResourceId(R.drawable.naver_login);
+    }
+
+    // 네이버 로그인 관련 핸들러
+    private OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
+        @Override
+        public void run(boolean success) {
+            if (success) {
+                String accessToken = mOAuthLoginInstance.getAccessToken(mContext);
+                String refreshToken = mOAuthLoginInstance.getRefreshToken(mContext);
+                long expiresAt = mOAuthLoginInstance.getExpiresAt(mContext);
+                String tokenType = mOAuthLoginInstance.getTokenType(mContext);
+
+                Toast.makeText(mContext, "success:" + accessToken, Toast.LENGTH_SHORT).show();
+
+                Log.d(TAG, "run: accessToken > " + accessToken);
+                Log.d(TAG, "run: refreshToken > " + refreshToken);
+                Log.d(TAG, "run: expiresAt > " + String.valueOf(expiresAt));
+                Log.d(TAG, "run: tokenType > " + tokenType);
+                Log.d(TAG, "run: getState() > " + mOAuthLoginInstance.getState(mContext).toString());
+
+                RequestApiTask rat = new RequestApiTask();
+                rat.execute();
+
+                //본인이 이동할 액티비티를 입력
+                //redirectSignupActivity();
+
+            } else {
+                String errorCode = mOAuthLoginInstance.getLastErrorCode(mContext).getCode();
+                String errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext);
+                Toast.makeText(mContext, "errorCode:" + errorCode
+                        + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "run: error");
+            }
+        }
+    };
+
+    private class RequestApiTask extends AsyncTask<Void, Void, Void> {
+        String member_id, member_nickname, member_name;
+        private String token = mOAuthLoginInstance.getAccessToken(mContext);
+        String member_loginType = "N";
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            String url = "https://openapi.naver.com/v1/nid/getUserProfile.xml";
+            String at = mOAuthLoginInstance.getAccessToken(mContext);
+            mUserInfoMap = requestNaverUserInfo(mOAuthLoginInstance.requestApi(mContext, at, url));
+            Log.d(TAG, "doInBackground: 들어옴");
+            return null;
+        }
+
+        protected void onPostExecute(Void content) {
+
+            if (mUserInfoMap.get("email") == null) {
+                Toast.makeText(mContext, "로그인 실패하였습니다.  잠시후 다시 시도해 주세요!!", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onPostExecute: 로그인 실패");
+            } else {
+
+                //네이버 로그인 성공
+                Log.d(TAG, 6+ String.valueOf(mUserInfoMap));
+                member_id = mUserInfoMap.get("id");
+                member_nickname = mUserInfoMap.get("nickname");
+                Log.d(TAG, "onPostExecute: member_id = "+ member_id);
+                Log.d(TAG, "onPostExecute: member_nickname = "+ member_nickname);
+
+                NaverLogin naverLogin = new NaverLogin(member_id, member_loginType);
+                try {
+                    naverLogin.execute().get();
+                    Log.d(TAG, "onSessionOpened: try 구문 안");
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(LoginActivity.this, "네이버 로그인 됐습니다...", Toast.LENGTH_SHORT).show();
+
+                if(naverLoginDTO == null){
+                    NaverJoin naverJoin = new NaverJoin(member_id, member_nickname, member_name, member_loginType, token);
+                    try {
+                        String state = naverJoin.execute().get();
+                        Log.d(TAG, "onSessionOpened: " + state);
+                    } catch (Exception e) {
+                        Log.d(TAG, "onPostExecute: " + e.getMessage());
+                    }
+
+                    Toast.makeText(LoginActivity.this, "네이버 로그인 됐습니다...", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onSuccess: 네이버 로그인 됐습니다");
+
+                }
+
+                Intent intent = new Intent(getApplicationContext(), LogoutActivity.class);
+                startActivity(intent);
+
+                finish();
+
+
+                /*LoginSelect loginSelect = new LoginSelect(member_email, "0000");
+                try {
+                    String result = loginSelect.execute().get();
+                    Log.d(TAG, "onSessionOpened: " + result);
+                    Log.d(TAG, "onSessionOpened: " + loginDTO);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+
+                /*if(loginDTO == null){
+                    JoinInsert joinInsert = new JoinInsert(member_email, "0000", member_nickname,"");
+                    try {
+                        String result = joinInsert.execute().get();
+                        Log.d(TAG, "onSessionOpened: " + result);
+                    } catch (Exception e) {
+                        Log.d(TAG, "onPostExecute: " + e.getMessage());
+                    }
+                    loginDTO = new MemberDTO(member_email, member_nickname, null);
+                    Log.d(TAG, "onSuccess: 네이버로그인됐습니다"+loginDTO.getMember_email());
+                }*/
+
+            }
+        }
+    } //class RequestApiTask
+
+    private static Map<String, String> requestNaverUserInfo(String data) {  //xml 파싱
+        String f_array[] = new String[9];
+        try {
+            XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserCreator.newPullParser();
+            InputStream input = new ByteArrayInputStream(data.getBytes("UTF-8"));
+            parser.setInput(input, "UTF-8");
+
+            int parserEvent = parser.getEventType();
+            String tag;
+            boolean inText = false;
+            boolean lastMatTag = false;
+
+            int colIdx = 0;
+
+            while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                switch (parserEvent) {
+                    case  XmlPullParser.START_TAG:
+                        tag = parser.getName();
+
+                        if(tag.compareTo("xml") == 0) {
+                            inText = false;
+                        } else if(tag.compareTo("data") == 0) {
+                            inText = false;
+                        } else if(tag.compareTo("result") == 0) {
+                            inText = false;
+                        } else if(tag.compareTo("resultcode") == 0) {
+                            inText = false;
+                        } else if(tag.compareTo("message") == 0) {
+                            inText = false;
+                        } else if(tag.compareTo("response") == 0) {
+                            inText = false;
+                        } else {
+                            inText = true;
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        tag = parser.getName();
+                        if(inText) {
+                            if(parser.getText() == null) {
+                                f_array[colIdx] = "";
+                            } else {
+                                f_array[colIdx] = parser.getText().trim();
+                            }
+                            colIdx++;
+                        }
+                        inText = false;
+                        break;
+                    case XmlPullParser.END_TAG:
+                        tag = parser.getName();
+                        inText = false;
+                        break;
+                }
+                parserEvent = parser.next();
+            }
+
+        } catch (Exception e) {
+            Log.e(TAG, "requestNaverUserInfo: Error is network call", e);
+
+        }
+
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("nickname", f_array[1]);
+        resultMap.put("id", f_array[6]);
+        resultMap.put("name", f_array[7]);
+
+        return resultMap;
+    } //requestNaverUserInfo
+
+    // 성공 후 이동할 액티비티
+    protected void redirectSignupActivity() {
+        final Intent intent = new Intent(this, LogoutActivity.class);
+        startActivity(intent);
+        finish();
+        //Toast.makeText(mContext, "NAVER LOGIN", Toast.LENGTH_SHORT).show();
+    }
+
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("HashKey", "HashKey:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("HashKey", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("HashKey", "HashKey Error. signature=" + signature, e);
+            }
+        }
+    }
+
 
     //----------------------------------------------------------------
     // 위험 권한
@@ -149,7 +477,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult ( int requestCode, String[] permissions,
-                                             int[] grantResults){
+                                             int[] grantResults) {
         if (requestCode == 1) {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
@@ -160,5 +488,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
 
 } //class

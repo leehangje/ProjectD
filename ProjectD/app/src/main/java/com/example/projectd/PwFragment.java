@@ -17,13 +17,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectd.ATask.SendEmail;
 import com.example.projectd.ATask.SignUpCheckId;
 
 import java.util.concurrent.ExecutionException;
 
 import static com.example.projectd.SignUpFormActivity.checkEmail;
 import static com.example.projectd.SignUpFormActivity.idCheckDTO;
-import static com.example.projectd.SignUpFormActivity.sender;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,9 +35,9 @@ public class PwFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "PwFragment";
     //GMailSender sender = new GMailSender("dteam0420@gmail.com", "hanul123");
 
-    EditText etEmail, etEmailAuthNum;
+    EditText etEmail, etName;
     Button btnEmailAuth, btnResetPw;
-
+    String state;
     ViewGroup rootView;
 
     //Dialog에 관련된 변수
@@ -100,26 +100,11 @@ public class PwFragment extends Fragment implements View.OnClickListener{
                 viewGroup, false);
 
         etEmail = rootView.findViewById(R.id.etEmail);
-        etEmailAuthNum = rootView.findViewById(R.id.etEmailAuthNum);
-        btnEmailAuth = rootView.findViewById(R.id.btnEmailAuth);
+        etName = rootView.findViewById(R.id.etName);
         btnResetPw = rootView.findViewById(R.id.btnResetPw);
 
         // 이메일 발송하기 버튼 클릭시
-        btnEmailAuth.setOnClickListener(this);
-
-        // 비밀번호 재설정 버튼 클릭시
-        btnResetPw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String emailAuthNum = etEmailAuthNum.getText().toString().trim();
-                if (emailAuthNum == sender.getEmailCode()) {    // 인증번호가 일치할때
-                    rootView = (ViewGroup) inflater.inflate(R.layout.fragment_pw_reset,
-                            viewGroup, false);
-                } else {
-                    Toast.makeText(getContext(), "인증번호가 일치하지 않습니다!", Toast.LENGTH_SHORT).show();
-                }
-            } //onClick()
-        }); //btnResetPw.setOnClickListener()
+        btnResetPw.setOnClickListener(this);
 
         return rootView;
     } //onCreateView()
@@ -147,10 +132,13 @@ public class PwFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         String id = etEmail.getText().toString().trim();
+        String name = etName.getText().toString().trim();
 
         if (id.length() == 0) {  //이메일를 입력하지 않은 경우
             Toast.makeText(getContext(), "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
+        } else if(name.length() == 0) {
+            Toast.makeText(getContext(), "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else if (!checkEmail(id)) { //이메일 형식에 맞지 않는 경우
             Toast.makeText(getContext(), "이메일 형식으로 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
@@ -171,13 +159,14 @@ public class PwFragment extends Fragment implements View.OnClickListener{
                 showMessage("알림", "가입하신 이메일이 존재하지 않습니다.\n다시 입력해주세요.");
                 return;
             } else {
-                showMessage("알림", "인증번호 이메일을 발송했습니다.\n이메일을 통해 인증번호를 입력해주세요");
+                //showMessage("알림", "인증번호 이메일을 발송했습니다.\n이메일을 통해 인증번호를 입력해주세요");
                 idCheckDTO = null;
-                Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
-                //((SignUpFormActivity) getActivity()).mailSender(id);
+                //Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+                /* G메일 전송 - 실패
+                ((SignUpFormActivity) getActivity()).mailSender(id);
                 ((SearchIDActivity) getActivity()).changeText(id);
-                /*
-                //G메일 전송
+
+                //G메일 전송 - 실패
                 try {
                     Toast.makeText(getContext(), "try 구문 안1, " + id, Toast.LENGTH_SHORT).show();
                     sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
@@ -191,48 +180,21 @@ public class PwFragment extends Fragment implements View.OnClickListener{
                     Log.d(TAG, "onClick: 이메일 보내기 오류");
                 } //try-catch
                 */
+                SendEmail sendEmail = new SendEmail(id, name);
 
-                //G메일 전송
                 try {
+                    state = sendEmail.execute().get().trim();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                    Log.d(TAG, "onClick: " + id);
-                    sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
-                            "이메일 인증번호는 "+ sender.getEmailCode()+ "입니다. \n인증번호를 입력해주세요!",
-                            "dteam0420@gmail.com",
-                            id);
-                    Log.d(TAG, "onClick: " + sender.getEmailCode());
-
-
-                    //mailSender(id);
-                    /*
-                    //인증 다이얼로그 생성
-                    dialog = LayoutInflater.from(getContext());
-                    dialogLayout = dialog.inflate(R.layout.layout_auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
-                    authDialog = new Dialog(getContext()); //Dialog 객체 생성
-                    authDialog.setContentView(dialogLayout); //Dialog에 inflate한 View를 탑재 하여줌
-                    authDialog.setCanceledOnTouchOutside(false); //Dialog 바깥 부분을 선택해도 닫히지 않게 설정함.
-                    authDialog.show();
-                    countDownTimer();
-
-                    //다이얼로그 내 인증번호 입력 확인버튼 클릭시
-                    emailAuth_btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String user_answer = emailAuth_number.getText().toString().trim();
-
-                            if (user_answer.equals(sender.getEmailCode())){
-                                Toast.makeText(getContext(), "이메일 인증 성공", Toast.LENGTH_SHORT).show();
-                                authDialog.cancel();
-                            } else{
-                                Toast.makeText(getContext(), "인증 번호를 다시 입력해주세요!", Toast.LENGTH_SHORT).show();
-                                emailAuth_number.setText("");
-                                emailAuth_number.requestFocus();
-                                return;
-                            }
-                        }
-                    });*/
-                } catch (Exception e) {
-                    Log.e("SendMail", e.getMessage(), e);
+                Toast.makeText(getContext(), state, Toast.LENGTH_SHORT).show();
+                if (state.equals("1")) {
+                    showMessage("알림", "이메일을 전송했습니다.\n비밀번호 재설정을 진행해주세요");
+                } else {
+                    showMessage("알림", "이메일 전송에 실패했습니다.\n관리자에게 문의해주세요");
                 }
             }
         }

@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.projectd.ATask.MdRentStatusInsert;
 import com.example.projectd.Dto.MdDTO;
 import com.google.firebase.database.annotations.NotNull;
 
@@ -25,15 +30,12 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
     Context context;
     List<MdDTO> items;
     OnLendItemCLickListener listener;
-
+    String md_rent_status;
+    String md_serial_number;
     public LendAdapter(Context context, List<MdDTO> items){
         this.context = context;
         this.items = items;
     }
-
-    // 리스너 객체 참조를 저장하는 변수
-   // private OnLendItemCLickListener mListener = null ;
-
 
     @NonNull
     @Override
@@ -70,6 +72,9 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
         TextView tv_md_category;
         TextView tv_md_serial_num;
         ImageView iv_md_img;
+        Button bt_disable;
+        Button bt_able;
+        //Spinner spinner2;
 
         public ViewHolder(final View itemView, final OnLendItemCLickListener listener){
             super(itemView);
@@ -79,6 +84,10 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
             tv_md_category = itemView.findViewById(R.id.tv_md_category);
             tv_md_serial_num = itemView.findViewById(R.id.tv_md_serial_num);
             iv_md_img = itemView.findViewById(R.id.iv_md_img);
+            bt_disable = itemView.findViewById(R.id.bt_disable);
+            bt_able = itemView.findViewById(R.id.bt_able);
+
+            //spinner2 = itemView.findViewById(R.id.sp_md_nego_category);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,17 +96,50 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                     if (listener != null) {
                         listener.onItemClick(ViewHolder.this, view, position);
                     }
-
                 }
             });
         }
 
-        public void setItem(MdDTO item){
+        public void setItem(final MdDTO item){
             tv_md_lend_name.setText(item.getMd_name());
             tv_md_lender.setText(item.getMember_id());
             tv_md_category.setText(item.getMd_category());
             tv_md_serial_num.setText(item.getMd_serial_number());
             Glide.with(itemView).load(item.getMd_photo_url()).into(iv_md_img);
+            bt_disable.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    md_rent_status = "1";
+                    md_serial_number = item.getMd_serial_number();
+                    MdRentStatusInsert mdRentStatusInsert = new MdRentStatusInsert(md_rent_status, md_serial_number);
+                    mdRentStatusInsert.execute();
+                    Toast.makeText(context, "거래완료", Toast.LENGTH_LONG).show();
+                }
+            });
+            bt_able.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    md_rent_status = "0";
+                    md_serial_number = item.getMd_serial_number();
+                    MdRentStatusInsert mdRentStatusInsert = new MdRentStatusInsert(md_rent_status, md_serial_number);
+                    mdRentStatusInsert.execute();
+                    Toast.makeText(context, "거래가능", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            /*spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    spinner2.getSelectedItemPosition();
+
+                    MdRentStatusInsert mdRentStatusInsert = new MdRentStatusInsert(item.getMd_rent_status());
+                    mdRentStatusInsert.execute();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });*/
         }
     }
 

@@ -3,15 +3,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/wallet_holo_blue_light"
+        android:gravity="center">
+
+    <ImageView
+        android:id="@+id/mainLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo1"
+        android:layout_gravity="center"/>
+
+    </LinearLayout>
+
     <TextView
-        android:layout_marginTop="100dp"
-        android:layout_gravity="center"
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="그것이 알고싶다"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="어서오세요 '대여안대여'입니다!"
+        android:textColor="#000000" />
 
 
 </LinearLayout>

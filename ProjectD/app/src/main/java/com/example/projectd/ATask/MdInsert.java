@@ -67,7 +67,7 @@ public class MdInsert extends AsyncTask<Void, Void, Void> {
 
             String postURL = ipConfig + "/app/anInsert";
             // 전송
-            //InputStream inputStream = null;
+
             HttpClient httpClient = AndroidHttpClient.newInstance("Android");
             HttpPost httpPost = new HttpPost(postURL);
             httpPost.setEntity(builder.build());

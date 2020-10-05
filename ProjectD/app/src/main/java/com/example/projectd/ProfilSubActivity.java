@@ -23,7 +23,6 @@ public class ProfilSubActivity extends AppCompatActivity {
 
     EditText name1, nickname1, phone1, addr1;
     String name, nickname, tel, addr;
-    String id = LoginActivity.loginDTO.getMember_id();
 
     File file = null;
     long fileSize = 0;
@@ -37,17 +36,42 @@ public class ProfilSubActivity extends AppCompatActivity {
         phone1 = findViewById(R.id.phone);
         addr1 = findViewById(R.id.addr);
 
-        String member_name = LoginActivity.loginDTO.getMember_name();
-        String member_nickname = LoginActivity.loginDTO.getMember_nickname();
-        String member_phone = LoginActivity.loginDTO.getMember_tel();
-        String member_addr = LoginActivity.loginDTO.getMember_addr();
+        if(loginDTO != null) {
 
-        name1.setText(member_name);
-        nickname1.setText(member_nickname);
-        phone1.setText(member_phone);
-        addr1.setText(member_addr);
+            String member_name = LoginActivity.loginDTO.getMember_name();
+            String member_nickname = LoginActivity.loginDTO.getMember_nickname();
+            String member_phone = LoginActivity.loginDTO.getMember_tel();
+            String member_addr = LoginActivity.loginDTO.getMember_addr();
+
+            name1.setText(member_name);
+            nickname1.setText(member_nickname);
+            phone1.setText(member_phone);
+            addr1.setText(member_addr);
+        }else if(LoginActivity.naverLoginDTO != null){
+            String member_name = LoginActivity.naverLoginDTO.getMember_name();
+            String member_nickname = LoginActivity.naverLoginDTO.getMember_nickname();
+            String member_phone = LoginActivity.naverLoginDTO.getMember_tel();
+            String member_addr = LoginActivity.naverLoginDTO.getMember_addr();
+
+            name1.setText(member_name);
+            nickname1.setText(member_nickname);
+            phone1.setText(member_phone);
+            addr1.setText(member_addr);
+        }else if(SessionCallback.kakaoLoginDTO != null){
+            String member_name = SessionCallback.kakaoLoginDTO.getMember_name();
+            String member_nickname = SessionCallback.kakaoLoginDTO.getMember_nickname();
+            String member_phone = SessionCallback.kakaoLoginDTO.getMember_tel();
+            String member_addr = SessionCallback.kakaoLoginDTO.getMember_addr();
+
+            name1.setText(member_name);
+            nickname1.setText(member_nickname);
+            phone1.setText(member_phone);
+            addr1.setText(member_addr);
+        }
 
     }
+
+    //프로필 수정
     public void btnSubUpdateClicked(View view){
         if(isNetworkConnected(this) == true){
 
@@ -56,19 +80,59 @@ public class ProfilSubActivity extends AppCompatActivity {
                 tel = phone1.getText().toString();
                 addr = addr1.getText().toString();
 
-                ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr);
-                profilSubUpdate.execute();
+                if ( loginDTO != null){
+                    String id = loginDTO.getMember_id();
+                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr);
+                    profilSubUpdate.execute();
 
-                String member_id = loginDTO.getMember_id();
-                String member_pw = loginDTO.getMember_pw();
-                LoginSelect select = new LoginSelect(member_id, member_pw);
-                loginDTO = null;
-                try {
-                    select.execute().get();
-                } catch (ExecutionException e) {
-                    e.getMessage();
-                } catch (InterruptedException e) {
-                    e.getMessage();
+                    String member_id = loginDTO.getMember_id();
+                    String member_pw = loginDTO.getMember_pw();
+                    LoginSelect select = new LoginSelect(member_id, member_pw);
+                    loginDTO = null;
+
+                    try {
+                        select.execute().get();
+                    } catch (ExecutionException e) {
+                        e.getMessage();
+                    } catch (InterruptedException e) {
+                        e.getMessage();
+                    }
+                }else if( LoginActivity.naverLoginDTO != null){
+                    String id = LoginActivity.naverLoginDTO.getMember_id();
+                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr);
+                    profilSubUpdate.execute();
+
+                    String member_id = LoginActivity.naverLoginDTO.getMember_id();
+                    String member_pw = LoginActivity.naverLoginDTO.getMember_pw();
+                    LoginSelect select = new LoginSelect(member_id, member_pw);
+                    LoginActivity.naverLoginDTO = null;
+
+                    try {
+                        select.execute().get();
+                    } catch (ExecutionException e) {
+                        e.getMessage();
+                    } catch (InterruptedException e) {
+                        e.getMessage();
+                    }
+
+                }else if(SessionCallback.kakaoLoginDTO != null){
+                    String id = SessionCallback.kakaoLoginDTO.getMember_id();
+                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr);
+                    profilSubUpdate.execute();
+
+                    String member_id = SessionCallback.kakaoLoginDTO.getMember_id();
+                    String member_pw = SessionCallback.kakaoLoginDTO.getMember_pw();
+                    LoginSelect select = new LoginSelect(member_id, member_pw);
+                    SessionCallback.kakaoLoginDTO = null;
+
+                    try {
+                        select.execute().get();
+                    } catch (ExecutionException e) {
+                        e.getMessage();
+                    } catch (InterruptedException e) {
+                        e.getMessage();
+                    }
+
                 }
 
                 Toast.makeText(getApplicationContext(), "수정성공", Toast.LENGTH_LONG).show();
@@ -86,14 +150,27 @@ public class ProfilSubActivity extends AppCompatActivity {
         }
 
     }
-
+    //계정 삭제
     public void btnDeleteClicked(View v){
         if(isNetworkConnected(this) == true){
 
+            if(loginDTO != null){
                 Log.d("Sub1 : selImg => ", loginDTO.getMember_profile());
 
                 ListDelete listDelete = new ListDelete(loginDTO.getMember_id(), loginDTO.getMember_profile());
                 listDelete.execute();
+            }else if(LoginActivity.naverLoginDTO != null){
+                Log.d("Sub1 : selImg => ", LoginActivity.naverLoginDTO.getMember_profile());
+
+                ListDelete listDelete = new ListDelete(LoginActivity.naverLoginDTO.getMember_id(), LoginActivity.naverLoginDTO.getMember_profile());
+                listDelete.execute();
+
+            }else if (SessionCallback.kakaoLoginDTO != null){
+                Log.d("Sub1 : selImg => ", SessionCallback.kakaoLoginDTO.getMember_profile());
+
+                ListDelete listDelete = new ListDelete(SessionCallback.kakaoLoginDTO.getMember_id(), SessionCallback.kakaoLoginDTO.getMember_profile());
+                listDelete.execute();
+            }
 
                 // 화면갱신
                 Intent refresh = new Intent(this, LoginActivity.class);
@@ -106,7 +183,7 @@ public class ProfilSubActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show(); // 테스트 111
         }
     }
-
+    //취소
     public void btnCancelClicked(View view){
         finish();
     }

@@ -22,7 +22,7 @@
 
             <LinearLayout
                 android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_height="160dp"
 
                 android:gravity="center_vertical"
                 android:orientation="vertical">
@@ -179,29 +179,24 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="38dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
-                    <TextView
-                        android:id="@+id/tv_md_nego"
-                        android:layout_width="120dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="대여여부"
-                        android:textAlignment="center"
-                        android:textSize="14sp"
-                        android:textStyle="normal|bold"
-                        android:background="#cccac6"/>
-                <Spinner
-                    android:id="@+id/sp_md_nego_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:textAlignment="center"
-                    android:background="#ffffff"
-                    android:entries="@array/협상카테고리" />
+
+                    <Button
+                        android:id="@+id/bt_disable"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:text="거래완료" />
+
+                    <Button
+                        android:id="@+id/bt_able"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:text="거래가능"/>
+
+
                 </LinearLayout>
 
             </LinearLayout>
