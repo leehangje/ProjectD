@@ -32,6 +32,8 @@ import java.util.regex.Pattern;
  * create an instance of this fragment.
  */
 public class IdFragment extends DialogFragment {
+    private static final String TAG = "main:IdFragment";
+
     EditText etTel, etTelAuthNum;
     Button btnTelAuth, btnSearchId;
     String authNum, phoneNum;
@@ -148,7 +150,8 @@ public class IdFragment extends DialogFragment {
                             // replace : 해당 문자열(매개변수 1)을 다른 문자열(매개변수 2)로 대체
                             // substring: 몇번째(매개변수 1)부터 몇번째(매개변수 2)까지의 문자열을 반환
                             String[] split = state.split("@");
-                            int split0length = split[0].length();
+                            // split[0] == 'admin' / split[1] == 'hanul.com'
+                            int split0length = split[0].length();   //5
                             String email = split[0].replace(split[0].substring(split0length - 3, split0length), "***");
                             email += "@" + split[1];
                             message = "고객님의 정보와 일치하는 아이디입니다.\n" + "\n"
