@@ -15,10 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.example.projectd.R;
 import com.google.android.material.tabs.TabLayout;
 
 import static com.example.projectd.SignUpFormActivity.sender;
@@ -34,17 +30,10 @@ public class SearchIDActivity extends AppCompatActivity {
     IdFragment fragment1;
     PwFragment fragment2;
 
-    TextView pwFragment_id;
-
-    Button testemail;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_i_d);
-
-        pwFragment_id = findViewById(R.id.pwFragment_id);
-        testemail = findViewById(R.id.testemail);
 
         //로그인가기
         Button btn_back = findViewById(R.id.btn_back);
@@ -97,37 +86,6 @@ public class SearchIDActivity extends AppCompatActivity {
 
         });
 
-        pwFragment_id.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                /*
-                String id = pwFragment_id.getText().toString().trim();
-                Log.d(TAG, "afterTextChanged: " + id);
-                //G메일 전송
-                try {
-                    Log.d(TAG, "onClick: " + id);
-                    sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
-                            "이메일 인증번호는 "+ sender.getEmailCode()+ "입니다. \n인증번호를 입력해주세요!",
-                            "dteam0420@gmail.com",
-                            id);
-                    Log.d(TAG, "onClick: " + sender.getEmailCode());
-
-                } catch (Exception e) {
-                    Log.e("SendMail", e.getMessage(), e);
-                }
-                */
-            }
-        }); //pwValueCheck.addTextChangedListener()
         /*
         testemail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,25 +111,5 @@ public class SearchIDActivity extends AppCompatActivity {
 
     }//onCreate
 
-    public void changeText(String data) {
-        pwFragment_id.setText(data);
-        /*
-        String id = pwFragment_id.getText().toString().trim();
-
-        //G메일 전송
-        try {
-            Log.d(TAG, "onClick: " + id);
-            sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
-                    "이메일 인증번호는 "+ sender.getEmailCode()+ "입니다. \n인증번호를 입력해주세요!",
-                    "dteam0420@gmail.com",
-                    id);
-            Log.d(TAG, "onClick: " + sender.getEmailCode());
-
-        } catch (Exception e) {
-            Log.e("SendMail", e.getMessage(), e);
-        }
-
-         */
-    } //changeText()
 
 }//class

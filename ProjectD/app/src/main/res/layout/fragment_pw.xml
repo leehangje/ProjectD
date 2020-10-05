@@ -10,6 +10,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일과 이름을 입력해주세요"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,7 +26,7 @@
 
             <EditText
                 android:id="@+id/etEmail"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
                 android:layout_marginLeft="27dp"
@@ -26,16 +35,6 @@
                 android:hint="이메일을 입력해주세요"
                 android:inputType="textEmailAddress"
                 android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/btnEmailAuth"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="5dp"
-                android:background="#3e4ba9"
-                android:text="이메일 발송하기"
-                android:textColor="#FFFFFF" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,7 +42,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/etEmailAuthNum"
+                android:id="@+id/etName"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
@@ -52,8 +51,7 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginRight="30dp"
                 android:ems="10"
-                android:hint="인증번호를 입력해주세요"
-                android:inputType="number"
+                android:hint="이름을 입력해주세요"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -70,19 +68,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btnResetPw"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="23dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginRight="0dp"
                 android:background="#3F51B5"
-                android:text="비밀번호 재설정"
+                android:layout_gravity="center"
+                android:layout_marginTop="45dp"
+                android:text="이메일 보내기"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 

@@ -20,6 +20,8 @@ import com.example.projectd.Dto.MemberDto;
 
 import java.util.ArrayList;
 import static com.example.projectd.LoginActivity.loginDTO;
+import static com.example.projectd.LoginActivity.naverLoginDTO;
+import static com.example.projectd.SessionCallback.kakaoLoginDTO;
 
 public class MainActivity extends Fragment {
 
@@ -59,7 +61,15 @@ public class MainActivity extends Fragment {
         recyclerView.setAdapter(adapter);
 
         tv_addr = viewGroup.findViewById(R.id.tv_addr);
-        tv_addr.setText(loginDTO.getMember_addr());     //메인 상단에 회원 동네 뜨도록 함
+
+        //메인 상단에 회원 동네 뜨도록 함
+        if(loginDTO != null) {
+            tv_addr.setText(loginDTO.getMember_addr());
+        } else if(naverLoginDTO != null) {
+            tv_addr.setText(naverLoginDTO.getMember_addr());
+        } else if(kakaoLoginDTO != null) {
+            tv_addr.setText(kakaoLoginDTO.getMember_addr());
+        }
 
         //찜목록
         btn_like = viewGroup.findViewById(R.id.btn_like);
@@ -119,8 +129,17 @@ public class MainActivity extends Fragment {
 
         });
 
-        AnMainSelect anMainSelect = new AnMainSelect(items, adapter, loginDTO.getMember_addr());
-        anMainSelect.execute();
+        if(loginDTO != null) {
+            AnMainSelect anMainSelect = new AnMainSelect(items, adapter, loginDTO.getMember_addr());
+            anMainSelect.execute();
+        } else if(naverLoginDTO != null) {
+            AnMainSelect anMainSelect = new AnMainSelect(items, adapter, naverLoginDTO.getMember_addr());
+            anMainSelect.execute();
+        } else if(kakaoLoginDTO != null) {
+            AnMainSelect anMainSelect = new AnMainSelect(items, adapter, kakaoLoginDTO.getMember_addr());
+            anMainSelect.execute();
+        }
+
 
         return viewGroup;
 

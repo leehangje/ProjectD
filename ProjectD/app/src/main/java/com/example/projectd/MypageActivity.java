@@ -68,7 +68,7 @@ public class MypageActivity extends Fragment {
         ratingBar2 = viewGroup.findViewById(R.id.ratingBar2);
         profile_photo = viewGroup.findViewById(R.id.profile_photo);
         ratingSum = viewGroup.findViewById(R.id.ratingSum);
-        btn1 = viewGroup.findViewById(R.id.btn1);
+
 
         final String grade = LoginActivity.loginDTO.getMember_grade();
         String user = LoginActivity.loginDTO.getMember_nickname();
@@ -78,13 +78,12 @@ public class MypageActivity extends Fragment {
         ratingBar2.setRating(Float.parseFloat(grade));
         ratingSum.setText(grade);
 
+        //프로필 사진
         Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
                 .placeholder(R.color.cardview_dark_background)
                 .into(profile_photo);
 
-
-        btn1.setText(LoginActivity.loginDTO.getMember_profile());
-
+        //별점
         ratingBar2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {

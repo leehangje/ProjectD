@@ -93,18 +93,17 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
 
-        <Button
+        <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+            android:id="@+id/naverLoginBtn"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="#16AF37"
-            android:text="NAVER로 로그인"
-            android:textColor="#FFFFFF" />
+            android:layout_height="40dp"
+            android:src="@drawable/naver_login" />
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="#F6D52B"
-            android:text="KAKAO로 로그인"
+        <ImageView
+            android:id="@+id/kakaoLoginBtn"
+            android:layout_width="145dp"
+            android:layout_height="50dp"
+            android:src="@drawable/kakao_login_large"
             android:textColor="#472E08" />
 
     </LinearLayout>

@@ -495,12 +495,12 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
         return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
     }
 
-    //비밀번호 형식 체크 (암호는 최소 8자 이상, 알파벳 1개, 숫자 1개 및 특수 문자 1개를 사용)
+    //비밀번호 형식 체크 (암호는 최소 8자 이상, 알파벳 소문자 1개, 숫자 1개 및 특수 문자 1개를 사용)
     public static boolean isValidPassword(final String password) {
 
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
 

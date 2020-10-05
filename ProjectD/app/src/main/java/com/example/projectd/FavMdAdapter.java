@@ -32,7 +32,7 @@ public class FavMdAdapter extends RecyclerView.Adapter<FavMdAdapter.ViewHolder>
 
     @NonNull
     @Override
-    public FavMdAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.card_list, parent, false);
 
