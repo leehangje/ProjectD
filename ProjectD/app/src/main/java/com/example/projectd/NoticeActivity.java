@@ -15,6 +15,7 @@ public class NoticeActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     NoticeAdapter adapter;
+    NoticeFindActivity noticeFindActivity;
 
     LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
 
@@ -23,6 +24,7 @@ public class NoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
 
+        noticeFindActivity = new NoticeFindActivity();
         recyclerView = findViewById(R.id.recyclerView);
         toolbar_context = findViewById(R.id.toolbar_context);
 
@@ -46,8 +48,8 @@ public class NoticeActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getSub(),
                         Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), NoticeFindActivity.class);
-                startActivityForResult(intent, Notice);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.notice_layout, noticeFindActivity).commit();
 
             }
         });

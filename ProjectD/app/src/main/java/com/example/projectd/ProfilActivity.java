@@ -75,14 +75,6 @@ public class ProfilActivity extends AppCompatActivity {
         profile_photo = findViewById(R.id.profile_photo);
         profile_set = findViewById(R.id.profile_set);
 
-        Modified.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ProfilSubActivity.class);
-                startActivity(intent);
-            }
-        });
-
         String member_name = LoginActivity.loginDTO.getMember_name();
         String member_nickname = LoginActivity.loginDTO.getMember_nickname();
         String member_addr = LoginActivity.loginDTO.getMember_addr();
@@ -90,37 +82,38 @@ public class ProfilActivity extends AppCompatActivity {
         String member_profile = LoginActivity.loginDTO.getMember_profile();
         String member_tel = LoginActivity.loginDTO.getMember_tel();
 
-
-
         profile_name.setText(member_name);
         profile_nickname.setText(member_nickname);
         profile_phone.setText(member_tel);
         profile_location.setText(member_addr);
         profile_email.setText(member_id);
 
+        //마이페이지에서 프로필 사진 가져옴
         imagePath = LoginActivity.loginDTO.getMember_profile();
         pImgDbPathU = imagePath;
         imageDbPathU = imagePath;
-
         profile_photo.setVisibility(View.VISIBLE);
+
         // 선택된 이미지 보여주기
         Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
                 .placeholder(R.color.cardview_dark_background)
                 .into(profile_photo);
 
-        Modified.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ProfilSubActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        //프로필 눌렀을 때 팝업창
         profile_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     show();
 
+            }
+        });
+
+        //프로필 수정
+        Modified.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ProfilSubActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -258,6 +251,7 @@ public class ProfilActivity extends AppCompatActivity {
         return res;
     }
 
+    //확인버튼 눌렀을때
     public void btnUpdateClicked(View view){
         if (LoginActivity.loginDTO.getMember_profile() != null){
 
@@ -332,6 +326,7 @@ public class ProfilActivity extends AppCompatActivity {
             }
         }
     }
+    //뒤로가기 눌렀을때
     public void ModifieClicked (View view){
         finish();
     }
