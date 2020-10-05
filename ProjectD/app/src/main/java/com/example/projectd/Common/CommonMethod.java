@@ -18,7 +18,7 @@ public class CommonMethod {
     /*public static String ipConfig = "http://192.168.0.178:8080";*/
     //public static String ipConfig = "http://121.148.239.200:80";
     /*public static String ipConfig = "http://192.168.1.8:8989";*/
-    public static String ipConfig = "http://192.168.0.74:8080/";
+    public static String ipConfig = "http://192.168.0.170:8080/";
    /* public static String ipConfig = "http://192.168.0.214:8080/";*/
     /*public static String ipConfig = "http://172.30.1.28:80";*/
     //public static String ipConfig = "http://192.168.0.71:8080";
