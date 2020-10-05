@@ -92,6 +92,9 @@ public class LoginActivity extends AppCompatActivity {
         //네이버 로그인 초기화
         initData();
 
+        //키 값 발급
+        getHashKey();
+
         naverLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -417,7 +420,26 @@ public class LoginActivity extends AppCompatActivity {
         //Toast.makeText(mContext, "NAVER LOGIN", Toast.LENGTH_SHORT).show();
     }
 
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("HashKey", "HashKey:null");
 
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("HashKey", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("HashKey", "HashKey Error. signature=" + signature, e);
+            }
+        }
+    }
 
 
     //----------------------------------------------------------------
