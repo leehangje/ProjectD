@@ -35,6 +35,7 @@ public class SearchActivity extends AppCompatActivity {
     Map<String,Object> params;
     ArrayList<MdDTO> items;
     LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
+    //
 
 
 
