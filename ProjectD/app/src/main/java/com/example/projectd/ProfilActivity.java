@@ -169,7 +169,6 @@ public class ProfilActivity extends AppCompatActivity {
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_PICK);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), LOAD_IMAGE);
-                    re
                 }
             }
         });
