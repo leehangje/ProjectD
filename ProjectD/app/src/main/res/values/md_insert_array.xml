@@ -2,12 +2,16 @@
 
 <resources>
     <string-array name="카테고리">
-        <item>자전거/전동/스쿠터</item>
-        <item>스포츠/레저</item>
-        <item>여행용품</item>
-        <item>육아용품</item>
+        <item>디지털/가전</item>
+        <item>스포츠/레져</item>
+        <item>유/아동</item>
+        <item>뷰티/미용</item>
         <item>게임/취미</item>
-        <item>기타</item>
+        <item>반려동물용품</item>
+        <item>생활 용품</item>
+        <item>의류/잡화</item>
+        <item>무료/나눔</item>
+        <item>기타 물품</item>
     </string-array>
 
 </resources>

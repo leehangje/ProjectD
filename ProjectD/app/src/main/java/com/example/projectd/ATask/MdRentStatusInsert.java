@@ -20,9 +20,11 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 public class MdRentStatusInsert  extends AsyncTask<Void, Void , String> {
     String md_rent_status;
+    String md_serial_number;
 
-    public MdRentStatusInsert (String md_rent_status){
+    public MdRentStatusInsert (String md_rent_status, String md_serial_number){
         this.md_rent_status = md_rent_status;
+        this.md_serial_number = md_serial_number;
     }
 
     // 데이터베이스에 삽입결과 0보다크면 삽입성공, 같거나 작으면 실패
@@ -43,6 +45,8 @@ public class MdRentStatusInsert  extends AsyncTask<Void, Void , String> {
             builder.setCharset(Charset.forName("UTF-8"));
             // 문자열 및 데이터 추가
             builder.addTextBody("md_rent_status", md_rent_status, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("md_serial_number", md_serial_number, ContentType.create("Multipart/related", "UTF-8"));
+
             String postURL = ipConfig + "/app/anMdRentStatus";
 
             // 전송

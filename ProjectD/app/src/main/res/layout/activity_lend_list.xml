@@ -42,22 +42,23 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="8dp"
+            android:text="카테고리 선택"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+
+            />
 
         <Spinner
+            android:layout_marginTop="40dp"
             android:id="@+id/sp_md_category2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:entries="@array/카테고리"
             />
-        <Button
-            android:id="@+id/bt_md_rent_status_save"
-            android:layout_marginTop="50dp"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:text="변경사항저장"
-            ></Button>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.projectd.ATask.MdInsert;
+import com.example.projectd.ATask.MdRentStatusInsert;
 import com.example.projectd.Common.CommonMethod;
 import com.example.projectd.Dto.MdDTO;
 import com.google.gson.Gson;
@@ -57,7 +58,6 @@ public class LendListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 category = spinner.getSelectedItem().toString();
-
                 MdPullRequest request = new MdPullRequest(category, LoginActivity.loginDTO.getMember_id());
                 request.execute();
             }
