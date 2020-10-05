@@ -48,6 +48,8 @@ public class ProfilSubActivity extends AppCompatActivity {
         addr1.setText(member_addr);
 
     }
+
+    //프로필 수정
     public void btnSubUpdateClicked(View view){
         if(isNetworkConnected(this) == true){
 
@@ -86,7 +88,7 @@ public class ProfilSubActivity extends AppCompatActivity {
         }
 
     }
-
+    //계정 삭제
     public void btnDeleteClicked(View v){
         if(isNetworkConnected(this) == true){
 
@@ -106,7 +108,7 @@ public class ProfilSubActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show(); // 테스트 111
         }
     }
-
+    //취소
     public void btnCancelClicked(View view){
         finish();
     }
