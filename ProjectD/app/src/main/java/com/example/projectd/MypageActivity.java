@@ -69,19 +69,51 @@ public class MypageActivity extends Fragment {
         profile_photo = viewGroup.findViewById(R.id.profile_photo);
         ratingSum = viewGroup.findViewById(R.id.ratingSum);
 
+        if( LoginActivity.loginDTO != null) {
 
-        final String grade = LoginActivity.loginDTO.getMember_grade();
-        String user = LoginActivity.loginDTO.getMember_nickname();
-        user_nickname.setText(user);
-         String addr = LoginActivity.loginDTO.getMember_addr();
-        member_addr.setText(addr);
-        ratingBar2.setRating(Float.parseFloat(grade));
-        ratingSum.setText(grade);
+            final String grade = LoginActivity.loginDTO.getMember_grade();
+            String user = LoginActivity.loginDTO.getMember_nickname();
+            user_nickname.setText(user);
+            String addr = LoginActivity.loginDTO.getMember_addr();
+            member_addr.setText(addr);
+            ratingBar2.setRating(Float.parseFloat(grade));
+            ratingSum.setText(grade);
 
-        //프로필 사진
-        Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
-                .placeholder(R.color.cardview_dark_background)
-                .into(profile_photo);
+            //프로필 사진
+            Glide.with(this).load(LoginActivity.loginDTO.getMember_profile())
+                    .placeholder(R.color.cardview_dark_background)
+                    .into(profile_photo);
+
+        }else if( LoginActivity.naverLoginDTO != null) {
+
+            final String grade = LoginActivity.naverLoginDTO.getMember_grade();
+            String user = LoginActivity.naverLoginDTO.getMember_nickname();
+            user_nickname.setText(user);
+            String addr = LoginActivity.naverLoginDTO.getMember_addr();
+            member_addr.setText(addr);
+            ratingBar2.setRating(Float.parseFloat(grade));
+            ratingSum.setText(grade);
+
+            //프로필 사진
+            Glide.with(this).load(LoginActivity.naverLoginDTO.getMember_profile())
+                    .placeholder(R.color.cardview_dark_background)
+                    .into(profile_photo);
+
+        }else if(SessionCallback.kakaoLoginDTO != null){
+
+            final String grade = SessionCallback.kakaoLoginDTO.getMember_grade();
+            String user = SessionCallback.kakaoLoginDTO.getMember_nickname();
+            user_nickname.setText(user);
+            String addr = SessionCallback.kakaoLoginDTO.getMember_addr();
+            member_addr.setText(addr);
+            ratingBar2.setRating(Float.parseFloat(grade));
+            ratingSum.setText(grade);
+
+            //프로필 사진
+            Glide.with(this).load(SessionCallback.kakaoLoginDTO.getMember_profile())
+                    .placeholder(R.color.cardview_dark_background)
+                    .into(profile_photo);
+        }
 
         //별점
         ratingBar2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
