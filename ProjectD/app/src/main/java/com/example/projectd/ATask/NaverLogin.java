@@ -110,7 +110,7 @@ public class NaverLogin extends AsyncTask<Void, Void, Void> {
                 member_name = reader.nextString();
             } else if (readStr.equals("member_profile")) {
                 member_profile = reader.nextString();
-            } else if (readStr.equals("member_loginType")) {
+            } else if (readStr.equals("member_logintype")) {
                 member_loginType = reader.nextString();
             } else if (readStr.equals("member_token")) {
                 member_token = reader.nextString();
@@ -119,7 +119,7 @@ public class NaverLogin extends AsyncTask<Void, Void, Void> {
             }
         }
         reader.endObject();
-        Log.d("main:kakao login : ", member_id + "," + member_loginType);
+        Log.d("main:naver login : ", member_id + "," + member_loginType);
         return new MemberDto(member_id, member_nickname, member_tel, member_addr, member_latitude,
                              member_longitude, member_grade, member_name, member_profile,
                              member_loginType, member_token);

@@ -165,6 +165,8 @@ public class SessionCallback implements ISessionCallback {
                                 Intent intent = new Intent(context, SocialLocationActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("member_id", member_id);
+                                intent.putExtra("member_loginType", member_loginType);
                                 context.startActivity(intent);
 
                             } else {     //카카오 로그인이 되어있는 경우
@@ -172,6 +174,8 @@ public class SessionCallback implements ISessionCallback {
                                     Intent intent = new Intent(context, SocialLocationActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.putExtra("member_id", member_id);
+                                    intent.putExtra("member_loginType", member_loginType);
                                     context.startActivity(intent);
                                 } else {        //주소 지정 o
                                     Intent intent = new Intent(context, RealMainActivity.class);

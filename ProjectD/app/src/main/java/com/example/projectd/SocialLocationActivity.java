@@ -29,6 +29,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.projectd.ATask.KakaoLogin;
+import com.example.projectd.ATask.NaverJoin;
+import com.example.projectd.ATask.NaverLogin;
 import com.example.projectd.ATask.UpdateLocation;
 import com.example.projectd.R;
 import com.example.projectd.SignUpFormActivity;
@@ -46,6 +49,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import static com.example.projectd.LoginActivity.naverLoginDTO;
 import static com.example.projectd.SessionCallback.kakaoLoginDTO;
@@ -130,6 +134,7 @@ public class SocialLocationActivity extends AppCompatActivity {
             }
         }); //locSearchBtn.setOnClickListener()
 
+
         // 완료 버튼 클릭시
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,9 +142,9 @@ public class SocialLocationActivity extends AppCompatActivity {
                 myAddress = searchValueText.getText().toString();
                 detailAddress = detailValue.getText().toString();
 
-                Intent intent = new Intent(SocialLocationActivity.this, SignUpFormActivity.class);
                 String s_latitude = String.valueOf(latitude);
                 String s_longitude = String.valueOf(longitude);
+                String member_id, member_loginType;
 
                 if(myAddress.equals("") || s_latitude.equals("") || s_longitude.equals("") ) {
                     // 알림 대화 상자를 보여주면서 경고문 보여주기
@@ -150,40 +155,64 @@ public class SocialLocationActivity extends AppCompatActivity {
                     showMessage("알림", "상세주소를 입력해주세요!");
                     return;
                 } else {
-                    if(kakaoLoginDTO != null) {
-                        UpdateLocation updateLocation = new UpdateLocation(myAddress + detailAddress, s_latitude, s_longitude, kakaoLoginDTO.getMember_id(), kakaoLoginDTO.getMember_loginType());
+                    // 위치 정보를 저장하는 경우는 총 2가지
+                    // 1. 처음으로 kakao 로그인을 했을 때(db 저장 x, kakaoLoginDTO가 null)
+                    // 2. 카카오 로그인을 했지만 위치정보가 저장이 안되어 있을 때(db 저장 O, kakaoLoginDTO가 null이 아닌 경우)
+
+                    Intent intent = getIntent();
+                    member_id = intent.getExtras().getString("member_id");
+                    member_loginType = intent.getExtras().getString("member_loginType");
+                    Log.d(TAG, "onClick: " + member_id + ", " + member_loginType);
+
+                    if (member_loginType.equals("K") && kakaoLoginDTO == null) {
+                        Log.d(TAG, "onClick: 카카오 처음 로그인 : " + member_id + ", " + member_loginType);
+
+                        KakaoLogin kakaoLogin = new KakaoLogin(member_id, member_loginType);
+
                         try {
-                            state = updateLocation.execute().get().trim();
-                            Log.d(TAG, "submitBtnClick: " + state);
-                        } catch (Exception e) {
-                            Log.d(TAG, "submitBtnClick: " + e.getMessage());
+                            kakaoLogin.execute().get();
+                            Log.d(TAG, "onSessionOpened: " + member_loginType);
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
 
-                        if(state.equals("1")) {
-                            Log.d(TAG, "onSuccess1: 위치 지정(소셜) 성공!");
-                        } else {
-                            Log.d(TAG, "onSuccess1: 위치 지정(소셜) 실패");
+                        if (kakaoLoginDTO != null) {
+                            updateLocation(myAddress + detailAddress, s_latitude, s_longitude, member_id, member_loginType);
                         }
-                        kakaoLoginDTO.setMember_addr(myAddress);
-                        kakaoLoginDTO.setMember_latitude(s_latitude);
-                        kakaoLoginDTO.setMember_longitude(s_longitude);
+                    } else if (member_loginType.equals("N") && naverLoginDTO == null) {
+                        Log.d(TAG, "onClick: 네이버 처음 로그인 : " + member_id + ", " + member_loginType);
 
-                        Log.d(TAG, "onClick: " + kakaoLoginDTO.getMember_addr() + ", " +
-                                    kakaoLoginDTO.getMember_latitude() + ", " +
-                                    kakaoLoginDTO.getMember_longitude());
-                    } else if (naverLoginDTO != null) {
-                        naverLoginDTO.setMember_addr(myAddress);
-                        naverLoginDTO.setMember_latitude(s_latitude);
-                        naverLoginDTO.setMember_longitude(s_longitude);
+                        NaverLogin naverLogin = new NaverLogin(member_id, member_loginType);
 
-                        Log.d(TAG, "onClick: " + naverLoginDTO.getMember_addr() + ", " +
-                                naverLoginDTO.getMember_latitude() + ", " +
-                                naverLoginDTO.getMember_longitude());
+                        try {
+                            naverLogin.execute().get();
+                            Log.d(TAG, "onSessionOpened: " + member_loginType);
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (naverLoginDTO != null) {
+                            updateLocation(myAddress + detailAddress, s_latitude, s_longitude, member_id, member_loginType);
+                        }
+                    } else if (member_loginType.equals("K") && kakaoLoginDTO != null) {
+                        Log.d(TAG, "onClick: 카카오 로그인 o, 위치 저장 x");
+                        Log.d(TAG, "onClick: " + myAddress + detailAddress + ", " + s_latitude + ", " + s_longitude  + ", " + kakaoLoginDTO.getMember_id() + ", " + kakaoLoginDTO.getMember_loginType());
+                        updateLocation(myAddress + detailAddress, s_latitude, s_longitude, kakaoLoginDTO.getMember_id(), kakaoLoginDTO.getMember_loginType());
+
+                    } else if (member_loginType.equals("N") && naverLoginDTO != null) {
+                        Log.d(TAG, "onClick: 네이버 로그인 o, 위치 저장 x");
+                        Log.d(TAG, "onClick: " + myAddress + detailAddress + ", " + s_latitude + ", " + s_longitude  + ", " + naverLoginDTO.getMember_id() + ", " + naverLoginDTO.getMember_loginType());
+                        updateLocation(myAddress + detailAddress, s_latitude, s_longitude, naverLoginDTO.getMember_id(), naverLoginDTO.getMember_loginType());
                     }
-
-                    Intent intent1 = new Intent(getApplicationContext(), RealMainActivity.class);
-                    startActivity(intent1);
                 }
+
+                    Intent intent2 = new Intent(getApplicationContext(), RealMainActivity.class);
+                    startActivity(intent2);
+                    finish();
             }
         }); //submitBtn.setOnClickListener()
 
@@ -195,6 +224,37 @@ public class SocialLocationActivity extends AppCompatActivity {
         });
 
     } //onCreate()
+
+    private void updateLocation(String addr, String latitude, String longitude, String member_id, String member_loginType) {
+        UpdateLocation updateLocation = new UpdateLocation(addr, latitude, longitude, member_id, member_loginType);
+        try {
+            state = updateLocation.execute().get().trim();
+            Log.d(TAG, "submitBtnClick: " + state);
+        } catch (Exception e) {
+            Log.d(TAG, "submitBtnClick: " + e.getMessage());
+        }
+
+        if(state.equals("1")) {
+            Log.d(TAG, "onSuccess1: 위치 지정(소셜) 성공!");
+        } else {
+            Log.d(TAG, "onSuccess1: 위치 지정(소셜) 실패");
+        }
+
+        if (member_loginType.equals("K")) {
+            kakaoLoginDTO.setMember_addr(addr);
+            kakaoLoginDTO.setMember_latitude(latitude);
+            kakaoLoginDTO.setMember_longitude(longitude);
+
+            Log.d(TAG, "onClick: " + member_loginType + ", " + kakaoLoginDTO.getMember_addr());
+        } else if(member_loginType.equals("N")) {
+            naverLoginDTO.setMember_addr(addr);
+            naverLoginDTO.setMember_latitude(latitude);
+            naverLoginDTO.setMember_longitude(longitude);
+
+            Log.d(TAG, "onClick: " + member_loginType);
+        }
+
+    } //updateLocation()
 
     private void requestMyLocation() {
         LocationManager manager =

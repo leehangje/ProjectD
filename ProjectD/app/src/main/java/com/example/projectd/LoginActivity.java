@@ -1,6 +1,7 @@
 package com.example.projectd;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.projectd.ATask.KakaoJoin;
 import com.example.projectd.ATask.LoginSelect;
 import com.example.projectd.ATask.NaverJoin;
 import com.example.projectd.ATask.NaverLogin;
@@ -32,11 +34,16 @@ import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -54,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView id_pw_search, signUp;
     Button loginSubmitBtn;
     String state = "";
+    String member_id, member_nickname, member_name, member_loginType;
     ImageView naverLoginBtn, kakaoLoginBtn;
 
     //네이버 로그인 관련
@@ -176,6 +184,8 @@ public class LoginActivity extends AppCompatActivity {
         kakaoLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                naverLoginDTO = null;
+                loginDTO = null;
                 session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
                 Log.d(TAG, "onClick: 카카오로그인완료");
             }
@@ -236,10 +246,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "run: tokenType > " + tokenType);
                 Log.d(TAG, "run: getState() > " + mOAuthLoginInstance.getState(mContext).toString());
 
-                RequestApiTask rat = new RequestApiTask();
+                RequestApiTask rat = new RequestApiTask(accessToken);
                 rat.execute();
 
-                //본인이 이동할 액티비티를 입력
                 //redirectSignupActivity();
 
             } else {
@@ -252,10 +261,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-    private class RequestApiTask extends AsyncTask<Void, Void, Void> {
-        String member_id, member_nickname, member_name;
-        private String token = mOAuthLoginInstance.getAccessToken(mContext);
-        String member_loginType = "N";
+    private class RequestApiTask extends AsyncTask<Void, Void, StringBuffer> {
+        private String token;
+
+        RequestApiTask(String token) {
+            this.token = token;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -263,16 +274,120 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
-            String url = "https://openapi.naver.com/v1/nid/getUserProfile.xml";
-            String at = mOAuthLoginInstance.getAccessToken(mContext);
-            mUserInfoMap = requestNaverUserInfo(mOAuthLoginInstance.requestApi(mContext, at, url));
+        protected StringBuffer doInBackground(Void... params) {
             Log.d(TAG, "doInBackground: 들어옴");
+            String header = "Bearer " + token;
+            try {
+                final String apiURL = "https://openapi.naver.com/v1/nid/me";
+                URL url = new URL(apiURL);
+                HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("Authorization", header);
+                int responseCode = con.getResponseCode();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        responseCode == 200 ? con.getInputStream() : con.getErrorStream()));
+
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while((inputLine = br.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                br.close();
+                return response;
+
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
             return null;
         }
 
-        protected void onPostExecute(Void content) {
+        protected void onPostExecute(StringBuffer response) {
+            super.onPostExecute(response);
 
+            try {
+                // response는 json encoded된 상태이기 때문에 json 형식으로 decode 해줘야 한다.
+                JSONObject object = new JSONObject(response.toString());
+                JSONObject innerJson = new JSONObject(object.get("response").toString());
+
+                // 만약 이메일이 필요한데 사용자가 이메일 제공을 거부하면
+                // JSON 데이터에는 email이라는 키가 없고, 이걸로 제공 여부를 판단한다.
+                if(!innerJson.has("id")) {
+                    Log.d(TAG, "onPostExecute: 이메일 정보 제공 동의 x");
+                } else {
+                    member_loginType = "N";
+
+                    member_name = innerJson.getString("name");
+                    Log.d(TAG, "onPostExecute: " + member_name);
+
+                    member_id = member_loginType + innerJson.getString("email");
+                    Log.d(TAG, "onPostExecute: " + member_id);
+
+                    member_nickname = innerJson.getString("nickname");
+                    Log.d(TAG, "onPostExecute: " + member_nickname);
+
+                    //member_loginType = "N";
+                    NaverLogin naverLogin = new NaverLogin(member_id, member_loginType);
+
+                    try {
+                        naverLogin.execute().get();
+                        Log.d(TAG, "onSessionOpened: " + naverLoginDTO);
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(naverLoginDTO == null) {      //네이버 로그인이 처음인 경우
+                        Log.d(TAG, "onPostExecute: 로그인 액티비티에서 네이버 로그인 > dto가 null > db 저장 x");
+                            NaverJoin naverJoin = new NaverJoin(member_id, member_nickname, member_name, member_loginType, token);
+                        try {
+                            state = naverJoin.execute().get().trim();
+                            Log.d(TAG, "onSessionOpened: " + state);
+                        } catch (Exception e) {
+                            Log.d(TAG, "onPostExecute: " + e.getMessage());
+                        }
+
+                        if(state.equals("1")) {
+                            Log.d(TAG, "onSuccess1: 네이버 회원가입 됐습니다");
+                        } else {
+                            Log.d(TAG, "onSuccess1: 회원가입 실패");
+                        }
+
+                        Intent intent = new Intent(getApplicationContext(), SocialLocationActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("member_id", member_id);
+                        intent.putExtra("member_loginType", member_loginType);
+                        startActivity(intent);
+
+                    } else {     //네이버 로그인(db에 저장되어 있을 경우)이 되어있는 경우
+                        if(naverLoginDTO.getMember_addr().equals("") || naverLoginDTO.getMember_addr() == null) {    //주소 지정 x
+                            Log.d(TAG, "onPostExecute: 로그인 액티비티에서 네이버 로그인 > dto가 o 그러나 주소 지정 x");
+                            Log.d(TAG, "onPostExecute: 주소 지정 x : " + naverLoginDTO.getMember_id());
+                            Log.d(TAG, "onPostExecute: 주소 지정 x 로그인 타입: " + naverLoginDTO.getMember_loginType());
+                            Intent intent = new Intent(getApplicationContext(), SocialLocationActivity.class);
+                            intent.putExtra("member_id", naverLoginDTO.getMember_id());
+                            intent.putExtra("member_loginType", naverLoginDTO.getMember_loginType());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } else {        //주소 지정 o
+                            Intent intent = new Intent(getApplicationContext(), RealMainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            Log.d(TAG, "onSuccess: " + naverLoginDTO.getMember_addr());
+                        }
+
+                    }
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            /*
             if (mUserInfoMap.get("email") == null) {
                 Toast.makeText(mContext, "로그인 실패하였습니다.  잠시후 다시 시도해 주세요!!", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onPostExecute: 로그인 실패");
@@ -314,107 +429,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
 
                 finish();
-
-
-                /*LoginSelect loginSelect = new LoginSelect(member_email, "0000");
-                try {
-                    String result = loginSelect.execute().get();
-                    Log.d(TAG, "onSessionOpened: " + result);
-                    Log.d(TAG, "onSessionOpened: " + loginDTO);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-
-                /*if(loginDTO == null){
-                    JoinInsert joinInsert = new JoinInsert(member_email, "0000", member_nickname,"");
-                    try {
-                        String result = joinInsert.execute().get();
-                        Log.d(TAG, "onSessionOpened: " + result);
-                    } catch (Exception e) {
-                        Log.d(TAG, "onPostExecute: " + e.getMessage());
-                    }
-                    loginDTO = new MemberDTO(member_email, member_nickname, null);
-                    Log.d(TAG, "onSuccess: 네이버로그인됐습니다"+loginDTO.getMember_email());
-                }*/
-
-            }
+            }*/
         }
     } //class RequestApiTask
 
-    private static Map<String, String> requestNaverUserInfo(String data) {  //xml 파싱
-        String f_array[] = new String[9];
-        try {
-            XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = parserCreator.newPullParser();
-            InputStream input = new ByteArrayInputStream(data.getBytes("UTF-8"));
-            parser.setInput(input, "UTF-8");
-
-            int parserEvent = parser.getEventType();
-            String tag;
-            boolean inText = false;
-            boolean lastMatTag = false;
-
-            int colIdx = 0;
-
-            while (parserEvent != XmlPullParser.END_DOCUMENT) {
-                switch (parserEvent) {
-                    case  XmlPullParser.START_TAG:
-                        tag = parser.getName();
-
-                        if(tag.compareTo("xml") == 0) {
-                            inText = false;
-                        } else if(tag.compareTo("data") == 0) {
-                            inText = false;
-                        } else if(tag.compareTo("result") == 0) {
-                            inText = false;
-                        } else if(tag.compareTo("resultcode") == 0) {
-                            inText = false;
-                        } else if(tag.compareTo("message") == 0) {
-                            inText = false;
-                        } else if(tag.compareTo("response") == 0) {
-                            inText = false;
-                        } else {
-                            inText = true;
-                        }
-                        break;
-                    case XmlPullParser.TEXT:
-                        tag = parser.getName();
-                        if(inText) {
-                            if(parser.getText() == null) {
-                                f_array[colIdx] = "";
-                            } else {
-                                f_array[colIdx] = parser.getText().trim();
-                            }
-                            colIdx++;
-                        }
-                        inText = false;
-                        break;
-                    case XmlPullParser.END_TAG:
-                        tag = parser.getName();
-                        inText = false;
-                        break;
-                }
-                parserEvent = parser.next();
-            }
-
-        } catch (Exception e) {
-            Log.e(TAG, "requestNaverUserInfo: Error is network call", e);
-
-        }
-
-        Map<String, String> resultMap = new HashMap<>();
-        resultMap.put("nickname", f_array[1]);
-        resultMap.put("id", f_array[6]);
-        resultMap.put("name", f_array[7]);
-
-        return resultMap;
-    } //requestNaverUserInfo
-
     // 성공 후 이동할 액티비티
     protected void redirectSignupActivity() {
-        final Intent intent = new Intent(this, LogoutActivity.class);
+        final Intent intent = new Intent(this, SocialLocationActivity.class);
+        intent.putExtra("naver_login", "naver");
+        intent.putExtra("member_id", member_id);
+        intent.putExtra("member_loginType", member_loginType);
         startActivity(intent);
         finish();
         //Toast.makeText(mContext, "NAVER LOGIN", Toast.LENGTH_SHORT).show();

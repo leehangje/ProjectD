@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,11 +31,18 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.nhn.android.naverlogin.OAuthLogin;
+import static com.example.projectd.LoginActivity.mContext;
+import static com.example.projectd.LoginActivity.mOAuthLoginInstance;
+import static com.example.projectd.LoginActivity.naverLoginDTO;
+import static com.example.projectd.LoginActivity.loginDTO;
+import static com.example.projectd.SessionCallback.kakaoLoginDTO;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MypageActivity extends Fragment {
-
+    private static final String TAG = "main:MypageActivity";
     TextView btn_profile_update, mypage_notice, mypage_qna, mypage_logout, ratingSum, btn1;
     ImageView my_goods, my_rentlist, my_fav;
     ViewGroup viewGroup;
@@ -179,8 +187,26 @@ public class MypageActivity extends Fragment {
         mypage_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                loginDTO = null;
+
+                if(naverLoginDTO != null) {    //네이버 로그아웃
+                    OAuthLogin.getInstance().logout(mContext);
+                    String accessToken = mOAuthLoginInstance.getAccessToken(mContext);
+                    String refreshToken = mOAuthLoginInstance.getRefreshToken(mContext);
+                    Log.d(TAG, "onClick: " + accessToken + ", " + refreshToken);
+                    naverLoginDTO = null;
+                } else if(kakaoLoginDTO != null) {  //카카오 로그아웃
+                    UserManagement.getInstance()
+                            .requestLogout(new LogoutResponseCallback() {
+                                @Override
+                                public void onCompleteLogout() {
+                                    Log.d(TAG, "onCompleteLogout: 카카오 로그아웃 완료");
+                                    kakaoLoginDTO = null;
+                                }
+                            });
+                }
+
+                getActivity().finish();
             }
         });
 
