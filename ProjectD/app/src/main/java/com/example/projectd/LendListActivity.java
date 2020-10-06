@@ -65,8 +65,7 @@ public class LendListActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
 
-
-        });
+        });//spinner
 
         // 툴바 안의 뒤로가기 버튼 클릭할 때
         toolbar_context.setOnClickListener(new View.OnClickListener() {

@@ -15,17 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectd.Dto.ReviewDto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
         implements OnRentItemCLickListener {
     private static final String TAG = "RentAdapter";
 
-    ArrayList<ReviewDto> items = new ArrayList<ReviewDto>();
+    List<ReviewDto> items;
     OnRentItemCLickListener listener;
     Context mContext;
 
-    public void setmContext(Context mContext) {
+    public RentAdapter(Context mContext, List<ReviewDto> items) {
         this.mContext = mContext;
+        this.items = items;
     }
 
     @NonNull
@@ -53,7 +55,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
     }
 
     @Override
-    public void onItemClick(ViewHolder holder, View view, int position) {
+    public void onItemClick(RentAdapter.ViewHolder holder, View view, int position) {
         if(listener != null){
             listener.onItemClick(holder, view, position);
         }
@@ -61,17 +63,16 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
 
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
-        TextView textView2;
-        TextView textView3;
+        TextView tv_member_id;
+        TextView tv_rate;
+        TextView tv_content;
         public ViewHolder(final View itemView,
                           final OnRentItemCLickListener listener){
             super(itemView);
 
-            textView = itemView.findViewById(R.id.tv_name);
-            textView2 = itemView.findViewById(R.id.tv_addr);
-            textView3 = itemView.findViewById(R.id.tv_rate);
-
+            tv_member_id = itemView.findViewById(R.id.tv_member_id);
+            tv_rate = itemView.findViewById(R.id.tv_rate);
+            tv_content = itemView.findViewById(R.id.tv_content);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -87,9 +88,9 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
         }
 
         public void setItem(ReviewDto item){
-            textView.setText(item.getMember_id());
-            //textView2.setText(item.get);
-            textView3.setText(item.getReview_scope());
+            tv_member_id.setText(item.getMember_id());
+            tv_rate.setText(item.getReview_scope());
+            tv_content.setText(item.getReview_content());
         }
     }
 
