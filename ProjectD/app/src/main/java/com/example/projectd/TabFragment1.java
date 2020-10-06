@@ -5,62 +5,72 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.projectd.ATask.AnReviewSelect;
+import com.example.projectd.Dto.MdDTO;
+import com.example.projectd.Dto.ReviewDto;
+
+import java.util.ArrayList;
 
 public class TabFragment1 extends Fragment {
 
     RecyclerView recyclerView;
     ReviewAdapter adapter;
+    MdDetailActivity activity;
 
-    TabFragment1 fragment1;
-    TabFragment2 fragment2;
+    //ArrayList<MdDTO> items;
+    ArrayList<ReviewDto> reviews;
+    String md_serial_number, member_profile;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    /*private Context mContext = MainActivity.this;*/
+    private static final int ACTIVITY_NUM = 3;
 
-    private String mParam1;
-    private String mParam2;
-
-    public TabFragment1() {
-
-    }
-
-    public static TabFragment1 newInstance(String param1, String param2) {
-        TabFragment1 fragment = new TabFragment1();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@Nullable LayoutInflater inflater, @Nullable
+            ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_tab1,container,false);
 
-        MdDetailActivity activity = (MdDetailActivity) getActivity();
+        activity = (MdDetailActivity) getActivity();
+
+        if(activity.mBundle != null){
+            Bundle bundle = activity.mBundle;
+            md_serial_number = bundle.getString("md_serial_number");
+            activity.mBundle = null;
+        }
+
+        //items = new ArrayList<>();
+        reviews = new ArrayList<>();
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false));
-        adapter = new ReviewAdapter();
+        //recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //adapter.addItem(new Review("두리","완전 좋았음"));
+        adapter = new ReviewAdapter(getContext(), reviews);
 
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new OnReviewItemClickListener() {
+            //public static final int main = 1001;
+
+            @Override
+            public void onItemClick(ReviewAdapter.ViewHolder holder, View view, int position) {
+                //ReviewDto review = adapter.getItem(position);
+
+                //Intent intent = new Intent(getActivity(), MdDetailActivity.class);
+                //intent.putExtra("item", item);
+                //startActivityForResult(intent, main);
+            }
+        });
+
+        AnReviewSelect anReviewSelect = new AnReviewSelect(reviews, adapter, md_serial_number);
+        anReviewSelect.execute();
+
 
         return  rootView;
 

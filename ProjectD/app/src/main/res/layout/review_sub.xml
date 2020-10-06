@@ -17,18 +17,18 @@
                 android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_photo"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:id="@+id/review_profile_photo"
+                    android:layout_width="61dp"
+                    android:layout_height="61dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="13dp"
                     android:src="@mipmap/ic_launcher" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
@@ -47,24 +47,28 @@
                             android:id="@+id/user_nickname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginTop="18dp"
                             android:text="닉네임"
-                            android:textSize="16sp"
+                            android:textColor="#000000"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <RatingBar
+                            android:id="@+id/review_ratingBar"
                             style="@style/Widget.AppCompat.RatingBar.Small"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="18dp"/>
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="22dp" />
 
                         <TextView
+                            android:id="@+id/review_scope"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginLeft="6dp"
+                            android:textSize="16sp"
                             android:text="별점"/>
 
                     </LinearLayout>
@@ -80,11 +84,13 @@
                     <!--리뷰내용-->
                     <TextView
                         android:id="@+id/review_text"
-                        android:layout_width="300dp"
+                        android:layout_width="295dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:textSize="17sp"
+                        android:textColor="#000000"
                         android:text="여기에 리뷰내용이 들어간다\n여기에 리뷰내용이 들어간다\n여기에 리뷰내용이 들어간다"/>
 
                 </LinearLayout>
