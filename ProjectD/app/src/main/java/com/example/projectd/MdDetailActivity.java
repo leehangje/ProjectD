@@ -46,7 +46,7 @@ public class MdDetailActivity extends AppCompatActivity {
     CircleImageView profile_photo;
     TextView user_nickname, member_addr, user_grade, md_name, md_price, md_deposit, md_category,
             md_Registration_date, md_hits, md_fav_count, md_detail_content;
-    Button btn_chat, btn_fav;
+    Button btn_chat, btn_fav, btn_review;
 
     TabFragment1 fragment1;
     TabFragment2 fragment2;
@@ -87,8 +87,10 @@ public class MdDetailActivity extends AppCompatActivity {
         md_fav_count = findViewById(R.id.md_fav_count);
         md_detail_content = findViewById(R.id.md_detail_content);
 
-        btn_chat = findViewById(R.id.btn_chat);
-        btn_fav = findViewById(R.id.btn_fav);
+        btn_fav = findViewById(R.id.btn_fav);           //찜하기
+        btn_chat = findViewById(R.id.btn_chat);         //리뷰쓰기
+        btn_review = findViewById(R.id.btn_review);     //채팅하기
+
 
         // 데이터베이스에 찜이 안 되어 있는 경우 setTag를 0 ,되어 있는경우 1로 셋팅
         FavSelect favSelect = new FavSelect(loginDTO.getMember_id(), item.getMd_serial_number());
@@ -294,8 +296,8 @@ public class MdDetailActivity extends AppCompatActivity {
         md_price.setText("대여료: " + item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
         md_deposit.setText("보증금: " + item.getMd_deposit() + "원");
         md_category.setText("카테고리 - " + item.getMd_category());
-        md_Registration_date.setText(item.getMd_registration_date());   //등록일자
-        md_hits.setText("조회수:" + item.getMd_hits());
+        md_Registration_date.setText("등록일자 : " + item.getMd_registration_date());   //등록일자
+        //md_hits.setText("조회수:" + item.getMd_hits());
         md_fav_count.setText("찜:" + item.getMd_fav_count());
         md_detail_content.setText("<상세정보>\n" + item.getMd_detail_content());
     }
