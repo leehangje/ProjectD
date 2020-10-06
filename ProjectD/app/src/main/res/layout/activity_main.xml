@@ -59,7 +59,7 @@
                 app:srcCompat="@drawable/main_icon_search" />
 
             <ImageButton
-                android:id="@+id/btn_alram"
+                android:id="@+id/btn_like"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="13dp"
@@ -67,10 +67,10 @@
                 android:layout_marginTop="20dp"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/main_icon_alram" />
+                app:srcCompat="@drawable/card_list_fav" />
 
             <ImageButton
-                android:id="@+id/btn_like"
+                android:id="@+id/btn_alram"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="13dp"
@@ -80,7 +80,7 @@
                 android:layout_marginRight="0dp"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/card_list_fav" />
+                app:srcCompat="@drawable/main_icon_alram" />
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
