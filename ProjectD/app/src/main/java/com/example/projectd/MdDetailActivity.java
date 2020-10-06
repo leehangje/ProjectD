@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class MdDetailActivity extends AppCompatActivity {
     TextView user_nickname, member_addr, user_grade, md_name, md_price, md_deposit, md_category,
             md_Registration_date, md_hits, md_fav_count, md_detail_content;
     Button btn_chat, btn_fav, btn_review;
+    RatingBar ratingBar;
 
     TabFragment1 fragment1;
     TabFragment2 fragment2;
@@ -86,6 +88,7 @@ public class MdDetailActivity extends AppCompatActivity {
         md_hits = findViewById(R.id.md_hits);
         md_fav_count = findViewById(R.id.md_fav_count);
         md_detail_content = findViewById(R.id.md_detail_content);
+        ratingBar = findViewById(R.id.ratingBar);
 
         btn_fav = findViewById(R.id.btn_fav);           //찜하기
         btn_chat = findViewById(R.id.btn_chat);         //리뷰쓰기
@@ -117,18 +120,6 @@ public class MdDetailActivity extends AppCompatActivity {
             btn_fav.setTag("0");
         }
 
-       /* if (favDto.getMd_fav_status().equals("1")){  //md_fav_status가 1일 경우 DB에 데이터가 있는것임
-            btn_fav.setTag("1");
-            //btn_fav.setText("찜 취소");
-            //btn_fav.setBackgroundColor(Color.RED);
-            //btn_fav.setTag("1");
-        }else {
-            btn_fav.setTag("0");
-            //btn_fav.setText("찜하기");
-            //btn_fav.setBackgroundColor(Color.parseColor("#f5f51f"));
-            //btn_fav.setTag("0");
-        }*/
-
         toolbar_context = findViewById(R.id.toolbar_context);
 
         setItem(item, memberDto);
@@ -137,6 +128,7 @@ public class MdDetailActivity extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
 
         vpPager.setAdapter(adapterViewPager);
+
 
         //프로필사진 동글이
         /*CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
@@ -290,8 +282,12 @@ public class MdDetailActivity extends AppCompatActivity {
     public void setItem(MdDTO item, MemberDto memberDto){
         user_nickname.setText(memberDto.getMember_nickname());
         member_addr.setText(memberDto.getMember_addr());
-        user_grade.setText(memberDto.getMember_grade());
+        user_grade.setText(memberDto.getMember_grade() + "점");
         Glide.with(this).load(memberDto.getMember_profile()).into(profile_photo);
+
+        //회원등급 RatingBar로 표시
+        final String grade = memberDto.getMember_grade();
+        ratingBar.setRating(Float.parseFloat(grade));
 
         // 사진url 가져오는 대표적인 방법: 글라이드 (쓰려면 그래들 추가해야됨)
        /* String imageUrl = mdDTO.getMd_photo_url();
@@ -309,7 +305,6 @@ public class MdDetailActivity extends AppCompatActivity {
         md_fav_count.setText("찜:" + item.getMd_fav_count());
         md_detail_content.setText("<상세정보>\n" + item.getMd_detail_content());
     }
-
 
     //상품 상세사진 슬라이드 넘기기
     public class MyPagerAdapter extends FragmentPagerAdapter {
