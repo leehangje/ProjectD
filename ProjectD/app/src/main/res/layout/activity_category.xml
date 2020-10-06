@@ -131,12 +131,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
-<<<<<<< HEAD
-                        android:text="유/아동"
-=======
-                        android:text="육아용품"
->>>>>>> ad2ca8c191386887ddfce167cab8d8ea7596e233
-                        android:textSize="19dp" />
+                        android:text="유/아동"/>
+
                 </LinearLayout>
 
                 <LinearLayout

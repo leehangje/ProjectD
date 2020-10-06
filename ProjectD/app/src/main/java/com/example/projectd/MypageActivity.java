@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -14,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,11 +32,17 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.nhn.android.naverlogin.OAuthLogin;
+import static com.example.projectd.LoginActivity.mContext;
+import static com.example.projectd.LoginActivity.mOAuthLoginInstance;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MypageActivity extends Fragment {
-
+    private static final String TAG = "main:MypageActivity";
+    
     TextView btn_profile_update, mypage_notice, mypage_qna, mypage_logout, ratingSum, btn1;
     ImageView my_goods, my_rentlist, my_fav;
     ViewGroup viewGroup;
@@ -43,12 +51,12 @@ public class MypageActivity extends Fragment {
     TextView user_nickname, member_addr;
     RatingBar ratingBar2;
     CircleImageView profile_photo;
-
+    RealMainActivity realMainActivity;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable
-            ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final
+    ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_mypage, null);
 
         setHasOptionsMenu(true);
@@ -182,8 +190,24 @@ public class MypageActivity extends Fragment {
         mypage_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                if (LoginActivity.loginDTO != null) {   //일반 로그아웃
+                    LoginActivity.loginDTO = null;
+                } else if(LoginActivity.naverLoginDTO != null) {    //네이버 로그아웃
+                    OAuthLogin.getInstance().logout(mContext);
+                    String accessToken = mOAuthLoginInstance.getAccessToken(mContext);
+                    String refreshToken = mOAuthLoginInstance.getRefreshToken(mContext);
+                    Log.d(TAG, "onClick: " + accessToken + ", " + refreshToken);
+                } else if(SessionCallback.kakaoLoginDTO != null) {  //카카오 로그아웃
+                    UserManagement.getInstance()
+                        .requestLogout(new LogoutResponseCallback() {
+                            @Override
+                            public void onCompleteLogout() {
+                                Log.d(TAG, "onCompleteLogout: 카카오 로그아웃 완료");
+                            }
+                        });
+                }
+
+                getActivity().finish();
             }
         });
 

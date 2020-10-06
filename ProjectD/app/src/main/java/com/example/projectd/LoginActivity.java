@@ -310,9 +310,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
 
-                Intent intent = new Intent(getApplicationContext(), LogoutActivity.class);
-                startActivity(intent);
-
                 finish();
 
 
@@ -414,9 +411,9 @@ public class LoginActivity extends AppCompatActivity {
 
     // 성공 후 이동할 액티비티
     protected void redirectSignupActivity() {
-        final Intent intent = new Intent(this, LogoutActivity.class);
-        startActivity(intent);
-        finish();
+        //final Intent intent = new Intent(this, LogoutActivity.class);
+        //startActivity(intent);
+        //finish();
         //Toast.makeText(mContext, "NAVER LOGIN", Toast.LENGTH_SHORT).show();
     }
 
