@@ -121,7 +121,7 @@ public class RentListActivity extends AppCompatActivity {
             LinearLayoutManager layoutManager =
                     new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);
-            adapter = new RentAdapter(RentListActivity.this, reviewDtos);
+            adapter = new RentAdapter(getApplicationContext(), reviewDtos);
             recyclerView.setAdapter(adapter);
             adapter.setOnItemClickListener(new OnRentItemCLickListener() {
                 @Override

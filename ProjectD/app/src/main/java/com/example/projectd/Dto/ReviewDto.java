@@ -3,14 +3,23 @@ package com.example.projectd.Dto;
 import java.io.Serializable;
 
 public class ReviewDto implements Serializable {
-    String member_id, review_scope, review_content;
+    String member_id, review_scope, review_content, member_nickname;
 
     public ReviewDto(){}
 
-    public ReviewDto(String member_id, String review_scope, String review_content) {
+    public ReviewDto(String member_id, String review_scope, String review_content, String member_nickname) {
         this.member_id = member_id;
         this.review_scope = review_scope;
         this.review_content = review_content;
+        this.member_nickname = member_nickname;
+    }
+
+    public String getMember_nickname() {
+        return member_nickname;
+    }
+
+    public void setMember_nickname(String member_nickname) {
+        this.member_nickname = member_nickname;
     }
 
     public String getMember_id() {

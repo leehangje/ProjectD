@@ -18,12 +18,12 @@ import com.example.projectd.Dto.MdDTO;
 
 public class ReviewActivity extends AppCompatActivity {
     LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
-    TextView tv_review_member_id, tv_review_md_serial_number;
+    TextView tv_review_member_id, tv_member_nick;
     RatingBar rb_review_scope;
     EditText et_review_content;
     Button bt_review_send;
 
-    String member_id="", review_scope="", review_content="";
+    String member_id="", review_scope="", review_content="", member_nickname="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,8 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
+        tv_member_nick = findViewById(R.id.tv_member_nick);
         tv_review_member_id = findViewById(R.id.tv_review_member_id);
-        tv_review_md_serial_number = findViewById(R.id.tv_review_md_serial_number);
         rb_review_scope = findViewById(R.id.rb_review_scope);
         et_review_content = findViewById(R.id.et_review_content);
         bt_review_send = findViewById(R.id.bt_review_send);
@@ -60,8 +60,9 @@ public class ReviewActivity extends AppCompatActivity {
                 member_id = LoginActivity.loginDTO.getMember_id();
                 review_scope = tv_ratingbar.getText().toString();
                 review_content = et_review_content.getText().toString();
+                member_nickname = LoginActivity.loginDTO.getMember_nickname();
 
-                ReviewInsert reviewInsert = new ReviewInsert(member_id, review_scope, review_content);
+                ReviewInsert reviewInsert = new ReviewInsert(member_id, review_scope, review_content, member_nickname);
                 reviewInsert.execute();
 
                 Intent showIntent = new Intent(getApplicationContext(), RentListActivity.class);

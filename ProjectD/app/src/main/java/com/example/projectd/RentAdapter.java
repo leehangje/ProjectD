@@ -66,6 +66,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
         TextView tv_member_id;
         TextView tv_rate;
         TextView tv_content;
+        TextView tv_member_nick;
         public ViewHolder(final View itemView,
                           final OnRentItemCLickListener listener){
             super(itemView);
@@ -73,6 +74,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
             tv_member_id = itemView.findViewById(R.id.tv_member_id);
             tv_rate = itemView.findViewById(R.id.tv_rate);
             tv_content = itemView.findViewById(R.id.tv_content);
+            tv_member_nick = itemView.findViewById(R.id.tv_member_nick);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -91,6 +93,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
             tv_member_id.setText(item.getMember_id());
             tv_rate.setText(item.getReview_scope());
             tv_content.setText(item.getReview_content());
+            tv_member_nick.setText(item.getMember_nickname());
         }
     }
 

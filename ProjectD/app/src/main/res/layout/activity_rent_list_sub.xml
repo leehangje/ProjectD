@@ -27,27 +27,65 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:weightSum="3">
+                android:layout_weight="1"
+                android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/tv_member_id"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+                    <TextView
+                        android:id="@+id/tv_member_id"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="아이디"
+                        android:textSize="14sp"
+                        android:paddingLeft="10dp"
+                        android:textStyle="normal|bold" />
+                    <TextView
+                        android:id="@+id/tv_member_nick"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="닉네임"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="200dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="아이디"
-                    android:textSize="14sp"
-                    android:textStyle="normal|bold" />
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/tv_rated"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="별점"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold" />
+                    <TextView
+                        android:id="@+id/tv_rate"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="별점"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold" />
 
-                <TextView
-                    android:id="@+id/tv_rate"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="대여자"
-                    android:textSize="14sp"
-                    android:textStyle="normal|bold" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_content"
@@ -55,7 +93,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="별점"
+                    android:paddingLeft="10dp"
+                    android:text="내용"
                     android:textSize="14sp"
                     android:textStyle="normal|bold" />
 

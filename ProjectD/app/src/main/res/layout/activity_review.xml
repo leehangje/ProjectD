@@ -61,19 +61,10 @@
                 android:layout_marginBottom="10dp"
                 android:paddingLeft="15dp"
                 android:textSize="20dp"
-                android:text="member_id"
+                android:hint="member_id"
                 android:background="#ffffff"/>
 
-            <TextView
-                android:id="@+id/tv_review_md_serial_number"
-                android:layout_width="320dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="15dp"
-                android:textSize="20dp"
-                android:text="md_serial_number"
-                android:background="#ffffff"/>
+
 
 
             <TextView
@@ -96,7 +87,7 @@
                 android:layout_marginBottom="20dp"
                 android:isIndicator="false"
                 android:numStars="5"
-                android:rating="3"
+                android:rating="0"
                 android:stepSize="0.5"
                 android:max="5"/>
 

@@ -19,12 +19,13 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 public class ReviewInsert extends AsyncTask<Void, Void, Void> {
 
-    String member_id,review_scope, review_content;
+    String member_id,review_scope, review_content , member_nickname;
 
-    public ReviewInsert(String member_id, String review_scope, String review_content){
+    public ReviewInsert(String member_id, String review_scope, String review_content, String member_nickname){
         this.member_id = member_id;
         this.review_scope = review_scope;
         this.review_content = review_content;
+        this.member_nickname = member_nickname;
     }
 
     HttpClient httpClient;
@@ -44,7 +45,7 @@ public class ReviewInsert extends AsyncTask<Void, Void, Void> {
             builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("review_scope", review_scope, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("review_content", review_content, ContentType.create("Multipart/related", "UTF-8"));
-
+            builder.addTextBody("member_nickname", member_nickname, ContentType.create("Multipart/related", "UTF-8"));
             String postURL = ipConfig + "/app/anReviewInsert";
 
             // 전송
