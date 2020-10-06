@@ -178,7 +178,6 @@
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <ImageView
-                        android:id="@+id/my_goods"
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_marginTop="5dp"
@@ -203,19 +202,18 @@
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <ImageView
-                        android:id="@+id/my_rentlist"
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_baseline_unarchive_24" />
+                        android:src="@drawable/ic_baseline_email_24" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="빌려준 내역" />
+                        android:text="내리뷰 목록" />
 
                 </LinearLayout>
 
@@ -228,7 +226,6 @@
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <ImageView
-                        android:id="@+id/my_fav"
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_marginTop="5dp"

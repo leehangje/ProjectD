@@ -24,13 +24,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.example.projectd.ATask.LoginSelect;
 import com.example.projectd.ATask.ProfilIensert;
+import com.example.projectd.ATask.ProfileDelete;
 import com.example.projectd.ATask.ProfileUpdate;
 import com.example.projectd.Common.CommonMethod;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,6 +47,7 @@ public class ProfilActivity extends AppCompatActivity {
     TextView profile_name, profile_nickname, profile_location, profile_home_tel, profile_phone, profile_email, profile_birth;
     CircleImageView profile_photo;
     Button profile_set;
+    String image = "https://d1u5g7tm7q0gio.cloudfront.net/images/avatars/defaults/default.jpg";
 
     //String id = LoginActivity.loginDTO.getMember_id();
 
@@ -201,6 +205,9 @@ public class ProfilActivity extends AppCompatActivity {
                                     FileProvider.getUriForFile(getApplicationContext(),
                                             getApplicationContext().getPackageName() + ".fileprovider", file));
                             Log.d("sub1:appId", getApplicationContext().getPackageName());
+                            Glide.with(getApplicationContext()).load(file)
+                                    .placeholder(R.color.cardview_dark_background)
+                                    .into(profile_photo);
                         }else {
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                         }
@@ -210,12 +217,37 @@ public class ProfilActivity extends AppCompatActivity {
                     }catch(Exception e){
                         Log.d("Sub1Update:error2", "Something Wrong", e);
                     }
-                }else{
+                }else if (items[pos] == items[1]){
                     profile_photo.setVisibility(View.VISIBLE);
                     Intent intent = new Intent();
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_PICK);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), LOAD_IMAGE);
+
+                    Glide.with(getApplicationContext()).load(LOAD_IMAGE)
+                            .placeholder(R.color.cardview_dark_background)
+                            .into(profile_photo);
+                }else{
+
+                    if ( LoginActivity.loginDTO.getMember_profile() != null) {
+                        String id = LoginActivity.loginDTO.getMember_id();
+                        ProfileDelete profileDelete = new ProfileDelete(id, image);
+                        profileDelete.execute();
+                        Glide.with(getApplicationContext()).load(image)
+                                .into(profile_photo);
+                    }else if( LoginActivity.naverLoginDTO.getMember_profile() != null ){
+                        String id = LoginActivity.naverLoginDTO.getMember_id();
+                        ProfileDelete profileDelete = new ProfileDelete(id, image);
+                        profileDelete.execute();
+                        Glide.with(getApplicationContext()).load(image)
+                                .into(profile_photo);
+                    }else if( SessionCallback.kakaoLoginDTO != null ){
+                        String id = SessionCallback.kakaoLoginDTO.getMember_id();
+                        ProfileDelete profileDelete = new ProfileDelete(id, image);
+                        profileDelete.execute();
+                        Glide.with(getApplicationContext()).load(image)
+                                .into(profile_photo);
+                    }
                 }
             }
         });
@@ -307,14 +339,16 @@ public class ProfilActivity extends AppCompatActivity {
 
     //확인버튼 눌렀을때
     public void btnUpdateClicked(View view){
+
         if ( LoginActivity.loginDTO.getMember_profile() != null){
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
-                    String id = LoginActivity.loginDTO.getMember_id();
-                    ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
-                    profilUpdate.execute();
-
+                    if (LoginActivity.loginDTO.getMember_profile() != image) {
+                        String id = LoginActivity.loginDTO.getMember_id();
+                        ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
+                        profilUpdate.execute();
+                    }
                     //Toast.makeText(getApplicationContext(), "수정성공", Toast.LENGTH_LONG).show();
                     Intent showIntent = new Intent(getApplicationContext(), RealMainActivity.class);
                     showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |   // 이 엑티비티 플래그를 사용하여 엑티비티를 호출하게 되면 새로운 태스크를 생성하여 그 태스크안에 엑티비티를 추가하게 됩니다. 단, 기존에 존재하는 태스크들중에 생성하려는 엑티비티와 동일한 affinity(관계, 유사)를 가지고 있는 태스크가 있다면 그곳으로 새 엑티비티가 들어가게됩니다.
@@ -348,10 +382,11 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
-                    String id = LoginActivity.naverLoginDTO.getMember_id();
-                    ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
-                    profilUpdate.execute();
-
+                    if (LoginActivity.naverLoginDTO.getMember_profile() != image) {
+                        String id = LoginActivity.naverLoginDTO.getMember_id();
+                        ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
+                        profilUpdate.execute();
+                    }
                     //Toast.makeText(getApplicationContext(), "수정성공", Toast.LENGTH_LONG).show();
                     Intent showIntent = new Intent(getApplicationContext(), RealMainActivity.class);
                     showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |   // 이 엑티비티 플래그를 사용하여 엑티비티를 호출하게 되면 새로운 태스크를 생성하여 그 태스크안에 엑티비티를 추가하게 됩니다. 단, 기존에 존재하는 태스크들중에 생성하려는 엑티비티와 동일한 affinity(관계, 유사)를 가지고 있는 태스크가 있다면 그곳으로 새 엑티비티가 들어가게됩니다.
@@ -384,10 +419,11 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
-                    String id = SessionCallback.kakaoLoginDTO.getMember_id();
-                    ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
-                    profilUpdate.execute();
-
+                    if (SessionCallback.kakaoLoginDTO.getMember_profile() != image) {
+                        String id = SessionCallback.kakaoLoginDTO.getMember_id();
+                        ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
+                        profilUpdate.execute();
+                    }
                     //Toast.makeText(getApplicationContext(), "수정성공", Toast.LENGTH_LONG).show();
                     Intent showIntent = new Intent(getApplicationContext(), RealMainActivity.class);
                     showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |   // 이 엑티비티 플래그를 사용하여 엑티비티를 호출하게 되면 새로운 태스크를 생성하여 그 태스크안에 엑티비티를 추가하게 됩니다. 단, 기존에 존재하는 태스크들중에 생성하려는 엑티비티와 동일한 affinity(관계, 유사)를 가지고 있는 태스크가 있다면 그곳으로 새 엑티비티가 들어가게됩니다.
