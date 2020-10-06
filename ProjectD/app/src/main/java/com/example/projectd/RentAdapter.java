@@ -12,13 +12,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectd.Dto.ReviewDto;
+
 import java.util.ArrayList;
 
 public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
         implements OnRentItemCLickListener {
     private static final String TAG = "RentAdapter";
 
-    ArrayList<Rent> items = new ArrayList<Rent>();
+    ArrayList<ReviewDto> items = new ArrayList<ReviewDto>();
     OnRentItemCLickListener listener;
     Context mContext;
 
@@ -37,7 +39,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Rent item = items.get(position);
+        ReviewDto item = items.get(position);
         holder.setItem(item);
     }
 
@@ -61,14 +63,14 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         TextView textView2;
-        Button button;
+        TextView textView3;
         public ViewHolder(final View itemView,
                           final OnRentItemCLickListener listener){
             super(itemView);
 
             textView = itemView.findViewById(R.id.tv_name);
             textView2 = itemView.findViewById(R.id.tv_addr);
-            button = itemView.findViewById(R.id.btn_review);
+            textView3 = itemView.findViewById(R.id.tv_rate);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,62 +84,31 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder>
                 
             });
             
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    //int i = 0;
-                    /**
-                     * 버튼 클릭 이벤트
-                     */
-
-                    if (position == 0) {
-                        Log.e(TAG, "onClick: button " + position);
-                        RentListActivity activity = (RentListActivity) mContext;
-                        activity.runReviewActivity();
-                    }
-
-                    if (position == 1) {
-                        Log.e(TAG, "onClick: button " + position);
-                        RentListActivity activity = (RentListActivity) mContext;
-                        activity.runReviewActivity();
-                    }
-
-                }
-            });
-            
         }
 
-        public void setItem(Rent item){
-            textView.setText(item.getName());
-            textView2.setText(item.getRenter());
+        public void setItem(ReviewDto item){
+            textView.setText(item.getMember_id());
+            //textView2.setText(item.get);
+            textView3.setText(item.getReview_scope());
         }
-
-
     }
 
 
-    public void addItem(Rent item){
+    public void addItem(ReviewDto item){
         items.add(item);
     }
 
-    public void setItems(ArrayList<Rent> items){
+    public void setItems(ArrayList<ReviewDto> items){
         this.items = items;
     }
 
-    public Rent getItem(int position){
+    public ReviewDto getItem(int position){
         return items.get(position);
     }
 
-    public void setItem(int position, Rent item){
+    public void setItem(int position, ReviewDto item){
         items.set(position, item);
     }
-
-
-
-
-
-
 
 
 }

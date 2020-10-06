@@ -127,19 +127,6 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                 }
             });
 
-            /*spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    spinner2.getSelectedItemPosition();
-
-                    MdRentStatusInsert mdRentStatusInsert = new MdRentStatusInsert(item.getMd_rent_status());
-                    mdRentStatusInsert.execute();
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });*/
         }
     }
 

@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3e4ba9">
+        android:background="#ffffff">
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="bottom"
-                android:background="#3e4ba9"
+                android:background="#0a172b"
                 app:srcCompat="@drawable/back_white" />
 
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:text="리뷰 쓰기"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -43,55 +43,86 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1">
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="#e9ecf2">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/tv_review_member_id"
+                android:layout_width="320dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="40dp"
-                android:text="대여품 제목"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="15dp"
+                android:textSize="20dp"
+                android:text="member_id"
+                android:background="#ffffff"/>
+
+            <TextView
+                android:id="@+id/tv_review_md_serial_number"
+                android:layout_width="320dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="15dp"
+                android:textSize="20dp"
+                android:text="md_serial_number"
+                android:background="#ffffff"/>
+
+
+            <TextView
+                android:id="@+id/tv_ratingbar"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="Rate : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rb_review_scope"
+                android:layout_centerHorizontal="true"
+                android:textSize="20sp"
+                />
 
             <RatingBar
-                android:id="@+id/ratingBar2"
+                android:id="@+id/rb_review_scope"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="40dp" />
+                android:layout_marginBottom="20dp"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="0.5"
+                android:max="5"/>
+
 
             <EditText
-                android:id="@+id/textView5"
+                android:id="@+id/et_review_content"
                 android:layout_width="320dp"
-                android:layout_height="280dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#ffffff"
+                android:gravity="top"
+                android:hint="리뷰 작성"
                 android:paddingLeft="20dp"
                 android:paddingTop="20dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#C0C8E8"
-                android:gravity="top"
-                android:hint="리뷰 작성 란"
-                android:shadowColor="#F1EBEB"
-                android:textSize="18sp" />
-
+                android:shadowColor="#ffffff"
+                android:textSize="18sp"
+                />
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/bt_review_send"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#4982D8"
+        android:background="#323845"
         android:text="등록 완료"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:textColor="#ffffff"/>
 </LinearLayout>

@@ -181,6 +181,14 @@ public class MdDetailActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         }); //tabs.addOnTabSelectedListener()
 
+        btn_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MdDetailActivity.this, ReviewActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         //채팅하기
         btn_chat.setOnClickListener(new View.OnClickListener() {

@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectd.Dto.ReviewDto;
+
 public class RentListActivity extends AppCompatActivity {
     public static final int chat = 1001;
 
@@ -25,7 +27,6 @@ public class RentListActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         toolbar_context = findViewById(R.id.toolbar_context);
-        button = findViewById(R.id.btn_review);
 
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -34,17 +35,14 @@ public class RentListActivity extends AppCompatActivity {
 
         adapter.setmContext(RentListActivity.this);
 
-        adapter.addItem(new Rent("컴퓨터", "박준근"));
-        adapter.addItem(new Rent("모니터", "안중근"));
-
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnRentItemCLickListener() {
             @Override
             public void onItemClick(RentAdapter.ViewHolder holder, View view, int position) {
-                Rent item = adapter.getItem(position);
+                ReviewDto item = adapter.getItem(position);
 
-                Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getName(),
+                Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getMember_id(),
                         Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);

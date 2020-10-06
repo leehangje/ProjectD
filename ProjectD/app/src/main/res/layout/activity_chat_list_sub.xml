@@ -85,7 +85,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="TextView"
+                    android:text="오픈채팅방"
                     android:textAlignment="center"
                     android:textSize="14sp"
                     android:textStyle="normal|bold" />

@@ -27,6 +27,8 @@ import androidx.core.content.FileProvider;
 
 import com.example.projectd.ATask.MdInsert;
 import com.example.projectd.Common.CommonMethod;
+import com.example.projectd.Dto.MdDTO;
+import com.example.projectd.Dto.MemberDto;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +42,7 @@ import static com.example.projectd.Common.CommonMethod.isNetworkConnected;
 
 public class MdInsertActivity extends AppCompatActivity {
     private static final String TAG = "MdInsertActivity";
+
 
     EditText et_md_name, et_md_price, et_md_rental_term , et_md_deposit, et_md_detail_content , et_md_serial;
     Spinner sp_md_category;
