@@ -131,13 +131,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
-<<<<<<< HEAD
+
                         android:text="유/아동"
                         android:textSize="19dp" />
-=======
-                        android:text="유/아동"/>
 
->>>>>>> 1fa122c9d8f867283e89c0ba33e39466ff19ca2e
                 </LinearLayout>
 
                 <LinearLayout
