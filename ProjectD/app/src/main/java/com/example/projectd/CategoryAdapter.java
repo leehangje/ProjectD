@@ -1,17 +1,13 @@
 package com.example.projectd;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,11 +18,11 @@ import static com.example.projectd.CategoryViewActivity.selItem;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder>  implements OnMainMdItemClickListener {
 
     private Context mContext;
     private ArrayList<MdDTO> items;
-
+    OnMainMdItemClickListener listener;
     public CategoryAdapter(Context mContext, ArrayList<MdDTO> items) {
         this.mContext = mContext;
         this.items = items;
@@ -38,7 +34,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.card_list, parent, false);
 
-        return new ViewHolder(itemView);
+        return new ViewHolder(itemView,this);
     }
 
     @Override
@@ -87,27 +83,67 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
 
+    public void setOnItemClickListener(OnMainMdItemClickListener listener){
+        this.listener = listener;
+    }
+
+
+
+  
+
+    @Override
+    public void onItemClick(MainMdAdapter.ViewHolder holder, View view, int position) {
+        if (listener != null){
+            listener.onItemClick(holder, view, position);
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public LinearLayout parentLayout;
-        public TextView md_name;
-        public TextView md_price;
-        public ImageView md_photo;
+         TextView md_name;
+         TextView md_price;
+         ImageView md_photo;
+        ImageView img_possible;
 
-        public ViewHolder(@NonNull final View itemView) {
+
+        public ViewHolder(View itemView, CategoryAdapter categoryAdapter) {
             super(itemView);
 
-            parentLayout = itemView.findViewById(R.id.parentLayout);
-            md_name = itemView.findViewById(R.id.tv_title);
-            md_price = itemView.findViewById(R.id.tv_price);
-            md_photo = itemView.findViewById(R.id.iv_img);
-        }
+
+                parentLayout = itemView.findViewById(R.id.parentLayout);
+                md_name = itemView.findViewById(R.id.tv_title);
+                md_price = itemView.findViewById(R.id.tv_price);
+                md_photo = itemView.findViewById(R.id.iv_img);
+                img_possible = itemView.findViewById(R.id.img_possible);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        int position = getAdapterPosition();
+
+
+                    }
+                });
+            }
+
 
         public void setItem(MdDTO item){
             md_name.setText(item.getMd_name());
-            md_price.setText(item.getMd_price());
+            md_price.setText(item.getMd_price() + "원");
 
             Glide.with(itemView).load(item.getMd_photo_url()).into(md_photo);
+
+            //getMd_rent_status(대여상태)가 1이면 대여중, 0이면 대여가능 표시
+            if (item.getMd_rent_status().equals("1")){
+                img_possible.setImageResource(R.drawable.impossible);
+            }else {
+                img_possible.setImageResource(R.drawable.possible);
+            }
+
+
         }
     }
 }
