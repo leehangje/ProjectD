@@ -1,5 +1,6 @@
 package com.example.projectd.ATask;
 
+import android.content.Intent;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -19,13 +20,16 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 public class ReviewInsert extends AsyncTask<Void, Void, Void> {
 
-    String member_id,review_scope, review_content , member_nickname;
+    String member_id,review_scope, review_content , member_nickname, md_member_id , md_serial_number;
 
-    public ReviewInsert(String member_id, String review_scope, String review_content, String member_nickname){
+    public ReviewInsert(String member_id, String review_scope, String review_content
+            , String member_nickname, String md_member_id, String md_serial_number){
         this.member_id = member_id;
         this.review_scope = review_scope;
         this.review_content = review_content;
         this.member_nickname = member_nickname;
+        this.md_member_id = md_member_id;
+        this.md_serial_number = md_serial_number;
     }
 
     HttpClient httpClient;
@@ -46,6 +50,9 @@ public class ReviewInsert extends AsyncTask<Void, Void, Void> {
             builder.addTextBody("review_scope", review_scope, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("review_content", review_content, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("member_nickname", member_nickname, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("md_member_id", md_member_id, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("md_serial_number", md_serial_number, ContentType.create("Multipart/related", "UTF-8"));
+
             String postURL = ipConfig + "/app/anReviewInsert";
 
             // 전송

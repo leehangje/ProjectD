@@ -173,10 +173,14 @@ public class MdDetailActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         }); //tabs.addOnTabSelectedListener()
 
+        //리뷰쓰기
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MdDetailActivity.this, ReviewActivity.class);
+                intent.putExtra("member_id", item.getMember_id());
+                intent.putExtra("md_serial_number", item.getMd_serial_number());
+
                 startActivity(intent);
             }
         });

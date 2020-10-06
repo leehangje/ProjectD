@@ -183,6 +183,7 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
 
+                  
                     <Button
                         android:id="@+id/bt_disable"
                         android:layout_width="80dp"

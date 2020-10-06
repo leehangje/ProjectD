@@ -23,7 +23,7 @@ public class ReviewActivity extends AppCompatActivity {
     EditText et_review_content;
     Button bt_review_send;
 
-    String member_id="", review_scope="", review_content="", member_nickname="";
+    String member_id="", review_scope="", review_content="", member_nickname="" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class ReviewActivity extends AppCompatActivity {
         });
 
 
+
+
         bt_review_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,8 +63,14 @@ public class ReviewActivity extends AppCompatActivity {
                 review_scope = tv_ratingbar.getText().toString();
                 review_content = et_review_content.getText().toString();
                 member_nickname = LoginActivity.loginDTO.getMember_nickname();
+                Intent intent = getIntent();
+                String md_member_id = intent.getExtras().getString("member_id");
+                String md_serial_number = intent.getExtras().getString("md_serial_number");
 
-                ReviewInsert reviewInsert = new ReviewInsert(member_id, review_scope, review_content, member_nickname);
+
+                ReviewInsert reviewInsert = new ReviewInsert(member_id, review_scope, review_content
+                        , member_nickname, md_member_id, md_serial_number);
+
                 reviewInsert.execute();
 
                 Intent showIntent = new Intent(getApplicationContext(), RentListActivity.class);
@@ -77,8 +85,6 @@ public class ReviewActivity extends AppCompatActivity {
 
             }
         });
-
-
 
     } //onCreate()
 } //class
