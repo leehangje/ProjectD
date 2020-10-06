@@ -54,9 +54,6 @@ public class MypageActivity extends Fragment {
         setHasOptionsMenu(true);
 
         btn_profile_update = viewGroup.findViewById(R.id.btn_profile_update);
-        my_goods = viewGroup.findViewById(R.id.my_goods);
-        my_rentlist = viewGroup.findViewById(R.id.my_rentlist);
-        my_fav = viewGroup.findViewById(R.id.my_fav);
         mypage_notice = viewGroup.findViewById(R.id.mypage_notice);
         mypage_qna = viewGroup.findViewById(R.id.mypage_qna);
         mypage_logout = viewGroup.findViewById(R.id.mypage_logout);
