@@ -27,7 +27,6 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 // doInBackground 파라미터 타입, onProgressUpdate파라미터 타입, onPostExecute 파라미터 타입 순서
 // AsyncTask <Params, Progress, Result> 순서임
 public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
-
     String member_id;
     ArrayList<MdDTO> items;
     DarunMdAdapter adapter;

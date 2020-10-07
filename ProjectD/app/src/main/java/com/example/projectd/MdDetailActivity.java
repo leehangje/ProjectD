@@ -175,6 +175,27 @@ public class MdDetailActivity extends AppCompatActivity {
         }); //tabs.addOnTabSelectedListener()
 
 
+        /*//본인이 등록한 상품에는 리뷰작성 버튼이 안뜨도록 layoutWeigth값을 변경해줌
+        LinearLayout.LayoutParams favParams = (LinearLayout.LayoutParams) btn_fav.getLayoutParams();
+        LinearLayout.LayoutParams reviewParams = (LinearLayout.LayoutParams) btn_review.getLayoutParams();
+        LinearLayout.LayoutParams chatParams = (LinearLayout.LayoutParams) btn_chat.getLayoutParams();
+
+        if (loginDTO.getMember_id().equals(item.getMember_id())){
+            favParams.weight = 5;
+            reviewParams.weight = 0;
+            chatParams.weight = 5;
+            btn_fav.setLayoutParams(favParams);
+            btn_review.setLayoutParams(reviewParams);
+            btn_chat.setLayoutParams(chatParams);
+        }else{
+            favParams.weight = 3f;
+            reviewParams.weight = 3.5f;
+            chatParams.weight = 3.5f;
+            btn_fav.setLayoutParams(favParams);
+            btn_review.setLayoutParams(reviewParams);
+            btn_chat.setLayoutParams(chatParams);
+        }*/
+
         //리뷰쓰기
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,13 +203,14 @@ public class MdDetailActivity extends AppCompatActivity {
                 if (loginDTO.getMember_id().equals(item.getMember_id())){
                     Toast.makeText(MdDetailActivity.this, "본인이 등록한 상품에는 리뷰를 작성할 수 없습니다!", Toast.LENGTH_SHORT).show();
                 }else {
-                    Intent intent = new Intent(MdDetailActivity.this, ReviewActivity.class);
-                    intent.putExtra("member_id", item.getMember_id());
-                    intent.putExtra("md_serial_number", item.getMd_serial_number());
-                    startActivity(intent);
+                Intent intent = new Intent(MdDetailActivity.this, ReviewActivity.class);
+                intent.putExtra("member_id", item.getMember_id());
+                intent.putExtra("md_serial_number", item.getMd_serial_number());
+                startActivity(intent);
                 }
             }
         });
+
 
         //채팅하기
         btn_chat.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +221,7 @@ public class MdDetailActivity extends AppCompatActivity {
             }
         });
 
+
         //찜하기
         btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,68 +230,72 @@ public class MdDetailActivity extends AppCompatActivity {
                 //mBundle = new Bundle();
                 //mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
 
-                // 찜취소
-                if (btn_fav.getTag().toString().equals("1")){
-                    Toast.makeText(MdDetailActivity.this, "찜 취소했습니다.", Toast.LENGTH_SHORT).show();
-                    FavUpdateMinus favUpdateMinus = new FavUpdateMinus(item.getMd_serial_number());
+                if (loginDTO.getMember_id().equals(item.getMember_id())){
+                    Toast.makeText(MdDetailActivity.this, "본인이 등록한 상품은 찜 할 수 없습니다", Toast.LENGTH_SHORT).show();
+                }else {
+                    // 찜취소
+                    if (btn_fav.getTag().toString().equals("1")){
+                        Toast.makeText(MdDetailActivity.this, "찜 취소했습니다.", Toast.LENGTH_SHORT).show();
+                        FavUpdateMinus favUpdateMinus = new FavUpdateMinus(item.getMd_serial_number());
 
-                    try {
-                        favUpdateMinus.execute().get();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        try {
+                            favUpdateMinus.execute().get();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        //찜취소했을때 화면의 찜개수표시 새로고침(1내려감)
+                        md_fav_count.setText("찜:" + item.getMd_fav_count());
+
+
+                        //'찜취소' 눌렀을때 찜테이블에 담겨있는 데이터 삭제
+                        FavDelete favDelete = new FavDelete(loginDTO.getMember_id(), item.getMd_serial_number());
+                        try {
+                            favDelete.execute().get();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        btn_fav.setText("찜하기");
+                        btn_fav.setBackgroundColor(Color.parseColor("#f5f51f"));
+                        btn_fav.setTag("0");
+
+                        // 찜이 아닐때
+                    }else if(btn_fav.getTag().toString().equals("0")){
+                        Toast.makeText(MdDetailActivity.this, "찜 목록에 넣었습니다.", Toast.LENGTH_SHORT).show();
+                        FavUpdate favUpdate = new FavUpdate(item.getMd_serial_number());
+
+                        try {
+                            favUpdate.execute().get();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        //찜하기 눌렀을때 화면에 찜갯수 1올라간거 표시되게끔 함(화면갱신아니고 그냥 눈속임)
+                        md_fav_count.setText("찜:" + (Integer.parseInt(item.getMd_fav_count())+1));
+
+                        btn_fav.setText("찜 취소");
+                        btn_fav.setBackgroundColor(Color.RED);
+                        btn_fav.setTag("1");
+
+                        //'찜하기'눌렀을때 찜테이블에 로그인아이디 & 찜상품시리얼넘버 넣기
+                        FavInsert favInsert = new FavInsert(loginDTO.getMember_id(), item.getMd_serial_number());
+                        try {
+                            favInsert.execute().get();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        Log.d("main:mdDetail", "onClick: 아무것도 안탐 ");
                     }
-
-                    //찜취소했을때 화면의 찜개수표시 새로고침(1내려감)
-                    md_fav_count.setText("찜:" + item.getMd_fav_count());
-
-
-                    //'찜취소' 눌렀을때 찜테이블에 담겨있는 데이터 삭제
-                    FavDelete favDelete = new FavDelete(loginDTO.getMember_id(), item.getMd_serial_number());
-                    try {
-                        favDelete.execute().get();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    btn_fav.setText("찜하기");
-                    btn_fav.setBackgroundColor(Color.parseColor("#f5f51f"));
-                    btn_fav.setTag("0");
-
-                // 찜이 아닐때
-                }else if(btn_fav.getTag().toString().equals("0")){
-                    Toast.makeText(MdDetailActivity.this, "찜 목록에 넣었습니다.", Toast.LENGTH_SHORT).show();
-                    FavUpdate favUpdate = new FavUpdate(item.getMd_serial_number());
-
-                    try {
-                        favUpdate.execute().get();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    //찜하기 눌렀을때 화면에 찜갯수 1올라간거 표시되게끔 함(화면갱신아니고 그냥 눈속임)
-                    md_fav_count.setText("찜:" + (Integer.parseInt(item.getMd_fav_count())+1));
-
-                    btn_fav.setText("찜 취소");
-                    btn_fav.setBackgroundColor(Color.RED);
-                    btn_fav.setTag("1");
-
-                    //'찜하기'눌렀을때 찜테이블에 로그인아이디 & 찜상품시리얼넘버 넣기
-                    FavInsert favInsert = new FavInsert(loginDTO.getMember_id(), item.getMd_serial_number());
-                    try {
-                        favInsert.execute().get();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }else{
-                    Log.d("main:mdDetail", "onClick: 아무것도 안탐 ");
                 }
 
             }//onclick()

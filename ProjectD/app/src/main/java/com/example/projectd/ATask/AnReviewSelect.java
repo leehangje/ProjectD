@@ -114,7 +114,7 @@ public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
 
     public ReviewDto readMessage(JsonReader reader) throws IOException {
         String member_id="",  review_scope="",  review_content="",
-                member_nickname="",  md_member_id="", md_serial_number="";
+                member_nickname="",  md_member_id="", md_serial_number="", member_profile="";
 
         reader.beginObject();
         while (reader.hasNext()) {
@@ -133,6 +133,8 @@ public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
                 md_member_id = reader.nextString();
             } else if (readStr.equals("md_serial_number")) {
                 md_serial_number = reader.nextString();
+            } else if (readStr.equals("member_profile")) {
+                member_profile = reader.nextString();
             } else {
                 reader.skipValue();
             }
@@ -140,7 +142,7 @@ public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
         reader.endObject();
 
         return new ReviewDto(member_id,  review_scope,  review_content,
-                member_nickname,  md_member_id, md_serial_number);
+                member_nickname,  md_member_id, md_serial_number, member_profile);
     }
 
 
