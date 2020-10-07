@@ -1,28 +1,37 @@
 package com.example.projectd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.projectd.Dto.MdDTO;
+
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.example.projectd.CategoryViewActivity.selItem;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder>  implements OnMainMdItemClickListener {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder>
+        implements OnCategoryItemClickListener {
 
+    RecyclerView recyclerView;
+    ViewGroup viewGroup;
     private Context mContext;
     private ArrayList<MdDTO> items;
-    OnMainMdItemClickListener listener;
+    OnCategoryItemClickListener listener;
     public CategoryAdapter(Context mContext, ArrayList<MdDTO> items) {
         this.mContext = mContext;
         this.items = items;
@@ -41,17 +50,32 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d("main:CategoryAdapter", "" + position);
 
-        MdDTO item = items.get(position);
+        final MdDTO item = items.get(position);
         holder.setItem(item);
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        /*holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("main:CategoryAdapter", "onClick: " + position);
-
                 selItem = items.get(position);
             }
+        });*/
+
+        holder.md_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selItem = items.get(position);
+                if(selItem != null){
+                    Intent intent = new Intent(mContext, MdDetailActivity.class);
+                    intent.putExtra("item",selItem );
+                    mContext.startActivity(intent);
+                }else {
+                    Toast.makeText(mContext, "항목 선택을 해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+            }
         });
+
     }
 
     @Override
@@ -83,16 +107,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
 
-    public void setOnItemClickListener(OnMainMdItemClickListener listener){
+    public void setOnItemClickListener(OnCategoryItemClickListener listener){
         this.listener = listener;
     }
 
-
-
-  
-
     @Override
-    public void onItemClick(MainMdAdapter.ViewHolder holder, View view, int position) {
+    public void onItemClick(CategoryAdapter.ViewHolder holder, View view, int position) {
         if (listener != null){
             listener.onItemClick(holder, view, position);
         }
@@ -101,33 +121,33 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public LinearLayout parentLayout;
-         TextView md_name;
-         TextView md_price;
-         ImageView md_photo;
+        TextView md_name;
+        TextView md_price;
+        ImageView md_photo;
         ImageView img_possible;
 
 
-        public ViewHolder(View itemView, CategoryAdapter categoryAdapter) {
+        public ViewHolder(View itemView, final OnCategoryItemClickListener listener) {
             super(itemView);
+            parentLayout = itemView.findViewById(R.id.parentLayout);
+            md_name = itemView.findViewById(R.id.tv_title);
+            md_price = itemView.findViewById(R.id.tv_price);
+            md_photo = itemView.findViewById(R.id.iv_img);
+            img_possible = itemView.findViewById(R.id.img_possible);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
 
 
-                parentLayout = itemView.findViewById(R.id.parentLayout);
-                md_name = itemView.findViewById(R.id.tv_title);
-                md_price = itemView.findViewById(R.id.tv_price);
-                md_photo = itemView.findViewById(R.id.iv_img);
-                img_possible = itemView.findViewById(R.id.img_possible);
-
-                itemView.setOnClickListener(new View.OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        int position = getAdapterPosition();
-
-
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(listener != null){
+                        listener.onItemClick(ViewHolder.this, view, position);
                     }
-                });
-            }
+
+                }
+            });
+        }
 
 
         public void setItem(MdDTO item){
