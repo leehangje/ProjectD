@@ -20,16 +20,17 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 public class ReviewInsert extends AsyncTask<Void, Void, Void> {
 
-    String member_id,review_scope, review_content , member_nickname, md_member_id , md_serial_number;
+    String member_id,review_scope, review_content , member_nickname, md_member_id , md_serial_number , member_profile;
 
     public ReviewInsert(String member_id, String review_scope, String review_content
-            , String member_nickname, String md_member_id, String md_serial_number){
+            , String member_nickname, String md_member_id, String md_serial_number, String member_profile){
         this.member_id = member_id;
         this.review_scope = review_scope;
         this.review_content = review_content;
         this.member_nickname = member_nickname;
         this.md_member_id = md_member_id;
         this.md_serial_number = md_serial_number;
+        this.member_profile = member_profile;
     }
 
     HttpClient httpClient;
@@ -52,6 +53,7 @@ public class ReviewInsert extends AsyncTask<Void, Void, Void> {
             builder.addTextBody("member_nickname", member_nickname, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_member_id", md_member_id, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("md_serial_number", md_serial_number, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_profile", member_profile, ContentType.create("Multipart/related", "UTF-8"));
 
             String postURL = ipConfig + "/app/anReviewInsert";
 

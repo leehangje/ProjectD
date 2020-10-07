@@ -90,7 +90,8 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#f0f1f5">
 
         <View
             android:layout_width="match_parent"
@@ -102,7 +103,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="513dp">
+        android:layout_height="516dp"
+        android:background="#f0f1f5">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -110,14 +112,16 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingRight="10dp"
+            >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="509dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                >
 
             </androidx.recyclerview.widget.RecyclerView>
 

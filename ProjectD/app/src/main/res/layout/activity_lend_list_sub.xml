@@ -65,15 +65,16 @@
 
                     <TextView
                         android:id="@+id/tv_md_serial_num2"
-                        android:layout_width="120dp"
+                        android:layout_width="160dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="고유번호"
-                        android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:text="고유번호 : "
+                        android:textAlignment="textEnd"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
-                        android:background="#cccac6"/>
+                        android:background="#ffffff"
+                        />
                     <TextView
                         android:id="@+id/tv_md_serial_num"
                         android:layout_width="match_parent"
@@ -82,7 +83,7 @@
                         android:gravity="center_vertical"
                         android:text="번호"
                         android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
                         android:background="#ffffff"/>
                 </LinearLayout>
@@ -95,15 +96,15 @@
                     android:weightSum="2">
                     <TextView
                         android:id="@+id/tv_md_lend_name2"
-                        android:layout_width="120dp"
+                        android:layout_width="160dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="상품명"
-                        android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:text="상품명 : "
+                        android:textAlignment="textEnd"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
-                        android:background="#cccac6"/>
+                        android:background="#ffffff"/>
                     <TextView
                         android:id="@+id/tv_md_lend_name"
                         android:layout_width="match_parent"
@@ -112,7 +113,7 @@
                         android:gravity="center_vertical"
                         android:text="대여품"
                         android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
                         android:background="#ffffff"/>
                 </LinearLayout>
@@ -124,15 +125,15 @@
                     android:weightSum="2">
                     <TextView
                         android:id="@+id/tv_md_lender2"
-                        android:layout_width="120dp"
+                        android:layout_width="160dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="ID"
-                        android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:text="아이디 : "
+                        android:textAlignment="textEnd"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
-                        android:background="#cccac6"/>
+                        android:background="#ffffff"/>
                     <TextView
                         android:id="@+id/tv_md_lender"
                         android:layout_width="match_parent"
@@ -141,7 +142,7 @@
                         android:gravity="center_vertical"
                         android:text="대여자"
                         android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
                         android:background="#ffffff"/>
                 </LinearLayout>
@@ -153,15 +154,15 @@
                     android:weightSum="2">
                     <TextView
                         android:id="@+id/tv_md_category2"
-                        android:layout_width="120dp"
+                        android:layout_width="160dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="카테고리"
-                        android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:text="카테고리 : "
+                        android:textAlignment="textEnd"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
-                        android:background="#cccac6"/>
+                        android:background="#ffffff"/>
 
                     <TextView
                         android:id="@+id/tv_md_category"
@@ -171,7 +172,7 @@
                         android:gravity="center_vertical"
                         android:text="카테고리"
                         android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="normal|bold"
                         android:background="#ffffff"/>
 
@@ -179,23 +180,30 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="38dp"
+                    android:layout_height="40dp"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    >
 
-                  
                     <Button
                         android:id="@+id/bt_disable"
-                        android:layout_width="80dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:text="거래완료" />
+                        android:text="대여중"
+                        android:layout_weight="1"
+                        android:backgroundTint="#fc0341"
+                        android:textSize="12sp"
+                        android:textColor="#ffffff"/>
 
                     <Button
                         android:id="@+id/bt_able"
-                        android:layout_width="80dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="거래가능"/>
+                        android:text="대여완료"
+                        android:backgroundTint="#0362fc"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:textColor="#ffffff"/>
 
 
                 </LinearLayout>
