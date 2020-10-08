@@ -54,7 +54,16 @@
                 android:paddingRight="10dp">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+           <!-- <ImageView
+                android:id="@+id/favlist_null"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_margin="50dp"
+                tools:srcCompat="@drawable/choonbae1" />-->
         </FrameLayout>
+
     </ScrollView>
 
 

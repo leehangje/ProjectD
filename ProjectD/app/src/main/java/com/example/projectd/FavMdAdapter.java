@@ -22,13 +22,12 @@ public class FavMdAdapter extends RecyclerView.Adapter<FavMdAdapter.ViewHolder>
     static Context context;
     ArrayList<MdDTO> items;
     OnFavItemClickListener listener;
-
+    ImageView favlist_null;
 
     public FavMdAdapter(Context context, ArrayList<MdDTO> items){
         this.context = context;
         this.items = items;
     }
-
 
     @NonNull
     @Override
@@ -68,14 +67,15 @@ public class FavMdAdapter extends RecyclerView.Adapter<FavMdAdapter.ViewHolder>
         TextView textView2;
         ImageView iv_img;
         ImageView img_possible;
+        ImageView favlist_null;
 
         public ViewHolder(View itemView, final OnFavItemClickListener listener){
             super(itemView);
-
             textView = itemView.findViewById(R.id.tv_title);
             textView2 = itemView.findViewById(R.id.tv_price);
             iv_img = itemView.findViewById(R.id.iv_img);
             img_possible = itemView.findViewById(R.id.img_possible);
+            favlist_null = itemView.findViewById(R.id.favlist_null);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
