@@ -75,7 +75,7 @@ public class FavMdAdapter extends RecyclerView.Adapter<FavMdAdapter.ViewHolder>
             textView2 = itemView.findViewById(R.id.tv_price);
             iv_img = itemView.findViewById(R.id.iv_img);
             img_possible = itemView.findViewById(R.id.img_possible);
-            favlist_null = itemView.findViewById(R.id.favlist_null);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -24,7 +24,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import static com.example.projectd.Common.CommonMethod.ipConfig;
-import static com.example.projectd.MainActivity.mdDTO;
 
 public class MdUpdate extends AsyncTask<Void, Void, Void> {
 

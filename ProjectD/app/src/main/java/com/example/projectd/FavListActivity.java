@@ -43,7 +43,7 @@ public class FavListActivity extends AppCompatActivity {
 
         toolbar_context = findViewById(R.id.toolbar_context);
 
-        favlist_null = findViewById(R.id.favlist_null); //리스트가 없다면 대신 보여줄 이미지
+        //favlist_null = findViewById(R.id.favlist_null); //리스트가 없다면 대신 보여줄 이미지
 
         favRecyclerView = findViewById(R.id.favRecyclerView);
         favRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
