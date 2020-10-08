@@ -117,6 +117,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
             tv_md_category.setText(item.getMd_category());
             tv_md_serial_num.setText(item.getMd_serial_number());
             Glide.with(itemView).load(item.getMd_photo_url()).into(iv_md_img);
+
             bt_disable.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

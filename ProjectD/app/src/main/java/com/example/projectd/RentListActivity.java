@@ -129,9 +129,7 @@ public class RentListActivity extends AppCompatActivity {
                     ReviewDto item = adapter.getItem(position);
                     Toast.makeText(getApplicationContext(), "아이템 선택됨" + item.getMember_id(),
                             Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);
-                    intent.putExtra("item", item);
-                    startActivityForResult(intent, Rent);
+
 
                 }
             });

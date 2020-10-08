@@ -216,7 +216,7 @@
                         android:id="@+id/bt_able"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="대여완료"
+                        android:text="대여가능"
                         android:backgroundTint="#0362fc"
                         android:layout_weight="1"
                         android:textSize="12sp"

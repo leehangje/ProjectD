@@ -31,15 +31,15 @@
                 android:weightSum="2">
 
                 <LinearLayout
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:orientation="horizontal"
-                    android:weightSum="2"
+                    android:weightSum="3"
                     >
+
                     <TextView
                         android:id="@+id/tv_member_id"
-
-                        android:layout_width="match_parent"
+                        android:layout_width="450dp"
                         android:layout_height="50dp"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
@@ -57,21 +57,35 @@
                         android:textSize="14sp"
                         android:textStyle="normal|bold" />
 
+                    <Button
+                        android:id="@+id/bt_delete"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="X"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="#f54242"
+                        android:background="#ffffff"
+                        />
+
+
+
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:layout_width="200dp"
+                    android:layout_width="300dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:weightSum="2">
+                    android:weightSum="3">
                     <TextView
                         android:id="@+id/tv_rated"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="별점"
+                        android:text="별점       : "
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
                         android:textStyle="normal|bold" />
@@ -83,6 +97,17 @@
                         android:gravity="center_vertical"
                         android:text="별점"
                         android:textSize="14sp"
+                        android:textStyle="normal|bold" />
+                    <TextView
+                        android:id="@+id/tv_review_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="리뷰넘"
+                        android:visibility="invisible"
+                        android:textSize="14sp"
+
                         android:textStyle="normal|bold" />
 
                 </LinearLayout>

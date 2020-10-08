@@ -15,15 +15,16 @@ import android.widget.Toast;
 
 import com.example.projectd.ATask.ReviewInsert;
 import com.example.projectd.Dto.MdDTO;
+import com.example.projectd.Dto.ReviewDto;
 
 public class ReviewActivity extends AppCompatActivity {
     LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
-    TextView tv_review_member_id, tv_member_nick;
+    TextView tv_review_member_id, tv_member_nick, tv_reviewnum;
     RatingBar rb_review_scope;
     EditText et_review_content;
     Button bt_review_send;
 
-    String member_id="", review_scope="", review_content="", member_nickname="" , member_profile = "";
+    String member_id="", review_scope="", review_content="", member_nickname="" , member_profile = "", review_num = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,11 @@ public class ReviewActivity extends AppCompatActivity {
         tv_review_member_id = findViewById(R.id.tv_review_member_id);
         rb_review_scope = findViewById(R.id.rb_review_scope);
         et_review_content = findViewById(R.id.et_review_content);
+        tv_reviewnum = findViewById(R.id.tv_review_num);
         bt_review_send = findViewById(R.id.bt_review_send);
-        final TextView tv_ratingbar = (TextView) findViewById(R.id.tv_ratingbar);
 
+
+        final TextView tv_ratingbar = (TextView) findViewById(R.id.tv_ratingbar);
         rb_review_scope.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -68,8 +71,12 @@ public class ReviewActivity extends AppCompatActivity {
                 String md_serial_number = intent.getExtras().getString("md_serial_number");
                 member_profile = LoginActivity.loginDTO.getMember_profile();
 
+                /*Intent intent1 = getIntent();
+                ReviewDto reviewDto = (ReviewDto) intent1.getSerializableExtra("item");
+                review_num = reviewDto.getReview_num();*/
+
                 ReviewInsert reviewInsert = new ReviewInsert(member_id, review_scope, review_content
-                        , member_nickname, md_member_id, md_serial_number, member_profile);
+                        , member_nickname, md_member_id, md_serial_number, member_profile, review_num);
 
                 reviewInsert.execute();
 
@@ -87,4 +94,6 @@ public class ReviewActivity extends AppCompatActivity {
         });
 
     } //onCreate()
+
+
 } //class

@@ -1,6 +1,5 @@
 package com.example.projectd.ATask;
 
-import android.content.Intent;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,21 +17,11 @@ import java.nio.charset.Charset;
 
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 
-public class ReviewInsert extends AsyncTask<Void, Void, Void> {
+public class ReviewDelete extends AsyncTask<Void, Void, Void> {
 
-    String member_id,review_scope, review_content , member_nickname, md_member_id , md_serial_number , member_profile, review_num;
+    String review_num;
 
-    public ReviewInsert(String member_id, String review_scope, String review_content
-            , String member_nickname, String md_member_id, String md_serial_number, String member_profile, String review_num){
-        this.member_id = member_id;
-        this.review_scope = review_scope;
-        this.review_content = review_content;
-        this.member_nickname = member_nickname;
-        this.md_member_id = md_member_id;
-        this.md_serial_number = md_serial_number;
-        this.member_profile = member_profile;
-        this.review_num = review_num;
-    }
+    public ReviewDelete(String review_num){this.review_num = review_num;}
 
     HttpClient httpClient;
     HttpPost httpPost;
@@ -42,22 +31,16 @@ public class ReviewInsert extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
+
             // MultipartEntityBuild 생성
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
             builder.setCharset(Charset.forName("UTF-8"));
 
             // 문자열 및 데이터 추가
-            builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("review_scope", review_scope, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("review_content", review_content, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("member_nickname", member_nickname, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("md_member_id", md_member_id, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("md_serial_number", md_serial_number, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("member_profile", member_profile, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("review_num", review_num, ContentType.create("Multipart/related", "UTF-8"));
 
-            String postURL = ipConfig + "/app/anReviewInsert";
+            String postURL = ipConfig + "/app/anReviewDelete";
 
             // 전송
             InputStream inputStream = null;
@@ -67,8 +50,7 @@ public class ReviewInsert extends AsyncTask<Void, Void, Void> {
             httpResponse = httpClient.execute(httpPost);
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
-
-        } catch (Exception e){
+        }catch (Exception e){
             e.printStackTrace();
         }finally {
             if(httpEntity != null){
@@ -90,7 +72,7 @@ public class ReviewInsert extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        Log.d("favInsert", "onPostExecute: 성공");
+        Log.d("Sub1Add:imageFilePath1", "삭제성공");
     }
 
 }
