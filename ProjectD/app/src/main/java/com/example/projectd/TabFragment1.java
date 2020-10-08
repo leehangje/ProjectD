@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectd.ATask.AnReviewSelect;
 import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.Dto.ReviewDto;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class  TabFragment1 extends Fragment {
 
@@ -67,7 +69,17 @@ public class  TabFragment1 extends Fragment {
         });
 
         AnReviewSelect anReviewSelect = new AnReviewSelect(reviews, adapter, md_serial_number);
-        anReviewSelect.execute();
+        try {
+            anReviewSelect.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /*MdDetailActivity activity = (MdDetailActivity) getActivity();
+        TabLayout.Tab tab = activity.tabs.getTabAt(0);
+        tab.select();*/
 
 
         return  rootView;

@@ -4,6 +4,7 @@ import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.View;
 
 import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.FavMdAdapter;
@@ -23,7 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class AnFavSelectList extends AsyncTask<Void, Void, Void> {
+public class AnFavSelectList extends AsyncTask<Void, Void, Integer> {
     ArrayList<MdDTO> items;
     FavMdAdapter adapter;
     String member_id;
@@ -41,7 +42,7 @@ public class AnFavSelectList extends AsyncTask<Void, Void, Void> {
     HttpEntity httpEntity;
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected Integer doInBackground(Void... voids) {
         items.clear();
         String result = "";
         String postURL = ipConfig + "/app/anFavSelectList";
@@ -83,12 +84,12 @@ public class AnFavSelectList extends AsyncTask<Void, Void, Void> {
                 httpClient = null;
             }
         }
-        return null;
+        return items.size();
     }//doInBackground()
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Integer result) {
+        super.onPostExecute(result);
 
         Log.d("AnFavSelectList", "AnFavSelectList Complete!!!");
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,18 +20,21 @@ import com.example.projectd.Dto.MdDTO;
 import com.example.projectd.Dto.MemberDto;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 import static com.example.projectd.LoginActivity.loginDTO;
 import static com.example.projectd.LoginActivity.naverLoginDTO;
 import static com.example.projectd.SessionCallback.kakaoLoginDTO;
 
 public class MainActivity extends Fragment {
-
+    private static final String TAG = "main:MainActivity";
     RecyclerView recyclerView;
     MainMdAdapter adapter;
     ViewGroup viewGroup;
     ImageButton btn_like;
     ArrayList<MdDTO> items;
     TextView tv_addr;
+    String member_addr;     //회원 주소를 저장하는 변수
 
     /*private Context mContext = MainActivity.this;*/
     private static final int ACTIVITY_NUM = 3;
@@ -62,14 +66,31 @@ public class MainActivity extends Fragment {
 
         tv_addr = viewGroup.findViewById(R.id.tv_addr);
 
-        //메인 상단에 회원 동네 뜨도록 함
+        // member_addr에 회원정보에 저장되어 있는 주소 할당
         if(loginDTO != null) {
-            tv_addr.setText(loginDTO.getMember_addr());
+            member_addr = loginDTO.getMember_addr();
         } else if(naverLoginDTO != null) {
-            tv_addr.setText(naverLoginDTO.getMember_addr());
+            member_addr = naverLoginDTO.getMember_addr();
         } else if(kakaoLoginDTO != null) {
-            tv_addr.setText(kakaoLoginDTO.getMember_addr());
+            member_addr = kakaoLoginDTO.getMember_addr();
         }
+
+        // 주소에 상세 주소가 안나오도록 하게 함(시, 도, 군, 구, 동, 면만 나오게끔)
+        String[] split1 = member_addr.split(" ");
+        String member_addr_re = "";
+
+        for (int i = 0; i < split1.length; i++) {
+            if(Pattern.matches("[가-힣]+(시|도|군|구|동|면)", split1[i])) {
+                member_addr_re += split1[i] + " ";
+            }
+        }
+        member_addr_re = member_addr_re.trim();
+        // 마지막 공백 제거
+
+        Log.d(TAG, "onCreateView: " + member_addr_re);
+
+        //메인 상단에 회원 동네 뜨도록 함
+        tv_addr.setText(member_addr_re);
 
         //찜목록
         btn_like = viewGroup.findViewById(R.id.btn_like);
@@ -129,17 +150,8 @@ public class MainActivity extends Fragment {
 
         });
 
-        if(loginDTO != null) {
-            AnMainSelect anMainSelect = new AnMainSelect(items, adapter, loginDTO.getMember_addr());
-            anMainSelect.execute();
-        } else if(naverLoginDTO != null) {
-            AnMainSelect anMainSelect = new AnMainSelect(items, adapter, naverLoginDTO.getMember_addr());
-            anMainSelect.execute();
-        } else if(kakaoLoginDTO != null) {
-            AnMainSelect anMainSelect = new AnMainSelect(items, adapter, kakaoLoginDTO.getMember_addr());
-            anMainSelect.execute();
-        }
-
+        AnMainSelect anMainSelect = new AnMainSelect(items, adapter, member_addr_re);
+        anMainSelect.execute();
 
         return viewGroup;
 
