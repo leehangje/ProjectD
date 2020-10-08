@@ -30,6 +30,7 @@ import com.example.projectd.Dto.MemberDto;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,7 +42,7 @@ public class MdDetailActivity extends AppCompatActivity {
     public MemberDto memberDto = null;
     public FavDto favDto = null;
     Bundle mBundle = null;
-
+    TabLayout tabs;
 
     FragmentPagerAdapter adapterViewPager;
 
@@ -129,10 +130,10 @@ public class MdDetailActivity extends AppCompatActivity {
 
         vpPager.setAdapter(adapterViewPager);
 
-
-        //프로필사진 동글이
-        /*CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(vpPager);*/
+        // 전달할 데이터 Bundle
+        mBundle = new Bundle();
+        mBundle.putString("member_id", item.getMember_id());  // 키값, 데이터
+        mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
 
         // 탭 프래그먼트
         fragment1 = new TabFragment1();
@@ -141,7 +142,11 @@ public class MdDetailActivity extends AppCompatActivity {
         //탭 프래그먼트중 기본으로 표시될 프래그먼트
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment1).commit();
 
-        TabLayout tabs = findViewById(R.id.tabs);
+        //프로필사진 동글이
+        /*CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(vpPager);*/
+
+        tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("리뷰"));
         tabs.addTab(tabs.newTab().setText( memberDto.getMember_nickname() + "님의 다른 상품"));
 
@@ -149,16 +154,12 @@ public class MdDetailActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                Log.d("MainActivity", "선택된 탭: " + position);
+                Log.d("MdDetailActivity", "선택된 탭: " + position);
 
                 Fragment selected = null;
                 if (position == 0){
                     selected = fragment1;
                 }else if (position == 1){
-                    // 전달할 데이터 Bundle
-                    mBundle = new Bundle();
-                    mBundle.putString("member_id", item.getMember_id());  // 키값, 데이터
-                    mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
                     selected = fragment2;
                 }
                 //fragment2.setArguments(args);
@@ -173,6 +174,8 @@ public class MdDetailActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         }); //tabs.addOnTabSelectedListener()
 
+        //TabLayout.Tab tab = tabs.getTabAt(0);
+        //tab.select();
 
         /*//본인이 등록한 상품에는 리뷰작성 버튼이 안뜨도록 layoutWeigth값을 변경해줌
         LinearLayout.LayoutParams favParams = (LinearLayout.LayoutParams) btn_fav.getLayoutParams();
@@ -309,12 +312,28 @@ public class MdDetailActivity extends AppCompatActivity {
             }
         });
 
+
     }//onCreate()
 
 
     public void setItem(MdDTO item, MemberDto memberDto){
+        String member_addr1 = memberDto.getMember_addr();
+
+        // 주소에 상세 주소가 안나오도록 하게 함(시, 도, 군, 구, 동, 면만 나오게끔)
+        String[] split1 = member_addr1.split(" ");
+        String member_addr_re = "";
+
+        for (int i = 0; i < split1.length; i++) {
+            if(Pattern.matches("[가-힣]+(시|도|군|구|동|면)", split1[i])) {
+                member_addr_re += split1[i] + " ";
+            }
+        }
+        member_addr_re = member_addr_re.trim();
+        // 마지막 공백 제거
+
+
         user_nickname.setText(memberDto.getMember_nickname());
-        member_addr.setText(memberDto.getMember_addr());
+        member_addr.setText(member_addr_re);
         user_grade.setText(memberDto.getMember_grade() + "점");
         Glide.with(this).load(memberDto.getMember_profile()).into(profile_photo);
 

@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectd.ATask.AnFavSelectList;
@@ -19,6 +21,7 @@ import com.example.projectd.Dto.FavDto;
 import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import static com.example.projectd.LoginActivity.loginDTO;
 
@@ -27,6 +30,8 @@ public class FavListActivity extends AppCompatActivity {
     RecyclerView favRecyclerView;
     FavMdAdapter adapter;
     ImageView favlist_null;
+    TextView text_fav_null;
+    ScrollView scrollView;
 
     ArrayList<MdDTO> items;
 
@@ -43,18 +48,15 @@ public class FavListActivity extends AppCompatActivity {
 
         toolbar_context = findViewById(R.id.toolbar_context);
 
-        //favlist_null = findViewById(R.id.favlist_null); //리스트가 없다면 대신 보여줄 이미지
+        scrollView = findViewById(R.id.scrollView);
+        favlist_null = findViewById(R.id.favlist_null);     //리스트가 없다면 대신 보여줄 이미지
+        text_fav_null = findViewById(R.id.text_fav_null);   //리스트가 없다면 대신 보여줄 텍스트
 
         favRecyclerView = findViewById(R.id.favRecyclerView);
         favRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         adapter = new FavMdAdapter(getApplicationContext(), items);
 
-       /* if (items.isEmpty()){
-            favlist_null.setVisibility(View.VISIBLE);
-        }else{
-            favlist_null.setVisibility(View.INVISIBLE);
-        }*/
 
         favRecyclerView.setAdapter(adapter);
 
@@ -73,8 +75,25 @@ public class FavListActivity extends AppCompatActivity {
             }
         });
 
+        int itemsSize = 0;  //찜목록갯수
         AnFavSelectList anFavSelectList = new AnFavSelectList(items, adapter, loginDTO.getMember_id());
-        anFavSelectList.execute();
+        try {
+            itemsSize = anFavSelectList.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(itemsSize == 0){
+            favlist_null.setVisibility(View.VISIBLE);
+            text_fav_null.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+        }else{
+            favlist_null.setVisibility(View.GONE);
+            text_fav_null.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
+        }
 
         // 툴바 안의 뒤로가기 버튼 클릭할 때
         toolbar_context.setOnClickListener(new View.OnClickListener() {

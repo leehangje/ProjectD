@@ -16,6 +16,7 @@ import com.example.projectd.ATask.AnDarunSelect;
 import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class TabFragment2 extends Fragment {
 
@@ -80,7 +81,13 @@ public class TabFragment2 extends Fragment {
 
 
         AnDarunSelect anDarunSelect = new AnDarunSelect(items, adapter, member_id);
-        anDarunSelect.execute();
+        try {
+            anDarunSelect.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         return  rootView;
