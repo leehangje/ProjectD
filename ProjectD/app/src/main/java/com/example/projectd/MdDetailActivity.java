@@ -33,6 +33,7 @@ import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.projectd.CategoryViewActivity.selItem;
 import static com.example.projectd.LoginActivity.loginDTO;
 
 public class MdDetailActivity extends AppCompatActivity {
@@ -74,6 +75,8 @@ public class MdDetailActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            selItem = null;
         }
 
         profile_photo = findViewById(R.id.profile_photo);
@@ -149,17 +152,16 @@ public class MdDetailActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                Log.d("MdDetailActivity", "선택된 탭: " + position);
-
-                // 전달할 데이터 Bundle
-                mBundle = new Bundle();
-                mBundle.putString("member_id", item.getMember_id());  // 키값, 데이터
-                mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
+                Log.d("MainActivity", "선택된 탭: " + position);
 
                 Fragment selected = null;
                 if (position == 0){
                     selected = fragment1;
                 }else if (position == 1){
+                    // 전달할 데이터 Bundle
+                    mBundle = new Bundle();
+                    mBundle.putString("member_id", item.getMember_id());  // 키값, 데이터
+                    mBundle.putString("md_serial_number", item.getMd_serial_number());  // 키값, 데이터
                     selected = fragment2;
                 }
                 //fragment2.setArguments(args);
@@ -174,21 +176,14 @@ public class MdDetailActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         }); //tabs.addOnTabSelectedListener()
 
-
-        //리뷰쓰기
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (loginDTO.getMember_id().equals(item.getMember_id())){
-                    Toast.makeText(MdDetailActivity.this, "본인이 등록한 상품에는 리뷰를 작성할 수 없습니다!", Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent = new Intent(MdDetailActivity.this, ReviewActivity.class);
-                    intent.putExtra("member_id", item.getMember_id());
-                    intent.putExtra("md_serial_number", item.getMd_serial_number());
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(MdDetailActivity.this, ReviewActivity.class);
+                startActivity(intent);
             }
         });
+
 
         //채팅하기
         btn_chat.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +233,7 @@ public class MdDetailActivity extends AppCompatActivity {
                     btn_fav.setBackgroundColor(Color.parseColor("#f5f51f"));
                     btn_fav.setTag("0");
 
-                // 찜이 아닐때
+                    // 찜이 아닐때
                 }else if(btn_fav.getTag().toString().equals("0")){
                     Toast.makeText(MdDetailActivity.this, "찜 목록에 넣었습니다.", Toast.LENGTH_SHORT).show();
                     FavUpdate favUpdate = new FavUpdate(item.getMd_serial_number());
@@ -267,6 +262,7 @@ public class MdDetailActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+
                 }else{
                     Log.d("main:mdDetail", "onClick: 아무것도 안탐 ");
                 }

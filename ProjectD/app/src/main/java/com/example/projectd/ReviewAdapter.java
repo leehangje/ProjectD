@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.projectd.Dto.ReviewDto;
 
 import java.util.ArrayList;
@@ -19,19 +20,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder>
             implements OnReviewItemClickListener {
 
-    static Context context;
+    static Context context1;
     String md_serial_number;
     ArrayList<ReviewDto> reviews;
     OnReviewItemClickListener listener;
 
     public ReviewAdapter(Context context, String md_serial_number, ArrayList<ReviewDto> reviews) {
-        this.context = context;
+        this.context1 = context;
         this.md_serial_number = md_serial_number;
         this.reviews = reviews;
     }
 
     public ReviewAdapter(Context context, ArrayList<ReviewDto> reviews) {
-        this.context = context;
+        this.context1 = context;
         this.reviews = reviews;
     }
 
@@ -96,6 +97,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
             user_nickname.setText(review.getMember_nickname());
             review_text.setText(review.getReview_content());
             review_scope.setText(review.getReview_scope() + "점");
+            Glide.with(context1).load(review.getMember_profile()).placeholder(R.drawable.person).into(review_profile_photo);
             //review_profile_photo
             review_ratingBar.setRating(Float.parseFloat(review.getReview_scope()));
         }

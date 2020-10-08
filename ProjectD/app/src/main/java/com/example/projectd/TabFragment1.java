@@ -16,15 +16,14 @@ import com.example.projectd.Dto.ReviewDto;
 
 import java.util.ArrayList;
 
-public class TabFragment1 extends Fragment {
+public class  TabFragment1 extends Fragment {
 
     RecyclerView recyclerView;
     ReviewAdapter adapter;
     MdDetailActivity activity;
 
-    //ArrayList<MdDTO> items;
     ArrayList<ReviewDto> reviews;
-    String md_serial_number, member_profile;
+    String md_serial_number;
 
     /*private Context mContext = MainActivity.this;*/
     private static final int ACTIVITY_NUM = 3;
@@ -43,7 +42,6 @@ public class TabFragment1 extends Fragment {
             activity.mBundle = null;
         }
 
-        //items = new ArrayList<>();
         reviews = new ArrayList<>();
 
         recyclerView = rootView.findViewById(R.id.recyclerView);

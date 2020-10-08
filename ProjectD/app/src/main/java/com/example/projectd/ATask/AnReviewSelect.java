@@ -133,6 +133,8 @@ public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
                 md_member_id = reader.nextString();
             } else if (readStr.equals("md_serial_number")) {
                 md_serial_number = reader.nextString();
+            } else if (readStr.equals("member_profile")) {
+                member_profile = reader.nextString();
             } else {
                 reader.skipValue();
             }
