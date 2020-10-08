@@ -5,9 +5,8 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.example.projectd.DarunMdAdapter;
-import com.example.projectd.Dto.MdDTO;
-import com.example.projectd.MainMdAdapter;
+import com.example.projectd.Dto.ReviewDto;
+import com.example.projectd.ReviewAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,17 +23,15 @@ import java.util.ArrayList;
 
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 
-// doInBackground 파라미터 타입, onProgressUpdate파라미터 타입, onPostExecute 파라미터 타입 순서
-// AsyncTask <Params, Progress, Result> 순서임
-public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
-    String member_id;
-    ArrayList<MdDTO> items;
-    DarunMdAdapter adapter;
+public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
+    String md_serial_number;
+    ArrayList<ReviewDto> reviews;
+    ReviewAdapter adapter;
 
-    public AnDarunSelect(ArrayList<MdDTO> items, DarunMdAdapter adapter, String member_id){
-        this.items = items;
+    public AnReviewSelect(ArrayList<ReviewDto> reviews, ReviewAdapter adapter, String md_serial_number) {
+        this.reviews = reviews;
         this.adapter = adapter;
-        this.member_id = member_id;
+        this.md_serial_number = md_serial_number;
     }
 
     HttpClient httpClient;
@@ -42,16 +39,13 @@ public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
     HttpResponse httpResponse;
     HttpEntity httpEntity;
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
+
 
     @Override
     protected Void doInBackground(Void... voids) {
-        items.clear();
+        reviews.clear();
         String result = "";
-        String postURL = ipConfig + "/app/anDarunSelect";
+        String postURL = ipConfig + "/app/anReviewSelect";
 
         try {
             // MultipartEntityBuild 생성
@@ -59,7 +53,7 @@ public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
             // 문자열 및 데이터 추가
-            builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("md_serial_number", md_serial_number, ContentType.create("Multipart/related", "UTF-8"));
 
             // 전송
             InputStream inputStream = null;
@@ -74,7 +68,7 @@ public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
 
 
         } catch (Exception e) {
-            Log.d("AnDarunSelect", e.getMessage());
+            Log.d("AnReviewSelect", e.getMessage());
             e.printStackTrace();
         }finally {
             if(httpEntity != null){
@@ -91,77 +85,65 @@ public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
             }
         }
         return null;
-    }
+    }//doInBackground()
+
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        Log.d("AnDarunSelect", "AnDarunSelect Complete!!!");
+        Log.d("AnReviewSelect", "AnReviewSelect Complete!!!");
 
         adapter.notifyDataSetChanged();
     }
+
 
     public void readJsonStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         try {
             reader.beginArray();
             while (reader.hasNext()) {
-                items.add(readMessage(reader));
+                reviews.add(readMessage(reader));
             }
             reader.endArray();
         } finally {
             reader.close();
         }
-    }
+    }//readJsonStream()
 
 
-    public MdDTO readMessage(JsonReader reader) throws IOException {
-        String md_name = "", md_category = "", md_rental_term = "", md_detail_content = "",
-                md_photo_url = "", member_id = "", md_registration_date = "",
-                md_serial_number = "";
-        String md_price = "", md_deposit = "", md_fav_count = "", md_rent_status = "", md_hits = "";
+    public ReviewDto readMessage(JsonReader reader) throws IOException {
+        String member_id="",  review_scope="",  review_content="",
+                member_nickname="",  md_member_id="", md_serial_number="", member_profile="";
 
         reader.beginObject();
         while (reader.hasNext()) {
             String readStr = reader.nextName();
 
-            if (readStr.equals("md_name")) {
-                md_name = reader.nextString();
-            } else if (readStr.equals("md_category")) {
-                md_category = reader.nextString();
-            } else if (readStr.equals("md_rental_term")) {
-                md_rental_term = reader.nextString();
-            } else if (readStr.equals("md_detail_content")) {
-                md_detail_content = reader.nextString();
-            } else if (readStr.equals("md_photo_url")) {
-                md_photo_url = reader.nextString();
-            } else if (readStr.equals("member_id")) {
+
+            if (readStr.equals("member_id")) {
                 member_id = reader.nextString();
-            } else if (readStr.equals("md_registration_date")) {
-                md_registration_date = reader.nextString();
+            } else if (readStr.equals("review_scope")) {
+                review_scope = reader.nextString();
+            } else if (readStr.equals("review_content")) {
+                review_content = reader.nextString();
+            } else if (readStr.equals("member_nickname")) {
+                member_nickname = reader.nextString();
+            } else if (readStr.equals("md_member_id")) {
+                md_member_id = reader.nextString();
             } else if (readStr.equals("md_serial_number")) {
                 md_serial_number = reader.nextString();
-            } else if (readStr.equals("md_price")) {
-                md_price = reader.nextString();
-            } else if (readStr.equals("md_deposit")) {
-                md_deposit = reader.nextString();
-            } else if (readStr.equals("md_fav_count")) {
-                md_fav_count = reader.nextString();
-            } else if (readStr.equals("md_rent_status")) {
-                md_rent_status = reader.nextString();
-            } else if (readStr.equals("md_hits")) {
-                md_hits = reader.nextString();
+            } else if (readStr.equals("member_profile")) {
+                member_profile = reader.nextString();
             } else {
                 reader.skipValue();
             }
         }
         reader.endObject();
 
-        return new MdDTO(md_name, md_category, md_price, md_rental_term,
-                md_deposit, md_detail_content, md_photo_url, member_id,
-                md_fav_count, md_registration_date,
-                md_serial_number, md_rent_status, md_hits);
+        return new ReviewDto(member_id,  review_scope,  review_content,
+                member_nickname,  md_member_id, md_serial_number, member_profile);
     }
+
 
 }//class

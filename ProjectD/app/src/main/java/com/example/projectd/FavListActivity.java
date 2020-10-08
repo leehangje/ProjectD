@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class FavListActivity extends AppCompatActivity {
 
     RecyclerView favRecyclerView;
     FavMdAdapter adapter;
+    ImageView favlist_null;
 
     ArrayList<MdDTO> items;
 
@@ -41,13 +43,20 @@ public class FavListActivity extends AppCompatActivity {
 
         toolbar_context = findViewById(R.id.toolbar_context);
 
+        //favlist_null = findViewById(R.id.favlist_null); //리스트가 없다면 대신 보여줄 이미지
+
         favRecyclerView = findViewById(R.id.favRecyclerView);
         favRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         adapter = new FavMdAdapter(getApplicationContext(), items);
 
-        favRecyclerView.setAdapter(adapter);
+       /* if (items.isEmpty()){
+            favlist_null.setVisibility(View.VISIBLE);
+        }else{
+            favlist_null.setVisibility(View.INVISIBLE);
+        }*/
 
+        favRecyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnFavItemClickListener() {
             public static final int fav = 1001;

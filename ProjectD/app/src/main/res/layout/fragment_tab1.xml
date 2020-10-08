@@ -17,12 +17,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <include
-            android:id="@+id/review1"
-            layout="@layout/review_sub"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </FrameLayout>
 
 </LinearLayout>

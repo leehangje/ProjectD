@@ -23,7 +23,7 @@ public class ReviewActivity extends AppCompatActivity {
     EditText et_review_content;
     Button bt_review_send;
 
-    String member_id="", review_scope="", review_content="", member_nickname="" ;
+    String member_id="", review_scope="", review_content="", member_nickname="" , member_profile = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +66,10 @@ public class ReviewActivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 String md_member_id = intent.getExtras().getString("member_id");
                 String md_serial_number = intent.getExtras().getString("md_serial_number");
-
+                member_profile = LoginActivity.loginDTO.getMember_profile();
 
                 ReviewInsert reviewInsert = new ReviewInsert(member_id, review_scope, review_content
-                        , member_nickname, md_member_id, md_serial_number);
+                        , member_nickname, md_member_id, md_serial_number, member_profile);
 
                 reviewInsert.execute();
 

@@ -58,9 +58,6 @@ public class TabFragment2 extends Fragment {
 
         adapter = new DarunMdAdapter(getContext(), items);
 
-        //adapter.addItem(new Darun("킥보드", "2000원"));
-        //adapter.addItem(new Darun("자건거", "5000원"));
-
         recyclerView.setAdapter(adapter);
 
 
