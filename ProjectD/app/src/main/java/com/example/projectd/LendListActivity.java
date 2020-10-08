@@ -74,6 +74,7 @@ public class LendListActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }//oncreate
 
     private class MdPullRequest extends AsyncTask<Void, Void, List<MdDTO>> {
@@ -140,6 +141,7 @@ public class LendListActivity extends AppCompatActivity {
         //선택된 아이템 MD디테일화면으로 보내기
         @Override
         protected void onPostExecute(final List<MdDTO> mdDTOS) {
+            super.onPostExecute(mdDTOS);
             final int Lend = 1001;
 
             LinearLayoutManager layoutManager =
@@ -159,8 +161,6 @@ public class LendListActivity extends AppCompatActivity {
 
                 }
             });
-
-            super.onPostExecute(mdDTOS);
 
         }
     }

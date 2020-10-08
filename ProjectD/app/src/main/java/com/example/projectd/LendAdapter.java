@@ -1,8 +1,11 @@
 package com.example.projectd;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.projectd.ATask.MdDelete;
 import com.example.projectd.ATask.MdRentStatusInsert;
 import com.example.projectd.Dto.MdDTO;
 import com.google.firebase.database.annotations.NotNull;
@@ -26,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> implements OnLendItemCLickListener {
+
+    private static final String TAG = "LendAdapter";
 
     Context context;
     List<MdDTO> items;
@@ -74,6 +80,8 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
         ImageView iv_md_img;
         Button bt_disable;
         Button bt_able;
+        Button bt_md_modify;
+        Button bt_md_delete;
         //Spinner spinner2;
 
         public ViewHolder(final View itemView, final OnLendItemCLickListener listener){
@@ -86,18 +94,24 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
             iv_md_img = itemView.findViewById(R.id.iv_md_img);
             bt_disable = itemView.findViewById(R.id.bt_disable);
             bt_able = itemView.findViewById(R.id.bt_able);
-
+            bt_md_modify = itemView.findViewById(R.id.bt_md_modify);
+            bt_md_delete = itemView.findViewById(R.id.bt_md_delete);
             //spinner2 = itemView.findViewById(R.id.sp_md_nego_category);
+
+
+
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     if (listener != null) {
-                        listener.onItemClick(ViewHolder.this, view, position);
+                       listener.onItemClick(ViewHolder.this, view, position);
                     }
                 }
             });
+
         }
 
         public void setItem(final MdDTO item){
@@ -113,7 +127,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                     md_serial_number = item.getMd_serial_number();
                     MdRentStatusInsert mdRentStatusInsert = new MdRentStatusInsert(md_rent_status, md_serial_number);
                     mdRentStatusInsert.execute();
-                    Toast.makeText(context, "거래완료", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "거래완료로 변경되었습니다", Toast.LENGTH_LONG).show();
                 }
             });
             bt_able.setOnClickListener(new View.OnClickListener() {
@@ -123,12 +137,52 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                     md_serial_number = item.getMd_serial_number();
                     MdRentStatusInsert mdRentStatusInsert = new MdRentStatusInsert(md_rent_status, md_serial_number);
                     mdRentStatusInsert.execute();
-                    Toast.makeText(context, "거래가능", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "거래가능으로 변경되었습니다", Toast.LENGTH_LONG).show();
+                }
+            });
+            final int position = getAdapterPosition();
+            bt_md_modify.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i(TAG, "onClick: 클릭" + position);
+                    Intent intent = new Intent(context, MdUpdateActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("num", items.get(position).getMd_serial_number());
+                    context.startActivity(intent);
+                }
+            });
+            bt_md_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("정말로 삭제하시겠습니까?");
+                    builder.setMessage("삭제하신 데이터는 되돌릴 수 없습니다");
+                    builder.setPositiveButton("삭제",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                      md_serial_number = item.getMd_serial_number();
+                                      MdDelete mdDelete = new MdDelete(md_serial_number);
+                                      mdDelete.execute();
+                                      Toast.makeText(context, "삭제성공", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    builder.setNegativeButton("취소",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    Toast.makeText(context, "삭제가 취소되었습니다", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    builder.show();
+
                 }
             });
 
         }
     }
+
 
     public void removeAll(){
         items.clear();
