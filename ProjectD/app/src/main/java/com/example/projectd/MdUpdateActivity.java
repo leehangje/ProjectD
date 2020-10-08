@@ -159,8 +159,18 @@ public class MdUpdateActivity extends AppCompatActivity {
             }
         });
 
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_cancel();
+            }
+        });
 
     }//oncreate
+
+    private void btn_cancel() {
+        finish();
+    }
 
     private void getMdDetail(String num) {
         String url = ipConfig + "app/anMdDetail?num=" + num;
@@ -224,7 +234,8 @@ public class MdUpdateActivity extends AppCompatActivity {
             Toast.makeText(this, "업로드 성공" , Toast.LENGTH_SHORT).show();
 
             finish();
-        }
-
     }
+
+
+}
 

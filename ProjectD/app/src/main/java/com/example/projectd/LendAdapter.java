@@ -1,6 +1,7 @@
 package com.example.projectd;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -59,7 +60,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
     }
 
     @Override
-    public int getItemCount() { return items.size(); }
+    public int getItemCount() { return items == null ? 0 : items.size(); }
 
     public void setOnItemClickListener(OnLendItemCLickListener listener){
         this.listener = listener;
@@ -97,10 +98,6 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
             bt_md_modify = itemView.findViewById(R.id.bt_md_modify);
             bt_md_delete = itemView.findViewById(R.id.bt_md_delete);
             //spinner2 = itemView.findViewById(R.id.sp_md_nego_category);
-
-
-
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,7 +152,11 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                 @Override
                 public void onClick(View view) {
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    md_serial_number = item.getMd_serial_number();
+                    MdDelete mdDelete = new MdDelete(md_serial_number);
+                    mdDelete.execute();
+                    Toast.makeText(context, "삭제성공", Toast.LENGTH_LONG).show();
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("정말로 삭제하시겠습니까?");
                     builder.setMessage("삭제하신 데이터는 되돌릴 수 없습니다");
                     builder.setPositiveButton("삭제",
@@ -175,8 +176,9 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                                     Toast.makeText(context, "삭제가 취소되었습니다", Toast.LENGTH_LONG).show();
                                 }
                             });
-                    builder.show();
-
+                    builder.show();*/
+                    // ((Activity) context).finish();
+                    // context.startActivity(((Activity) context).getIntent());
                 }
             });
 
