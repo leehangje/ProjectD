@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -34,6 +35,7 @@ public class CategoryViewActivity extends AppCompatActivity {
 
     CategorySelect categorySelect;
     ProgressDialog progressDialog;
+    TextView category_name;
 
     String category;
 
@@ -56,6 +58,9 @@ public class CategoryViewActivity extends AppCompatActivity {
             category = intent.getStringExtra("category");
         }
 
+        category_name = findViewById(R.id.category_name);
+
+        category_name.setText(category);
 
         categorySelect = new CategorySelect(items, adapter, progressDialog, category);
         try {

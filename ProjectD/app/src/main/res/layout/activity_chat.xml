@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#869ce3"
     >
 
     <androidx.recyclerview.widget.RecyclerView
@@ -14,8 +13,7 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#869ce3"/>
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,15 +26,12 @@
             android:id="@+id/EditText_Chat"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#e9ecf2"/>
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/Button_send"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="#3e4ba9"
-            android:textColor="#ffffff"
             android:text="SEND" />
 
 
