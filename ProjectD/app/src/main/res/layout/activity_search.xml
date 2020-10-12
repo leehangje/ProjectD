@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:background="#3e4ba9">
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:text="검색"
-                android:textColor="#3e4ba9"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -45,7 +45,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_marginTop="10dp">
@@ -60,9 +60,8 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="13dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="검색어를 입력하세요"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
@@ -70,15 +69,12 @@
 
             <Button
                 android:id="@+id/icon_search"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
-                android:text="검색"
-                android:background="#3e4ba9"
-                android:textColor="#ffffff"/>
+                android:text="검색" />
 
 
         </LinearLayout>
@@ -87,8 +83,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="520dp"
-        android:background="#f0f1f5">
+        android:layout_height="520dp">
 
         <FrameLayout
             android:layout_width="match_parent"
