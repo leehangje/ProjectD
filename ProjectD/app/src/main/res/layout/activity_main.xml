@@ -12,12 +12,14 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#3F51B5">
 
         <LinearLayout
             android:layout_width="244dp"
             android:layout_height="60dp"
             android:orientation="horizontal">
+
 
             <ImageButton
                 android:id="@+id/btn_gps"
@@ -26,9 +28,9 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="22dp"
-                android:background="#FFFFFF"
+                android:background="#3F51B5"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/main_icon_gps" />
+                app:srcCompat="@drawable/main_icon_gps2" />
 
             <TextView
                 android:id="@+id/tv_addr"
@@ -39,7 +41,8 @@
                 android:layout_marginTop="27dp"
                 android:layout_marginEnd="191dp"
                 android:layout_marginRight="0dp"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:textColor="#ffffff"/>
         </LinearLayout>
 
         <LinearLayout
@@ -54,9 +57,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="20dp"
-                android:background="#FFFFFF"
+                android:background="#3F51B5"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/main_icon_search" />
+                app:srcCompat="@drawable/main_icon_search2" />
 
             <ImageButton
                 android:id="@+id/btn_like"
@@ -65,9 +68,9 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="20dp"
-                android:background="#FFFFFF"
+                android:background="#3F51B5"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/card_list_fav" />
+                app:srcCompat="@drawable/card_list_fav2" />
 
             <ImageButton
                 android:id="@+id/btn_alram"
@@ -78,9 +81,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="0dp"
-                android:background="#FFFFFF"
+                android:background="#3F51B5"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/main_icon_alram" />
+                app:srcCompat="@drawable/main_icon_alram2" />
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -89,16 +92,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="#f0f1f5">
+        android:layout_marginTop="0dp"
+        android:background="#3F51B5"
+        android:orientation="horizontal">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
-            android:background="#918E8E" />
+            android:background="#FFFFFF" />
     </LinearLayout>
 
     <ScrollView
