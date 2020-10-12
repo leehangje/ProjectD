@@ -25,27 +25,29 @@
     <EditText
         android:id="@+id/etId"
         android:layout_width="295dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#DDDDDD"
+        android:layout_height="50dp"
+        android:background="#ffffff"
         android:ems="10"
         android:hint="ID"
+        android:paddingLeft="10dp"
         android:inputType="textEmailAddress"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"/>
+        android:textColor="#000000"
+        android:textColorHint="#acb0b5"/>
 
     <EditText
         android:id="@+id/etPw"
         android:layout_width="295dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/etId"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="#ffffff"
         android:ems="10"
         android:hint="PW"
+        android:paddingLeft="10dp"
         android:inputType="textPassword"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF" />
+        android:textColor="#000000"
+        android:textColorHint="#acb0b5" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,7 +83,9 @@
         android:layout_below="@id/etPw"
         android:layout_gravity="center"
         android:text="로그인"
+        android:textColor="#ffffff"
         android:textSize="18sp"
+        android:background="#162659"
         android:layout_marginTop="35dp"/>
 
     <LinearLayout
@@ -97,6 +101,7 @@
             android:id="@+id/naverLoginBtn"
             android:layout_width="150dp"
             android:layout_height="40dp"
+
             android:src="@drawable/naver_login" />
 
         <ImageView

@@ -85,7 +85,10 @@
                     android:id="@+id/category6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
@@ -99,7 +102,6 @@
                         android:id="@+id/categoryBtn6"
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
                         android:background="#FFFFFF"
                         android:text="게임/취미"
                         android:textSize="15dp" />
@@ -143,8 +145,11 @@
                     android:id="@+id/category7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -199,8 +204,11 @@
                     android:id="@+id/category8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -255,8 +263,11 @@
                     android:id="@+id/category9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -309,8 +320,11 @@
                     android:id="@+id/category10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
                     android:orientation="horizontal">
 
                     <ImageView

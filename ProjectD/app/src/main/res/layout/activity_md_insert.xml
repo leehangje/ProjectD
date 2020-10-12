@@ -20,30 +20,42 @@
 
             <ImageView
                 android:id="@+id/imgVwSelected"
-                android:layout_width="140dp"
-                android:layout_height="115dp"
+                android:layout_width="184dp"
+                android:layout_height="114dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="217dp"
+                android:layout_marginRight="217dp"
                 android:layout_marginBottom="16dp"
                 android:autofillHints="image"
                 android:background="#ffffff"
-                android:src="@drawable/image_border"
-                />
+                android:src="@drawable/image_border" />
+
 
             <TextView
-                android:layout_marginTop="110dp"
-                android:layout_marginLeft="30dp"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:hint="이미지 미리보기"
-                android:gravity="center"/>
-
-
+                android:layout_alignTop="@+id/imgVwSelected"
+                android:layout_alignEnd="@+id/imgVwSelected"
+                android:layout_alignRight="@+id/imgVwSelected"
+                android:layout_alignBottom="@+id/imgVwSelected"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="54dp"
+                android:layout_marginLeft="54dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:hint="이미지 미리보기" />
 
             <EditText
                 android:id="@+id/et_md_name"
@@ -56,7 +68,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:hint="제목을 입력하세요"
@@ -71,7 +83,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="false"
                 android:layout_alignParentBottom="false"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="121dp"
                 android:layout_marginRight="151dp"
                 android:layout_marginBottom="574dp"
@@ -89,7 +101,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="false"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="23dp"
                 android:layout_marginRight="23dp"
                 android:layout_marginBottom="0dp"
@@ -114,9 +126,13 @@
                 android:id="@+id/sp_md_category"
                 android:layout_width="290dp"
                 android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="200dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
                 android:layout_toEndOf="@+id/tv_md_category"
                 android:layout_toRightOf="@+id/tv_md_category"
                 android:entries="@array/카테고리" />
@@ -136,15 +152,19 @@
                 android:id="@+id/et_md_price"
                 android:layout_width="290dp"
                 android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="260dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
                 android:layout_toEndOf="@+id/tv_md_price"
                 android:layout_toRightOf="@+id/tv_md_price"
                 android:ems="10"
                 android:hint="가격을 입력하세요"
                 android:inputType="textPersonName"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_md_rental_term"
@@ -161,9 +181,13 @@
                 android:id="@+id/et_md_rental_term"
                 android:layout_width="290dp"
                 android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="320dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
                 android:layout_toEndOf="@+id/tv_md_rental_term"
                 android:layout_toRightOf="@+id/tv_md_rental_term"
                 android:clickable="true"
@@ -192,16 +216,18 @@
                 android:id="@+id/et_md_deposit"
                 android:layout_width="290dp"
                 android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="13dp"
                 android:layout_marginTop="380dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_toEndOf="@+id/tv_md_deposit"
                 android:layout_toRightOf="@+id/tv_md_deposit"
+                android:gravity="center|left"
                 android:hint="보증금을 입력하세요"
-                android:textSize="12sp"
-                android:gravity="center|left" />
+                android:textSize="12sp" />
 
 
             <TextView
@@ -219,9 +245,13 @@
                 android:id="@+id/et_md_detail_content"
                 android:layout_width="290dp"
                 android:layout_height="150dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="440dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
                 android:layout_toEndOf="@+id/tv_md_detail_content"
                 android:layout_toRightOf="@+id/tv_md_detail_content"
                 android:ems="10"
@@ -244,6 +274,8 @@
                 android:layout_marginEnd="211dp"
                 android:layout_marginRight="211dp"
                 android:layout_marginBottom="1dp"
+                android:background="#3e4ba9"
+                android:textColor="#ffffff"
                 android:text="입력하기"
                 />
 
@@ -291,6 +323,7 @@
                 android:layout_marginBottom="1dp"
                 android:onClick="btnCancleClicked"
                 android:text="취소"
+                android:background="#acb0b5"
                 />
         </RelativeLayout>
 

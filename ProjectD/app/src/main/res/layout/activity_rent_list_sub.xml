@@ -38,23 +38,25 @@
                     >
 
                     <TextView
+                        android:layout_width="400dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="아이디"
+                        android:textColor="#3e4ba9"
+                        android:textSize="14sp"
+                        android:paddingLeft="10dp"
+                        android:textStyle="normal|bold" />
+
+                    <TextView
                         android:id="@+id/tv_member_id"
-                        android:layout_width="450dp"
+                        android:layout_width="500dp"
                         android:layout_height="50dp"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="아이디"
                         android:textSize="14sp"
                         android:paddingLeft="10dp"
-                        android:textStyle="normal|bold" />
-                    <TextView
-                        android:id="@+id/tv_member_nick"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="닉네임"
-                        android:textSize="14sp"
                         android:textStyle="normal|bold" />
 
                     <Button
@@ -75,27 +77,50 @@
 
 
                 <LinearLayout
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:weightSum="3">
+                    android:weightSum="5">
                     <TextView
                         android:id="@+id/tv_rated"
-                        android:layout_width="match_parent"
+                        android:layout_width="350dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="별점       : "
+                        android:textColor="#3e4ba9"
+                        android:text="별점"
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
                         android:textStyle="normal|bold" />
                     <TextView
                         android:id="@+id/tv_rate"
-                        android:layout_width="match_parent"
+                        android:layout_width="350dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="별점"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold" />
+                    <TextView
+                        android:layout_width="360dp"
+                        android:layout_height="50dp"
+                        android:paddingLeft="7dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="닉네임"
+                        android:textColor="#3e4ba9"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold" />
+
+                    <TextView
+                        android:id="@+id/tv_member_nick"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingLeft="7dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="닉네임"
                         android:textSize="14sp"
                         android:textStyle="normal|bold" />
                     <TextView

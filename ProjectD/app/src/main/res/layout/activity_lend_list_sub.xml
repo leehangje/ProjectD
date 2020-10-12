@@ -90,6 +90,7 @@
                         android:textAlignment="textEnd"
                         android:textSize="12sp"
                         android:textStyle="normal|bold"
+                        android:textColor="#3F51B5"
                         android:background="#ffffff"
                         />
                     <TextView
@@ -121,6 +122,7 @@
                         android:textAlignment="textEnd"
                         android:textSize="12sp"
                         android:textStyle="normal|bold"
+                        android:textColor="#3F51B5"
                         android:background="#ffffff"/>
                     <TextView
                         android:id="@+id/tv_md_lend_name"
@@ -150,6 +152,7 @@
                         android:textAlignment="textEnd"
                         android:textSize="12sp"
                         android:textStyle="normal|bold"
+                        android:textColor="#3F51B5"
                         android:background="#ffffff"/>
                     <TextView
                         android:id="@+id/tv_md_lender"
@@ -179,6 +182,7 @@
                         android:textAlignment="textEnd"
                         android:textSize="12sp"
                         android:textStyle="normal|bold"
+                        android:textColor="#3F51B5"
                         android:background="#ffffff"/>
 
                     <TextView

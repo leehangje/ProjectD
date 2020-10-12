@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3e4ba9">
+        android:background="#ffffff">
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:text="상세 페이지"
-                android:textColor="#FFFFFF"
+                android:textColor="#3e4ba9"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -78,7 +78,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
-                android:background="#E3F3D0">
+                android:background="#3F51B5">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_photo"
@@ -99,6 +99,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="100dp"
                     android:layout_marginTop="13dp"
+                    android:textColor="#ffffff"
                     android:text="닉네임"
                     android:textSize="19sp" />
 
@@ -110,6 +111,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="100dp"
                     android:layout_marginTop="40dp"
+                    android:textColor="#ffffff"
                     android:text="동네 표시"
                     android:textSize="16sp" />
 
@@ -122,9 +124,15 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="268dp"
                     android:layout_marginLeft="268dp"
-                    android:layout_marginTop="17dp" />
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="65dp"
+                    android:layout_marginRight="65dp"
+                    android:layout_marginBottom="46dp" />
 
                 <TextView
                     android:id="@+id/user_grade"
@@ -132,9 +140,16 @@
                     android:layout_height="29dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="351dp"
                     android:layout_marginTop="14dp"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginRight="19dp"
+                    android:layout_marginBottom="36dp"
                     android:text="(평균)"
+                    android:textColor="#ffffff"
                     android:textSize="14sp" />
 
 
@@ -142,32 +157,57 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:background="#FFFFFF">
+
 
                 <TextView
                     android:id="@+id/md_name"
-                    android:layout_width="334dp"
-                    android:layout_height="25dp"
+                    android:layout_width="250dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="15dp"
                     android:text="상품명"
                     android:textColor="#0E0E0E"
-                    android:textSize="22sp"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/md_price"
-                    android:layout_width="136dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="32dp"
-                    android:layout_marginTop="52dp"
+                    android:layout_marginTop="55dp"
                     android:text="대여가격"
-                    android:textColor="#0E0E0E"
+                    android:textColor="#3F51B5"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/md_price"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginTop="55dp"
+                    android:text="대여가격"
+                    android:textColor="#58595c"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="176dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="85dp"
+                    android:text="보증금"
+                    android:textColor="#3F51B5"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -177,10 +217,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="187dp"
-                    android:layout_marginTop="52dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginTop="85dp"
                     android:text="보증금"
-                    android:textColor="#0E0E0E"
+                    android:textColor="#58595c"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="165dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="115dp"
+                    android:text="카테고리"
+                    android:textColor="#3F51B5"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -191,12 +245,26 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginTop="115dp"
+                    android:text="카테고리"
+                    android:textColor="#58595c"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="168dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:layout_marginStart="32dp"
                     android:layout_marginLeft="32dp"
-                    android:layout_marginTop="92dp"
-                    android:text="카테고리"
-                    android:textColor="#0E0E0E"
-                    android:textSize="16sp"
+                    android:layout_marginTop="145dp"
+                    android:text="등록일자"
+                    android:textColor="#3F51B5"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -206,42 +274,75 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="125dp"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginTop="145dp"
                     android:text="등록일자"
-                    android:textColor="#0E0E0E"
-                    android:textSize="16sp"
+                    android:textColor="#58595c"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
+               <!-- <TextView
                     android:id="@+id/md_hits"
                     android:layout_width="148dp"
                     android:layout_height="25dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="210dp"
-                    android:layout_marginLeft="210dp"
-                    android:layout_marginTop="125dp"
+                    android:layout_marginStart="215dp"
+                    android:layout_marginLeft="215dp"
+                    android:layout_marginTop="199dp"
                     android:textColor="#0E0E0E"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold" />-->
+
+                <TextView
+                    android:layout_width="149dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="280dp"
+                    android:layout_marginLeft="280dp"
+                    android:layout_marginTop="15dp"
+                    android:text="♥"
+                    android:textColor="#ed0000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/md_fav_count"
                     android:layout_width="149dp"
-                    android:layout_height="25dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="210dp"
-                    android:layout_marginLeft="210dp"
-                    android:layout_marginTop="92dp"
+                    android:layout_marginStart="305dp"
+                    android:layout_marginLeft="305dp"
+                    android:layout_marginTop="15dp"
                     android:text="찜 개수"
-                    android:textColor="#0E0E0E"
+                    android:textColor="#58595c"
                     android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"/>
+
+
+
+                <TextView
+                    android:layout_width="168dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="180dp"
+                    android:text="상세설명"
+                    android:textColor="#3F51B5"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
+
 
                 <TextView
                     android:id="@+id/md_detail_content"
@@ -250,11 +351,19 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginStart="32dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="210dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:background="@drawable/image_border"
+                    android:backgroundTint="#869ce3"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
                     android:text="상세설명"
-                    android:textColor="#1B1A1A"
+                    android:textColor="#58595c"
                     android:textSize="16sp" />
 
             </RelativeLayout>
@@ -278,7 +387,7 @@
                     app:tabBackground="@color/colorAccent"
                     app:tabIndicatorColor="#FFFFFF"
                     app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:tabTextColor="#353333">
+                    app:tabTextColor="#ffffff">
                 </com.google.android.material.tabs.TabLayout>
 
             </LinearLayout>
@@ -288,7 +397,8 @@
                 android:name="com.example.project_md_detail.TabFragment1"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="#f0f1f5" />
         </LinearLayout>
 
 
@@ -305,18 +415,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:background="#f5f51f"
-            android:text="찜하기"
+            android:background="#ffffff"
+            android:text="♥"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
 
         <Button
             android:id="@+id/btn_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
-            android:background="#ffa321"
+            android:background="@color/colorAccent"
             android:text="리뷰작성하기"
+            android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -325,7 +437,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
-            android:background="#673AB7"
+            android:background="#1d3e69"
             android:text="채팅하기"
             android:textColor="#FFFFFF"
             android:textSize="18sp"

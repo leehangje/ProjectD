@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3e4ba9">
+        android:background="#ffffff">
 
         <LinearLayout
             android:id="@+id/toolbar_context"
@@ -34,7 +34,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:text="위치 찾기"
-                android:textColor="#FFFFFF"
+                android:textColor="#3e4ba9"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -47,7 +47,9 @@
         android:layout_marginStart="45dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="27dp"
-        android:text="지도 우상단의 gps를 클릭하여 위치를 지정하고 해당 위치로 설정 버튼을 클릭한 후, 완료 버튼을 반드시 클릭해주세요!"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
+        android:text="지도 우상단의 gps를 클릭하여 위치를 지정하고, \n해당 위치로 설정 버튼을 클릭한 후, \n완료 버튼을 반드시 클릭해주세요!"
         android:textStyle="bold" />
 
     <EditText
@@ -60,6 +62,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="65dp"
         android:layout_marginLeft="65dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginRight="65dp"
         android:layout_marginTop="15dp"
         android:background="#FFFFFF"
         android:hint="내 위치"
@@ -77,6 +81,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="45dp"
         android:layout_marginLeft="45dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
         android:layout_marginTop="27dp"
         android:background="#3E4BA9"
         android:text="해당 위치로 설정"
@@ -94,6 +100,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="27dp">
 
         <fragment
@@ -116,6 +124,8 @@
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="27dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
         android:background="#3E4BA9"
         android:text="완료"
         android:textColor="#FFFFFF"
