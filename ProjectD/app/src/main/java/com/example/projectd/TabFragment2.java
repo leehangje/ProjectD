@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectd.ATask.AnDarunSelect;
 import com.example.projectd.Dto.MdDTO;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -44,12 +45,6 @@ public class TabFragment2 extends Fragment {
             activity.mBundle = null;
         }
 
-        /*Bundle args = getArguments(); // 데이터 받기
-        if(args != null)
-        {
-            member_id = args.getString("member_id");
-        }*/
-
         items = new ArrayList<>();
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
@@ -60,7 +55,6 @@ public class TabFragment2 extends Fragment {
         adapter = new DarunMdAdapter(getContext(), items);
 
         recyclerView.setAdapter(adapter);
-
 
         adapter.setOnItemClickListener(new OnDarunMdItemClickListener() {
             public static final int main = 1001;
@@ -78,8 +72,6 @@ public class TabFragment2 extends Fragment {
             }
         });
 
-
-
         AnDarunSelect anDarunSelect = new AnDarunSelect(items, adapter, member_id);
         try {
             anDarunSelect.execute().get();
@@ -88,7 +80,6 @@ public class TabFragment2 extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
         return  rootView;
 

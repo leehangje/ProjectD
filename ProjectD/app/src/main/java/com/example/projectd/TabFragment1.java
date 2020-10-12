@@ -41,7 +41,8 @@ public class  TabFragment1 extends Fragment {
         if(activity.mBundle != null){
             Bundle bundle = activity.mBundle;
             md_serial_number = bundle.getString("md_serial_number");
-            activity.mBundle = null;
+            //회원의 다른상품탭을 보려면 null로 만들면 안됨
+            //activity.mBundle = null;
         }
 
         reviews = new ArrayList<>();
