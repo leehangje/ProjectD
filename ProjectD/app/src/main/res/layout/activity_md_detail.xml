@@ -287,7 +287,7 @@
                 android:id="@+id/container"
                 android:name="com.example.project_md_detail.TabFragment1"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
 
