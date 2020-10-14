@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/detail_photo1"
-        android:layout_width="300dp"
-        android:layout_height="550dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         app:srcCompat="@mipmap/ic_launcher" />
 

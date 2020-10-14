@@ -58,20 +58,20 @@
 
     <ImageView
         android:id="@+id/favlist_null"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="50dp"
-        android:src="@drawable/no_fav"
+        android:src="@drawable/no_favitem"
         android:visibility="visible"/>
 
     <TextView
         android:id="@+id/text_fav_null"
-        android:layout_width="250dp"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:textColor="#000000"
-        android:textSize="25dp"
+        android:textSize="30dp"
         android:text="찜한 상품이 없습니다!"
         android:visibility="visible"/>
 
