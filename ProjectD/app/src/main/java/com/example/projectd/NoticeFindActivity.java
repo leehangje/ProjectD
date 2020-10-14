@@ -12,24 +12,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class NoticeFindActivity extends Fragment {
+public class NoticeFindActivity extends AppCompatActivity {
 
-    ViewGroup viewGroup;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notice_find);
 
-            public View onCreateView(@NonNull LayoutInflater inflater, @Nullable
-                    ViewGroup container, @Nullable Bundle savedInstanceState) {
-                viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_notice_find, null);
-
-            ImageView btn_back;
-
-        btn_back = viewGroup.findViewById(R.id.btn_back);
-
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        return viewGroup;
     }
 }

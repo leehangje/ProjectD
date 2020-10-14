@@ -38,19 +38,33 @@ public class QnAListActivity extends AppCompatActivity {
             recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             List<QnAListAdapter.Item> data = new ArrayList<>();
 
-            QnAListAdapter.Item places = new QnAListAdapter.Item(QnAListAdapter.HEADER, "궁금한게 있나요?");
+            QnAListAdapter.Item places = new QnAListAdapter.Item(QnAListAdapter.HEADER, "상품 대여는 어떻게 하나요?");
             places.invisibleChildren = new ArrayList<>();
-            places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "몰라여"));
-            QnAListAdapter.Item places1 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "이 앱을 만든 동기가 궁금하신가요?");
+            places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "[상품 판매 등록 방법]"));
+            places.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "* 앱 > 하단의 '+' 버튼 선택 후 상품등록하기"));
+            QnAListAdapter.Item places1 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "거래를 하면 안되는 것들은 어떤 것이 있나요?");
             places1.invisibleChildren = new ArrayList<>();
             places1.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "몰라여"));
-            QnAListAdapter.Item places2 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "대여하는 방법이 궁금하신가요?");
+            QnAListAdapter.Item places2 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "수제(음식,화장품)을 판매하고 싶은데 어떤 서류가 필요한가요?");
             places2.invisibleChildren = new ArrayList<>();
-            places2.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "안대여"));
+            places2.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "수제(음식,화장품)을 판매하실 통신판매 허기증, 사업자등록증, 신분증 필요"));
+            places2.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "수제 음식 : 통신 판매 허가증/사업자 등록증/신분증"));
+            places2.invisibleChildren.add(new QnAListAdapter.Item(QnAListAdapter.CHILD, "수제 화장품(비누) : 식약청 허가증/통신 판매 허가증/사업자 등록증/신분증"));
+
+            QnAListAdapter.Item places3 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "물품대여 후 교환이나 환불은 어떻게 하나요?");
+            QnAListAdapter.Item places4 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "14세 미만은 가입이 불가한가요?");
+            QnAListAdapter.Item places5 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "여러개의 계정을 만들 수 있나요?");
+            QnAListAdapter.Item places6 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "휴면께정 헤제는 어떻게 하나요?");
+            QnAListAdapter.Item places7 = new QnAListAdapter.Item(QnAListAdapter.HEADER, "상품 수정 / 상품 삭제 방법법");
 
             data.add(places);
             data.add(places1);
             data.add(places2);
+            data.add(places3);
+            data.add(places4);
+            data.add(places5);
+            data.add(places6);
+            data.add(places7);
 
         recyclerview.setAdapter(new QnAListAdapter(data));
 

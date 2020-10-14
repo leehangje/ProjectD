@@ -344,7 +344,9 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
+                    Toast.makeText(getApplicationContext(), LoginActivity.loginDTO.getMember_profile(), Toast.LENGTH_LONG).show();
                     if (LoginActivity.loginDTO.getMember_profile() != image) {
+
                         String id = LoginActivity.loginDTO.getMember_id();
                         ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);
                         profilUpdate.execute();
@@ -419,6 +421,7 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(isNetworkConnected(this) == true){
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
+
                     if (SessionCallback.kakaoLoginDTO.getMember_profile() != image) {
                         String id = SessionCallback.kakaoLoginDTO.getMember_id();
                         ProfileUpdate profilUpdate = new ProfileUpdate(id, pImgDbPathU, imageDbPathU, imageRealPathU);

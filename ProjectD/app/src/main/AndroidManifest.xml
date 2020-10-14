@@ -92,7 +92,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".NoticeFindActivity"
-            android:parentActivityName=".NoticeActivity" /> <!-- API24 이상부터 Url 이 file:// 로 시작되면 안되서 content:// 으로 변환시키는 부분 -->
+            android:parentActivityName=".NoticeActivity" />
+        <activity
+            android:name=".NoticeFindActivity2"
+            android:parentActivityName=".NoticeActivity" /><!-- API24 이상부터 Url 이 file:// 로 시작되면 안되서 content:// 으로 변환시키는 부분 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
