@@ -74,7 +74,8 @@
 
                 <LinearLayout
                     android:layout_width="300dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:weightSum="3">
 
                     <TextView
                         android:id="@+id/tv_rated"
@@ -82,6 +83,7 @@
                         android:layout_height="30dp"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
+                        android:layout_weight="1"
                         android:text="별점       : "
                         android:textSize="14sp"
                         android:textStyle="normal|bold" />
@@ -92,6 +94,7 @@
                         android:layout_height="30dp"
                         android:gravity="center_vertical"
                         android:text="별점"
+                        android:layout_weight="1"
                         android:textSize="14sp"
                         android:textStyle="normal|bold" />
 
@@ -101,6 +104,7 @@
                         android:layout_height="30dp"
                         android:gravity="center_vertical"
                         android:text="리뷰넘"
+                        android:layout_weight="1"
                         android:textSize="14sp"
                         android:textStyle="normal|bold"
 
