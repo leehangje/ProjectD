@@ -52,6 +52,7 @@
             android:name="com.google.android.gms.vision"
             android:value="@integer/google_play_services_version" />
 
+        <activity android:name=".MdUpdateActivity" />
         <activity android:name=".SignUpFormActivity" />
         <activity android:name=".AlramActivity" />
         <activity android:name=".FavListActivity" />
