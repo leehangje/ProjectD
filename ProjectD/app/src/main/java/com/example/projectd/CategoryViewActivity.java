@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class CategoryViewActivity extends AppCompatActivity {
     TextView category_name;
 
     String category;
+    LinearLayout toolbar_context;   //툴바를 감싸는 레이아웃
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,14 @@ public class CategoryViewActivity extends AppCompatActivity {
                 RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        // 툴바 안의 뒤로가기 버튼 클릭할 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         if (intent != null) {
