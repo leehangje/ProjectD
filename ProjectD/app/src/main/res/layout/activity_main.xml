@@ -16,16 +16,16 @@
         android:background="#3F51B5">
 
         <LinearLayout
-            android:layout_width="244dp"
+            android:layout_width="225dp"
             android:layout_height="60dp"
             android:orientation="horizontal">
 
 
             <ImageButton
                 android:id="@+id/btn_gps"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="7dp"
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="22dp"
                 android:background="#3F51B5"
@@ -36,8 +36,8 @@
                 android:id="@+id/tv_addr"
                 android:layout_width="179dp"
                 android:layout_height="31dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="27dp"
                 android:layout_marginEnd="191dp"
                 android:layout_marginRight="0dp"
@@ -52,9 +52,9 @@
 
             <ImageButton
                 android:id="@+id/btn_search"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="8dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="20dp"
                 android:background="#3F51B5"
@@ -63,8 +63,8 @@
 
             <ImageButton
                 android:id="@+id/btn_like"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="20dp"
@@ -74,12 +74,12 @@
 
             <ImageButton
                 android:id="@+id/btn_alram"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginRight="0dp"
                 android:background="#3F51B5"
                 android:scaleType="fitXY"
