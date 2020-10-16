@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:background="#3e4ba9">
 
         <LinearLayout
             android:id="@+id/toolbar_context"
@@ -33,7 +33,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:text="카테고리"
-                android:textColor="#3e4ba9"
+                android:textColor="#ffffff"
                 android:textSize="18sp" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -85,7 +85,7 @@
                     android:id="@+id/category6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
@@ -143,7 +143,7 @@
                     android:id="@+id/category7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
@@ -199,7 +199,7 @@
                     android:id="@+id/category8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
@@ -255,7 +255,7 @@
                     android:id="@+id/category9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 
@@ -309,7 +309,7 @@
                     android:id="@+id/category10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
 

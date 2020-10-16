@@ -12,29 +12,29 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:background="#3e4ba9">
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/btn_back"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="bottom"
-                android:background="#0a172b"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="#3e4ba9"
                 app:srcCompat="@drawable/back_white" />
 
             <TextView
+                android:id="@+id/category_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
-                android:text="리뷰 쓰기"
-                android:textColor="#000000"
+                android:text="리뷰작성"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -112,7 +112,7 @@
             android:id="@+id/bt_review_send"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#323845"
+            android:background="#3e4ba9"
             android:text="등록 완료"
             android:textSize="24sp"
 

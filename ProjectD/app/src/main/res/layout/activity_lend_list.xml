@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f0f1f5">
+        android:background="#3e4ba9">
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
@@ -26,13 +26,14 @@
                 app:srcCompat="@drawable/back_white" />
 
             <TextView
+                android:id="@+id/category_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:text="대여해준 상품"
-                android:textColor="#3e4ba9"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -46,9 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:paddingLeft="8dp"
-            android:text="카테고리 선택"
+            android:text="카테고리를 선택하세요"
             android:gravity="center_vertical"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:background="#f0f1f5"
             />
 
