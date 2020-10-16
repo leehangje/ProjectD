@@ -11,15 +11,25 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#FFFFFF"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-        <TextView
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="#3e4ba9">
+        <LinearLayout
+            android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MyPage"
-            android:textColor="@color/design_default_color_primary"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:text="내 정보"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -291,55 +301,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="5dp"
                     android:background="#EDEDED" />
-
-                <TextView
-                    android:id="@+id/btn1"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:textColor="#434242"
-                    android:textSize="20dp"
-                    android:text="버튼1"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"/>
-
-                <TextView
-                    android:id="@+id/btn2"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:textColor="#434242"
-                    android:textSize="20dp"
-                    android:text="버튼2"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"/>
-
-                <TextView
-                    android:id="@+id/btn3"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:textColor="#434242"
-                    android:textSize="20dp"
-                    android:text="버튼3"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"/>
-
-                <TextView
-                    android:id="@+id/btn4"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:textColor="#434242"
-                    android:textSize="20dp"
-                    android:text="버튼4"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"/>
-
 
             </LinearLayout>
 
