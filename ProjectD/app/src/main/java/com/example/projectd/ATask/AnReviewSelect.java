@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 
-public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
+public class AnReviewSelect extends AsyncTask<Void, Void, Integer> {
     String md_serial_number;
     ArrayList<ReviewDto> reviews;
     ReviewAdapter adapter;
@@ -39,10 +39,8 @@ public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
     HttpResponse httpResponse;
     HttpEntity httpEntity;
 
-
-
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected Integer doInBackground(Void... voids) {
         reviews.clear();
         String result = "";
         String postURL = ipConfig + "/app/anReviewSelect";
@@ -84,13 +82,13 @@ public class AnReviewSelect extends AsyncTask<Void, Void, Void> {
                 httpClient = null;
             }
         }
-        return null;
+        return reviews.size();
     }//doInBackground()
 
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Integer result) {
+        super.onPostExecute(result);
 
         Log.d("AnReviewSelect", "AnReviewSelect Complete!!!");
 

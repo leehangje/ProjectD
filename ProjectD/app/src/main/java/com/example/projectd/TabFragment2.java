@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,6 +26,8 @@ public class TabFragment2 extends Fragment {
     RecyclerView recyclerView;
     DarunMdAdapter adapter;
     MdDetailActivity activity;
+    ImageView no_darun_md;
+    ScrollView darunMdScrollView;
 
     ArrayList<MdDTO> items;
     String member_id;
@@ -44,6 +48,10 @@ public class TabFragment2 extends Fragment {
             member_id = bundle.getString("member_id");
             activity.mBundle = null;
         }
+
+        darunMdScrollView = rootView.findViewById(R.id.darunMdScrollView);
+        no_darun_md = rootView.findViewById(R.id.no_darun_md);
+
 
         items = new ArrayList<>();
 
@@ -72,13 +80,22 @@ public class TabFragment2 extends Fragment {
             }
         });
 
+        int itemsSize = 0;  //찜목록갯수
         AnDarunSelect anDarunSelect = new AnDarunSelect(items, adapter, member_id);
         try {
-            anDarunSelect.execute().get();
+            itemsSize = anDarunSelect.execute().get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        if(itemsSize == 0){
+            no_darun_md.setVisibility(View.VISIBLE);
+            darunMdScrollView.setVisibility(View.GONE);
+        }else{
+            no_darun_md.setVisibility(View.GONE);
+            darunMdScrollView.setVisibility(View.VISIBLE);
         }
 
         return  rootView;
