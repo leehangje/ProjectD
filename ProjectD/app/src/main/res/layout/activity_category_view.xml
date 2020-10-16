@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3e4ba9">
+        android:background="#ffffff">
         <LinearLayout
             android:id="@+id/toolbar_context"
             android:layout_width="wrap_content"
@@ -19,10 +19,10 @@
 
             <ImageButton
                 android:id="@+id/btn_back"
+                app:srcCompat="@drawable/back_white"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="#3e4ba9"
-                app:srcCompat="@drawable/back_white" />
+                android:background="#3e4ba9" />
 
             <TextView
                 android:id="@+id/category_name"
@@ -32,7 +32,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:text="선택한 카테고리"
-                android:textColor="#FFFFFF"
+                android:textColor="#3e4ba9"
                 android:textSize="18sp" />
 
         </LinearLayout>
