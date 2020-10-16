@@ -26,7 +26,7 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 // doInBackground 파라미터 타입, onProgressUpdate파라미터 타입, onPostExecute 파라미터 타입 순서
 // AsyncTask <Params, Progress, Result> 순서임
-public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
+public class AnDarunSelect extends AsyncTask<Void, Void, Integer> {
     String member_id;
     ArrayList<MdDTO> items;
     DarunMdAdapter adapter;
@@ -43,12 +43,7 @@ public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
     HttpEntity httpEntity;
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
-    protected Void doInBackground(Void... voids) {
+    protected Integer doInBackground(Void... voids) {
         items.clear();
         String result = "";
         String postURL = ipConfig + "/app/anDarunSelect";
@@ -90,12 +85,12 @@ public class AnDarunSelect extends AsyncTask<Void, Void, Void> {
                 httpClient = null;
             }
         }
-        return null;
+        return items.size();
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Integer result) {
+        super.onPostExecute(result);
 
         Log.d("AnDarunSelect", "AnDarunSelect Complete!!!");
 

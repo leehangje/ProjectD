@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,6 +25,8 @@ public class  TabFragment1 extends Fragment {
     RecyclerView recyclerView;
     ReviewAdapter adapter;
     MdDetailActivity activity;
+    ImageView no_review;
+    ScrollView reviewScrollView;
 
     ArrayList<ReviewDto> reviews;
     String md_serial_number;
@@ -44,6 +48,9 @@ public class  TabFragment1 extends Fragment {
             //회원의 다른상품탭을 보려면 null로 만들면 안됨
             //activity.mBundle = null;
         }
+
+        reviewScrollView = rootView.findViewById(R.id.reviewScrollView); //리스트가 있을경우 표시
+        no_review = rootView.findViewById(R.id.no_review); //리스트가 없다면 대신 보여줄 이미지
 
         reviews = new ArrayList<>();
 
@@ -69,13 +76,22 @@ public class  TabFragment1 extends Fragment {
             }
         });
 
+        int reviewsSize = 0;   //리뷰목록갯수
         AnReviewSelect anReviewSelect = new AnReviewSelect(reviews, adapter, md_serial_number);
         try {
-            anReviewSelect.execute().get();
+            reviewsSize = anReviewSelect.execute().get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        if(reviewsSize == 0){
+            no_review.setVisibility(View.VISIBLE);
+            reviewScrollView.setVisibility(View.GONE);
+        }else{
+            no_review.setVisibility(View.GONE);
+            reviewScrollView.setVisibility(View.VISIBLE);
         }
 
         /*MdDetailActivity activity = (MdDetailActivity) getActivity();
