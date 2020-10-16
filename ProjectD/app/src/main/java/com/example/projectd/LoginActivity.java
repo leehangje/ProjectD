@@ -139,8 +139,10 @@ public class LoginActivity extends AppCompatActivity {
                     String member_pw = etPw.getText().toString();
 
                     LoginSelect loginSelect = new LoginSelect(member_id, member_pw);
+
                     try {
                         loginSelect.execute().get();
+                        // loginDTO에 값 저장
                     } catch (ExecutionException e) {
                         e.getMessage();
                     } catch (InterruptedException e) {
@@ -153,26 +155,43 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(loginDTO != null){
+                if(loginDTO != null) {      //회원정보가 DB에 저장 o
                     String member_nickname = loginDTO.getMember_nickname();
                     String member_addr = loginDTO.getMember_addr();
                     Toast.makeText(LoginActivity.this, loginDTO.getMember_id() + "님 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                     Log.d("main:login", loginDTO.getMember_id() + "님 로그인 되었습니다.");
 
-                    // 로그인 정보에 값이 있으면 로그인이 되었으므로 메인화면으로 이동
-                    Intent intent = new Intent(LoginActivity.this, RealMainActivity.class);
-                    intent.putExtra("member_nickname", member_nickname);
-                    intent.putExtra("member_addr", member_addr);
-                    startActivity(intent);
+                    if (loginDTO.getMember_addr() == null || loginDTO.getMember_addr().equals("") ||
+                       loginDTO.getMember_latitude() == null || loginDTO.getMember_latitude().equals("") ||
+                       loginDTO.getMember_longitude() == null || loginDTO.getMember_longitude().equals("")) {
+                        //웹으로 회원가입한 회원일 경우(위치정보 저장 x)
+                        // 위치 지정 화면(SocialLocationActivity)으로 이동
+                        Log.d(TAG, "onClick: 위치 지정 화면으로 이동");
+                        Log.d(TAG, "onClick: 아이디 : " + loginDTO.getMember_id() + ", 로그인타입 : " + loginDTO.getMember_loginType());
 
+                        Intent intent = new Intent(getApplicationContext(), SocialLocationActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("member_id", loginDTO.getMember_id());
+                        intent.putExtra("member_loginType", "M");
+                        startActivity(intent);
+                    } else {
+                        //앱으로 회원가입 한 경우, 웹으로 회원가입했는데 위치정보가 저장되어 있는 경우
+                        // 메인화면으로 이동
+                        Log.d(TAG, "onClick: 메인 화면으로 이동, 주소는 " + loginDTO.getMember_addr());
+
+                        Intent intent = new Intent(LoginActivity.this, RealMainActivity.class);
+                        intent.putExtra("member_nickname", member_nickname);
+                        intent.putExtra("member_addr", member_addr);
+                        startActivity(intent);
+                    }
                 } else {
                     Toast.makeText(LoginActivity.this, "아이디나 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     Log.d("main:login", "아이디나 비밀번호가 일치하지 않습니다.");
-                    etId.setText("");
-                    etPw.setText("");
-                    etId.requestFocus();
                 }
-
+                etId.setText("");
+                etPw.setText("");
+                etId.requestFocus();
             }
         }); //loginSubmitBtn.setOnClickListener()
 
@@ -190,6 +209,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick: 카카오로그인완료");
             }
         });
+
+        etId.setText("");
+        etPw.setText("");
 
     } //onCreate()
 

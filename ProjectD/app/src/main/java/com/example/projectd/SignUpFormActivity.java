@@ -41,11 +41,11 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
     Button btnEmailAuth, btnLocSearch, btnSubmit;
     EditText etId, etName, etPw, etNickName,
             etTel, etLocation, etPwCheck, etDetailAdd;
-    TextView tvIdCheck, tvPwCheck1, tvPwCheck2, tvNickNameCheck, tvTelCheck;
+    TextView tvIdCheck, tvNameCheck, tvPwCheck1, tvPwCheck2, tvNickNameCheck, tvTelCheck;
     String state;
     String member_id, member_pw, member_name,
             member_nickname, member_tel, member_addr,
-            member_latitude, member_longitude;
+            member_latitude, member_longitude, member_loginType, member_token;
     private static final int LOCATION_ACTIVITY_REQUEST_CODE = 0;
     LinearLayout toolbar_context;   // 툴바를 감싸는 레이아웃
 
@@ -86,6 +86,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
         etDetailAdd = findViewById(R.id.etDetailAdd);
 
         tvIdCheck = findViewById(R.id.tvIdCheck);
+        tvNameCheck = findViewById(R.id.tvNameCheck);
         tvPwCheck1 = findViewById(R.id.tvPwCheck1);
         tvPwCheck2 = findViewById(R.id.tvPwCheck2);
         tvNickNameCheck = findViewById(R.id.tvNickNameCheck);
@@ -144,6 +145,25 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
         // (이메일) 인증하기 버튼 클릭 리스너 > 하단 클릭 메소드 참고
         btnEmailAuth.setOnClickListener(this);
+
+        // 이름 입력 칸에 값을 입력한 후 발생하는 key 리스너
+        etName.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                String name = etName.getText().toString();
+
+                if(event.getAction() == KeyEvent.ACTION_DOWN
+                        && keyCode == KeyEvent.KEYCODE_ENTER){
+                    if(name.length() == 0 ){  //이름을 입력하지 않은 경우
+                        tvNameCheck.setText("이름을 입력하세요!");
+                        tvNameCheck.setVisibility(View.VISIBLE);
+                        etName.requestFocus();
+                        return false;
+                    }
+                }
+                return false;
+            } //onKey()
+        }); //etName.setOnKeyListener()
 
         //메일전송을 위한 준비
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -214,15 +234,16 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
                 if(event.getAction() == KeyEvent.ACTION_DOWN
                         && keyCode == KeyEvent.KEYCODE_ENTER){
-                    if(nickname.length() == 0 ){  //닉네임을 입력하지 않은 경우
+                    if(nickname.length() == 0 ) {  //닉네임을 입력하지 않은 경우
                         tvNickNameCheck.setText("닉네임을 입력하세요!");
                         tvNickNameCheck.setVisibility(View.VISIBLE);
                         etNickName.setText("");
                         etNickName.requestFocus();
                         return false;
-                    } else if (!Pattern.matches("^[a-zA-Z0-9가-힣]{2,8}$", nickname)) {
-                                //이메일 형식에 맞지 않는 경우
-                        tvNickNameCheck.setText("닉네임은 2~8자 영문 대소문자,\n숫자, 한글만 사용가능 합니다.");
+                    } else if (!Pattern.matches("^[a-zA-Z가-힣ㄱ-ㅎ]{2,8}$", nickname)) {
+                        //이메일 형식에 맞지 않는 경우
+                        Toast.makeText(SignUpFormActivity.this, "닉네임 : " + Pattern.matches("/^[\\w\\Wㄱ-ㅎ|가-힣]{2,8}$/", nickname), Toast.LENGTH_SHORT).show();
+                        tvNickNameCheck.setText("닉네임은 2~8 글자, 영문 대소문자,\n숫자, 한글만 사용가능 합니다.");
                         tvNickNameCheck.setVisibility(View.VISIBLE);
                         etNickName.setText("");
                         etNickName.requestFocus();
@@ -339,17 +360,16 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                         Toast.makeText(SignUpFormActivity.this, "사용 불가능한 아이디입니다!", Toast.LENGTH_SHORT).show();
                         idCheckDTO = null;
                         return;
-                    } else if (!checkIdStr.equals(member_id)) {
+                    } else if (!checkIdStr.equals(member_id) || member_token == null) {
                         Toast.makeText(SignUpFormActivity.this, "이메일 인증을 진행하여 주세요", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    Log.d(TAG, "onClick: member_token : " + member_token);
                 }
 
-                /*
                 if (member_name.length() == 0) {
                     Toast.makeText(SignUpFormActivity.this, "이름을 입력해주세요!", Toast.LENGTH_SHORT).show();
                 }
-                */
 
                 //비밀번호 형식 체크
                 if (member_pw.length() == 0){   //비밀번호를 입력하지 않은경우
@@ -375,13 +395,13 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 // 닉네임 유효성 검사 & 중복확인 체크
-                if(member_nickname.length() == 0 ){  //닉네임을 입력하지 않은 경우
+                if(member_nickname.length() == 0 ) {  //닉네임을 입력하지 않은 경우
                     Toast.makeText(SignUpFormActivity.this, "닉네임을 입력해주세요!", Toast.LENGTH_SHORT).show();
                     etNickName.requestFocus();
                     return;
-                } else if (!Pattern.matches("^[a-zA-Z0-9가-힣]{2,8}$", member_nickname)) {
+                } else if (!Pattern.matches("^[a-zA-Z가-힣ㄱ-ㅎ]{2,8}$", member_nickname)) {
                     //닉네임 형식에 맞지 않는 경우
-                    Toast.makeText(SignUpFormActivity.this, "닉네임은 2~8자 영문 대소문자, 숫자, 한글만 사용가능 합니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this, "닉네임은 2~8 글자 영문 대소문자, 숫자, 한글만 사용가능 합니다.", Toast.LENGTH_SHORT).show();
                     etNickName.setText("");
                     return;
 
@@ -430,7 +450,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                 member_addr += " " + detailAddress;   // 상세주소 정보를 member_addr 변수에 추가
 
                 SignUpInsert signUpInsert = new SignUpInsert(member_id, member_pw, member_nickname,
-                                                             member_tel, member_addr, member_latitude, member_longitude,  member_name);
+                                                             member_tel, member_addr, member_latitude, member_longitude,  member_name, member_token);
                 try {
                     state = signUpInsert.execute().get().trim();
                 } catch (ExecutionException e) {
@@ -549,13 +569,14 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
 
                 //G메일 전송
                 try {
+                    final String code = sender.getEmailCode();
 
                     Log.d(TAG, "onClick: " + id);
                     sender.sendMail("대여 안대여 - 이메일 인증을 진행해 주세요!",
                             "이메일 인증번호는 "+ sender.getEmailCode()+ "입니다. \n인증번호를 입력해주세요!",
                             "dteam0420@gmail.com",
                             id);
-                    Log.d(TAG, "onClick: " + sender.getEmailCode());
+                    Log.d(TAG, "onClick: " + code);
 
 
                     //mailSender(id);
@@ -577,6 +598,7 @@ public class SignUpFormActivity extends AppCompatActivity implements View.OnClic
                             if (user_answer.equals(sender.getEmailCode())){
                                 Toast.makeText(getApplicationContext(), "이메일 인증 성공", Toast.LENGTH_SHORT).show();
                                 checkIdStr = etId.getText().toString();
+                                member_token = code;
                                 authDialog.cancel();
                             } else{
                                 Toast.makeText(getApplicationContext(), "인증 번호를 다시 입력해주세요!", Toast.LENGTH_SHORT).show();

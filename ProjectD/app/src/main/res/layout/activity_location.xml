@@ -42,10 +42,10 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:layout_width="330dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="27dp"
         android:text="지도 우상단의 gps를 클릭하여 위치를 지정하고 해당 위치로 설정 버튼을 클릭한 후, 완료 버튼을 반드시 클릭해주세요!"
         android:textStyle="bold" />
@@ -58,8 +58,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginLeft="65dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
         android:background="#FFFFFF"
         android:hint="내 위치"
@@ -68,15 +68,15 @@
 
     <Button
         android:id="@+id/setupBtn"
-        android:layout_width="330dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchValueText"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="27dp"
         android:background="#3E4BA9"
         android:text="해당 위치로 설정"
@@ -85,15 +85,15 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="318dp"
+        android:layout_width="320dp"
         android:layout_height="246dp"
         android:layout_below="@+id/searchValueText"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="27dp">
 
         <fragment
@@ -106,15 +106,15 @@
 
     <Button
         android:id="@+id/submitBtn"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="58dp"
         android:layout_below="@+id/searchValueText"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="27dp"
         android:background="#3E4BA9"
         android:text="완료"

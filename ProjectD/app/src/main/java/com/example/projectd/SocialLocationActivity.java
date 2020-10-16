@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import static com.example.projectd.LoginActivity.loginDTO;
 import static com.example.projectd.LoginActivity.naverLoginDTO;
 import static com.example.projectd.SessionCallback.kakaoLoginDTO;
 
@@ -155,16 +156,19 @@ public class SocialLocationActivity extends AppCompatActivity {
                     showMessage("알림", "상세주소를 입력해주세요!");
                     return;
                 } else {
-                    // 위치 정보를 저장하는 경우는 총 2가지
-                    // 1. 처음으로 kakao 로그인을 했을 때(db 저장 x, kakaoLoginDTO가 null)
+                    // SocialLocationActivity로 위치 정보를 저장하는 경우는 총 2가지
+                    // 1. 처음으로 소셜(kakao, naver) 로그인을 했을 때(db 저장 x, kakaoLoginDTO가 null)
                     // 2. 카카오 로그인을 했지만 위치정보가 저장이 안되어 있을 때(db 저장 O, kakaoLoginDTO가 null이 아닌 경우)
+                    // 3. 웹으로 회원가입했을 때(웹에서는 addr, latitude, longitude 컬럼 값이 null)
 
                     Intent intent = getIntent();
                     member_id = intent.getExtras().getString("member_id");
                     member_loginType = intent.getExtras().getString("member_loginType");
+                    String member_addr = myAddress + " " + detailAddress;
+
                     Log.d(TAG, "onClick: " + member_id + ", " + member_loginType);
 
-                    if (member_loginType.equals("K") && kakaoLoginDTO == null) {
+                    if (member_loginType.equals("K") && kakaoLoginDTO == null) {    // 1번의 경우
                         Log.d(TAG, "onClick: 카카오 처음 로그인 : " + member_id + ", " + member_loginType);
 
                         KakaoLogin kakaoLogin = new KakaoLogin(member_id, member_loginType);
@@ -179,9 +183,9 @@ public class SocialLocationActivity extends AppCompatActivity {
                         }
 
                         if (kakaoLoginDTO != null) {
-                            updateLocation(myAddress + detailAddress, s_latitude, s_longitude, member_id, member_loginType);
+                            updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
                         }
-                    } else if (member_loginType.equals("N") && naverLoginDTO == null) {
+                    } else if (member_loginType.equals("N") && naverLoginDTO == null) {     // 1번의 경우
                         Log.d(TAG, "onClick: 네이버 처음 로그인 : " + member_id + ", " + member_loginType);
 
                         NaverLogin naverLogin = new NaverLogin(member_id, member_loginType);
@@ -196,17 +200,23 @@ public class SocialLocationActivity extends AppCompatActivity {
                         }
 
                         if (naverLoginDTO != null) {
-                            updateLocation(myAddress + detailAddress, s_latitude, s_longitude, member_id, member_loginType);
+                            updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
                         }
-                    } else if (member_loginType.equals("K") && kakaoLoginDTO != null) {
+                    } else if (member_loginType.equals("K") && kakaoLoginDTO != null) {     // 2번의 경우
                         Log.d(TAG, "onClick: 카카오 로그인 o, 위치 저장 x");
-                        Log.d(TAG, "onClick: " + myAddress + detailAddress + ", " + s_latitude + ", " + s_longitude  + ", " + kakaoLoginDTO.getMember_id() + ", " + kakaoLoginDTO.getMember_loginType());
-                        updateLocation(myAddress + detailAddress, s_latitude, s_longitude, kakaoLoginDTO.getMember_id(), kakaoLoginDTO.getMember_loginType());
+                        Log.d(TAG, "onClick: " + member_addr + ", " + s_latitude + ", " + s_longitude  + ", " + kakaoLoginDTO.getMember_id() + ", " + kakaoLoginDTO.getMember_loginType());
+                        updateLocation(member_addr, s_latitude, s_longitude, kakaoLoginDTO.getMember_id(), kakaoLoginDTO.getMember_loginType());
 
-                    } else if (member_loginType.equals("N") && naverLoginDTO != null) {
+                    } else if (member_loginType.equals("N") && naverLoginDTO != null) {     // 2번의 경우
                         Log.d(TAG, "onClick: 네이버 로그인 o, 위치 저장 x");
-                        Log.d(TAG, "onClick: " + myAddress + detailAddress + ", " + s_latitude + ", " + s_longitude  + ", " + naverLoginDTO.getMember_id() + ", " + naverLoginDTO.getMember_loginType());
-                        updateLocation(myAddress + detailAddress, s_latitude, s_longitude, naverLoginDTO.getMember_id(), naverLoginDTO.getMember_loginType());
+                        Log.d(TAG, "onClick: " + myAddress + " " + detailAddress + ", " + s_latitude + ", " + s_longitude  + ", " + naverLoginDTO.getMember_id() + ", " + naverLoginDTO.getMember_loginType());
+                        updateLocation(member_addr, s_latitude, s_longitude, naverLoginDTO.getMember_id(), naverLoginDTO.getMember_loginType());
+                    } else if(member_loginType.equals("M") && loginDTO != null) {       // 3번의 경우
+                        Log.d(TAG, "onClick: 웹으로 로그인 o, 위치 저장 x");
+                        updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
+                        loginDTO.setMember_addr(member_addr);
+                        loginDTO.setMember_latitude(s_latitude);
+                        loginDTO.setMember_longitude(s_longitude);
                     }
                 }
 

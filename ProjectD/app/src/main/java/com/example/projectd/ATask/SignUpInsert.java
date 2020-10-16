@@ -19,12 +19,13 @@ import java.nio.charset.Charset;
 import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 public class SignUpInsert extends AsyncTask<Void, Void, String> {
-    String member_id, member_pw, member_nickname, member_tel, member_addr, member_latitude, member_longitude;
-    int member_grade;
-    String member_name;
+    String member_id, member_pw, member_nickname, member_tel,
+           member_addr, member_latitude, member_longitude,
+           member_grade, member_name, member_token;
 
     public SignUpInsert(String member_id, String member_pw, String member_nickname,
-                        String member_tel, String member_addr, String member_latitude, String member_longitude, String member_name) {
+                        String member_tel, String member_addr, String member_latitude,
+                        String member_longitude, String member_name, String member_token) {
         this.member_id = member_id;
         this.member_pw = member_pw;
         this.member_nickname = member_nickname;
@@ -33,6 +34,7 @@ public class SignUpInsert extends AsyncTask<Void, Void, String> {
         this.member_latitude = member_latitude;
         this.member_longitude = member_longitude;
         this.member_name = member_name;
+        this.member_token = member_token;
     }
 
     // 데이터베이스에 삽입결과 0보다크면 삽입성공, 같거나 작으면 실패
@@ -61,6 +63,7 @@ public class SignUpInsert extends AsyncTask<Void, Void, String> {
             builder.addTextBody("member_latitude", member_latitude, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("member_longitude", member_longitude, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("member_name", member_name, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_token", member_token, ContentType.create("Multipart/related", "UTF-8"));
 
             String postURL = ipConfig + "/app/anJoin";
 
