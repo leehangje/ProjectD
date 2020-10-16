@@ -89,7 +89,7 @@ public class MdDetailActivity extends AppCompatActivity {
         md_deposit = findViewById(R.id.md_dedosit);
         md_category = findViewById(R.id.md_category);
         md_Registration_date = findViewById(R.id.md_Registration_date);
-        md_hits = findViewById(R.id.md_hits);
+        //md_hits = findViewById(R.id.md_hits);
         md_fav_count = findViewById(R.id.md_fav_count);
         md_detail_content = findViewById(R.id.md_detail_content);
         ratingBar = findViewById(R.id.ratingBar);
@@ -349,13 +349,13 @@ public class MdDetailActivity extends AppCompatActivity {
                 .into(detail_photo1);*/
 
         md_name.setText(item.getMd_name());
-        md_price.setText("대여료: " + item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
-        md_deposit.setText("보증금: " + item.getMd_deposit() + "원");
-        md_category.setText("카테고리 - " + item.getMd_category());
-        md_Registration_date.setText("등록일자 : " + item.getMd_registration_date());   //등록일자
+        md_price.setText(item.getMd_price() + "원");  //int형 가져올땐 ""를 추가해야됨
+        md_deposit.setText(item.getMd_deposit() + "원");
+        md_category.setText(item.getMd_category());
+        md_Registration_date.setText(item.getMd_registration_date());   //등록일자
         //md_hits.setText("조회수:" + item.getMd_hits());
         md_fav_count.setText("찜:" + item.getMd_fav_count());
-        md_detail_content.setText("<상세정보>\n" + item.getMd_detail_content());
+        md_detail_content.setText(item.getMd_detail_content());
     }
 
     //상품 상세사진 슬라이드 넘기기
