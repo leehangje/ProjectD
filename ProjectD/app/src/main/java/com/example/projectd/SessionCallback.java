@@ -50,7 +50,7 @@ public class SessionCallback implements ISessionCallback {
             e.printStackTrace();
         }
 
-        Toast.makeText(context, "카카오 로그인 됐습니다...", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "카카오 로그인 됐습니다...", Toast.LENGTH_SHORT).show();
 
         /*LoginSelect loginSelect = new LoginSelect(member_email, "0000");
         try {

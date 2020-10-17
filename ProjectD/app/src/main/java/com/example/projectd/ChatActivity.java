@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.projectd.Dto.ChatDto;
 import com.example.projectd.Dto.MemberDto;
@@ -38,12 +39,14 @@ public class ChatActivity extends AppCompatActivity {
     private Button Button_send;
     private DatabaseReference myRef;
 
-
+    LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         Button_send = findViewById(R.id.Button_send);
         EditText_Chat = findViewById(R.id.EditText_Chat);
@@ -111,7 +114,13 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
+        // 뒤로가기 버튼 클릭 시
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 }

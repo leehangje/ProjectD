@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ import static com.example.projectd.Common.CommonMethod.isNetworkConnected;
 public class MdInsertActivity extends AppCompatActivity {
     private static final String TAG = "MdInsertActivity";
 
+    LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
 
     EditText et_md_name, et_md_price, et_md_rental_term , et_md_deposit, et_md_detail_content , et_md_serial;
     Spinner sp_md_category;
@@ -108,6 +110,8 @@ public class MdInsertActivity extends AppCompatActivity {
         btn_submit = findViewById(R.id.btn_submit);
         btn_cancel = findViewById(R.id.btn_cancel);
         imgVwSelected = findViewById(R.id.imgVwSelected);
+
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         //EDITTEXT 클릭 시 달력 띄우기
         EditText et_md_rental_term = (EditText) findViewById(R.id.et_md_rental_term);
@@ -182,6 +186,14 @@ public class MdInsertActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btnSubmit();
+            }
+        });
+
+        // 뒤로가기 버튼 클릭 시
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

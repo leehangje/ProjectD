@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
@@ -21,6 +22,7 @@ import android.widget.LinearLayout;
 
 import com.example.projectd.ATask.CategorySelect;
 import com.example.projectd.Dto.MdDTO;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -276,12 +278,18 @@ public class CategoryActivity extends Fragment {
         toolbar_context.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.main_layout, mainActivity).commitAllowingStateLoss();
+                MainActivity fragment = new MainActivity();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_layout, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
         return viewGroup;
     }//onCreateView()
+
+
+
 
 }//class

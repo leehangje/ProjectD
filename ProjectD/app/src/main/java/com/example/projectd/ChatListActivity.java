@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.projectd.Common.CommonMethod;
@@ -30,6 +31,9 @@ public class ChatListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ChatListAdapter adapter;
     String member_id = "";
+
+    LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +41,18 @@ public class ChatListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_list);
 
         recyclerView = findViewById(R.id.recyclerView);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         ChatPullRequest request = new ChatPullRequest(LoginActivity.loginDTO.getMember_id());
         request.execute();
+
+        //뒤로가기 버튼 클릭 시
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
     private class ChatPullRequest extends AsyncTask<Void, Void, List<MemberDto>> {

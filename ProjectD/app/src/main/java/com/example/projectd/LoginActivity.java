@@ -170,8 +170,8 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "onClick: 아이디 : " + loginDTO.getMember_id() + ", 로그인타입 : " + loginDTO.getMember_loginType());
 
                         Intent intent = new Intent(getApplicationContext(), SocialLocationActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);     //로그아웃할 때 앱 전체가 꺼지는 문제가 있어 주석처리함
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("member_id", loginDTO.getMember_id());
                         intent.putExtra("member_loginType", "M");
                         startActivity(intent);
@@ -379,27 +379,30 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         Intent intent = new Intent(getApplicationContext(), SocialLocationActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("member_id", member_id);
                         intent.putExtra("member_loginType", member_loginType);
                         startActivity(intent);
 
                     } else {     //네이버 로그인(db에 저장되어 있을 경우)이 되어있는 경우
-                        if(naverLoginDTO.getMember_addr().equals("") || naverLoginDTO.getMember_addr() == null) {    //주소 지정 x
+                        if(naverLoginDTO.getMember_addr().equals("") || naverLoginDTO.getMember_addr() == null ||
+                            naverLoginDTO.getMember_latitude().equals("") || naverLoginDTO.getMember_latitude() == null ||
+                            naverLoginDTO.getMember_longitude().equals("") || naverLoginDTO.getMember_longitude() == null) {
+                            // 네이버 로그인 계정이 DB에 저장되어 있지만 주소는 DB에 저장되지 않았을 경우
                             Log.d(TAG, "onPostExecute: 로그인 액티비티에서 네이버 로그인 > dto가 o 그러나 주소 지정 x");
                             Log.d(TAG, "onPostExecute: 주소 지정 x : " + naverLoginDTO.getMember_id());
                             Log.d(TAG, "onPostExecute: 주소 지정 x 로그인 타입: " + naverLoginDTO.getMember_loginType());
                             Intent intent = new Intent(getApplicationContext(), SocialLocationActivity.class);
                             intent.putExtra("member_id", naverLoginDTO.getMember_id());
                             intent.putExtra("member_loginType", naverLoginDTO.getMember_loginType());
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         } else {        //주소 지정 o
                             Intent intent = new Intent(getApplicationContext(), RealMainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             Log.d(TAG, "onSuccess: " + naverLoginDTO.getMember_addr());
                         }

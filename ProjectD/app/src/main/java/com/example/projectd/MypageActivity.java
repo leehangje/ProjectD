@@ -52,6 +52,8 @@ public class MypageActivity extends Fragment {
     RatingBar ratingBar2;
     CircleImageView profile_photo;
 
+    MainActivity mainActivity;
+    LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
 
     @Nullable
     @Override
@@ -60,6 +62,8 @@ public class MypageActivity extends Fragment {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_mypage, null);
 
         setHasOptionsMenu(true);
+
+        mainActivity = new MainActivity();
 
         btn_profile_update = viewGroup.findViewById(R.id.btn_profile_update);
         mypage_notice = viewGroup.findViewById(R.id.mypage_notice);
@@ -73,6 +77,8 @@ public class MypageActivity extends Fragment {
         ratingBar2 = viewGroup.findViewById(R.id.ratingBar2);
         profile_photo = viewGroup.findViewById(R.id.profile_photo);
         ratingSum = viewGroup.findViewById(R.id.ratingSum);
+
+        toolbar_context = viewGroup.findViewById(R.id.toolbar_context);
 
         if( LoginActivity.loginDTO != null) {
 
@@ -187,7 +193,6 @@ public class MypageActivity extends Fragment {
         mypage_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginDTO = null;
 
                 if(naverLoginDTO != null) {    //네이버 로그아웃
                     OAuthLogin.getInstance().logout(mContext);
@@ -195,6 +200,7 @@ public class MypageActivity extends Fragment {
                     String refreshToken = mOAuthLoginInstance.getRefreshToken(mContext);
                     Log.d(TAG, "onClick: " + accessToken + ", " + refreshToken);
                     naverLoginDTO = null;
+
                 } else if(kakaoLoginDTO != null) {  //카카오 로그아웃
                     UserManagement.getInstance()
                             .requestLogout(new LogoutResponseCallback() {
@@ -204,9 +210,21 @@ public class MypageActivity extends Fragment {
                                     kakaoLoginDTO = null;
                                 }
                             });
-                }
 
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                loginDTO = null;
                 getActivity().finish();
+            }
+        });
+
+        // 툴바안의 뒤로가기 버튼을 클릭했을 때
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.main_layout, mainActivity).commitAllowingStateLoss();
             }
         });
 
