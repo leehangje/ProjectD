@@ -73,7 +73,7 @@
                         android:id="@+id/category_icon1"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/camera"
+                        android:src="@drawable/cate_mimg1"
                         />
 
                     <Button
@@ -97,7 +97,7 @@
                         android:id="@+id/category_icon6"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/game" />
+                        android:src="@drawable/cate_mimg6" />
 
                     <Button
                         android:id="@+id/categoryBtn6"
@@ -129,7 +129,7 @@
                         android:id="@+id/category_icon2"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/baby" />
+                        android:src="@drawable/cate_mimg2" />
 
                     <Button
                         android:id="@+id/categoryBtn2"
@@ -156,7 +156,7 @@
                         android:layout_width="45dp"
                         android:layout_height="45dp"
 
-                        android:src="@drawable/beauty" />
+                        android:src="@drawable/cate_mimg7" />
 
                     <Button
                         android:id="@+id/categoryBtn7"
@@ -188,7 +188,7 @@
                         android:id="@+id/category_icon3"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/cup" />
+                        android:src="@drawable/cate_mimg3" />
 
                     <Button
                         android:id="@+id/categoryBtn3"
@@ -211,7 +211,7 @@
                         android:id="@+id/category_icon8"
                         android:layout_width="44dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/pet" />
+                        android:src="@drawable/cate_mimg8" />
 
                     <Button
                         android:id="@+id/categoryBtn8"
@@ -243,7 +243,7 @@
                         android:id="@+id/category_icon4"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/cycle" />
+                        android:src="@drawable/cate_mimg4" />
 
                     <Button
                         android:id="@+id/categoryBtn4"
@@ -267,7 +267,7 @@
                         android:id="@+id/category_icon9"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/etc" />
+                        android:src="@drawable/cate_mimg10" />
 
                     <Button
                         android:id="@+id/categoryBtn9"
@@ -298,7 +298,7 @@
                         android:id="@+id/category_icon5"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/closet" />
+                        android:src="@drawable/cate_mimg5" />
 
                     <Button
                         android:id="@+id/categoryBtn5"
@@ -321,7 +321,7 @@
                         android:id="@+id/category_icon10"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/free" />
+                        android:src="@drawable/cate_mimg9" />
 
                     <Button
                         android:id="@+id/categoryBtn10"
