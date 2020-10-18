@@ -71,8 +71,8 @@ public class TabFragment2 extends Fragment {
             public void onItemClick(DarunMdAdapter.ViewHolder holder, View view, int position) {
                 MdDTO item = adapter.getItem(position);
 
-                Toast.makeText(getActivity(), "아이템 선택됨" + item.getMd_name(),
-                        Toast.LENGTH_LONG).show();
+                /*Toast.makeText(getActivity(), "아이템 선택됨" + item.getMd_name(),
+                        Toast.LENGTH_LONG).show();*/
 
                 Intent intent = new Intent(getActivity(), MdDetailActivity.class);
                 intent.putExtra("item", item);

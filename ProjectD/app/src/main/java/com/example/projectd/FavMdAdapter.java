@@ -63,11 +63,8 @@ public class FavMdAdapter extends RecyclerView.Adapter<FavMdAdapter.ViewHolder>
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
-        TextView textView2;
-        ImageView iv_img;
-        ImageView img_possible;
-        ImageView favlist_null;
+        TextView textView, textView2, tv_favCount;
+        ImageView iv_img, img_possible;
 
         public ViewHolder(View itemView, final OnFavItemClickListener listener){
             super(itemView);
@@ -75,6 +72,7 @@ public class FavMdAdapter extends RecyclerView.Adapter<FavMdAdapter.ViewHolder>
             textView2 = itemView.findViewById(R.id.tv_price);
             iv_img = itemView.findViewById(R.id.iv_img);
             img_possible = itemView.findViewById(R.id.img_possible);
+            tv_favCount = itemView.findViewById(R.id.tv_favCount);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +89,7 @@ public class FavMdAdapter extends RecyclerView.Adapter<FavMdAdapter.ViewHolder>
         public void setItem(MdDTO item){
             textView.setText(item.getMd_name());
             textView2.setText(item.getMd_price() + "원");
+            tv_favCount.setText(item.getMd_fav_count());
             Glide.with(context).load(item.getMd_photo_url()).placeholder(R.drawable.spinner_icon).into(iv_img);
 
             //getMd_rent_status(대여상태)가 1이면 대여중, 0이면 대여가능 표시

@@ -29,9 +29,9 @@ public class CategoryViewActivity extends AppCompatActivity {
 
     public static MdDTO selItem = null;
 
-    private RecyclerView recyclerView;
-    private CategoryAdapter adapter;
-    ArrayList<MdDTO> items ;
+    RecyclerView recyclerView;
+    CategoryAdapter adapter;
+    ArrayList<MdDTO> items;
 
     CategorySelect categorySelect;
     ProgressDialog progressDialog;
@@ -71,6 +71,19 @@ public class CategoryViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        adapter.setOnItemClickListener(new OnCategoryItemClickListener() {
+            public static final int category = 1001;
+
+            @Override
+            public void onItemClick(CategoryAdapter.ViewHolder holder, View view, int position) {
+                MdDTO item = adapter.getItem(position);
+
+                Intent intent = new Intent(getApplicationContext(), MdDetailActivity.class);
+                intent.putExtra("item", item);
+                startActivityForResult(intent, category);
+
+            }
+        });
     }
 
 }

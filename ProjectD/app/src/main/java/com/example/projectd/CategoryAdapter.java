@@ -27,9 +27,7 @@ import java.util.ArrayList;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder>
         implements OnCategoryItemClickListener {
 
-    RecyclerView recyclerView;
-    ViewGroup viewGroup;
-    private Context mContext;
+    static Context mContext;
     private ArrayList<MdDTO> items;
     OnCategoryItemClickListener listener;
     public CategoryAdapter(Context mContext, ArrayList<MdDTO> items) {
@@ -53,14 +51,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         final MdDTO item = items.get(position);
         holder.setItem(item);
 
-        /*holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("main:CategoryAdapter", "onClick: " + position);
-                selItem = items.get(position);
-            }
-        });*/
-
         holder.md_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,19 +62,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 }else {
                     Toast.makeText(mContext, "항목 선택을 해주세요", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-
-    // 어댑터에 매소드 만들기
 
     // 리사이클러뷰 내용 모두 지우기
     public void removeAllItem(){
@@ -125,6 +110,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         TextView md_price;
         ImageView md_photo;
         ImageView img_possible;
+        TextView tv_favCount;;
 
 
         public ViewHolder(View itemView, final OnCategoryItemClickListener listener) {
@@ -134,6 +120,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             md_price = itemView.findViewById(R.id.tv_price);
             md_photo = itemView.findViewById(R.id.iv_img);
             img_possible = itemView.findViewById(R.id.img_possible);
+            tv_favCount = itemView.findViewById(R.id.tv_favCount);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -153,8 +140,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         public void setItem(MdDTO item){
             md_name.setText(item.getMd_name());
             md_price.setText(item.getMd_price() + "원");
-
-            Glide.with(itemView).load(item.getMd_photo_url()).into(md_photo);
+            tv_favCount.setText(item.getMd_fav_count());
+            //Glide.with(itemView).load(item.getMd_photo_url()).into(md_photo);
+            Glide.with(mContext).load(item.getMd_photo_url()).placeholder(R.drawable.spinner_icon).into(md_photo);
 
             //getMd_rent_status(대여상태)가 1이면 대여중, 0이면 대여가능 표시
             if (item.getMd_rent_status().equals("1")){

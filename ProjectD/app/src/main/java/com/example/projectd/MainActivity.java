@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class MainActivity extends Fragment {
     TextView tv_addr;
     String member_addr;     //회원 주소를 저장하는 변수
 
+
     /*private Context mContext = MainActivity.this;*/
     private static final int ACTIVITY_NUM = 3;
 
@@ -51,6 +53,7 @@ public class MainActivity extends Fragment {
         } else if (Build.VERSION.SDK_INT < 21) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }*/
+
 
         items = new ArrayList<>();
         recyclerView = viewGroup.findViewById(R.id.recyclerView);
@@ -133,7 +136,6 @@ public class MainActivity extends Fragment {
         });
 
 
-
         adapter.setOnItemClickListener(new OnMainMdItemClickListener() {
             public static final int main = 1001;
 
@@ -141,8 +143,8 @@ public class MainActivity extends Fragment {
             public void onItemClick(MainMdAdapter.ViewHolder holder, View view, int position) {
                 MdDTO item = adapter.getItem(position);
 
-                Toast.makeText(getActivity(), "아이템 선택됨" + item.getMd_name(),
-                        Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "아이템 선택됨" + item.getMd_name(),
+                        //Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity(), MdDetailActivity.class);
                 intent.putExtra("item", item);
                 startActivityForResult(intent, main);
