@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6E6E6"
@@ -41,85 +42,65 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_width="280dp"
+
+    <fragment android:id="@+id/autocomplete_fragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="27dp"
-        android:text="지도 우상단의 gps를 클릭하여 위치를 지정하고 해당 위치로 설정 버튼을 클릭한 후, 완료 버튼을 반드시 클릭해주세요!"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/searchValueText"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
-        android:background="#FFFFFF"
-        android:hint="내 위치"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp" />
-
-    <Button
-        android:id="@+id/setupBtn"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/searchValueText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="27dp"
-        android:background="#3E4BA9"
-        android:text="해당 위치로 설정"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="320dp"
-        android:layout_height="246dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/searchValueText"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="27dp">
+        android:layout_centerHorizontal="true">
 
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="245dp" />
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:id="@+id/searchValueText"
+            android:layout_width="284dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="380dp"
+            android:background="#FFFFFF"
+            android:hint="내 위치"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp" />
+
+        <Button
+            android:id="@+id/setupBtn"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchValueText"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="440dp"
+            android:background="#C3C3C3"
+            android:text="해당 위치로 설정"
+            android:textColor="#3E4BA9"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="320dp"
+            android:layout_height="58dp"
+            android:layout_below="@+id/searchValueText"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="500dp"
+            android:background="#3E4BA9"
+            android:text="완료"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="320dp"
-        android:layout_height="58dp"
-        android:layout_below="@+id/searchValueText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="27dp"
-        android:background="#3E4BA9"
-        android:text="완료"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+
 </LinearLayout>
 
 <!--

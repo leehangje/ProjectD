@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.example.projectd.R;
 import com.example.projectd.SignUpFormActivity;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -41,8 +42,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,6 +67,7 @@ public class LocationActivity extends AppCompatActivity {
     LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
 
     Double latitude, longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +102,10 @@ public class LocationActivity extends AppCompatActivity {
                 GpsTracker gpsTracker = new GpsTracker(LocationActivity.this);
                 latitude = gpsTracker.getLatitude();
                 longitude = gpsTracker.getLongitude();
-                addMarker(new LatLng(latitude, longitude));
+                LatLng curPoint = new LatLng(latitude, longitude);  //현재 위치 반환
+                addMarker(curPoint);    // 현재 위치에 마커 추가
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 18));
+                // 지도를 curPoint 지점으로 확대해서 표시
 
                 // 지도를 클릭했을 때 실행되는 메소드
                 map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -110,6 +121,42 @@ public class LocationActivity extends AppCompatActivity {
 
         MapsInitializer.initialize(this);
 
+        // 위치 검색 자동완성
+        Places.initialize(getApplicationContext(), "AIzaSyD7wAJVRHAe2jMHZSouoMxf-8-sjJPZUn0");
+        PlacesClient placesClient = Places.createClient(this);
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                latitude = 0.0; longitude = 0.0;    // 기존의 위도 경도 초기화
+
+                //searchValueText.setText(place.getName());
+                //Log.d(TAG, "onPlaceSelected: getAddress : " + place.getAddress());
+                //Log.d(TAG, "onPlaceSelected: 위도 : " + place.getLatLng().latitude);
+                //Log.d(TAG, "onPlaceSelected: 경도 : " + place.getLatLng().longitude);
+                // → place.getId()와 place.getName()을 제외한 나머지 get~()값은 다 null을 반환한다.
+
+                Location searchLocation = getLocationFromAddress(getApplicationContext(), place.getName());
+                latitude = searchLocation.getLatitude();
+                longitude = searchLocation.getLongitude();
+
+                addMarker(new LatLng(latitude, longitude));
+
+                searchValueText.setText(getCurrentAddress(latitude, longitude).substring(5));
+
+                Log.d(TAG, "onPlaceSelected: " + place.getName()
+                        + ", 위도 : " + latitude + ", 경도 : " + longitude);
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                Log.d(TAG, "onError: " + status);
+            }
+        });
+
         // 해당 위치 설정 버튼 클릭 시
         setupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,9 +168,14 @@ public class LocationActivity extends AppCompatActivity {
                 Toast.makeText(LocationActivity.this,
                         "latitude" + latitude + "\nlongitude" + longitude,
                         Toast.LENGTH_SHORT).show();
+                myAddress = getCurrentAddress(latitude, longitude);
+                myAddress = myAddress.substring(5);
+                searchValueText.setText(myAddress);
+                /*
                 String address = getCurrentAddress(latitude, longitude);
                 address = address.substring(5);
                 searchValueText.setText(address);
+                 */
             }
         }); //locSearchBtn.setOnClickListener()
         
@@ -150,6 +202,7 @@ public class LocationActivity extends AppCompatActivity {
             }
         }); //submitBtn.setOnClickListener()
 
+        // 뒤로가기 버튼 클릭 시
         toolbar_context.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +210,8 @@ public class LocationActivity extends AppCompatActivity {
             }
         });
 
-    } //onCreate()
+    } //onCreate() 끝
+
 
     private void requestMyLocation() {
         LocationManager manager =
@@ -340,6 +394,7 @@ public class LocationActivity extends AppCompatActivity {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.icon(smallMarkerIcon);
         markerOptions.position(latLng); //마커위치설정
+        markerOptions.title(myAddress);
         map.animateCamera(CameraUpdateFactory.newLatLng(latLng));   // 마커생성위치로 이동
         Marker marker = map.addMarker(markerOptions);
     }
