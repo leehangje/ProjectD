@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import com.example.projectd.ATask.NaverLogin;
 import com.example.projectd.ATask.UpdateLocation;
 import com.example.projectd.R;
 import com.example.projectd.SignUpFormActivity;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -45,8 +47,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -66,6 +74,7 @@ public class SocialLocationActivity extends AppCompatActivity {
     String myAddress, detailAddress, state;
     LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
     Double latitude, longitude;
+    boolean update_location = false;    //위치정보 수정(메인에서) 여부를 저장하는 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +111,10 @@ public class SocialLocationActivity extends AppCompatActivity {
                 GpsTracker gpsTracker = new GpsTracker(SocialLocationActivity.this);
                 latitude = gpsTracker.getLatitude();
                 longitude = gpsTracker.getLongitude();
-                addMarker(new LatLng(latitude, longitude));
+                LatLng curPoint = new LatLng(latitude, longitude);  //현재 위치 반환
+                addMarker(curPoint);    // 현재 위치에 마커 추가
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 18));
+                // 지도를 curPoint 지점으로 확대해서 표시
 
                 // 지도를 클릭했을 때 실행되는 메소드
                 map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -118,6 +130,43 @@ public class SocialLocationActivity extends AppCompatActivity {
 
         MapsInitializer.initialize(this);
 
+        // 위치 검색 자동완성
+        Places.initialize(getApplicationContext(), "AIzaSyD7wAJVRHAe2jMHZSouoMxf-8-sjJPZUn0");
+        PlacesClient placesClient = Places.createClient(this);
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS));
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                latitude = 0.0; longitude = 0.0;    // 검색된 장소가 다시 선택됐을 경우, 기존의 위도 경도 초기화
+
+                //searchValueText.setText(place.getName());
+                //Log.d(TAG, "onPlaceSelected: getAddress : " + place.getAddress());
+                Log.d(TAG, "onPlaceSelected: 위도 : " + place.getLatLng().latitude);
+                Log.d(TAG, "onPlaceSelected: 경도 : " + place.getLatLng().longitude);
+                latitude = place.getLatLng().latitude;
+                longitude = place.getLatLng().longitude;
+
+                //Location searchLocation = getLocationFromAddress(getApplicationContext(), place.getName());
+                //latitude = searchLocation.getLatitude();
+                //longitude = searchLocation.getLongitude();
+
+                addMarker(new LatLng(latitude, longitude));
+
+                searchValueText.setText(getCurrentAddress(latitude, longitude).substring(5));
+
+                Log.d(TAG, "onPlaceSelected: " + place.getName()
+                        + ", 위도 : " + latitude + ", 경도 : " + longitude);
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                Log.d(TAG, "onError: " + status);
+            }
+        }); // 위치 검색 자동완성 끝
+
         // 해당 위치 설정 버튼 클릭 시
         setupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,9 +178,13 @@ public class SocialLocationActivity extends AppCompatActivity {
                 Toast.makeText(SocialLocationActivity.this,
                         "latitude" + latitude + "\nlongitude" + longitude,
                         Toast.LENGTH_SHORT).show();
-                String address = getCurrentAddress(latitude, longitude);
-                address = address.substring(5);
-                searchValueText.setText(address);
+                myAddress = getCurrentAddress(latitude, longitude);
+                myAddress = myAddress.substring(5);
+                // substring(5) → '대한민국 '이라는 문자열을 제외한 나머지 주소만 저장
+
+                searchValueText.setText(myAddress);
+
+                Log.d(TAG, "addMarker: 위도는 " + latitude + ", 경도는 " + longitude);
             }
         }); //locSearchBtn.setOnClickListener()
 
@@ -158,17 +211,19 @@ public class SocialLocationActivity extends AppCompatActivity {
                 } else {
                     // SocialLocationActivity로 위치 정보를 저장하는 경우는 총 2가지
                     // 1. 처음으로 소셜(kakao, naver) 로그인을 했을 때(db 저장 x, kakaoLoginDTO가 null)
-                    // 2. 카카오 로그인을 했지만 위치정보가 저장이 안되어 있을 때(db 저장 O, kakaoLoginDTO가 null이 아닌 경우)
+                    // 2. 소셜 로그인을 했지만 위치정보가 저장이 안되어 있을 때(db 저장 O, kakaoLoginDTO가 null이 아닌 경우)
                     // 3. 웹으로 회원가입했을 때(웹에서는 addr, latitude, longitude 컬럼 값이 null)
+                    // 4. 위치 정보가 저장되어있지만 위치정보를 바꾸려고 할때(메인의 gps 버튼 클릭 시) - 소셜 로그인, 일반로그인 상관없이
 
                     Intent intent = getIntent();
                     member_id = intent.getExtras().getString("member_id");
                     member_loginType = intent.getExtras().getString("member_loginType");
                     String member_addr = myAddress + " " + detailAddress;
+                    update_location = intent.getExtras().getBoolean("update_location");
 
                     Log.d(TAG, "onClick: " + member_id + ", " + member_loginType);
 
-                    if (member_loginType.equals("K") && kakaoLoginDTO == null) {    // 1번의 경우
+                    if (member_loginType.equals("K") && kakaoLoginDTO == null) {    // 1번의 경우(카카오)
                         Log.d(TAG, "onClick: 카카오 처음 로그인 : " + member_id + ", " + member_loginType);
 
                         KakaoLogin kakaoLogin = new KakaoLogin(member_id, member_loginType);
@@ -185,7 +240,9 @@ public class SocialLocationActivity extends AppCompatActivity {
                         if (kakaoLoginDTO != null) {
                             updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
                         }
-                    } else if (member_loginType.equals("N") && naverLoginDTO == null) {     // 1번의 경우
+                        setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
+
+                    } else if (member_loginType.equals("N") && naverLoginDTO == null) {     // 1번의 경우(네이버)
                         Log.d(TAG, "onClick: 네이버 처음 로그인 : " + member_id + ", " + member_loginType);
 
                         NaverLogin naverLogin = new NaverLogin(member_id, member_loginType);
@@ -202,27 +259,47 @@ public class SocialLocationActivity extends AppCompatActivity {
                         if (naverLoginDTO != null) {
                             updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
                         }
-                    } else if (member_loginType.equals("K") && kakaoLoginDTO != null) {     // 2번의 경우
+
+                        setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
+
+                    } else if (member_loginType.equals("K") && kakaoLoginDTO != null) {     // 2번의 경우(카카오)
                         Log.d(TAG, "onClick: 카카오 로그인 o, 위치 저장 x");
                         Log.d(TAG, "onClick: " + member_addr + ", " + s_latitude + ", " + s_longitude  + ", " + kakaoLoginDTO.getMember_id() + ", " + kakaoLoginDTO.getMember_loginType());
                         updateLocation(member_addr, s_latitude, s_longitude, kakaoLoginDTO.getMember_id(), kakaoLoginDTO.getMember_loginType());
+                        setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
 
-                    } else if (member_loginType.equals("N") && naverLoginDTO != null) {     // 2번의 경우
+                    } else if (member_loginType.equals("N") && naverLoginDTO != null) {     // 2번의 경우(네이버)
                         Log.d(TAG, "onClick: 네이버 로그인 o, 위치 저장 x");
                         Log.d(TAG, "onClick: " + myAddress + " " + detailAddress + ", " + s_latitude + ", " + s_longitude  + ", " + naverLoginDTO.getMember_id() + ", " + naverLoginDTO.getMember_loginType());
                         updateLocation(member_addr, s_latitude, s_longitude, naverLoginDTO.getMember_id(), naverLoginDTO.getMember_loginType());
-                    } else if(member_loginType.equals("M") && loginDTO != null) {       // 3번의 경우
+                        setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
+
+                    } else if(member_loginType.equals("M") && loginDTO.getMember_addr() == null) {       // 3번의 경우
                         Log.d(TAG, "onClick: 웹으로 로그인 o, 위치 저장 x");
                         updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
-                        loginDTO.setMember_addr(member_addr);
-                        loginDTO.setMember_latitude(s_latitude);
-                        loginDTO.setMember_longitude(s_longitude);
-                    }
-                }
+                        setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
 
+                    } else if(update_location) {    //4번의 경우
+                        Log.d(TAG, "onClick: 위치 정보 업데이트 : 아이디는 " + member_id + ", 로그인 타입은 " + member_loginType);
+                        updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
+                        setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
+                        Log.d(TAG, "setLocation: 멤버 로그인 : " + loginDTO.getMember_addr() + ", " +
+                                loginDTO.getMember_latitude() + ", " + loginDTO.getMember_longitude());
+
+                        // 여기서 부터는 SocialLocationActivity가 finish되고 RealMainActivity가 나타날 때
+                        // refresh 기능을 수행하게끔 하는 코드
+                        //Intent intent1 = new Intent(getApplicationContext(), RealMainActivity.class);
+                        //intent1.putExtra("member_addr", member_addr);
+                        setResult(Activity.RESULT_OK);
+
+                        finish();
+                        return;
+                    }
                     Intent intent2 = new Intent(getApplicationContext(), RealMainActivity.class);
                     startActivity(intent2);
                     finish();
+                }
+
             }
         }); //submitBtn.setOnClickListener()
 
@@ -250,21 +327,30 @@ public class SocialLocationActivity extends AppCompatActivity {
             Log.d(TAG, "onSuccess1: 위치 지정(소셜) 실패");
         }
 
-        if (member_loginType.equals("K")) {
+    } //updateLocation()
+
+    // 멤버 DTO에 갱신된 위치정보를 저장하는 메소드
+    public void setLocation(String addr, String latitude, String longitude, String loginType) {
+        if(loginType.equals("M")) {
+            loginDTO.setMember_addr(addr);
+            loginDTO.setMember_latitude(latitude);
+            loginDTO.setMember_longitude(longitude);
+            Log.d(TAG, "setLocation: 멤버 로그인 : " + loginDTO.getMember_addr() + ", " +
+                            loginDTO.getMember_latitude() + ", " + loginDTO.getMember_longitude());
+        } else if(loginType.equals("K")) {
             kakaoLoginDTO.setMember_addr(addr);
             kakaoLoginDTO.setMember_latitude(latitude);
             kakaoLoginDTO.setMember_longitude(longitude);
-
-            Log.d(TAG, "onClick: " + member_loginType + ", " + kakaoLoginDTO.getMember_addr());
-        } else if(member_loginType.equals("N")) {
+            Log.d(TAG, "setLocation: 카카오 로그인 : " + kakaoLoginDTO.getMember_addr() + ", " +
+                    kakaoLoginDTO.getMember_latitude() + ", " + kakaoLoginDTO.getMember_longitude());
+        } else if(loginType.equals("N")) {
             naverLoginDTO.setMember_addr(addr);
             naverLoginDTO.setMember_latitude(latitude);
             naverLoginDTO.setMember_longitude(longitude);
-
-            Log.d(TAG, "onClick: " + member_loginType);
+            Log.d(TAG, "setLocation: 네이버 로그인 : " + naverLoginDTO.getMember_addr() + ", " +
+                    naverLoginDTO.getMember_latitude() + ", " + naverLoginDTO.getMember_longitude());
         }
-
-    } //updateLocation()
+    } //setLocation()
 
     private void requestMyLocation() {
         LocationManager manager =
@@ -447,8 +533,14 @@ public class SocialLocationActivity extends AppCompatActivity {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.icon(smallMarkerIcon);
         markerOptions.position(latLng); //마커위치설정
+        markerOptions.title(getCurrentAddress(latLng.latitude, latLng.longitude));
+        // 마커를 찍은 주소를 마커 title에 표시되도록 함
+
         map.animateCamera(CameraUpdateFactory.newLatLng(latLng));   // 마커생성위치로 이동
         Marker marker = map.addMarker(markerOptions);
+
+        latitude = latLng.latitude;     // 마커를 찍은 위치의 위도, 경도를 변수에 저장
+        longitude = latLng.longitude;
     }
 
     // 알림 대화상자를 보여주는 메소드

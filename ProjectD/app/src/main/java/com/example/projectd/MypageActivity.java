@@ -31,8 +31,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.nhn.android.naverlogin.OAuthLogin;
 import static com.example.projectd.LoginActivity.mContext;
 import static com.example.projectd.LoginActivity.mOAuthLoginInstance;
@@ -210,6 +212,33 @@ public class MypageActivity extends Fragment {
                                     kakaoLoginDTO = null;
                                 }
                             });
+                    
+                    //카카오 회원 탈퇴
+                    UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                        @Override
+                        public void onFailure(ErrorResult errorResult) {
+                            //회원탈퇴 실패 시 동작
+                            Log.d(TAG, "onFailure: 회원탈퇴 실패");
+                        }
+
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+                            //세션이 닫혔을 시 동작.
+                            Log.d(TAG, "onSessionClosed: 세션 닫힘");
+                        }
+
+                        @Override
+                        public void onNotSignedUp() {
+                            //가입되지 않은 계정이 회원탈퇴를 요구할 경우 동작.
+                            Log.d(TAG, "onNotSignedUp: 가입된 계정이 아닙니다");
+                        }
+
+                        @Override
+                        public void onSuccess(Long result) {
+                            //회원탈퇴 성공 시 동작.
+                            Log.d(TAG, "onSuccess: 회원탈퇴 성공!");
+                        }
+                    });
 
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);

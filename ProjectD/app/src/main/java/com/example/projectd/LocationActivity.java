@@ -126,22 +126,23 @@ public class LocationActivity extends AppCompatActivity {
         PlacesClient placesClient = Places.createClient(this);
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS));
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                latitude = 0.0; longitude = 0.0;    // 기존의 위도 경도 초기화
+                latitude = 0.0; longitude = 0.0;    // 검색된 장소가 다시 선택됐을 경우, 기존의 위도 경도 초기화
 
                 //searchValueText.setText(place.getName());
                 //Log.d(TAG, "onPlaceSelected: getAddress : " + place.getAddress());
-                //Log.d(TAG, "onPlaceSelected: 위도 : " + place.getLatLng().latitude);
-                //Log.d(TAG, "onPlaceSelected: 경도 : " + place.getLatLng().longitude);
-                // → place.getId()와 place.getName()을 제외한 나머지 get~()값은 다 null을 반환한다.
+                Log.d(TAG, "onPlaceSelected: 위도 : " + place.getLatLng().latitude);
+                Log.d(TAG, "onPlaceSelected: 경도 : " + place.getLatLng().longitude);
+                latitude = place.getLatLng().latitude;
+                longitude = place.getLatLng().longitude;
 
-                Location searchLocation = getLocationFromAddress(getApplicationContext(), place.getName());
-                latitude = searchLocation.getLatitude();
-                longitude = searchLocation.getLongitude();
+                //Location searchLocation = getLocationFromAddress(getApplicationContext(), place.getName());
+                //latitude = searchLocation.getLatitude();
+                //longitude = searchLocation.getLongitude();
 
                 addMarker(new LatLng(latitude, longitude));
 
@@ -165,17 +166,11 @@ public class LocationActivity extends AppCompatActivity {
                 //Double latitude = currentLocation.getLatitude();
                 //Double longitude = currentLocation.getLongitude();
 
-                Toast.makeText(LocationActivity.this,
-                        "latitude" + latitude + "\nlongitude" + longitude,
-                        Toast.LENGTH_SHORT).show();
                 myAddress = getCurrentAddress(latitude, longitude);
                 myAddress = myAddress.substring(5);
                 searchValueText.setText(myAddress);
-                /*
-                String address = getCurrentAddress(latitude, longitude);
-                address = address.substring(5);
-                searchValueText.setText(address);
-                 */
+
+                Log.d(TAG, "addMarker: 위도는 " + latitude + ", 경도는 " + longitude);
             }
         }); //locSearchBtn.setOnClickListener()
         
@@ -196,6 +191,8 @@ public class LocationActivity extends AppCompatActivity {
                     intent.putExtra("longitude", longitude);
                     //startActivity(intent);
                     setResult(RESULT_OK, intent);
+                    // → LocationActivity가 finish()될 때 SignUpFormActivity가 refresh 되도록 작성한 코드
+
                     Log.d(TAG, "else:onClick: " + myAddress + ", " + latitude + ", " + longitude);
                     finish();
                 }
@@ -394,9 +391,12 @@ public class LocationActivity extends AppCompatActivity {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.icon(smallMarkerIcon);
         markerOptions.position(latLng); //마커위치설정
-        markerOptions.title(myAddress);
+        markerOptions.title(getCurrentAddress(latLng.latitude, latLng.longitude));
+        // 마커를 찍은 주소를 마커 title에 표시되도록 함
         map.animateCamera(CameraUpdateFactory.newLatLng(latLng));   // 마커생성위치로 이동
         Marker marker = map.addMarker(markerOptions);
+        latitude = latLng.latitude;     // 마커를 찍은 위치의 위도, 경도를 변수에 저장
+        longitude = latLng.longitude;
     }
 
     // 알림 대화상자를 보여주는 메소드

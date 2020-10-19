@@ -16,6 +16,7 @@
         android:background="#3F51B5">
 
         <LinearLayout
+            android:id="@+id/updateLocation"
             android:layout_width="225dp"
             android:layout_height="60dp"
             android:orientation="horizontal">
@@ -41,8 +42,8 @@
                 android:layout_marginTop="27dp"
                 android:layout_marginEnd="191dp"
                 android:layout_marginRight="0dp"
-                android:textSize="17sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout
