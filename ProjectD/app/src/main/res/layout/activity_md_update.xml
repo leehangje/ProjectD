@@ -10,8 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
 
         <RelativeLayout
@@ -168,24 +168,6 @@
                 android:inputType="textPersonName"
                 android:textSize="12sp" />
 
-            <Button
-                android:id="@+id/btn_md_update"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="false"
-                android:layout_marginStart="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="635dp"
-                android:layout_marginEnd="211dp"
-                android:layout_marginRight="211dp"
-                android:layout_marginBottom="1dp"
-                android:text="수정하기"
-
-                />
 
             <TextView
                 android:id="@+id/tv_member_id"
@@ -213,30 +195,36 @@
                 android:text="제품번호*"
                 />
 
-
-            <Button
-                android:id="@+id/btn_cancel"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="false"
-                android:layout_marginStart="210dp"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="635dp"
-                android:layout_marginEnd="51dp"
-                android:layout_marginRight="51dp"
-                android:layout_marginBottom="1dp"
-                android:onClick="btnCancleClicked"
-                android:text="취소"
-                />
         </RelativeLayout>
 
-
-
-
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_weight="1"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="수정하기"
+            android:textColor="#ffffff"
+            android:background="#3e4ba9"
+            />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_cancel"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:onClick="btnCancleClicked"
+            android:text="취소"
+            android:textColor="#000000"
+            android:background="#c7c3c3"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
