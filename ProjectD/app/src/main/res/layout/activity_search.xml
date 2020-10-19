@@ -82,28 +82,31 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/searchScrollView"
         android:layout_width="match_parent"
-        android:layout_height="520dp">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
-        <FrameLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="0dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="520dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+        </androidx.recyclerview.widget.RecyclerView>
 
-            </androidx.recyclerview.widget.RecyclerView>
 
-        </FrameLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/no_search"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="50dp"
+        android:src="@drawable/no_search"
+        android:visibility="gone"/>
 
 
     <!--app:itemTextColor="@color/wallet_bright_foreground_disabled_holo_light"-->

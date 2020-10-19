@@ -31,16 +31,21 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 // doInBackground 파라미터 타입, onProgressUpdate파라미터 타입, onPostExecute 파라미터 타입 순서
 // AsyncTask <Params, Progress, Result> 순서임
-public class SearchSelect extends AsyncTask<Void, Void, Void> {
+public class SearchSelect extends AsyncTask<Void, Void, Integer> {
     // 생성자
     ArrayList<MdDTO> items;
     SearchAdapter adapter;
     Map<String,Object> params;
 
-    public SearchSelect(ArrayList<MdDTO> items, SearchAdapter adapter,Map<String,Object> params) {
+    public SearchSelect(ArrayList<MdDTO> items, SearchAdapter adapter, Map<String,Object> params) {
         this.items = items;
         this.adapter = adapter;
         this.params = params;
+    }
+
+    public SearchSelect(ArrayList<MdDTO> items, SearchAdapter adapter) {
+        this.items = items;
+        this.adapter = adapter;
     }
 
     HttpClient httpClient;
@@ -54,7 +59,7 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected Integer doInBackground(Void... voids) {
         items.clear();
         String result = "";
         String postURL = ipConfig + "/app/SearchSelect";
@@ -82,8 +87,6 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
             httpResponse = httpClient.execute(httpPost);
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
-
-
 
             readJsonStream(inputStream);
 
@@ -115,12 +118,12 @@ public class SearchSelect extends AsyncTask<Void, Void, Void> {
             }
 
         }
-        return null;
+        return items.size();
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Integer result) {
+        super.onPostExecute(result);
 
         Log.d("Sub1", "SearchSelect Complete!!!");
 

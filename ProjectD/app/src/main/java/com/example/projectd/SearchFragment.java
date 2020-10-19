@@ -10,11 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.example.projectd.ATask.SearchSelect;
 import com.example.projectd.Dto.MdDTO;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class SearchFragment extends Fragment {
     SearchActivity activity;
@@ -22,11 +27,17 @@ public class SearchFragment extends Fragment {
     RecyclerView recyclerView;
     SearchAdapter adapter;
     ArrayList<MdDTO> items;
+    ImageView no_search;
+    ScrollView searchScrollView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_search,container,false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.activity_search,container,false);
+
+        searchScrollView = rootView.findViewById(R.id.searchScrollView);
+        no_search = rootView.findViewById(R.id.no_search);
 
         activity = (SearchActivity) getActivity();
         items = new ArrayList<>();
@@ -38,8 +49,6 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SearchAdapter(activity.getApplicationContext(), items);
 
-        //adapter.addItem(new Search("컴퓨터","3500원"));
-        //adapter.addItem(new Search("자건거", "5000원"));
 
         recyclerView.setAdapter(adapter);
 
@@ -56,6 +65,37 @@ public class SearchFragment extends Fragment {
                 startActivityForResult(intent, main);
             }
         });
+
+  /*      int scrollSize = recyclerView.getScrollBarSize()
+        if (scrollSize == 0){
+            no_search.setVisibility(View.VISIBLE);
+            searchScrollView.setVisibility(View.GONE);
+        }else {
+            no_search.setVisibility(View.GONE);
+            searchScrollView.setVisibility(View.VISIBLE);
+        }
+*/
+
+
+/*
+        int itemSize = 0; //검색목록갯수
+        SearchSelect searchSelect = new SearchSelect(items, adapter);
+        try {
+            itemSize = searchSelect.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(itemSize == 0){
+            no_search.setVisibility(View.VISIBLE);
+            searchScrollView.setVisibility(View.GONE);
+        }else{
+            no_search.setVisibility(View.GONE);
+            searchScrollView.setVisibility(View.VISIBLE);
+        }
+*/
 
         return  rootView;
     }
