@@ -156,6 +156,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if(loginDTO != null) {      //회원정보가 DB에 저장 o
+                    loginDTO.setMember_loginType("M");
+
                     String member_nickname = loginDTO.getMember_nickname();
                     String member_addr = loginDTO.getMember_addr();
                     Toast.makeText(LoginActivity.this, loginDTO.getMember_id() + "님 로그인 되었습니다.", Toast.LENGTH_SHORT).show();

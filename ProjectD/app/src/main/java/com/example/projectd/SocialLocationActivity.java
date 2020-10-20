@@ -64,7 +64,7 @@ import static com.example.projectd.LoginActivity.naverLoginDTO;
 import static com.example.projectd.SessionCallback.kakaoLoginDTO;
 
 public class SocialLocationActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "main:S_LocationActivity";
 
     SupportMapFragment mapFragment;
     GoogleMap map;
@@ -277,7 +277,10 @@ public class SocialLocationActivity extends AppCompatActivity {
                         updateLocation(member_addr, s_latitude, s_longitude, naverLoginDTO.getMember_id(), naverLoginDTO.getMember_loginType());
                         setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
 
-                    } else if(member_loginType.equals("M") && loginDTO.getMember_addr() == null) {       // 3번의 경우
+                    } else if(member_loginType.equals("M") &&
+                                (loginDTO.getMember_addr() == null || loginDTO.getMember_addr().equals("") ||
+                                 loginDTO.getMember_latitude() == null || loginDTO.getMember_latitude().equals("") ||
+                                 loginDTO.getMember_longitude() == null) || loginDTO.getMember_longitude().equals("")) {    // 3번의 경우
                         Log.d(TAG, "onClick: 웹으로 로그인 o, 위치 저장 x");
                         updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
                         setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
