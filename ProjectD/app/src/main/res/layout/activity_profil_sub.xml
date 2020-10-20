@@ -40,7 +40,7 @@
             android:id="@+id/Modified"
             android:layout_width="73dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="170dp"
+            android:layout_marginLeft="218dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:onClick="btnSubUpdateClicked"
@@ -153,7 +153,8 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
                 android:background="@drawable/radius"
                 android:paddingLeft="10dp" />
 
