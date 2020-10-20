@@ -107,37 +107,29 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="516dp"
+        android:layout_height="480dp"
         android:background="#f0f1f5">
 
-        <FrameLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="454dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="0dp"
+            android:layout_height="500dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    >
+        </androidx.recyclerview.widget.RecyclerView>
 
-                </androidx.recyclerview.widget.RecyclerView>
 
-        </FrameLayout>
     </ScrollView>
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/menu_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:background="#3F51B5"
-        app:itemIconTint="#FFFFFF"
-        app:menu="@menu/menu_bottom" />-->
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/menu_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:background="#3F51B5"
+            app:itemIconTint="#FFFFFF"
+            app:menu="@menu/menu_bottom" />-->
     <!--app:itemTextColor="@color/wallet_bright_foreground_disabled_holo_light"-->
 
 </LinearLayout>
