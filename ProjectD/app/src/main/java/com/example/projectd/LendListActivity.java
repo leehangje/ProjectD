@@ -58,7 +58,7 @@ public class LendListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 category = spinner.getSelectedItem().toString();
-                MdPullRequest request = new MdPullRequest(category, LoginActivity.loginDTO.getMember_id());
+                MdPullRequest request = new MdPullRequest(LendListActivity.this, category, LoginActivity.loginDTO.getMember_id());
                 request.execute();
             }
             @Override
@@ -79,10 +79,12 @@ public class LendListActivity extends AppCompatActivity {
 
     private class MdPullRequest extends AsyncTask<Void, Void, List<MdDTO>> {
 
+        Context context;
         String category;
         String member_id;
 
-        public MdPullRequest(String category, String member_id) {
+        public MdPullRequest(Context context, String category, String member_id) {
+            this.context = context;
             this.category = category;
             this.member_id = member_id;
         }
@@ -147,7 +149,7 @@ public class LendListActivity extends AppCompatActivity {
             LinearLayoutManager layoutManager =
                     new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);
-            adapter = new LendAdapter(getApplicationContext(), mdDTOS);
+            adapter = new LendAdapter(context, mdDTOS);
             recyclerView.setAdapter(adapter);
             adapter.setOnItemClickListener(new OnLendItemCLickListener() {
                 @Override

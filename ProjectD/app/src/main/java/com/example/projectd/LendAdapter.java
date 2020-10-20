@@ -153,11 +153,11 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                 @Override
                 public void onClick(View view) {
 
-                    md_serial_number = item.getMd_serial_number();
-                    MdDelete mdDelete = new MdDelete(md_serial_number);
-                    mdDelete.execute();
-                    Toast.makeText(context, "삭제성공", Toast.LENGTH_LONG).show();
-                    /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                    md_serial_number = item.getMd_serial_number();
+//                    MdDelete mdDelete = new MdDelete(md_serial_number);
+//                    mdDelete.execute();
+//                    Toast.makeText(context, "삭제성공", Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("정말로 삭제하시겠습니까?");
                     builder.setMessage("삭제하신 데이터는 되돌릴 수 없습니다");
                     builder.setPositiveButton("삭제",
@@ -175,11 +175,14 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> im
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int which) {
                                     Toast.makeText(context, "삭제가 취소되었습니다", Toast.LENGTH_LONG).show();
+                                    ((Activity) context).finish();
+                                    context.startActivity(((Activity) context).getIntent());
                                 }
                             });
-                    builder.show();*/
-                    // ((Activity) context).finish();
-                    // context.startActivity(((Activity) context).getIntent());
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+
                 }
             });
 
