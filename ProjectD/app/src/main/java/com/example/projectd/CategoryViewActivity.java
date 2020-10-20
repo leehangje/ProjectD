@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,17 +28,17 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class CategoryViewActivity extends AppCompatActivity {
+    private static final String TAG = "main:CategoryViewActivity";
 
     public static MdDTO selItem = null;
 
     RecyclerView recyclerView;
     CategoryAdapter adapter;
     ArrayList<MdDTO> items;
-
+    LinearLayout toolbar_context;
     CategorySelect categorySelect;
     ProgressDialog progressDialog;
     TextView category_name;
-
     String category;
 
     @Override
@@ -47,6 +49,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         items = new ArrayList<>();
         adapter = new CategoryAdapter(this, items);
         recyclerView = findViewById(R.id.recyclerView);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 RecyclerView.VERTICAL, false);
@@ -82,6 +85,14 @@ public class CategoryViewActivity extends AppCompatActivity {
                 intent.putExtra("item", item);
                 startActivityForResult(intent, category);
 
+            }
+        });
+
+        // 뒤로가기 버튼 클릭 시
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

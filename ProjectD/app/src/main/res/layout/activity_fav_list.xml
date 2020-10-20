@@ -18,12 +18,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/btn_back"
-                app:srcCompat="@drawable/back_white"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="#3e4ba9" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                android:background="#3e4ba9"
+                app:srcCompat="@drawable/back_white" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -44,7 +44,7 @@ public class ProfilActivity extends AppCompatActivity {
     private static final String TAG = "ProfilActivity";
 
     LinearLayout toolbar_context, Modified;   //툴바를 감싸는 레이아웃
-    TextView profile_name, profile_nickname, profile_location, profile_home_tel, profile_phone, profile_email, profile_birth;
+    TextView profile_name, profile_nickname, profile_location, profile_phone, profile_email;
     CircleImageView profile_photo;
     Button profile_set;
     String image = "https://d1u5g7tm7q0gio.cloudfront.net/images/avatars/defaults/default.jpg";
@@ -73,8 +73,6 @@ public class ProfilActivity extends AppCompatActivity {
         profile_nickname = findViewById(R.id.profile_nickname);
         profile_phone = findViewById(R.id.profile_phone);
         profile_location = findViewById(R.id.profile_location);
-        profile_birth = findViewById(R.id.profile_birth);
-        profile_home_tel = findViewById(R.id.profile_home_tel);
         profile_email = findViewById(R.id.profile_email);
         profile_photo = findViewById(R.id.profile_photo);
         profile_set = findViewById(R.id.profile_set);
@@ -342,7 +340,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         if ( LoginActivity.loginDTO.getMember_profile() != null){
 
-            if(isNetworkConnected(this) == true){
+            if(isNetworkConnected(this) == true) {
                 if(fileSize <= 30000000) {  // 파일크기가 30메가 보다 작아야 업로드 할수 있음
                     Toast.makeText(getApplicationContext(), LoginActivity.loginDTO.getMember_profile(), Toast.LENGTH_LONG).show();
                     if (LoginActivity.loginDTO.getMember_profile() != image) {

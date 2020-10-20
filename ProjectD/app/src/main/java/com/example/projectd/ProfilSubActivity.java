@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class ProfilSubActivity extends AppCompatActivity {
 
     EditText name1, nickname1, phone1, addr1;
     String name, nickname, tel, addr;
+    LinearLayout toolbar_context;
 
     File file = null;
     long fileSize = 0;
@@ -35,6 +37,7 @@ public class ProfilSubActivity extends AppCompatActivity {
         nickname1 = findViewById(R.id.nickname);
         phone1 = findViewById(R.id.phone);
         addr1 = findViewById(R.id.addr);
+        toolbar_context = findViewById(R.id.toolbar_context);
 
         if(loginDTO != null) {
 
@@ -68,6 +71,13 @@ public class ProfilSubActivity extends AppCompatActivity {
             phone1.setText(member_phone);
             addr1.setText(member_addr);
         }
+
+        toolbar_context.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
