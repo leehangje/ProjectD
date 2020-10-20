@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectd.ATask.ListDelete;
@@ -19,12 +21,16 @@ import java.util.concurrent.ExecutionException;
 
 import static com.example.projectd.Common.CommonMethod.isNetworkConnected;
 import static com.example.projectd.LoginActivity.loginDTO;
+import static com.example.projectd.LoginActivity.naverLoginDTO;
 
 public class ProfilSubActivity extends AppCompatActivity {
+    private static final int SOCAIL_LOCATION_ACTIVITY_REQUEST_CODE = 0;
+    private static final String TAG = "main:ProfilSubActivity";
 
     EditText name1, nickname1, phone1, addr1;
-    String name, nickname, tel, addr;
+    String name, nickname, tel, addr, latitude, longitude, member_loginType;
     LinearLayout toolbar_context;
+    ImageView updateLocation_p;
 
     File file = null;
     long fileSize = 0;
@@ -38,6 +44,7 @@ public class ProfilSubActivity extends AppCompatActivity {
         phone1 = findViewById(R.id.phone);
         addr1 = findViewById(R.id.addr);
         toolbar_context = findViewById(R.id.toolbar_context);
+        updateLocation_p = findViewById(R.id.updateLocation_p);
 
         if(loginDTO != null) {
 
@@ -50,6 +57,9 @@ public class ProfilSubActivity extends AppCompatActivity {
             nickname1.setText(member_nickname);
             phone1.setText(member_phone);
             addr1.setText(member_addr);
+
+            member_loginType = "M";
+
         }else if(LoginActivity.naverLoginDTO != null){
             String member_name = LoginActivity.naverLoginDTO.getMember_name();
             String member_nickname = LoginActivity.naverLoginDTO.getMember_nickname();
@@ -60,6 +70,9 @@ public class ProfilSubActivity extends AppCompatActivity {
             nickname1.setText(member_nickname);
             phone1.setText(member_phone);
             addr1.setText(member_addr);
+
+            member_loginType = naverLoginDTO.getMember_loginType();
+
         }else if(SessionCallback.kakaoLoginDTO != null){
             String member_name = SessionCallback.kakaoLoginDTO.getMember_name();
             String member_nickname = SessionCallback.kakaoLoginDTO.getMember_nickname();
@@ -70,6 +83,8 @@ public class ProfilSubActivity extends AppCompatActivity {
             nickname1.setText(member_nickname);
             phone1.setText(member_phone);
             addr1.setText(member_addr);
+
+            member_loginType = SessionCallback.kakaoLoginDTO.getMember_loginType();
         }
 
         toolbar_context.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +94,23 @@ public class ProfilSubActivity extends AppCompatActivity {
             }
         });
 
+        //gps 버튼 클릭 시 위치 지정 화면으로 이동
+        updateLocation_p.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SocialLocationActivity.class);
+                intent.putExtra("update_location_p", true);
+                intent.putExtra("member_loginType", member_loginType);
+                startActivityForResult(intent, SOCAIL_LOCATION_ACTIVITY_REQUEST_CODE);
+            }
+        });
+
     }
 
     //프로필 수정
     public void btnSubUpdateClicked(View view){
         if(isNetworkConnected(this) == true){
+
 
                 name = name1.getText().toString();
                 nickname = nickname1.getText().toString();
@@ -92,7 +119,7 @@ public class ProfilSubActivity extends AppCompatActivity {
 
                 if ( loginDTO != null){
                     String id = loginDTO.getMember_id();
-                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr);
+                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr, latitude, longitude);
                     profilSubUpdate.execute();
 
                     String member_id = loginDTO.getMember_id();
@@ -109,7 +136,7 @@ public class ProfilSubActivity extends AppCompatActivity {
                     }
                 }else if( LoginActivity.naverLoginDTO != null){
                     String id = LoginActivity.naverLoginDTO.getMember_id();
-                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr);
+                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr, latitude, longitude);
                     profilSubUpdate.execute();
 
                     String member_id = LoginActivity.naverLoginDTO.getMember_id();
@@ -127,7 +154,7 @@ public class ProfilSubActivity extends AppCompatActivity {
 
                 }else if(SessionCallback.kakaoLoginDTO != null){
                     String id = SessionCallback.kakaoLoginDTO.getMember_id();
-                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr);
+                    ProfileSubUpdate profilSubUpdate = new ProfileSubUpdate(id, name, nickname, tel, addr, latitude, longitude);
                     profilSubUpdate.execute();
 
                     String member_id = SessionCallback.kakaoLoginDTO.getMember_id();
@@ -197,4 +224,21 @@ public class ProfilSubActivity extends AppCompatActivity {
     public void btnCancelClicked(View view){
         finish();
     }
+
+    // SocailLocationActivity에서 전달한 위치 정보를 받는 메소드
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SOCAIL_LOCATION_ACTIVITY_REQUEST_CODE
+                && resultCode == RESULT_OK) {
+            String myAddress = data.getStringExtra("member_addr");
+            //etLocation.setText(myAddress);
+            addr1.setText(myAddress);
+            latitude = data.getStringExtra("latitude");
+            longitude = data.getStringExtra("longitude");
+            Log.d(TAG, "onActivityResult: 갱신된 위도 : " + latitude + ", 갱신된 경도 : " + longitude);
+        }
+    }//onActivityResult()
 }

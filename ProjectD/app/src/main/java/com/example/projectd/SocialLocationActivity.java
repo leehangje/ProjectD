@@ -71,10 +71,10 @@ public class SocialLocationActivity extends AppCompatActivity {
     //Button locSearchBtn;
     Button setupBtn, submitBtn;
     EditText searchValueText, detailValue;
-    String myAddress, detailAddress, state;
+    String myAddress, detailAddress, state, member_addr;    //member_addr은 일반주소 + 상세주소
     LinearLayout toolbar_context;   //툴바를 감싸고 있는 레이아웃
     Double latitude, longitude;
-    boolean update_location = false;    //위치정보 수정(메인에서) 여부를 저장하는 변수
+    boolean update_location = false, update_location_p = false;    //위치정보 수정(메인에서) 여부를 저장하는 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,13 +213,16 @@ public class SocialLocationActivity extends AppCompatActivity {
                     // 1. 처음으로 소셜(kakao, naver) 로그인을 했을 때(db 저장 x, kakaoLoginDTO가 null)
                     // 2. 소셜 로그인을 했지만 위치정보가 저장이 안되어 있을 때(db 저장 O, kakaoLoginDTO가 null이 아닌 경우)
                     // 3. 웹으로 회원가입했을 때(웹에서는 addr, latitude, longitude 컬럼 값이 null)
-                    // 4. 위치 정보가 저장되어있지만 위치정보를 바꾸려고 할때(메인의 gps 버튼 클릭 시) - 소셜 로그인, 일반로그인 상관없이
+                    // 4. 위치 정보가 저장되어있지만 위치정보를 바꾸려고 할때(메인의 gps 버튼 클릭 시)- 소셜 로그인, 일반로그인 상관없이
+                    // 5. 프로필 수정부분에서 위치정보를 수정할 때 - 여기는 SocialLocationActivity에서 DB 수정하는 것이 아니라
+                    //      - 값만 가져와서 프로필 수정 페이지에서 DB 업데이트를 함
 
                     Intent intent = getIntent();
                     member_id = intent.getExtras().getString("member_id");
                     member_loginType = intent.getExtras().getString("member_loginType");
-                    String member_addr = myAddress + " " + detailAddress;
+                    member_addr = myAddress + " " + detailAddress;
                     update_location = intent.getExtras().getBoolean("update_location");
+                    update_location_p = intent.getExtras().getBoolean("update_location_p");
 
                     Log.d(TAG, "onClick: " + member_id + ", " + member_loginType);
 
@@ -280,7 +283,7 @@ public class SocialLocationActivity extends AppCompatActivity {
                         setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
 
                     } else if(update_location) {    //4번의 경우
-                        Log.d(TAG, "onClick: 위치 정보 업데이트 : 아이디는 " + member_id + ", 로그인 타입은 " + member_loginType);
+                        Log.d(TAG, "onClick: 위치 정보 업데이트(메인) : 아이디는 " + member_id + ", 로그인 타입은 " + member_loginType);
                         updateLocation(member_addr, s_latitude, s_longitude, member_id, member_loginType);
                         setLocation(member_addr, s_latitude, s_longitude, member_loginType);    //DTO에 위치 저장
                         Log.d(TAG, "setLocation: 멤버 로그인 : " + loginDTO.getMember_addr() + ", " +
@@ -292,6 +295,16 @@ public class SocialLocationActivity extends AppCompatActivity {
                         //intent1.putExtra("member_addr", member_addr);
                         setResult(Activity.RESULT_OK);
 
+                        finish();
+                        return;
+                    } else if(update_location_p) {      //5번의 경우
+                        Intent intent1 = new Intent(getApplicationContext(), ProfilSubActivity.class);
+                        intent1.putExtra("member_addr", member_addr);
+                        intent1.putExtra("latitude", s_latitude);
+                        intent1.putExtra("longitude", s_longitude);
+                        setResult(RESULT_OK, intent1);
+
+                        Log.d(TAG, "프로필에서 SocialLocation으로 이동 : " + member_addr + ", " + s_latitude + ", " + s_longitude);
                         finish();
                         return;
                     }

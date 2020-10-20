@@ -22,16 +22,17 @@ import static com.example.projectd.Common.CommonMethod.ipConfig;
 
 public class ProfileSubUpdate extends AsyncTask<Void, Void, Void> {
 
-    String id, name, nickname, addr, tel;
+    String id, name, nickname, addr, tel, latitude, longitude;
 
     public ProfileSubUpdate(String id, String name,
-                            String nickname, String tel, String addr){
+                            String nickname, String tel, String addr, String latitude, String longitude){
         this.id = id;
         this.name = name;
         this.nickname = nickname;
         this.tel = tel;
         this.addr = addr;
-
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     @Override
@@ -53,6 +54,8 @@ public class ProfileSubUpdate extends AsyncTask<Void, Void, Void> {
             builder.addTextBody("nickname", nickname, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("tel", tel, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("addr", addr, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("latitude", latitude, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("longitude", longitude, ContentType.create("Multipart/related", "UTF-8"));
 
             Log.d("id", id);
             Log.d("name", name);
