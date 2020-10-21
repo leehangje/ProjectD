@@ -62,23 +62,31 @@ public class ChatActivity extends AppCompatActivity {
                     chat.setName(nickname);
                     chat.setMsg(msg);
                     myRef.push().setValue(chat);
+                    EditText_Chat.getText().clear();
+                    mRecyclerView.scrollToPosition(chatList.size()-1);
+
                 }
 
             }
         });
         mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        //mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         chatList = new ArrayList<>();
         mAdapter = new ChatAdapter(chatList, ChatActivity.this, nickname  );
         mRecyclerView.setAdapter(mAdapter);
-
         mAdapter.notifyDataSetChanged();
-        mRecyclerView.scrollToPosition(chatList.size() - 1);
+        //mRecyclerView.scrollToPosition(chatList.size() - 1);
+        //mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount());
+        //mRecyclerView.scrollToPosition(mAdapter.getItemCount() -1);
 
         // Write a message to the database
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
 
