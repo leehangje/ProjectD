@@ -15,6 +15,7 @@ import com.example.projectd.Dto.MemberDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>
         implements OnChatItemClickListener {
@@ -89,9 +90,26 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
 
           public void setItem(MemberDto item){
+              String member_addr = item.getMember_addr();
+
+              // 주소에 상세 주소가 안나오도록 하게 함(시, 도, 군, 구, 동, 면만 나오게끔)
+              String[] split1 = member_addr.split(" ");
+              String member_addr_re = "";
+
+              for (int i = 0; i < split1.length; i++) {
+                  if(Pattern.matches("[가-힣]+(시|도|군|구|동|면)", split1[i])) {
+                      member_addr_re += split1[i] + " ";
+                  }
+              }
+              member_addr_re = member_addr_re.trim();
+              // 마지막 공백 제거
+
               tv_chat_nickname.setText(item.getMember_nickname());
-              tv_chat_addr.setText(item.getMember_addr());
-              Glide.with(itemView).load(item.getMember_profile()).into(iv_chatlist_img);
+              tv_chat_addr.setText(member_addr_re);
+
+
+              //Glide.with(itemView).load(item.getMember_profile()).into(iv_chatlist_img);
+              //Glide.with(itemView).load(item.getMember_profile()).into(iv_chatlist_img);
           }
 
     }

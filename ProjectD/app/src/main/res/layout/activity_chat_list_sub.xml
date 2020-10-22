@@ -35,6 +35,7 @@
                         android:id="@+id/iv_chatlist_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/openchat"
                         android:scaleType="fitXY"/>
 
                     <ProgressBar
@@ -61,18 +62,19 @@
                     android:id="@+id/tv_chat_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center_vertical"
                     android:text="닉네임"
                     android:textAlignment="center"
                     android:textSize="14sp"
-                    android:textStyle="normal|bold" />
+                    android:textStyle="normal|bold"
+                    android:visibility="invisible"/>
 
                 <TextView
                     android:id="@+id/tv_chat_addr"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.25"
                     android:gravity="center_vertical"
                     android:text="주소"
                     android:textAlignment="center"
@@ -83,9 +85,9 @@
                     android:id="@+id/tv_last_msg"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.25"
                     android:gravity="center_vertical"
-                    android:text="오픈채팅방"
+                    android:text="오픈 채팅방"
                     android:textAlignment="center"
                     android:textSize="14sp"
                     android:textStyle="normal|bold" />
