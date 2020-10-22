@@ -54,9 +54,10 @@ public class ProfileSubUpdate extends AsyncTask<Void, Void, Void> {
             builder.addTextBody("nickname", nickname, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("tel", tel, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("addr", addr, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("latitude", latitude, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("longitude", longitude, ContentType.create("Multipart/related", "UTF-8"));
-
+            if (latitude == "") {
+                builder.addTextBody("latitude", latitude, ContentType.create("Multipart/related", "UTF-8"));
+                builder.addTextBody("longitude", longitude, ContentType.create("Multipart/related", "UTF-8"));
+            }
             Log.d("id", id);
             Log.d("name", name);
             Log.d("nickname", nickname);
