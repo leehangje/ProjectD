@@ -65,7 +65,7 @@ public class MdInsert extends AsyncTask<Void, Void, Void> {
 
             builder.addPart("image", new FileBody(new File(md_photo_real_url)));
 
-            String postURL = ipConfig + "/app/anInsert";
+            String postURL = ipConfig + "app/anInsert";
             // 전송
 
             HttpClient httpClient = AndroidHttpClient.newInstance("Android");

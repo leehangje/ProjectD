@@ -69,6 +69,7 @@ public class RentListActivity extends AppCompatActivity {
             List<ReviewDto> list = null;
             try {
                 // 연결단계
+                //URL url = new URL(CommonMethod.ipConfig + "app/anReviewPull");
                 URL url = new URL(CommonMethod.ipConfig + "app/anReviewPull");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
